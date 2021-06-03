@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double KlineVersionNumber;
-FOUNDATION_EXPORT const unsigned char KlineVersionString[];
+FOUNDATION_EXPORT double KLineVersionNumber;
+FOUNDATION_EXPORT const unsigned char KLineVersionString[];
 

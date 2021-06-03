@@ -56,7 +56,9 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// labels)
     @objc open var xAxis: XAxis
     {
-        return _xAxis
+        get {
+            return _xAxis
+        }
     }
     
     /// The default IValueFormatter that has been determined by the chart considering the provided minimum and maximum values.

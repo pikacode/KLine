@@ -7,7 +7,7 @@ use_frameworks!
 
 target 'demo' do
 
-    pod 'Kline', :path => '../'
+    pod 'KLine', :path => '../'
 
  
 end

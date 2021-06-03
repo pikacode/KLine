@@ -1,9 +1,9 @@
 {
-  "name": "Kline",
+  "name": "KLine",
   "version": "1.0.0",
   "summary": "kline....",
   "description": "aax kline",
-  "homepage": "https://github.com/pikacode/Kline",
+  "homepage": "https://github.com/pikacode/KLine",
   "license": "MIT",
   "authors": {
     "pikacode": "pikacode@qq.com",
@@ -13,7 +13,7 @@
     "ios": "9.0"
   },
   "source": {
-    "git": "https://github.com/pikacode/Kline.git",
+    "git": "https://github.com/pikacode/KLine.git",
     "tag": "1.0.0"
   },
   "source_files": [

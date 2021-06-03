@@ -1,5 +1,5 @@
-framework module Kline {
-  umbrella header "Kline-umbrella.h"
+framework module KLine {
+  umbrella header "KLine-umbrella.h"
 
   export *
   module * { export * }

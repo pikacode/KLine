@@ -1,9 +1,8 @@
 //
-//  ArrayExtensions.swift
-//  Exchange
+//  UIColor.swift
+//  KLine
 //
-//  Created by pikacode on 2020/8/3.
-//  Copyright © 2020 Atom International. All rights reserved.
+//  Created by pikacode on 2021/6/1.
 //
 
 import UIKit

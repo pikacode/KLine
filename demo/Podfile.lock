@@ -2,24 +2,24 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-  - Kline (1.0.0):
+  - KLine (1.0.0):
     - Charts (~> 3.6.0)
 
 DEPENDENCIES:
-  - Kline (from `../`)
+  - KLine (from `../`)
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Charts
 
 EXTERNAL SOURCES:
-  Kline:
+  KLine:
     :path: "../"
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  Kline: ec78f52f7e6cbf7152c08c8e6fa3513f5d6427e1
+  KLine: d03728f20e1c1c2fb1e1453df7f5856b9706c0ee
 
-PODFILE CHECKSUM: a4d8fe49aefdc810cb2e341e20182577c9c900ce
+PODFILE CHECKSUM: cedc0ee0b6a70d2e13cdbbde847078a4deb1eb04
 
 COCOAPODS: 1.10.1

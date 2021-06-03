@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     #  summary should be tweet-length, and the description more in depth.
     #
   
-    s.name         = "Kline"
+    s.name         = "KLine"
     s.version      = "1.0.0"
     s.summary      = "kline...."
   
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   aax kline
                      DESC
   
-    s.homepage     = "https://github.com/pikacode/Kline"
+    s.homepage     = "https://github.com/pikacode/KLine"
   
     # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
   
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
     #  Supports git, hg, bzr, svn and HTTP.
     #
   
-    s.source       = { :git => "https://github.com/pikacode/Kline.git", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/pikacode/KLine.git", :tag => "#{s.version}" }
   
   
     # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-@interface PodsDummy_Kline : NSObject
+@interface PodsDummy_KLine : NSObject
 @end
-@implementation PodsDummy_Kline
+@implementation PodsDummy_KLine
 @end

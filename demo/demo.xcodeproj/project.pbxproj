@@ -3,28 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0FFF99750300DB43A4A503D4 /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4CC2519C9BFB0128672582 /* Pods_demo.framework */; };
 		3B11D5232665E630009517FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5222665E630009517FC /* AppDelegate.swift */; };
-		3B11D5252665E630009517FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5242665E630009517FC /* SceneDelegate.swift */; };
 		3B11D5272665E630009517FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5262665E630009517FC /* ViewController.swift */; };
 		3B11D52A2665E630009517FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D5282665E630009517FC /* Main.storyboard */; };
 		3B11D52C2665E633009517FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D52B2665E633009517FC /* Assets.xcassets */; };
 		3B11D52F2665E633009517FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D52D2665E633009517FC /* LaunchScreen.storyboard */; };
+		3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */; };
+		3B11D57E26663F1E009517FC /* DemoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */; };
+		3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D58026663F4C009517FC /* AxisValueFormatter.swift */; };
+		3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B61861E2667339E00691E39 /* CombinedChartViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B11D51F2665E630009517FC /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B11D5222665E630009517FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3B11D5242665E630009517FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3B11D5262665E630009517FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3B11D5292665E630009517FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B11D52B2665E633009517FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B11D52E2665E633009517FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B11D5302665E633009517FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedChartViewController.swift; sourceTree = "<group>"; };
+		3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoBaseViewController.swift; sourceTree = "<group>"; };
+		3B11D58026663F4C009517FC /* AxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisValueFormatter.swift; sourceTree = "<group>"; };
+		3B61861E2667339E00691E39 /* CombinedChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombinedChartViewController.xib; sourceTree = "<group>"; };
 		941396932459EA8B2D4442C4 /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		C031B8CBFDDA8F4479B227BC /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		DD4CC2519C9BFB0128672582 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,8 +70,11 @@
 			isa = PBXGroup;
 			children = (
 				3B11D5222665E630009517FC /* AppDelegate.swift */,
-				3B11D5242665E630009517FC /* SceneDelegate.swift */,
 				3B11D5262665E630009517FC /* ViewController.swift */,
+				3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */,
+				3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */,
+				3B61861E2667339E00691E39 /* CombinedChartViewController.xib */,
+				3B11D58026663F4C009517FC /* AxisValueFormatter.swift */,
 				3B11D5282665E630009517FC /* Main.storyboard */,
 				3B11D52B2665E633009517FC /* Assets.xcassets */,
 				3B11D52D2665E633009517FC /* LaunchScreen.storyboard */,
@@ -88,7 +97,6 @@
 				C031B8CBFDDA8F4479B227BC /* Pods-demo.debug.xcconfig */,
 				941396932459EA8B2D4442C4 /* Pods-demo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -153,6 +161,7 @@
 			files = (
 				3B11D52F2665E633009517FC /* LaunchScreen.storyboard in Resources */,
 				3B11D52C2665E633009517FC /* Assets.xcassets in Resources */,
+				3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */,
 				3B11D52A2665E630009517FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,8 +216,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B11D5272665E630009517FC /* ViewController.swift in Sources */,
+				3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */,
+				3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */,
+				3B11D57E26663F1E009517FC /* DemoBaseViewController.swift in Sources */,
 				3B11D5232665E630009517FC /* AppDelegate.swift in Sources */,
-				3B11D5252665E630009517FC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +369,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -377,6 +389,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
