@@ -16,6 +16,24 @@ open class KLineView: UIView {
         }
     }
 
+    var data = [KLineData]() {
+        didSet {
+            types.flatMap{ $0 }.forEach{
+                calculate($0)
+            }
+        }
+    }
+
+    lazy var MACD = [Any]()
+
+    func calculate(_ type: KLineType) {
+//        MACD = ...
+    }
+
+    func getMACD() -> [Any] {
+        return [Any]()
+    }
+
     public let chartView = KLCombinedChartView(frame: .zero)
 
     public init(types: [[KLineType]]) {
