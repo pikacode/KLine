@@ -8,7 +8,7 @@
 import UIKit
 
 //图表类型
-public enum KLineType {
+public enum KLineType: CaseIterable {
     case min //分时图
     case candle //蜡烛图
     case mavol
@@ -21,5 +21,17 @@ public enum KLineType {
     case boll
     case depth //深度图
     case custom
+
+    public var style: KLStyle {
+        get {
+            return KLineType.styles[self]!
+        }
+        set {
+            KLineType.styles[self] = newValue
+        }
+    }
+
+    static var styles = KLineType.allCases.reduce(into: [KLineType : KLStyle]()) { $0[$1] = $1.style }
+
 }
 
