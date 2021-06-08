@@ -10,15 +10,17 @@ import Charts
 
 open class KLineView: UIView {
 
-    public var types: [[KLineType]] {
+    public var sections: [KLSection] = [KLSection()] {
         didSet {
 
         }
     }
 
+    var types: [KLineType] { return sections.flatMap{ $0.types } }
+
     var data = [KLineData]() {
         didSet {
-            types.flatMap{ $0 }.forEach{
+            types.forEach{
                 calculate($0)
             }
         }
@@ -36,8 +38,8 @@ open class KLineView: UIView {
 
     public let chartView = KLCombinedChartView(frame: .zero)
 
-    public init(types: [[KLineType]]) {
-        self.types = types
+    public init(sections: [KLSection]) {
+        self.sections = sections
         super.init(frame: .zero)
     }
 

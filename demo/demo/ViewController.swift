@@ -13,9 +13,13 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIView!
 
-    let klineView = KLineView(types: [[.candle, .ma],
-                                      [.mavol],
-                                      [.macd]])
+    lazy var klineView = KLineView(sections: [section1,
+                                              section2,
+                                              section3])
+
+    var section1 = KLSection([.candle, .ma], 280)
+    var section2 = KLSection([.mavol], 74)
+    var section3 = KLSection([.macd], 74)
 
     override func viewDidLoad() {
         super.viewDidLoad()

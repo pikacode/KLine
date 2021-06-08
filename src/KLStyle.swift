@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol KLineStyleElement {}
+protocol KLStyleElement {}
 
-open class KLineStyle {
+open class KLStyle {
 
     static var lineWidth1 = CGFloat(1)
     static var maxBarWidth = CGFloat(4)
