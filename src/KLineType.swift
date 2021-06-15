@@ -24,7 +24,7 @@ public enum KLineType: CaseIterable {
 
     public var style: KLStyle {
         get {
-            return KLineType.styles[self]!
+            return KLineType.styles[self] ?? KLStyle()
         }
         set {
             KLineType.styles[self] = newValue

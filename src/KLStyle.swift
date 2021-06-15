@@ -25,26 +25,41 @@ open class KLStyle {
         return style
     }()
 
-    public var lineWidth1: CGFloat = KLStyle.default.lineWidth1
+    public var lineWidth1: CGFloat
 
-    public var maxBarWidth: CGFloat = KLStyle.default.maxBarWidth
-    public var minBarWidth: CGFloat = KLStyle.default.minBarWidth
+    public var maxBarWidth: CGFloat
+    public var minBarWidth: CGFloat
 
-    public var space: CGFloat = KLStyle.default.space
+    public var space: CGFloat
 
-    public var lineColor1: UIColor = KLStyle.default.lineColor1
-    public var lineColor2: UIColor = KLStyle.default.lineColor2
-    public var lineColor3: UIColor = KLStyle.default.lineColor3
+    public var lineColor1: UIColor
+    public var lineColor2: UIColor
+    public var lineColor3: UIColor
 
-    public var upColor: UIColor = KLStyle.default.upColor
-    public var downColor: UIColor = KLStyle.default.downColor
+    public var upColor: UIColor
+    public var downColor: UIColor
 
-    public var upGradient: GradientColor = KLStyle.default.upGradient
-    public var downGradient: GradientColor = KLStyle.default.downGradient
+    public var upGradient: GradientColor
+    public var downGradient: GradientColor 
 
     public struct GradientColor {
         let top: UIColor
         let bottom: UIColor
+    }
+
+    public init() {
+        let style = KLStyle.default
+        lineWidth1 = style.lineWidth1
+        maxBarWidth = style.maxBarWidth
+        minBarWidth = style.minBarWidth
+        space = style.space
+        lineColor1 = style.lineColor1
+        lineColor2 = style.lineColor2
+        lineColor3 = style.lineColor3
+        upColor = style.upColor
+        downColor = style.downColor
+        upGradient = style.upGradient
+        downGradient = style.downGradient
     }
 
 }
