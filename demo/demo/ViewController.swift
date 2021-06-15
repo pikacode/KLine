@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         contentView.addSubview(klineView)
         klineView.frame = contentView.bounds
 
-        
 
     }
 

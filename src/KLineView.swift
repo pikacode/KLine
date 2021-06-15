@@ -16,24 +16,56 @@ open class KLineView: UIView {
         }
     }
 
+    let queue = DispatchQueue(label: "KLine")
+
     var types: [KLineType] { return sections.flatMap{ $0.types } }
 
-    var data = [KLineData]() {
+    private var isCalculating = false {
         didSet {
-            types.forEach{
-                calculate($0)
+            if !isCalculating && data.count != tempData.count && data.first?.time != tempData.first?.time {
+                data = tempData
+                setDataCompletion()
             }
         }
     }
 
-    lazy var MACD = [Any]()
+    private var tempData = [KLineData]()
+    private var realData = [KLineData]()
 
-    func calculate(_ type: KLineType) {
-//        MACD = ...
+    public var data: [KLineData] {
+        set {
+            tempData = data
+            if isCalculating {
+                return
+            } else {
+                var newData = newValue
+                isCalculating = true
+                queue.async {
+                    self.types.forEach{ $0.calculate(&newData) }
+                    self.realData = newData
+                    self.isCalculating = false
+                    // realData != tempData 说明计算过程中又修改了数据
+                    if self.realData.count != self.tempData.count &&
+                        self.realData.first != self.tempData.first {
+                        self.data = self.tempData
+                    } else {
+                        DispatchQueue.main.async {
+                            self.setDataCompletion()
+                        }
+                    }
+                }
+            }
+        }
+        get {
+            return realData
+        }
     }
 
-    func getMACD() -> [Any] {
-        return [Any]()
+    private var setDataCompletion = {}
+
+    public func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
+        setDataCompletion = completion
+        self.data = data
     }
 
     public let chartView = KLCombinedChartView(frame: .zero)
