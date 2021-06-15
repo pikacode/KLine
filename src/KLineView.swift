@@ -10,27 +10,23 @@ import Charts
 
 open class KLineView: UIView {
 
+    // MARK: - public
+
+    public init(sections: [KLSection]) {
+        self.sections = sections
+        super.init(frame: .zero)
+    }
+
     public var sections: [KLSection] = [KLSection()] {
         didSet {
 
         }
     }
 
-    let queue = DispatchQueue(label: "KLine")
-
-    var types: [KLineType] { return sections.flatMap{ $0.types } }
-
-    private var isCalculating = false {
-        didSet {
-            if !isCalculating && data.count != tempData.count && data.first?.time != tempData.first?.time {
-                data = tempData
-                setDataCompletion()
-            }
-        }
+    public func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
+        setDataCompletion = completion
+        self.data = data
     }
-
-    private var tempData = [KLineData]()
-    private var realData = [KLineData]()
 
     public var data: [KLineData] {
         set {
@@ -61,19 +57,20 @@ open class KLineView: UIView {
         }
     }
 
-    private var setDataCompletion = {}
-
-    public func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
-        setDataCompletion = completion
-        self.data = data
-    }
-
     public let chartView = KLCombinedChartView(frame: .zero)
 
-    public init(sections: [KLSection]) {
-        self.sections = sections
-        super.init(frame: .zero)
-    }
+    // MARK: - private
+
+    var setDataCompletion = {}
+
+    let queue = DispatchQueue(label: "KLine")
+
+    var types: [KLineType] { return sections.flatMap{ $0.types } }
+
+    var isCalculating = false
+
+    var tempData = [KLineData]()
+    var realData = [KLineData]()
 
     open override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -85,14 +82,9 @@ open class KLineView: UIView {
         }
     }
 
-    public func reload() {
-
-    }
-
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
 
 }
