@@ -17,7 +17,7 @@ open class KLineView: UIView {
         super.init(frame: .zero)
     }
 
-    public var sections: [KLSection] = [KLSection()] {
+    public var sections: [KLSection] = [KLSection([MA.self])] {
         didSet {
 
         }
@@ -37,7 +37,7 @@ open class KLineView: UIView {
                 var newData = newValue
                 isCalculating = true
                 queue.async {
-                    self.types.forEach{ $0.calculate(&newData) }
+                    self.indicators.forEach{ $0.calculate(&newData) }
                     self.realData = newData
                     self.isCalculating = false
                     // realData != tempData 说明计算过程中又修改了数据
@@ -65,7 +65,7 @@ open class KLineView: UIView {
 
     let queue = DispatchQueue(label: "KLine")
 
-    var types: [KLineType] { return sections.flatMap{ $0.types } }
+    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0.indicators } }
 
     var isCalculating = false
 

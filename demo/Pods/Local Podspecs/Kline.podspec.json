@@ -18,7 +18,8 @@
   },
   "source_files": [
     "src",
-    "src/*.{swift}"
+    "src/*.{swift}",
+    "src/**/*.{swift}"
   ],
   "public_header_files": "src/*.{h}",
   "resources": "EBBannerView/Classes/*.{xib,mp3}",

@@ -9,12 +9,12 @@ import UIKit
 
 open class KLSection {
 
-    public var types: [KLineType] = [.candle]
+    public var indicators: [KLIndicator.Type] = [MA.self]
 
     public var height: CGFloat = 100
 
-    public init(_ types: [KLineType] = [.candle], _ height: CGFloat = 100) {
-        self.types = types
+    public init(_ indicators: [KLIndicator.Type], _ height: CGFloat = 100) {
+        self.indicators = indicators
         self.height = height
     }
 

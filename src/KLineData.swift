@@ -29,8 +29,3 @@ extension KLineData: Equatable {
     }
 }
 
-open class MA {
-    var _7: Double = 0
-    var _25: Double = 0
-    var _60: Double = 0
-}
