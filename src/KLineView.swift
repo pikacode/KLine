@@ -12,12 +12,12 @@ open class KLineView: UIView {
 
     // MARK: - public
 
-    public init(sections: [KLSection]) {
+    public init(_ sections: [[KLIndicator.Type]]) {
         self.sections = sections
         super.init(frame: .zero)
     }
 
-    public var sections: [KLSection] = [KLSection([MA.self])] {
+    public var sections: [[KLIndicator.Type]] {
         didSet {
 
         }
@@ -29,6 +29,9 @@ open class KLineView: UIView {
     }
 
     public var data: [KLineData] {
+        get {
+            return realData
+        }
         set {
             tempData = data
             if isCalculating {
@@ -52,9 +55,6 @@ open class KLineView: UIView {
                 }
             }
         }
-        get {
-            return realData
-        }
     }
 
     public let chartView = KLCombinedChartView(frame: .zero)
@@ -65,7 +65,7 @@ open class KLineView: UIView {
 
     let queue = DispatchQueue(label: "KLine")
 
-    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0.indicators } }
+    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0 } }
 
     var isCalculating = false
 
