@@ -13,7 +13,7 @@ open class MA: KLIndicator {
 
     public static var days = [7, 25, 60]
 
-    var data: [Int: Double] = [7: 0, 25: 0, 60: 0]
+    var data: [Int: Double] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
 
     public static func calculate(_ data: inout [KLineData]) {
         days.forEach{
@@ -22,13 +22,18 @@ open class MA: KLIndicator {
     }
 
     static func calculateMA(_ data: inout [KLineData], day: Int) {
-//        for i in (day-1)..<(data.count-1) {
-//            if let last1 = data[(i-1)~], var ma = last1.ma, let lastn = data[(i-day)~] {
-//                var sum = ma * day - lastn.close
-//            } else {
-//
-//            }
-//        }
+        for i in (day-1)..<(data.count-1) {
+            let sum: Double
+            if let lastMA = data[(i-1)~]?.ma?.data[day], let closeN = data[(i-day)~]?.close {
+                //上一个值存在，减去第一个，加上最后一个即可
+                sum = lastMA * Double(day) - closeN + data[i].close
+            } else {
+                sum = data[(i-day+1)...i].reduce(into: 0) { $0 += $1.close }
+            }
+            let ma = data[i].ma ?? MA()
+            ma.data[day] = sum/Double(day)
+            data[i].ma = ma
+        }
     }
 
 }

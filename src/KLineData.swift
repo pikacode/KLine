@@ -8,14 +8,14 @@
 import UIKit
 
 open class KLineData {
-    var open: CGFloat = 0
-    var high: CGFloat = 0
-    var time: CGFloat = 0
-    var low: CGFloat = 0
-    var vol: CGFloat = 0
-    var close: CGFloat = 0
+    var open: Double = 0
+    var high: Double = 0
+    var time: Double = 0
+    var low: Double = 0
+    var vol: Double = 0
+    var close: Double = 0
 
-    var ma = MA()
+    var ma: MA?
 }
 
 extension KLineData: Equatable {
