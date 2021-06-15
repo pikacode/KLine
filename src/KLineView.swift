@@ -33,7 +33,7 @@ open class KLineView: UIView {
             return realData
         }
         set {
-            tempData = data
+            tempData = newValue
             if isCalculating {
                 return
             } else {

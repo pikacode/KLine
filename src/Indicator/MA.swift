@@ -22,6 +22,9 @@ open class MA: KLIndicator {
     }
 
     static func calculateMA(_ data: inout [KLineData], day: Int) {
+        if day > data.count {
+            return
+        }
         for i in (day-1)..<(data.count-1) {
             let sum: Double
             if let lastMA = data[(i-1)~]?.ma?.data[day], let closeN = data[(i-day)~]?.close {
