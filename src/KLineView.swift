@@ -72,7 +72,7 @@ open class KLineView: UIView {
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
-                            self.updateChart()
+                            self.sections.forEach{ $0.draw() }
                             self.setDataCompletion()
                         }
                     }
@@ -93,10 +93,6 @@ open class KLineView: UIView {
 
     var tempData = [KLineData]()
     var realData = [KLineData]()
-
-    func updateChart() {
-
-    }
 
     open override func layoutSubviews() {
         if subviews.count != sections.count {

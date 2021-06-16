@@ -11,7 +11,7 @@ open class KLSection {
 
     public var indicators: [KLIndicator.Type] {
         didSet {
-            
+            draw()
         }
     }
 
@@ -26,5 +26,9 @@ open class KLSection {
     }
 
     let chartView = KLCombinedChartView(frame: .zero)
+
+    func draw() {
+        
+    }
 
 }
