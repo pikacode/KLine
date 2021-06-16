@@ -20,7 +20,11 @@ open class Candle: KLIndicator {
         set.shadowColor = .darkGray
         set.valueFont = .systemFont(ofSize: 10)
         set.drawValuesEnabled = false
-        set.shadowWidth = 4
+        set.shadowWidth = 1
+
+        entries.forEach{
+            print("o \($0.open) c \($0.close) h \($0.high) l \($0.low)")
+        }
         return set
     }
     

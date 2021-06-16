@@ -31,12 +31,21 @@
                                     <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6KZ-rA-nbW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-NK-DGa">
+                                <rect key="frame" x="192" y="302" width="30" height="30"/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Api-WO-xNN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
+                            <constraint firstItem="1JQ-NK-DGa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6IP-fr-2O8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jqQ-Du-XSW" secondAttribute="trailing" constant="20" id="H1w-wv-O3H"/>
                             <constraint firstItem="0iT-oj-kjq" firstAttribute="top" secondItem="jqQ-Du-XSW" secondAttribute="bottom" constant="20" id="N6C-Vq-A6V"/>
+                            <constraint firstItem="1JQ-NK-DGa" firstAttribute="top" secondItem="0iT-oj-kjq" secondAttribute="bottom" constant="30" id="Qtj-kl-yTZ"/>
                             <constraint firstItem="0iT-oj-kjq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SVO-Ch-1HJ"/>
                             <constraint firstItem="jqQ-Du-XSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="as0-dz-r6S"/>
                             <constraint firstItem="jqQ-Du-XSW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="faM-Au-cgQ"/>

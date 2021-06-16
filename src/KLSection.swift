@@ -27,7 +27,7 @@ open class KLSection {
         self.height = height
     }
 
-    lazy var chartView = KLCombinedChartView(frame: .zero)
+    public lazy var chartView = KLCombinedChartView(frame: .zero)
 
     func draw(_ data: [KLineData]) {
         self.data = data
