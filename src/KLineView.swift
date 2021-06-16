@@ -12,12 +12,12 @@ open class KLineView: UIView {
 
     // MARK: - public
 
-    public init(_ sections: [[KLIndicator.Type]]) {
+    public init(_ sections: [KLSection]) {
         self.sections = sections
         super.init(frame: .zero)
     }
 
-    public var sections: [[KLIndicator.Type]] {
+    public var sections: [KLSection] {
         didSet {
 
         }
@@ -49,6 +49,7 @@ open class KLineView: UIView {
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
+                            self.updateChart()
                             self.setDataCompletion()
                         }
                     }
@@ -57,30 +58,32 @@ open class KLineView: UIView {
         }
     }
 
-    public let chartView = KLCombinedChartView(frame: .zero)
-
     // MARK: - private
 
     var setDataCompletion = {}
 
     let queue = DispatchQueue(label: "KLine")
 
-    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0 } }
+    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0.indicators } }
 
     var isCalculating = false
 
     var tempData = [KLineData]()
     var realData = [KLineData]()
 
-    open override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(chartView)
-        [NSLayoutConstraint.Attribute.top, .bottom, .left, .right].forEach{
-            let c = NSLayoutConstraint(item: self, attribute: $0, relatedBy: .equal, toItem: chartView, attribute: $0, multiplier: 1, constant: 0)
-            self.addConstraint(c)
-        }
+    func updateChart() {
+
     }
+
+//    open override func didMoveToSuperview() {
+//        super.didMoveToSuperview()
+//        chartView.translatesAutoresizingMaskIntoConstraints = false
+//        addSubview(chartView)
+//        [NSLayoutConstraint.Attribute.top, .bottom, .left, .right].forEach{
+//            let c = NSLayoutConstraint(item: self, attribute: $0, relatedBy: .equal, toItem: chartView, attribute: $0, multiplier: 1, constant: 0)
+//            self.addConstraint(c)
+//        }
+//    }
 
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

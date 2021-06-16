@@ -13,9 +13,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIView!
 
-    lazy var klineView = KLineView([[Candle.self, MA.self],
-                                    [MA.self],
-                                    [MA.self]])
+    lazy var klineView = KLineView([KLSection([Candle.self, MA.self], 300),
+                                    KLSection([MA.self], 74),
+                                    KLSection([MA.self], 74)])
 
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243

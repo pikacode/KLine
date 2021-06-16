@@ -11,7 +11,6 @@ open class KLStyle {
 
     public static var `default`: KLStyle = {
         let style = KLStyle()
-        style.height = 100
         style.lineWidth1 = 1
         style.maxBarWidth = 4
         style.minBarWidth = 1
@@ -25,8 +24,6 @@ open class KLStyle {
         style.downGradient = GradientColor(top: style.downColor.alpha(0.8), bottom: style.downColor.alpha(0.1))
         return style
     }()
-
-    public var height: CGFloat
 
     public var lineWidth1: CGFloat
 
@@ -52,7 +49,6 @@ open class KLStyle {
 
     public init() {
         let style = KLStyle.default
-        height = style.height
         lineWidth1 = style.lineWidth1
         maxBarWidth = style.maxBarWidth
         minBarWidth = style.minBarWidth
