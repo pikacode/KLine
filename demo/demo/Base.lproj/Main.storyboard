@@ -17,14 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-Du-XSW">
-                                <rect key="frame" x="87" y="129" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-Du-XSW">
+                                <rect key="frame" x="20" y="94" width="374" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="etr-aw-mgj"/>
+                                </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-oj-kjq">
-                                <rect key="frame" x="184" y="388" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-oj-kjq">
+                                <rect key="frame" x="184" y="242" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6KZ-rA-nbW"/>
@@ -33,14 +34,22 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jqQ-Du-XSW" secondAttribute="trailing" constant="20" id="H1w-wv-O3H"/>
+                            <constraint firstItem="0iT-oj-kjq" firstAttribute="top" secondItem="jqQ-Du-XSW" secondAttribute="bottom" constant="20" id="N6C-Vq-A6V"/>
+                            <constraint firstItem="0iT-oj-kjq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SVO-Ch-1HJ"/>
+                            <constraint firstItem="jqQ-Du-XSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="as0-dz-r6S"/>
+                            <constraint firstItem="jqQ-Du-XSW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="faM-Au-cgQ"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentHeight" destination="etr-aw-mgj" id="ucT-9g-kpo"/>
                         <outlet property="contentView" destination="jqQ-Du-XSW" id="rMb-Dr-XNU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-201" y="131"/>
+            <point key="canvasLocation" x="-857" y="80"/>
         </scene>
     </scenes>
     <resources>

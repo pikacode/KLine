@@ -10,8 +10,8 @@ import KLine
 
 class ViewController: UIViewController {
 
-
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
     lazy var klineView = KLineView([KLSection([Candle.self, MA.self], 300),
                                     KLSection([MA.self], 74),
@@ -49,11 +49,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         contentView.addSubview(klineView)
-        klineView.frame = contentView.bounds
 
         klineView.data = data
 
+    }
 
+    override func viewDidLayoutSubviews() {
+        klineView.frame = contentView.bounds
+        contentHeight.constant = klineView.needHeight
     }
 
     @IBAction func action(_ sender: Any) {

@@ -17,6 +17,9 @@ open class KLSection {
 
     public var height: CGFloat
 
+    var offset: CGFloat = 0
+
+
     public init(_ indicators: [KLIndicator.Type], _ height: CGFloat) {
         self.indicators = indicators
         self.height = height

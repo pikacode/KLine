@@ -18,9 +18,32 @@ open class KLineView: UIView {
     }
 
     public var sections: [KLSection] {
-        didSet {
-
+        willSet {
+            newValue.forEach{ $0.offset = sections[0].offset }
         }
+        didSet {
+            subviews.forEach{ $0.removeFromSuperview() }
+            sections.forEach{
+                let view = $0.chartView
+                view.translatesAutoresizingMaskIntoConstraints = false
+                let top: NSLayoutConstraint
+                if let last = self.subviews.last {
+                    top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: 0)
+                } else {
+                    top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
+                }
+                self.addSubview(view)
+                view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: CGFloat.random(in: 0.3...0.8))
+                let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: $0.height)
+                let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
+                let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
+                self.addConstraints([left, right, top, height])
+            }
+        }
+    }
+
+    public var needHeight: CGFloat {
+        return sections.reduce(0, { $0 + $1.height })
     }
 
     public func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
@@ -73,6 +96,13 @@ open class KLineView: UIView {
 
     func updateChart() {
 
+    }
+
+    open override func layoutSubviews() {
+        if subviews.count != sections.count {
+            let s = sections
+            sections = s
+        }
     }
 
 //    open override func didMoveToSuperview() {
