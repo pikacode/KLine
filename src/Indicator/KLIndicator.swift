@@ -11,4 +11,9 @@ public protocol KLIndicator {
     static func calculate(_ data: inout [KLineData])
 
     static var style: KLStyle { get set }
+
+}
+
+extension KLIndicator {
+    static var name: String { return "\(self)" }
 }

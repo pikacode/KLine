@@ -72,7 +72,7 @@ open class KLineView: UIView {
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
-                            self.sections.forEach{ $0.draw() }
+                            self.sections.forEach{ $0.draw(self.data) }
                             self.setDataCompletion()
                         }
                     }

@@ -11,7 +11,7 @@ open class KLSection {
 
     public var indicators: [KLIndicator.Type] {
         didSet {
-            draw()
+            draw(data)
         }
     }
 
@@ -19,6 +19,7 @@ open class KLSection {
 
     var offset: CGFloat = 0
 
+    var data = [KLineData]()
 
     public init(_ indicators: [KLIndicator.Type], _ height: CGFloat) {
         self.indicators = indicators
@@ -27,8 +28,20 @@ open class KLSection {
 
     let chartView = KLCombinedChartView(frame: .zero)
 
-    func draw() {
-        
+    func draw(_ data: [KLineData]) {
+        self.data = data
+        indicators.forEach {
+            switch $0.name {
+            case Candle.name:
+                break
+
+            case MA.name:
+                break
+
+            default:
+                break
+            }
+        }
     }
 
 }
