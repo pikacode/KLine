@@ -24,6 +24,7 @@ open class KLCombinedChartView: CombinedChartView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         KLCombinedChartView.exchangeMethod()
+        initUI()
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -55,9 +56,8 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
 
-        xAxis.axisMaximum = 30
-        viewPortHandler.setMaximumScaleX(10)
-        zoomToCenter(scaleX: 3, scaleY: 1)
+//        viewPortHandler.setMaximumScaleX(10)
+//        zoomToCenter(scaleX: 3, scaleY: 1)
     }
 
     override func panGestureRecognized_1(_ recognizer: NSUIPanGestureRecognizer) {

@@ -12,7 +12,7 @@ open class Candle: KLIndicator {
 
     public static func candleData(_ data: [KLineData]) -> CandleChartDataSet? {
         let entries = data.map{
-            CandleChartDataEntry(x: $0.time/10000, shadowH: $0.high, shadowL: $0.low, open: $0.open, close: $0.close)
+            CandleChartDataEntry(x: $0.time/50000, shadowH: $0.high, shadowL: $0.low, open: $0.open, close: $0.close)
         }
         let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
         set.setColor(UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1))

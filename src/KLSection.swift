@@ -35,7 +35,7 @@ open class KLSection {
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()
-
+        
         indicators.forEach {
             if let line = $0.lineData(data) {
                 lineData.dataSets.append(line)

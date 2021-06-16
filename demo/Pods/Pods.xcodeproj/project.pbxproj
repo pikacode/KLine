@@ -427,8 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				7AFC567159517D6CD98F7BD7C6E4E3E1 /* KLIndicator.swift */,
-				3C933E856100FEE323098B0138ACCFC0 /* MA.swift */,
 				3BA465A0267894BA009A3EF2 /* Candle.swift */,
+				3C933E856100FEE323098B0138ACCFC0 /* MA.swift */,
 			);
 			name = Indicator;
 			path = src/Indicator;
