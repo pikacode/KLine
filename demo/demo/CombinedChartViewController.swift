@@ -70,6 +70,8 @@ class CombinedChartViewController: DemoBaseViewController, IAxisValueFormatter {
         }
         
         let data = CombinedChartData()
+        chartView.data = data
+
         data.lineData = generateLineData()
         data.candleData = generateCandleData()
 //        data.barData = generateBarData()
@@ -78,7 +80,6 @@ class CombinedChartViewController: DemoBaseViewController, IAxisValueFormatter {
 //
 //        chartView.xAxis.axisMaximum = data.xMax + 0.25
 
-        chartView.data = data
         chartView.moveViewToX(25)
     }
 

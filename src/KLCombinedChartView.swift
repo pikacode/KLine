@@ -82,7 +82,7 @@ open class KLCombinedChartView: CombinedChartView {
     var crossPoint: CGPoint? {
         didSet {
 //            data = CombinedChartData()
-            print(crossPoint)
+            //print(crossPoint)
             guard let chartData = data as? CombinedChartData else { return }
 
             let crossSet: LineChartDataSet = {
@@ -101,10 +101,10 @@ open class KLCombinedChartView: CombinedChartView {
                 return set
             }()
 
-            if let index = chartData.lineData.dataSets.firstIndex(where: { $0.label == crossLabel }) {
-                chartData.lineData.dataSets[index] = crossSet
+            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == crossLabel }) {
+                chartData.lineData?.dataSets[index] = crossSet
             } else {
-                chartData.lineData.addDataSet(crossSet)
+                chartData.lineData?.addDataSet(crossSet)
             }
             data = chartData
             setNeedsDisplay()
@@ -115,7 +115,7 @@ open class KLCombinedChartView: CombinedChartView {
         super.draw(rect)
         guard let p = crossPoint,
               let context = UIGraphicsGetCurrentContext(),
-              let index = (data as? CombinedChartData)?.lineData.dataSets.firstIndex(where: { $0.label == crossLabel })
+              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == crossLabel })
         else { return }
         let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
         renderer?.drawHighlighted(context: context, indices: [h])

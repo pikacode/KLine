@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 open class MA: KLIndicator {
 
@@ -37,6 +38,10 @@ open class MA: KLIndicator {
             ma.data[day] = sum/Double(day)
             data[i].ma = ma
         }
+    }
+
+    public static func lineData(_ data: [KLineData]) -> LineChartDataSet? {
+        return nil
     }
 
 }

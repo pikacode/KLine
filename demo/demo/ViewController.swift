@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
-        let count = 30
+        let count = 90
         var temp = [KLineData]()
         for i in 0..<count {
             let v = Double.random(in: 500000...3000000)
