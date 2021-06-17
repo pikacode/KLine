@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Charts
 
 open class EMA: KLIndicator {
     
     public static var style: KLStyle = KLStyle.default
     
-    public static var days = [12, 25, 26]
+    public static var days = [7, 25, 99]
     
     var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
     
@@ -23,10 +24,7 @@ open class EMA: KLIndicator {
     
     static func calculateEMA(_ data: inout [KLineData], day: Int) {
         
-        if day > data.count {
-            return
-        }
-        for i in (day-1)..<(data.count - 1) {
+        for i in 0..<(data.count - 1) {
             let model = data[i]
             let ema = data[i].ema ?? EMA()
             if i == 0 {
@@ -42,7 +40,34 @@ open class EMA: KLIndicator {
         
         
     }
-    
+    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+        let sets = days.map { (day) -> LineChartDataSet in
+            let entries = data.compactMap{ (d) -> ChartDataEntry? in
+                if let value = d.ema?.data[day] {
+                    return ChartDataEntry(x: d.x, y: value)
+                } else {
+                    return nil
+                }
+            }
+            let set = LineChartDataSet(entries: entries, label: "")
+            let index = days.firstIndex(of: day) ?? 0
+            let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
+            set.setColor(color)
+            set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+            set.lineWidth = 0.5
+            set.circleRadius = 0
+            set.circleHoleRadius = 0
+            set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+            set.mode = .cubicBezier
+            set.drawValuesEnabled = true
+            set.valueFont = .systemFont(ofSize: 0)
+            set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+            set.axisDependency = .left
+            return set
+        }
+        return sets
+    }
+
     
     
     
