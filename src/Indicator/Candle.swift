@@ -14,7 +14,7 @@ open class Candle: KLIndicator {
         let entries = data.map{
             CandleChartDataEntry(x: $0.x, shadowH: $0.high, shadowL: $0.low, open: $0.open, close: $0.close)
         }
-        let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
+        let set = CandleChartDataSet(entries: entries, label: nil)
         set.increasingColor = style.upColor
         set.decreasingColor = style.downColor
         set.increasingFilled = true

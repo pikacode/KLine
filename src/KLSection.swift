@@ -52,7 +52,7 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-
+        
         chartView.data = combinedData
         chartView.viewPortHandler.setMaximumScaleX(10)
 

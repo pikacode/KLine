@@ -10,11 +10,11 @@ import Charts
 
 open class MA: KLIndicator {
 
+    public var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
+
     public static var style: KLStyle = KLStyle.default
 
     public static var days = [7, 25, 60]
-
-    var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
 
     public static func calculate(_ data: inout [KLineData]) {
         days.forEach{
@@ -22,7 +22,7 @@ open class MA: KLIndicator {
         }
     }
 
-    static func calculateMA(_ data: inout [KLineData], day: Int) {
+    public static func calculateMA(_ data: inout [KLineData], day: Int) {
         if day > data.count {
             return
         }
@@ -49,19 +49,16 @@ open class MA: KLIndicator {
                     return nil
                 }
             }
-            let set = LineChartDataSet(entries: entries, label: "")
+            let last = entries.last?.y ?? 0
+            let label = String(format: "MA\(day):%.8f", last)
+            let set = LineChartDataSet(entries: entries, label: label)
             let index = days.firstIndex(of: day) ?? 0
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
-            set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-            set.lineWidth = 0.5
-            set.circleRadius = 0
-            set.circleHoleRadius = 0
-            set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+            set.lineWidth = style.lineWidth1
             set.mode = .cubicBezier
-            set.drawValuesEnabled = true
-            set.valueFont = .systemFont(ofSize: 0)
-            set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+            set.drawCirclesEnabled = false
+            set.drawValuesEnabled = false
             set.axisDependency = .left
             return set
         }
