@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
-        let count = 90
+        let count = 360
         var temp = [KLineData]()
         for i in 0..<count {
             let v = Double.random(in: 500000...3000000)
@@ -31,9 +31,9 @@ class ViewController: UIViewController {
                 o = Double.random(in: 380...400)
             }
             var arr = [o,
-                       Double.random(in: (o*0.95)...(o*1.05)),
-                       Double.random(in: (o*0.95)...(o*1.05)),
-                       Double.random(in: (o*0.95)...(o*1.05))].sorted()
+                       Double.random(in: (o*0.92)...(o*1.08)),
+                       Double.random(in: (o*0.92)...(o*1.08)),
+                       Double.random(in: (o*0.92)...(o*1.08))].sorted()
             let h = arr.removeLast()
             let l = arr.removeFirst()
             let c = arr[0] == o ? arr[1] : arr[0]

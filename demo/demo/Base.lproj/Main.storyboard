@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-Du-XSW">
-                                <rect key="frame" x="20" y="94" width="374" height="128"/>
+                                <rect key="frame" x="8" y="94" width="398" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="etr-aw-mgj"/>
@@ -43,11 +43,11 @@
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="1JQ-NK-DGa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6IP-fr-2O8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jqQ-Du-XSW" secondAttribute="trailing" constant="20" id="H1w-wv-O3H"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jqQ-Du-XSW" secondAttribute="trailing" constant="8" id="H1w-wv-O3H"/>
                             <constraint firstItem="0iT-oj-kjq" firstAttribute="top" secondItem="jqQ-Du-XSW" secondAttribute="bottom" constant="20" id="N6C-Vq-A6V"/>
                             <constraint firstItem="1JQ-NK-DGa" firstAttribute="top" secondItem="0iT-oj-kjq" secondAttribute="bottom" constant="30" id="Qtj-kl-yTZ"/>
                             <constraint firstItem="0iT-oj-kjq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SVO-Ch-1HJ"/>
-                            <constraint firstItem="jqQ-Du-XSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="as0-dz-r6S"/>
+                            <constraint firstItem="jqQ-Du-XSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="as0-dz-r6S"/>
                             <constraint firstItem="jqQ-Du-XSW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="faM-Au-cgQ"/>
                         </constraints>
                     </view>

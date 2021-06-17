@@ -9,21 +9,7 @@ import UIKit
 
 open class KLStyle {
 
-    public static var `default`: KLStyle = {
-        let style = KLStyle()
-        style.lineWidth1 = 1
-        style.maxBarWidth = 4
-        style.minBarWidth = 1
-        style.space = 1
-        style.lineColor1 = UIColor.white
-        style.lineColor2 = UIColor.white
-        style.lineColor3 = UIColor.white
-        style.upColor = UIColor.white
-        style.downColor = UIColor.white
-        style.upGradient = GradientColor(top: style.upColor.alpha(0.8), bottom: style.upColor.alpha(0.1))
-        style.downGradient = GradientColor(top: style.downColor.alpha(0.8), bottom: style.downColor.alpha(0.1))
-        return style
-    }()
+    public static var `default` = KLStyle(true)
 
     public var lineWidth1: CGFloat
 
@@ -47,19 +33,33 @@ open class KLStyle {
         let bottom: UIColor
     }
 
-    public init() {
-        let style = KLStyle.default
-        lineWidth1 = style.lineWidth1
-        maxBarWidth = style.maxBarWidth
-        minBarWidth = style.minBarWidth
-        space = style.space
-        lineColor1 = style.lineColor1
-        lineColor2 = style.lineColor2
-        lineColor3 = style.lineColor3
-        upColor = style.upColor
-        downColor = style.downColor
-        upGradient = style.upGradient
-        downGradient = style.downGradient
+    public init(_ isDefault: Bool = false) {
+        if isDefault {
+            lineWidth1 = 1
+            maxBarWidth = 4
+            minBarWidth = 1
+            space = 1
+            lineColor1 = 0x039fff.toColor
+            lineColor2 = 0x01d0f7.toColor
+            lineColor3 = 0xff7401.toColor
+            upColor = 0x02cc99.toColor
+            downColor = 0xff2500.toColor
+            upGradient = GradientColor(top: upColor.alpha(0.8), bottom: upColor.alpha(0.1))
+            downGradient = GradientColor(top: downColor.alpha(0.8), bottom: downColor.alpha(0.1))
+        } else {
+            let style = KLStyle.default
+            lineWidth1 = style.lineWidth1
+            maxBarWidth = style.maxBarWidth
+            minBarWidth = style.minBarWidth
+            space = style.space
+            lineColor1 = style.lineColor1
+            lineColor2 = style.lineColor2
+            lineColor3 = style.lineColor3
+            upColor = style.upColor
+            downColor = style.downColor
+            upGradient = style.upGradient
+            downGradient = style.downGradient
+        }
     }
 
 }

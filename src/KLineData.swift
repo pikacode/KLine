@@ -14,6 +14,10 @@ open class KLineData {
     public var low: Double = 0
     public var vol: Double = 0
     public var time: TimeInterval = 0
+    
+    public var x: Double {
+        return time/50000
+    }
 
     public var ma: MA?
 

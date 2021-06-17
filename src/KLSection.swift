@@ -29,31 +29,37 @@ open class KLSection {
 
     public lazy var chartView = KLCombinedChartView(frame: .zero)
 
+    let combinedData = CombinedChartData()
+
     func draw(_ data: [KLineData]) {
         self.data = data
 
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()
-        
+
         indicators.forEach {
             if let line = $0.lineData(data) {
-                lineData.dataSets.append(line)
+                lineData.dataSets.append(contentsOf: line)
+                combinedData.lineData = lineData
             }
             if let bar = $0.barData(data) {
-                barData.dataSets.append(bar)
+                barData.dataSets.append(contentsOf: bar)
+                combinedData.barData = barData
             }
             if let candle = $0.candleData(data) {
-                candleData.dataSets.append(candle)
+                candleData.dataSets.append(contentsOf: candle)
+                combinedData.candleData = candleData
             }
         }
 
-        let combinedData = CombinedChartData()
-        combinedData.lineData = lineData
-        combinedData.candleData = candleData
-        combinedData.barData = barData
-        chartView.data = combinedData
 
+        chartView.data = combinedData
+        chartView.viewPortHandler.setMaximumScaleX(10)
+
+        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            chartView.zoomToCenter(scaleX: 10, scaleY: 1)
+        }
     }
 
 }

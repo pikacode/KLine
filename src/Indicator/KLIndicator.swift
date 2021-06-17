@@ -13,23 +13,23 @@ public protocol KLIndicator {
 
     static var style: KLStyle { get set }
 
-    static func candleData(_ data: [KLineData]) -> CandleChartDataSet?
-    static func lineData(_ data: [KLineData]) -> LineChartDataSet?
-    static func barData(_ data: [KLineData]) -> BarChartDataSet?
+    static func candleData(_ data: [KLineData]) -> [CandleChartDataSet]?
+    static func lineData(_ data: [KLineData]) -> [LineChartDataSet]?
+    static func barData(_ data: [KLineData]) -> [BarChartDataSet]?
 }
 
 extension KLIndicator {
     static var name: String { return "\(self)" }
 
-    public static func candleData(_ data: [KLineData]) -> CandleChartDataSet? {
+    public static func candleData(_ data: [KLineData]) -> [CandleChartDataSet]? {
         return nil
     }
 
-    public static func lineData(_ data: [KLineData]) -> LineChartDataSet? {
+    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
         return nil
     }
 
-    public static func barData(_ data: [KLineData]) -> BarChartDataSet? {
+    public static func barData(_ data: [KLineData]) -> [BarChartDataSet]? {
         return nil
     }
 }
