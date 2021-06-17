@@ -49,7 +49,7 @@ enum Option {
     case toggleRotate
     case toggleHighlightCircle
     
-    var label: String {
+    var label: String {  
         switch self {
         case .toggleValues: return "Toggle Y-Values"
         case .toggleIcons: return "Toggle Icons"
