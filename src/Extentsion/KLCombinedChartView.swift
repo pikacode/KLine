@@ -12,6 +12,7 @@ open class KLCombinedChartView: CombinedChartView {
 
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
+
         if didExchangeMethod { return }
         didExchangeMethod = true
         let s1 = Selector("panGestureRecognized:")
@@ -22,22 +23,35 @@ open class KLCombinedChartView: CombinedChartView {
     }
 
     public override init(frame: CGRect) {
-        super.init(frame: frame)
         KLCombinedChartView.exchangeMethod()
+        super.init(frame: frame)
         initUI()
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
         KLCombinedChartView.exchangeMethod()
+        super.init(coder: aDecoder)
         initUI()
     }
 
     func initUI() {
+
         drawGridBackgroundEnabled = true
         gridBackgroundColor = 0x0e0e0e.toColor
 
         autoScaleMinMaxEnabled = true
+
+        minOffset = 0
+
+        object_setClass(legendRenderer, KLLegendRenderer.self)
+        legend.form = .none
+        legend.verticalAlignment = .top
+        legend.drawInside = true
+        legend.font = UIFont.systemFont(ofSize: 9)
+        legend.formSize = 0
+        legend.xEntrySpace = 5
+        legend.formToTextSpace = 0
+        legend.xOffset = 6
 
         xAxis.labelPosition = .bottomInside
         xAxis.gridColor = 0x262626.toColor
@@ -79,8 +93,6 @@ open class KLCombinedChartView: CombinedChartView {
         }
     }
 
-    let crossLabel = "KLCross"
-
     var crossPoint: CGPoint? {
         didSet {
 //            data = CombinedChartData()
@@ -90,7 +102,7 @@ open class KLCombinedChartView: CombinedChartView {
             let crossSet: LineChartDataSet = {
                 guard let p = crossPoint else { return LineChartDataSet() }
                 let entries = [ChartDataEntry(x: Double(p.x), y: Double(p.y))]
-                let set = LineChartDataSet(entries: entries, label: crossLabel)
+                let set = LineChartDataSet(entries: entries, label: KLCrosshair.label)
                 set.setColor(UIColor.blue)
                 set.lineWidth = 2.5
                 set.mode = .linear
@@ -103,7 +115,7 @@ open class KLCombinedChartView: CombinedChartView {
                 return set
             }()
 
-            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == crossLabel }) {
+            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == KLCrosshair.label }) {
                 chartData.lineData?.dataSets[index] = crossSet
             } else {
                 chartData.lineData?.addDataSet(crossSet)
@@ -117,7 +129,7 @@ open class KLCombinedChartView: CombinedChartView {
         super.draw(rect)
         guard let p = crossPoint,
               let context = UIGraphicsGetCurrentContext(),
-              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == crossLabel })
+              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == KLCrosshair.label })
         else { return }
         let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
         renderer?.drawHighlighted(context: context, indices: [h])

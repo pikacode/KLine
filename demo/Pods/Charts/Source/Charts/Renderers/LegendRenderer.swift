@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartLegendRenderer)
+//@objc(ChartLegendRenderer)
 open class LegendRenderer: Renderer
 {
     /// the legend object this renderer renders

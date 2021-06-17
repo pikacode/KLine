@@ -10,6 +10,6 @@ import Charts
 
 class KLCrosshair {
 
- 
+    static let label = "KLCross"
 
 }
