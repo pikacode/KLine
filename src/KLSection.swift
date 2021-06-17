@@ -33,7 +33,7 @@ open class KLSection {
 
     func draw(_ data: [KLineData]) {
         self.data = data
-
+         
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()
@@ -52,7 +52,6 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-
 
         chartView.data = combinedData
         chartView.viewPortHandler.setMaximumScaleX(10)

@@ -14,7 +14,7 @@ open class MA: KLIndicator {
 
     public static var days = [7, 25, 60]
 
-    var data: [Int: Double] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
+    var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
 
     public static func calculate(_ data: inout [KLineData]) {
         days.forEach{
@@ -28,7 +28,7 @@ open class MA: KLIndicator {
         }
         for i in (day-1)..<(data.count-1) {
             let sum: Double
-            if let lastMA = data[(i-1)~]?.ma?.data[day], let closeN = data[(i-day)~]?.close {
+            if let lastMA = data[(i-1)~]?.ma?.data[day] as? Double, let closeN = data[(i-day)~]?.close {
                 //上一个值存在，减去第一个，加上最后一个即可
                 sum = lastMA * Double(day) - closeN + data[i].close
             } else {
@@ -43,7 +43,7 @@ open class MA: KLIndicator {
     public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
         let sets = days.map { (day) -> LineChartDataSet in
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
-                if let value = d.ma?.data[day] {
+                if let value = d.ma?.data[day] as? Double {
                     return ChartDataEntry(x: d.x, y: value)
                 } else {
                     return nil

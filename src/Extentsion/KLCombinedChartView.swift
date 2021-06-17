@@ -37,6 +37,8 @@ open class KLCombinedChartView: CombinedChartView {
         drawGridBackgroundEnabled = true
         gridBackgroundColor = 0x0e0e0e.toColor
 
+        autoScaleMinMaxEnabled = true
+
         xAxis.labelPosition = .bottomInside
         xAxis.gridColor = 0x262626.toColor
         xAxis.labelTextColor = UIColor.white.alpha(0.6)
