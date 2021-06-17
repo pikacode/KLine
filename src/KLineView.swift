@@ -25,6 +25,7 @@ open class KLineView: UIView {
             subviews.forEach{ $0.removeFromSuperview() }
             sections.forEach{
                 let view = $0.chartView
+                view.delegate = self
                 view.translatesAutoresizingMaskIntoConstraints = false
                 let top: NSLayoutConstraint
                 if let last = self.subviews.last {
@@ -99,6 +100,7 @@ open class KLineView: UIView {
             let s = sections
             sections = s
         }
+
     }
 
 //    open override func didMoveToSuperview() {
@@ -115,5 +117,20 @@ open class KLineView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+}
+
+extension KLineView: ChartViewDelegate {
+
+    public func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        let views = sections.map{ $0.chartView }.filter{ $0 != chartView }
+        let p = CGPoint(x: dX, y: dY)
+        views.forEach{
+            let originalMatrix = $0.viewPortHandler.touchMatrix
+            var matrix = CGAffineTransform(translationX: p.x, y: p.y)
+            matrix = originalMatrix.concatenating(matrix)
+            $0.viewPortHandler.refresh(newMatrix: matrix, chart: $0, invalidate: true)
+        }
+    }
 
 }
