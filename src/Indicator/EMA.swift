@@ -21,7 +21,7 @@ open class EMA {
             if i == 0 {
                 //第一天的ema12 是收盘价
                 ema.data[day] =  model.close
-            }else{
+            } else {
                 if  let lastEmaDay = model.ema?.data[day - 1] {
                     ema.data[day] = Double((2 / (day + 1))) * (model.close - lastEmaDay) + lastEmaDay
                 }
