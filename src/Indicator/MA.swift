@@ -40,7 +40,7 @@ open class MA: KLIndicator {
         }
     }
 
-    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         let sets = days.map { (day) -> LineChartDataSet in
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ma?.data[day] as? Double {

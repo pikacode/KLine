@@ -50,6 +50,19 @@ class ViewController: UIViewController {
 
         klineView.data = data
 
+        /* set data with a completion block
+
+         // data is [KLineData]
+         klineView.setData(data) {
+            //finish
+         }
+
+         // data is [Any]
+         klineView.setCustomData(data) {
+            //finish
+         }
+
+         */
     }
 
     override func viewDidLayoutSubviews() {
@@ -59,7 +72,7 @@ class ViewController: UIViewController {
 
     @IBAction func test(_ sender: Any) {
         // klineView.sections.first?.chartView
-        klineView.sections.first?.chartView.legend
+
     }
 
     @IBAction func action(_ sender: Any) {

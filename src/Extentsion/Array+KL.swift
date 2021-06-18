@@ -31,6 +31,7 @@ postfix func ~ (value: CountableClosedRange<Int>?) -> OptionalRange {
 }
 
 extension Array {
+
     subscript(int: OptionalInt, file: String = #file, function: String = #function, line: Int = #line) -> Element? {
         get {
             if let index = int.index {

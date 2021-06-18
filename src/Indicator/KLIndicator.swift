@@ -11,25 +11,49 @@ import Charts
 public protocol KLIndicator {
     static func calculate(_ data: inout [KLineData])
 
+    // to handle custom data
+    static func calculate(custom data: inout [Any])
+
     static var style: KLStyle { get set }
 
-    static func candleData(_ data: [KLineData]) -> [CandleChartDataSet]?
-    static func lineData(_ data: [KLineData]) -> [LineChartDataSet]?
-    static func barData(_ data: [KLineData]) -> [BarChartDataSet]?
+    static func candleDataSet(_ data: [KLineData]) -> [CandleChartDataSet]?
+    static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]?
+    static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]?
+
+    static func candleDataSet(custom data: [Any]) -> [CandleChartDataSet]?
+    static func lineDataSet(custom data: [Any]) -> [LineChartDataSet]?
+    static func barDataSet(custom data: [Any]) -> [BarChartDataSet]?
 }
 
 extension KLIndicator {
-    static var name: String { return "\(self)" }
+    public static var name: String { return "\(self)" }
 
-    public static func candleData(_ data: [KLineData]) -> [CandleChartDataSet]? {
+    public static func calculate(custom data: inout [Any]) {
+
+    }
+
+    public static func candleDataSet(_ data: [KLineData]) -> [CandleChartDataSet]? {
         return nil
     }
 
-    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         return nil
     }
 
-    public static func barData(_ data: [KLineData]) -> [BarChartDataSet]? {
+    public static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]? {
         return nil
     }
+
+    public static func candleDataSet(custom data: [Any]) -> [CandleChartDataSet]? {
+        return nil
+    }
+
+    public static func lineDataSet(custom data: [Any]) -> [LineChartDataSet]? {
+        return nil
+    }
+
+    public static func barDataSet(custom data: [Any]) -> [BarChartDataSet]? {
+        return nil
+    }
+
 }

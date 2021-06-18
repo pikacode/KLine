@@ -10,7 +10,7 @@ import Charts
 
 open class Candle: KLIndicator {
 
-    public static func candleData(_ data: [KLineData]) -> [CandleChartDataSet]? {
+    public static func candleDataSet(_ data: [KLineData]) -> [CandleChartDataSet]? {
         let entries = data.map{
             CandleChartDataEntry(x: $0.x, shadowH: $0.high, shadowL: $0.low, open: $0.open, close: $0.close)
         }

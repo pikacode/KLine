@@ -14,7 +14,7 @@ open class EMA: KLIndicator {
     
     public static var days = [7, 25, 99]
     
-    var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
+    public var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
     
     public static func calculate(_ data: inout [KLineData]) {
         days.forEach{
@@ -22,8 +22,7 @@ open class EMA: KLIndicator {
         }
     }
     
-    static func calculateEMA(_ data: inout [KLineData], day: Int) {
-        
+    public static func calculateEMA(_ data: inout [KLineData], day: Int) {
         for i in 0..<(data.count - 1) {
             let model = data[i]
             let ema = data[i].ema ?? EMA()
@@ -37,10 +36,9 @@ open class EMA: KLIndicator {
             }
             data[i].ema = ema
         }
-        
-        
     }
-    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+
+    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         let sets = days.map { (day) -> LineChartDataSet in
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ema?.data[day] {
@@ -68,8 +66,4 @@ open class EMA: KLIndicator {
         return sets
     }
 
-    
-    
-    
-    
 }
