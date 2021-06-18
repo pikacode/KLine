@@ -23,7 +23,7 @@ open class MACD: KLIndicator {
      DEA（MACD）= 前一日DEA×8/10＋今日DIF×2/10
      BAR=2×(DIFF－DEA)
      */
-    static func calculateSignMACD(_ data: inout [KLineData]) {
+    public static func calculateSignMACD(_ data: inout [KLineData]) {
         for index in 0..<data.count {
             let model = data[index]
             //计算EMA12，EMA26, DEA
@@ -44,7 +44,7 @@ open class MACD: KLIndicator {
         }
     }
     
-    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         
         let sets = emaDay.map { (day) -> LineChartDataSet in
             
@@ -71,7 +71,7 @@ open class MACD: KLIndicator {
         return sets
     }
     
-    public static func barData(_ data: [KLineData]) -> [BarChartDataSet]? {
+    public static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]? {
         let entries = data.compactMap{ (d) -> BarChartDataEntry in
             return BarChartDataEntry(x: d.x, y: d.macd_macd)
         }
@@ -83,6 +83,5 @@ open class MACD: KLIndicator {
         set.valueColors = colors
         return [set]
     }
-    
     
 }

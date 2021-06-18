@@ -57,6 +57,7 @@ open class KLineView: UIView {
         self.data = data
     }
 
+    /// [KLineData] or custom [Any]
     public var data: [Any] {
         get {
             return realData
