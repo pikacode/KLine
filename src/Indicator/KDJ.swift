@@ -77,6 +77,7 @@ open class KDJ {
 extension KDJ: KLIndicator {
 
     public static var style: KLStyle = KLStyle.default
+
     public static func calculate(_ data: inout [KLineData]) {
         calculateKDJ(&data)
     }
