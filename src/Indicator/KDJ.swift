@@ -75,7 +75,7 @@ open class KDJ: KLIndicator {
         return result.isNaN ? 0 : result
     }
     
-    public static func lineData(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         
         
         var sets = [LineChartDataSet]()
