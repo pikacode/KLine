@@ -9,7 +9,9 @@ import UIKit
 import Charts
 
 open class MACD {
-    
+
+    public static var emaDay = [12, 26]
+
     /**
      EMA（12）= 前一日EMA（12）×11/13＋今日收盘价×2/13
      EMA（26）= 前一日EMA（26）×25/27＋今日收盘价×2/27
@@ -26,7 +28,7 @@ open class MACD {
                 model.small_macd = model.close
                 model.dif = 0
                 model.dea = 0
-            }else{
+            } else {
                 let lastModel = data[index - 1]
                 model.big_macd = lastModel.big_macd * 25 / 27 + model.close * 2 / 27
                 model.small_macd = lastModel.small_macd * 11 / 13 + model.close * 2 / 13
@@ -44,8 +46,6 @@ extension MACD: KLIndicator {
 
     public static var style: KLStyle = KLStyle.default
 
-    public static var emaDay = [12, 26]
-
     public static func calculate(_ data: inout [KLineData]) {
         calculateSignMACD(&data)
     }
@@ -57,18 +57,15 @@ extension MACD: KLIndicator {
                 return ChartDataEntry(x: d.x, y: index == 0 ? d.dif : d.dea)
             }
             let set = LineChartDataSet(entries: entries, label: "")
-
             let color = [style.lineColor1, style.lineColor2][index]
             set.setColor(color)
-            set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-            set.lineWidth = 0.5
+
+            set.lineWidth = style.lineWidth1
             set.circleRadius = 0
             set.circleHoleRadius = 0
-            set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
             set.mode = .cubicBezier
             set.drawValuesEnabled = true
-            set.valueFont = .systemFont(ofSize: 0)
-            set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+
             set.axisDependency = .left
             return set
         }
@@ -80,7 +77,7 @@ extension MACD: KLIndicator {
             return BarChartDataEntry(x: d.x, y: d.macd_macd)
         }
         let colors = entries.map { (entry) -> NSUIColor in
-            return entry.y > 0 ? .red : .green
+            return entry.y > 0 ? style.upBarColor : style.downBarColor
         }
         let set = BarChartDataSet(entries: entries)
         set.colors = colors

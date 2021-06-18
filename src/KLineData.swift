@@ -15,11 +15,21 @@ open class KLineData {
     public var vol: Double = 0
     public var time: TimeInterval = 0
         
+    
+    //MACD技术指标
     public var dif: Double = 0.0
     public var dea: Double = 0.0
     public var small_macd: Double = 0.0
     public var big_macd: Double = 0.0
     public var macd_macd: Double = 0.0
+    
+    
+    //KDJ技术指标
+    public var k: Double = 0.0
+    public var d: Double = 0.0
+    public var j: Double = 0.0
+    public var rsv: Double = 0.0
+
     
     public var x: Double {
         return time/50000
@@ -30,6 +40,7 @@ open class KLineData {
     
     //附图
     public var macd: MACD? //指数平滑异同平均线
+    public var kdj: KDJ? //随机指标
 
     public init(o: Double, c: Double, h: Double, l: Double, v: Double, t: TimeInterval) {
         open = o

@@ -21,9 +21,13 @@ open class KLStyle {
     public var lineColor1: UIColor
     public var lineColor2: UIColor
     public var lineColor3: UIColor
+    
 
     public var upColor: UIColor
     public var downColor: UIColor
+    
+    public var upBarColor: UIColor
+    public var downBarColor: UIColor
 
     public var upGradient: GradientColor
     public var downGradient: GradientColor
@@ -46,6 +50,8 @@ open class KLStyle {
             lineColor3 = 0xff7401.toColor
             upColor = 0x02cc99.toColor
             downColor = 0xff2500.toColor
+            upBarColor = 0xC33137.toColor
+            downBarColor = 0x37A783.toColor
             upGradient = GradientColor(top: upColor.alpha(0.8), bottom: upColor.alpha(0.1))
             downGradient = GradientColor(top: downColor.alpha(0.8), bottom: downColor.alpha(0.1))
             label = KLLabel(text: "", font: UIFont.systemFont(ofSize: 10), color: UIColor.black, bgColor: UIColor.white, position: KLPosition.left(.zero))
@@ -60,6 +66,8 @@ open class KLStyle {
             lineColor3 = style.lineColor3
             upColor = style.upColor
             downColor = style.downColor
+            upBarColor = style.upBarColor
+            downBarColor = style.downBarColor
             upGradient = style.upGradient
             downGradient = style.downGradient
             label = style.label
