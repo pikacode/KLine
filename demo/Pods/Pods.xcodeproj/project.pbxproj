@@ -148,7 +148,13 @@
 		CB6E235EB0A5B896F9D1815877757EF9 /* CandleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E783FA79E7C5FEE6D62879F518ABF0A /* CandleChartData.swift */; };
 		CDABB0AA47F0EEE957FCE629F8D2DB6B /* BubbleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F657E07032F55A96BEE75F573FBC54D1 /* BubbleChartView.swift */; };
 		CEC814CFD549BCDDAB65F5918969182E /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7045AE44AA41F438E17FF48B7B8DCA /* IHighlighter.swift */; };
+<<<<<<< HEAD
+		D1015019267B29EC008300A8 /* MACD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1015018267B29EC008300A8 /* MACD.swift */; };
+		D101501E267B2AD4008300A8 /* EMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101501D267B2AD4008300A8 /* EMA.swift */; };
+		D273DADB5EA8D6CFC0AA21D9B73F961F /* Candle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A3CE3CA90260308DBCBA2D34164DA /* Candle.swift */; };
+=======
 		D29BC07A19AE556FF8EDD2AE67E3DBF2 /* KLStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE2911FA0358514135D56DFAD192D54 /* KLStyle.swift */; };
+>>>>>>> ed8976c26552f8d03711eb369471e70dac5b5a7f
 		D68F93293888B6776369185028CB60B0 /* IBarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEA8AC06FB34D00653F00EB4DA31444 /* IBarChartDataSet.swift */; };
 		D6E011A7BA193945CEA69517E40CBD48 /* XShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116AB9BF75A2A772277869CDD16CFD5 /* XShapeRenderer.swift */; };
 		D7B623CFD7231E00FB60419AA17A3E82 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F617C946A8AF36F4BE67A3944DCD159 /* MoveViewJob.swift */; };
@@ -350,6 +356,8 @@
 		CE6013C31DB5F628FCFF459656034379 /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
 		CEEED036C18816CECC0CE22C86D1282A /* YAxisRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRenderer.swift; path = Source/Charts/Renderers/YAxisRenderer.swift; sourceTree = "<group>"; };
 		D064CCBEB3D8F86F6C6EB1E51C427CFA /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarHighlighter.swift; path = Source/Charts/Highlight/PieRadarHighlighter.swift; sourceTree = "<group>"; };
+		D1015018267B29EC008300A8 /* MACD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MACD.swift; sourceTree = "<group>"; };
+		D101501D267B2AD4008300A8 /* EMA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMA.swift; sourceTree = "<group>"; };
 		D466846EAE78237BBF2B30F1C005611F /* RadarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataEntry.swift; sourceTree = "<group>"; };
 		D5870D99A8B67AFF39FEA87AED03835E /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };
 		D61FAAA2867F45107D88179DA87F3188 /* KLCombinedChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KLCombinedChartView.swift; sourceTree = "<group>"; };
@@ -428,6 +436,13 @@
 		1311414D1D49AA6B24E3ED3BD3B87ED5 /* KLine */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				464B065D957FC2A7BD05F5CC8F76144F /* KLIndicator.swift */,
+				3D2A3CE3CA90260308DBCBA2D34164DA /* Candle.swift */,
+				5B96D37EAC9A1FE8944359FEB97A7B14 /* MA.swift */,
+				D1015018267B29EC008300A8 /* MACD.swift */,
+				D101501D267B2AD4008300A8 /* EMA.swift */,
+=======
 				DB99FB1A6A304D75C91DE25DC33037B5 /* KLCrosshair.swift */,
 				AB75F98FDC6457CF772A9C3B3A05DF3F /* KLineData.swift */,
 				67FEE8DB1EDB2198AEEBFD33D27DDF65 /* KLineView.swift */,
@@ -437,6 +452,7 @@
 				664C024342543E761B1EB42CCC2A5690 /* Indicator */,
 				5C0E29399554F0AB756FADF200C1D4C0 /* Pod */,
 				8A04E9DD0CD66F082E91576F857BE92D /* Support Files */,
+>>>>>>> ed8976c26552f8d03711eb369471e70dac5b5a7f
 			);
 			name = KLine;
 			path = ../..;
@@ -1035,6 +1051,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
+				B695CCAB1F48F03C79021DC0A8ED97D4 /* Array+KL.swift in Sources */,
+				D101501E267B2AD4008300A8 /* EMA.swift in Sources */,
+				D273DADB5EA8D6CFC0AA21D9B73F961F /* Candle.swift in Sources */,
+				D1015019267B29EC008300A8 /* MACD.swift in Sources */,
+				770728A800218A83591162C92021EB96 /* Int+KL.swift in Sources */,
+				DF2512D8BF26501B166878170C3F677D /* KLCombinedChartView.swift in Sources */,
+				493371903B25659CA27AAF56B6B1986E /* KLCrosshair.swift in Sources */,
+				148389F06BF64A736D7D4A44AB9CA10D /* KLIndicator.swift in Sources */,
+				882D64911D9B91084A773244DD1C7804 /* KLine-dummy.m in Sources */,
+				A2288C6D3CD15BC341E0CBE15E64103D /* KLineData.swift in Sources */,
+				E58608609E5B6E0D10BD74E07E3AE11A /* KLineView.swift in Sources */,
+				4CE646D16CBC1823CB912592441BA56F /* KLSection.swift in Sources */,
+				978EA03E83E00A642550702AC98D056C /* KLStyle.swift in Sources */,
+				13EBDE51CC873A477F88C82F3D3ADC99 /* MA.swift in Sources */,
+				0E87F67CE2F1E002E799EF22E06305FE /* UIColor+KL.swift in Sources */,
+=======
 				EEB6A070DCD1963C8D84AE62B3D12836 /* Array+KL.swift in Sources */,
 				2C546B099988225BB067964E4E5EAFE3 /* Candle.swift in Sources */,
 				60F03DCF6E80C22A866F22C38EFF1056 /* Int+KL.swift in Sources */,
@@ -1049,6 +1082,7 @@
 				801BBBD14B625296F86D98356F7EDAD7 /* KLLegendRenderer.swift in Sources */,
 				3496D7FA4D1AA663609BB05BFCAD3D9D /* MA.swift in Sources */,
 				5B9E58A88F52CBB0FBCCB2AED9C206E9 /* UIColor+KL.swift in Sources */,
+>>>>>>> ed8976c26552f8d03711eb369471e70dac5b5a7f
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

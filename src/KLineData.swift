@@ -14,12 +14,22 @@ open class KLineData {
     public var low: Double = 0
     public var vol: Double = 0
     public var time: TimeInterval = 0
+        
+    public var dif: Double = 0.0
+    public var dea: Double = 0.0
+    public var small_macd: Double = 0.0
+    public var big_macd: Double = 0.0
+    public var macd_macd: Double = 0.0
     
     public var x: Double {
         return time/50000
     }
 
-    public var ma: MA?
+    public var ma: MA? //简单移动平均数
+    public var ema: EMA? //指数移动平均数
+    
+    //附图
+    public var macd: MACD? //指数平滑异同平均线
 
     public init(o: Double, c: Double, h: Double, l: Double, v: Double, t: TimeInterval) {
         open = o
