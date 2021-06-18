@@ -52,24 +52,35 @@ open class KLineView: UIView {
         self.data = data
     }
 
-    public var data: [KLineData] {
+    public func setCustomData(_ data: [Any], completion: @escaping ()->() = {}) {
+        setDataCompletion = completion
+        self.data = data
+    }
+
+    public var data: [Any] {
         get {
             return realData
         }
         set {
             tempData = newValue
             if isCalculating {
+                dataDidSetWhenCalculate = true
                 return
             } else {
                 var newData = newValue
                 isCalculating = true
                 queue.async {
-                    self.indicators.forEach{ $0.calculate(&newData) }
+                    self.indicators.forEach{
+                        if var d = newData as? [KLineData] {
+                            $0.calculate(&d)
+                        } else {
+                            $0.calculate(custom: &newData)
+                        }
+                    }
                     self.realData = newData
                     self.isCalculating = false
-                    // realData != tempData 说明计算过程中又修改了数据
-                    if self.realData.count != self.tempData.count &&
-                        self.realData.first != self.tempData.first {
+                    if self.dataDidSetWhenCalculate {
+                        self.dataDidSetWhenCalculate = false
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
@@ -91,9 +102,10 @@ open class KLineView: UIView {
     var indicators: [KLIndicator.Type] { return sections.flatMap{ $0.indicators } }
 
     var isCalculating = false
+    var dataDidSetWhenCalculate = false
 
-    var tempData = [KLineData]()
-    var realData = [KLineData]()
+    var tempData = [Any]()
+    var realData = [Any]()
 
     open override func layoutSubviews() {
         if subviews.count != sections.count {

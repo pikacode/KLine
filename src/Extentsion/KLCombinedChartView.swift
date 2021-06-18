@@ -34,7 +34,7 @@ open class KLCombinedChartView: CombinedChartView {
         initUI()
     }
 
-    func initUI() {
+    open func initUI() {
 
         drawGridBackgroundEnabled = true
         gridBackgroundColor = 0x0e0e0e.toColor
@@ -49,9 +49,10 @@ open class KLCombinedChartView: CombinedChartView {
         legend.drawInside = true
         legend.font = UIFont.systemFont(ofSize: 9)
         legend.formSize = 0
-        legend.xEntrySpace = 5
+        legend.xEntrySpace = 10
         legend.formToTextSpace = 0
-        legend.xOffset = 6
+        legend.xOffset = 10
+        legend.yOffset = 2
 
         xAxis.labelPosition = .bottomInside
         xAxis.gridColor = 0x262626.toColor
