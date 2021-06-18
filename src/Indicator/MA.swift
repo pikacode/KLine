@@ -8,21 +8,13 @@
 import UIKit
 import Charts
 
-open class MA: KLIndicator {
+open class MA {
 
     public var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
 
-    public static var style: KLStyle = KLStyle.default
-
     public static var days = [7, 25, 60]
 
-    public static func calculate(_ data: inout [KLineData]) {
-        days.forEach{
-            self.calculateMA(&data, day: $0)
-        }
-    }
-
-    public static func calculateMA(_ data: inout [KLineData], day: Int) {
+    static func calculateMA(_ data: inout [KLineData], day: Int) {
         if day > data.count {
             return
         }
@@ -37,6 +29,18 @@ open class MA: KLIndicator {
             let ma = data[i].ma ?? MA()
             ma.data[day] = sum/Double(day)
             data[i].ma = ma
+        }
+    }
+
+}
+
+extension MA: KLIndicator {
+
+    public static var style: KLStyle = KLStyle.default
+
+    public static func calculate(_ data: inout [KLineData]) {
+        days.forEach{
+            self.calculateMA(&data, day: $0)
         }
     }
 
@@ -66,5 +70,3 @@ open class MA: KLIndicator {
     }
 
 }
-
-

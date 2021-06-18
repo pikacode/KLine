@@ -8,21 +8,13 @@
 import UIKit
 import Charts
 
-open class EMA: KLIndicator {
-    
-    public static var style: KLStyle = KLStyle.default
-    
+open class EMA {
+
     public static var days = [7, 25, 99]
     
     public var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
     
-    public static func calculate(_ data: inout [KLineData]) {
-        days.forEach{
-            self.calculateEMA(&data, day: $0)
-        }
-    }
-    
-    public static func calculateEMA(_ data: inout [KLineData], day: Int) {
+    static func calculateEMA(_ data: inout [KLineData], day: Int) {
         for i in 0..<(data.count - 1) {
             let model = data[i]
             let ema = data[i].ema ?? EMA()
@@ -35,6 +27,18 @@ open class EMA: KLIndicator {
                 }
             }
             data[i].ema = ema
+        }
+    }
+
+}
+
+extension EMA: KLIndicator {
+
+    public static var style: KLStyle = KLStyle.default
+
+    public static func calculate(_ data: inout [KLineData]) {
+        days.forEach{
+            self.calculateEMA(&data, day: $0)
         }
     }
 

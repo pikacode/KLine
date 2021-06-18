@@ -16,7 +16,7 @@ public enum KLPosition {
     case bottom(_ offset: CGPoint)
 }
 
-public enum Direction {
+public enum KLDirection {
     case horizontal
     case vertical
 }

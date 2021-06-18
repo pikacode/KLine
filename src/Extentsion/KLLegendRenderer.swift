@@ -11,7 +11,7 @@ import Charts
 open class KLLegendRenderer: LegendRenderer {
 
     @objc open override func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor) {
-        if label == KLCrosshair.label {
+        if label == Crosshair.label {
             return
         }
         guard let entries = legend?.entries,
