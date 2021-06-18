@@ -41,6 +41,7 @@ open class KLineData {
     //附图
     public var macd: MACD? //指数平滑异同平均线
     public var kdj: KDJ? //随机指标
+    public var rsi: RSI? //相对强弱指标
 
     public init(o: Double, c: Double, h: Double, l: Double, v: Double, t: TimeInterval) {
         open = o

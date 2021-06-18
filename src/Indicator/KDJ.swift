@@ -77,7 +77,6 @@ open class KDJ: KLIndicator {
     
     public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
         
-        
         var sets = [LineChartDataSet]()
         for (index, _) in days.enumerated() {
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
@@ -86,7 +85,7 @@ open class KDJ: KLIndicator {
             let labelArr = ["K", "D", "J"]
             var lable = String(format: "\(labelArr[index]):%.2f ", entries.last?.y ?? 0)
             if index == 0 {
-                lable = "KDJ\(days.map{String($0)}.joined(separator: ","))  \(lable)"
+                lable = "KDJ(\(days.map{String($0)}.joined(separator: ","))） \(lable)"
             }
             let set = LineChartDataSet(entries: entries, label: lable)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
