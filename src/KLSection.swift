@@ -10,26 +10,26 @@ import Charts
 
 open class KLSection {
 
-    public var indicators: [KLIndicator.Type] {
-        didSet {
-            draw(data)
-        }
-    }
-
-    public var height: CGFloat
-
-    var offset: CGFloat = 0
-
-    open var data = [Any]()
-
     public init(_ indicators: [KLIndicator.Type], _ height: CGFloat) {
         self.indicators = indicators
         self.height = height
     }
 
-    public lazy var chartView = KLCombinedChartView(frame: .zero)
+    open var indicators: [KLIndicator.Type] {
+        didSet {
+            draw(data)
+        }
+    }
 
-    let combinedData = CombinedChartData()
+    open lazy var chartView = KLCombinedChartView(frame: .zero)
+
+    open var height: CGFloat
+
+    open var data = [Any]()
+
+    public let combinedData = CombinedChartData()
+
+    var offset: CGFloat = 0
 
     open func draw(_ data: [Any]) {
         self.data = data

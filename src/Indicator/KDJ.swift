@@ -7,14 +7,11 @@
 
 import UIKit
 import Charts
-open class KDJ: KLIndicator {
-    public static var style: KLStyle = KLStyle.default
-    
+
+open class KDJ {
+
     public static var days = [9, 3, 3]
-    
-    public static func calculate(_ data: inout [KLineData]) {
-        calculateKDJ(&data)
-    }
+
         /**
      三根线：K，D，J
      以最高价，最低价和收盘价为基本数据进行计算
@@ -32,7 +29,7 @@ open class KDJ: KLIndicator {
             if i == 0 {
                 model.k = 50
                 model.d = 50
-            }else{
+            } else {
                 let lastModel = data[i - 1]
                 model.rsv = calculateRSV(endIndex: i, data: data)
                 
@@ -75,8 +72,16 @@ open class KDJ: KLIndicator {
         return result.isNaN ? 0 : result
     }
     
+}
+
+extension KDJ: KLIndicator {
+
+    public static var style: KLStyle = KLStyle.default
+    public static func calculate(_ data: inout [KLineData]) {
+        calculateKDJ(&data)
+    }
+
     public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
-        
         var sets = [LineChartDataSet]()
         for (index, _) in days.enumerated() {
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
@@ -98,11 +103,7 @@ open class KDJ: KLIndicator {
             set.axisDependency = .left
             sets.append(set)
         }
-
         return sets
     }
-    
-    
-    
 
 }

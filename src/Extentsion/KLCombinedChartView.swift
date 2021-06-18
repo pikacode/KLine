@@ -103,7 +103,7 @@ open class KLCombinedChartView: CombinedChartView {
             let crossSet: LineChartDataSet = {
                 guard let p = crossPoint else { return LineChartDataSet() }
                 let entries = [ChartDataEntry(x: Double(p.x), y: Double(p.y))]
-                let set = LineChartDataSet(entries: entries, label: KLCrosshair.label)
+                let set = LineChartDataSet(entries: entries, label: Crosshair.label)
                 set.setColor(UIColor.blue)
                 set.lineWidth = 2.5
                 set.mode = .linear
@@ -116,7 +116,7 @@ open class KLCombinedChartView: CombinedChartView {
                 return set
             }()
 
-            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == KLCrosshair.label }) {
+            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label }) {
                 chartData.lineData?.dataSets[index] = crossSet
             } else {
                 chartData.lineData?.addDataSet(crossSet)
@@ -130,7 +130,7 @@ open class KLCombinedChartView: CombinedChartView {
         super.draw(rect)
         guard let p = crossPoint,
               let context = UIGraphicsGetCurrentContext(),
-              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == KLCrosshair.label })
+              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label })
         else { return }
         let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
         renderer?.drawHighlighted(context: context, indices: [h])

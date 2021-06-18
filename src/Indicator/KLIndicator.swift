@@ -23,10 +23,17 @@ public protocol KLIndicator {
     static func candleDataSet(custom data: [Any]) -> [CandleChartDataSet]?
     static func lineDataSet(custom data: [Any]) -> [LineChartDataSet]?
     static func barDataSet(custom data: [Any]) -> [BarChartDataSet]?
+
+    static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]?
+
 }
 
 extension KLIndicator {
     public static var name: String { return "\(self)" }
+
+    public static func calculate(_ data: inout [KLineData]) {
+
+    }
 
     public static func calculate(custom data: inout [Any]) {
 
@@ -53,6 +60,10 @@ extension KLIndicator {
     }
 
     public static func barDataSet(custom data: [Any]) -> [BarChartDataSet]? {
+        return nil
+    }
+
+    public static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]? {
         return nil
     }
 

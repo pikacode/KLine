@@ -17,7 +17,7 @@ open class KLineView: UIView {
         super.init(frame: .zero)
     }
 
-    public var sections: [KLSection] {
+    open var sections: [KLSection] {
         willSet {
             newValue.forEach{ $0.offset = sections[0].offset }
         }
@@ -43,22 +43,22 @@ open class KLineView: UIView {
         }
     }
 
-    public var needHeight: CGFloat {
+    open var needHeight: CGFloat {
         return sections.reduce(0, { $0 + $1.height })
     }
 
-    public func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
+    open func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
         setDataCompletion = completion
         self.data = data
     }
 
-    public func setCustomData(_ data: [Any], completion: @escaping ()->() = {}) {
+    open func setCustomData(_ data: [Any], completion: @escaping ()->() = {}) {
         setDataCompletion = completion
         self.data = data
     }
 
     /// [KLineData] or custom [Any]
-    public var data: [Any] {
+    open var data: [Any] {
         get {
             return realData
         }

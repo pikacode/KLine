@@ -7,15 +7,11 @@
 
 import UIKit
 import Charts
-open class MACD: KLIndicator {
-    
-    public static var style: KLStyle = KLStyle.default
-    
+
+open class MACD {
+
     public static var emaDay = [12, 26]
-        
-    public static func calculate(_ data: inout [KLineData]) {
-        calculateSignMACD(&data)
-    }
+
     /**
      EMA（12）= 前一日EMA（12）×11/13＋今日收盘价×2/13
      EMA（26）= 前一日EMA（26）×25/27＋今日收盘价×2/27
@@ -23,7 +19,7 @@ open class MACD: KLIndicator {
      DEA（MACD）= 前一日DEA×8/10＋今日DIF×2/10
      BAR=2×(DIFF－DEA)
      */
-    public static func calculateSignMACD(_ data: inout [KLineData]) {
+    static func calculateSignMACD(_ data: inout [KLineData]) {
         for index in 0..<data.count {
             let model = data[index]
             //计算EMA12，EMA26, DEA
@@ -32,7 +28,7 @@ open class MACD: KLIndicator {
                 model.small_macd = model.close
                 model.dif = 0
                 model.dea = 0
-            }else{
+            } else {
                 let lastModel = data[index - 1]
                 model.big_macd = lastModel.big_macd * 25 / 27 + model.close * 2 / 27
                 model.small_macd = lastModel.small_macd * 11 / 13 + model.close * 2 / 13
@@ -44,10 +40,18 @@ open class MACD: KLIndicator {
         }
     }
     
+}
+
+extension MACD: KLIndicator {
+
+    public static var style: KLStyle = KLStyle.default
+
+    public static func calculate(_ data: inout [KLineData]) {
+        calculateSignMACD(&data)
+    }
+
     public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
-        
         let sets = emaDay.map { (day) -> LineChartDataSet in
-            
             let index = emaDay.firstIndex(of: day) ?? 0
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
                 return ChartDataEntry(x: d.x, y: index == 0 ? d.dif : d.dea)
@@ -67,7 +71,7 @@ open class MACD: KLIndicator {
         }
         return sets
     }
-    
+
     public static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]? {
         let entries = data.compactMap{ (d) -> BarChartDataEntry in
             return BarChartDataEntry(x: d.x, y: d.macd_macd)
@@ -80,5 +84,5 @@ open class MACD: KLIndicator {
         set.valueColors = colors
         return [set]
     }
-    
+
 }
