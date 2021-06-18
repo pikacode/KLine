@@ -12,4 +12,7 @@ class KLCrosshair {
 
     static let label = "KLCross"
 
+    let horizontal = LimitLine(direction: .horizontal)
+    let vertical = LimitLine(direction: .vertical)
+
 }

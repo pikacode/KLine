@@ -26,7 +26,9 @@ open class KLStyle {
     public var downColor: UIColor
 
     public var upGradient: GradientColor
-    public var downGradient: GradientColor 
+    public var downGradient: GradientColor
+
+    public var label: KLLabel
 
     public struct GradientColor {
         let top: UIColor
@@ -46,6 +48,7 @@ open class KLStyle {
             downColor = 0xff2500.toColor
             upGradient = GradientColor(top: upColor.alpha(0.8), bottom: upColor.alpha(0.1))
             downGradient = GradientColor(top: downColor.alpha(0.8), bottom: downColor.alpha(0.1))
+            label = KLLabel(text: "", font: UIFont.systemFont(ofSize: 10), color: UIColor.black, bgColor: UIColor.white, position: KLPosition.left(.zero))
         } else {
             let style = KLStyle.default
             lineWidth1 = style.lineWidth1
@@ -59,6 +62,7 @@ open class KLStyle {
             downColor = style.downColor
             upGradient = style.upGradient
             downGradient = style.downGradient
+            label = style.label
         }
     }
 
