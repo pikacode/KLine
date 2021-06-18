@@ -53,18 +53,15 @@ open class MACD: KLIndicator {
                 return ChartDataEntry(x: d.x, y: index == 0 ? d.dif : d.dea)
             }
             let set = LineChartDataSet(entries: entries, label: "")
-            
             let color = [style.lineColor1, style.lineColor2][index]
             set.setColor(color)
-            set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-            set.lineWidth = 0.5
+
+            set.lineWidth = style.lineWidth1
             set.circleRadius = 0
             set.circleHoleRadius = 0
-            set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
             set.mode = .cubicBezier
             set.drawValuesEnabled = true
-            set.valueFont = .systemFont(ofSize: 0)
-            set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+
             set.axisDependency = .left
             return set
         }
@@ -76,7 +73,7 @@ open class MACD: KLIndicator {
             return BarChartDataEntry(x: d.x, y: d.macd_macd)
         }
         let colors = entries.map { (entry) -> NSUIColor in
-            return entry.y > 0 ? .red : .green
+            return entry.y > 0 ? style.upBarColor : style.downBarColor
         }
         let set = BarChartDataSet(entries: entries)
         set.colors = colors
