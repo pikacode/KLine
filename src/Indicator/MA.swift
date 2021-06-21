@@ -10,9 +10,12 @@ import Charts
 
 open class MA {
 
+    required public init() {}
+    
     public var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
 
     public static var days = [7, 25, 60]
+    var days: [Int] { return Self.days }
 
     static func calculateMA(_ data: inout [KLineData], day: Int) {
         if day > data.count {
@@ -35,23 +38,32 @@ open class MA {
 }
 
 extension MA: KLIndicator {
-
+    
     public static var style: KLStyle = KLStyle.default
 
-    public static func calculate(_ data: inout [KLineData]) {
+    public static func calculate(_ data: inout [Any]) {
+        guard var data = data as? [KLineData] else { return }
         days.forEach{
             self.calculateMA(&data, day: $0)
         }
     }
 
-    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
-        let sets = days.map { (day) -> LineChartDataSet in
+    public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
+        guard let data = data as? [KLineData] else {
+            return nil
+
+        }
+
+        let sets = days.compactMap { (day) -> LineChartDataSet? in
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ma?.data[day] as? Double {
                     return ChartDataEntry(x: d.x, y: value)
                 } else {
                     return nil
                 }
+            }
+            if entries.count == 0 {
+                return nil
             }
             let last = entries.last?.y ?? 0
             let label = String(format: "MA\(day):%.8f", last)
@@ -64,8 +76,10 @@ extension MA: KLIndicator {
             set.drawCirclesEnabled = false
             set.drawValuesEnabled = false
             set.axisDependency = .left
+            set.forEach{ print($0) }
             return set
         }
+
         return sets
     }
 

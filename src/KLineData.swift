@@ -34,7 +34,6 @@ open class KLineData {
     public static var timeXScale: Double = 50000
 
     public var x: Double {
-        print("i: \(time) \(time/KLineData.timeXScale)")
         return time/KLineData.timeXScale
     }
 

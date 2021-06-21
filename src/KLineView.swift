@@ -72,11 +72,7 @@ open class KLineView: UIView {
                 isCalculating = true
                 queue.async {
                     self.indicators.forEach{
-                        if var d = newData as? [KLineData] {
-                            $0.calculate(&d)
-                        } else {
-                            $0.calculate(custom: &newData)
-                        }
+                        type(of: $0).calculate(&newData)
                     }
                     self.realData = newData
                     self.isCalculating = false
@@ -85,7 +81,9 @@ open class KLineView: UIView {
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
-                            self.sections.forEach{ $0.draw(self.data) }
+                            self.sections.forEach{
+                                $0.data = self.data
+                            }
                             self.setDataCompletion()
                         }
                     }
@@ -100,7 +98,7 @@ open class KLineView: UIView {
 
     let queue = DispatchQueue(label: "KLine")
 
-    var indicators: [KLIndicator.Type] { return sections.flatMap{ $0.indicators } }
+    var indicators: [KLIndicator] { return sections.flatMap{ $0.indicators } }
 
     var isCalculating = false
     var dataDidSetWhenCalculate = false

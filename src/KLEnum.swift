@@ -7,13 +7,11 @@
 
 import UIKit
 
-/// - position = top ，offset =  (origin.x + size.width) / 2), origin.y， 是矩形上边中点
-/// - position = left ，offset  = origin.x, (origin.y + size.height) / 2，是矩形左边中点，以此类推
+/// offset 偏移量
 public enum KLPosition {
-    case top(_ offset: CGPoint)
-    case left(_ offset: CGPoint)
-    case right(_ offset: CGPoint)
-    case bottom(_ offset: CGPoint)
+    case left(_ offset: CGPoint) //居左
+    case right(_ offset: CGPoint) //居右
+    case center(_ offset: CGPoint) //居中
 }
 
 public enum KLDirection {
@@ -25,4 +23,3 @@ public enum KLOrderDirection {
     case buy
     case sell
 }
-

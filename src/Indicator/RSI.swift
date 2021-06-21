@@ -8,6 +8,11 @@
 import UIKit
 
 open class RSI: KLIndicator {
+
+    required public init() {
+
+    }
+    
     public static var style: KLStyle = KLStyle.default
     public static var days = [6, 12, 24]
     
@@ -23,8 +28,9 @@ open class RSI: KLIndicator {
     var rsi24: Double      = 0
     
     
-    public static func calculate(_ data: inout [KLineData]) {
-        
+    public func calculate(_ data: inout [Any]) {
+        guard let data = data as? [KLineData] else { return }
+
     }
     
     private static func calculateRSI(_ data: inout [KLineData]) {

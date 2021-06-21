@@ -39,7 +39,6 @@ open class KLDateFormatter: IAxisValueFormatter {
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = Date(timeIntervalSince1970: value * KLineData.timeXScale)
-        print("o: \(value) \(value * KLineData.timeXScale)")
         return KLDateFormatter.formatter.string(from: date)
     }
 

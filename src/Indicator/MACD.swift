@@ -10,6 +10,8 @@ import Charts
 
 open class MACD {
 
+    required public init() {}
+
     public static var emaDay = [12, 26]
 
     /**
@@ -20,6 +22,7 @@ open class MACD {
      BAR=2×(DIFF－DEA)
      */
     static func calculateSignMACD(_ data: inout [KLineData]) {
+        
         for index in 0..<data.count {
             let model = data[index]
             //计算EMA12，EMA26, DEA
@@ -43,10 +46,11 @@ open class MACD {
 }
 
 extension MACD: KLIndicator {
-
+    
     public static var style: KLStyle = KLStyle.default
 
-    public static func calculate(_ data: inout [KLineData]) {
+    public static func calculate(_ data: inout [Any]) {
+        guard var data = data as? [KLineData] else { return }
         calculateSignMACD(&data)
     }
 

@@ -19,9 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    var section1 = KLSection([Candle.self, MA.self], 300)
-    var section2 = KLSection([MA.self], 74)
-    var section3 = KLSection([KDJ.self], 74)
+    var section1 = KLSection([Candle() ], 300)
+    var section2 = KLSection([MA()], 74)
+    var section3 = KLSection([KDJ()], 74)
 
     lazy var klineView = KLineView([section1,
                                     section2,
@@ -62,6 +62,10 @@ class ViewController: UIViewController {
 
         KLDateFormatter.format = DateFormat.day.rawValue
         section1.xAxis.valueFormatter = KLDateFormatter()
+
+        let line = LimitLine(200, .horizontal)
+        section1.indicators.append(line)
+        section1.draw()
 
         /* set data with a completion block
 

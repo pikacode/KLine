@@ -10,14 +10,14 @@ import Charts
 
 open class KLSection {
 
-    public init(_ indicators: [KLIndicator.Type], _ height: CGFloat) {
+    public init(_ indicators: [KLIndicator], _ height: CGFloat) {
         self.indicators = indicators
         self.height = height
     }
 
-    open var indicators: [KLIndicator.Type] {
+    open var indicators: [KLIndicator] {
         didSet {
-            draw(data)
+            draw()
         }
     }
 
@@ -29,7 +29,11 @@ open class KLSection {
 
     open var height: CGFloat
 
-    open var data = [Any]()
+    open var data = [Any]() {
+        didSet {
+            draw()
+        }
+    }
 
     public let combinedData = CombinedChartData()
 
@@ -39,40 +43,41 @@ open class KLSection {
     public var leftAxis: YAxis { chartView.leftAxis }
     public var rightAxis: YAxis { chartView.rightAxis }
 
-    open func draw(_ data: [Any]) {
-        self.data = data
+    open func draw() {
+
+        guard data.count > 0 else {
+            indicators.forEach{
+                if let l = $0 as? LimitLine {
+                    let line = ChartLimitLine(limit: Double(l.value), label: "开仓")
+                    line.lineWidth = 1
+                    line.lineDashLengths = [5, 5]
+                    line.labelPosition = .topRight
+                    line.valueFont = .systemFont(ofSize: 10)
+                    let leftAxis = chartView.leftAxis
+                    leftAxis.removeAllLimitLines()
+                    leftAxis.addLimitLine(line)
+                    leftAxis.gridLineDashLengths = [5, 5]
+                }
+            }
+            return
+        }
 
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()
 
         indicators.forEach {
-            if let data = data as? [KLineData] {
-                if let line = $0.lineDataSet(data) {
-                    lineData.dataSets.append(contentsOf: line)
-                    combinedData.lineData = lineData
-                }
-                if let bar = $0.barDataSet(data) {
-                    barData.dataSets.append(contentsOf: bar)
-                    combinedData.barData = barData
-                }
-                if let candle = $0.candleDataSet(data) {
-                    candleData.dataSets.append(contentsOf: candle)
-                    combinedData.candleData = candleData
-                }
-            } else {
-                if let line = $0.lineDataSet(custom: data) {
-                    lineData.dataSets.append(contentsOf: line)
-                    combinedData.lineData = lineData
-                }
-                if let bar = $0.barDataSet(custom: data) {
-                    barData.dataSets.append(contentsOf: bar)
-                    combinedData.barData = barData
-                }
-                if let candle = $0.candleDataSet(custom: data) {
-                    candleData.dataSets.append(contentsOf: candle)
-                    combinedData.candleData = candleData
-                }
+            if let set = $0.lineDataSet(data), set.count > 0 {
+                lineData.dataSets.append(contentsOf: set)
+                combinedData.lineData = lineData
+            }
+            if let set = $0.barDataSet(data), set.count > 0 {
+                barData.dataSets.append(contentsOf: set)
+                combinedData.barData = barData
+            }
+            if let set = $0.candleDataSet(data), set.count > 0 {
+                candleData.dataSets.append(contentsOf: set)
+                combinedData.candleData = candleData
             }
         }
 

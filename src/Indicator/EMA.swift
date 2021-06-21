@@ -10,8 +10,11 @@ import Charts
 
 open class EMA {
 
-    public static var days = [7, 25, 99]
+    required public init() {}
     
+    public static var days = [7, 25, 99]
+    var days: [Int] { return Self.days }
+
     public var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
     
     static func calculateEMA(_ data: inout [KLineData], day: Int) {
@@ -36,13 +39,16 @@ extension EMA: KLIndicator {
 
     public static var style: KLStyle = KLStyle.default
 
-    public static func calculate(_ data: inout [KLineData]) {
+    public static func calculate(_ data: inout [Any]) {
+        guard var data = data as? [KLineData] else { return }
         days.forEach{
             self.calculateEMA(&data, day: $0)
         }
     }
 
-    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
+        guard let data = data as? [KLineData] else { return nil }
+
         let sets = days.map { (day) -> LineChartDataSet in
             let entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ema?.data[day] {
