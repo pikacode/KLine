@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    var section1 = KLSection([Candle() ], 300)
+    var section1 = KLSection([Candle(), MA()], 300)
     var section2 = KLSection([MA()], 74)
     var section3 = KLSection([KDJ()], 74)
 
