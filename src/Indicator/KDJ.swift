@@ -77,7 +77,6 @@ open class KDJ {
 extension KDJ: KLIndicator {
 
     public static var style: KLStyle = KLStyle.default
-
     public static func calculate(_ data: inout [KLineData]) {
         calculateKDJ(&data)
     }
@@ -91,7 +90,7 @@ extension KDJ: KLIndicator {
             let labelArr = ["K", "D", "J"]
             var lable = String(format: "\(labelArr[index]):%.2f ", entries.last?.y ?? 0)
             if index == 0 {
-                lable = "KDJ\(days.map{String($0)}.joined(separator: ","))  \(lable)"
+                lable = "KDJ(\(days.map{String($0)}.joined(separator: ","))） \(lable)"
             }
             let set = LineChartDataSet(entries: entries, label: lable)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]

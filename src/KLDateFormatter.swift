@@ -9,7 +9,10 @@ import UIKit
 import Charts
 
 open class KLEmptyFormatter: IAxisValueFormatter {
+    public init() {
 
+    }
+    
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return ""
     }

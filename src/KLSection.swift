@@ -21,7 +21,11 @@ open class KLSection {
         }
     }
 
-    open lazy var chartView = KLCombinedChartView(frame: .zero)
+    open lazy var chartView: KLCombinedChartView = {
+        let v = KLCombinedChartView(frame: .zero)
+        v.xAxis.valueFormatter = KLEmptyFormatter()
+        return v
+    }()
 
     open var height: CGFloat
 
