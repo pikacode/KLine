@@ -32,4 +32,8 @@ open class Candle: KLIndicator {
 
     public static var style: KLStyle = .default
 
+    public static var xValueFormatter: IAxisValueFormatter? {
+        return KLDateFormatter()
+    }
+
 }

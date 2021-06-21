@@ -31,6 +31,10 @@ open class KLSection {
 
     var offset: CGFloat = 0
 
+    public var xAxis: XAxis { chartView.xAxis }
+    public var leftAxis: YAxis { chartView.leftAxis }
+    public var rightAxis: YAxis { chartView.rightAxis }
+
     open func draw(_ data: [Any]) {
         self.data = data
 
@@ -75,6 +79,7 @@ open class KLSection {
             chartView.zoomToCenter(scaleX: 10, scaleY: 1)
         }
 
+        
     }
 
 }

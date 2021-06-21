@@ -21,7 +21,6 @@ open class KLStyle {
     public var lineColor1: UIColor
     public var lineColor2: UIColor
     public var lineColor3: UIColor
-    
 
     public var upColor: UIColor
     public var downColor: UIColor

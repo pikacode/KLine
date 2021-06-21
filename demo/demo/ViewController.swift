@@ -8,14 +8,24 @@
 import UIKit
 import KLine
 
+enum DateFormat: String {
+    case min = "mm:ss"
+    case hour = "dd-MM hh:mm"
+    case day = "yyyy-MM-dd"
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    lazy var klineView = KLineView([KLSection([Candle.self, MA.self], 300),
-                                    KLSection([MA.self], 74),
-                                    KLSection([KDJ.self], 74)])
+    var section1 = KLSection([Candle.self, MA.self], 300)
+    var section2 = KLSection([MA.self], 74)
+    var section3 = KLSection([KDJ.self], 74)
+
+    lazy var klineView = KLineView([section1,
+                                    section2,
+                                    section3])
 
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
@@ -49,6 +59,9 @@ class ViewController: UIViewController {
         contentView.addSubview(klineView)
 
         klineView.data = data
+
+        KLDateFormatter.format = DateFormat.day.rawValue
+        section1.xAxis.valueFormatter = KLDateFormatter()
 
         /* set data with a completion block
 

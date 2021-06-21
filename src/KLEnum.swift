@@ -20,3 +20,9 @@ public enum KLDirection {
     case horizontal
     case vertical
 }
+
+public enum KLOrderDirection {
+    case buy
+    case sell
+}
+

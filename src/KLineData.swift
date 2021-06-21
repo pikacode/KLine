@@ -23,16 +23,19 @@ open class KLineData {
     public var big_macd: Double = 0.0
     public var macd_macd: Double = 0.0
     
-    
+
     //KDJ技术指标
     public var k: Double = 0.0
     public var d: Double = 0.0
     public var j: Double = 0.0
     public var rsv: Double = 0.0
 
-    
+    /// 对时间戳的缩放  x = timeInterval / timeXScale
+    public static var timeXScale: Double = 50000
+
     public var x: Double {
-        return time/50000
+        print("i: \(time) \(time/KLineData.timeXScale)")
+        return time/KLineData.timeXScale
     }
 
     public var ma: MA? //简单移动平均数
