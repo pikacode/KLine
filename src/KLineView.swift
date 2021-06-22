@@ -43,7 +43,7 @@ open class KLineView: UIView {
         }
     }
 
-    open var needHeight: CGFloat {
+    open var neededHeight: CGFloat {
         return sections.reduce(0, { $0 + $1.height })
     }
 

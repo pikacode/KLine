@@ -24,18 +24,12 @@
                                     <constraint firstAttribute="height" constant="128" id="etr-aw-mgj"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-oj-kjq">
-                                <rect key="frame" x="184" y="242" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6KZ-rA-nbW"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-NK-DGa">
-                                <rect key="frame" x="192" y="302" width="30" height="30"/>
-                                <state key="normal" title="Test"/>
+                                <rect key="frame" x="178.5" y="242" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
                                 <connections>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Api-WO-xNN"/>
+                                    <action selector="settingsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIj-Ff-wuw"/>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c4V-8H-KxJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -44,11 +38,9 @@
                         <constraints>
                             <constraint firstItem="1JQ-NK-DGa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6IP-fr-2O8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jqQ-Du-XSW" secondAttribute="trailing" constant="8" id="H1w-wv-O3H"/>
-                            <constraint firstItem="0iT-oj-kjq" firstAttribute="top" secondItem="jqQ-Du-XSW" secondAttribute="bottom" constant="20" id="N6C-Vq-A6V"/>
-                            <constraint firstItem="1JQ-NK-DGa" firstAttribute="top" secondItem="0iT-oj-kjq" secondAttribute="bottom" constant="30" id="Qtj-kl-yTZ"/>
-                            <constraint firstItem="0iT-oj-kjq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SVO-Ch-1HJ"/>
                             <constraint firstItem="jqQ-Du-XSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="as0-dz-r6S"/>
                             <constraint firstItem="jqQ-Du-XSW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="faM-Au-cgQ"/>
+                            <constraint firstItem="1JQ-NK-DGa" firstAttribute="top" secondItem="jqQ-Du-XSW" secondAttribute="bottom" constant="20" id="zDt-KA-mPZ"/>
                         </constraints>
                     </view>
                     <connections>
