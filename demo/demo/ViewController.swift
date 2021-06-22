@@ -56,6 +56,12 @@ class ViewController: UIViewController {
         return temp
     }()
 
+    let settingsView: ChartSettingsView = {
+        let view = Bundle.main.loadNibNamed("\(ChartSettingsView.self)", owner: nil, options: nil)?.last as! ChartSettingsView
+        UIApplication.shared.keyWindow?.addSubview(view)
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -91,18 +97,27 @@ class ViewController: UIViewController {
 
          */
 
+
+        ChartSettings.shared.changed = { (settings) in
+
+            self.section1.height = settings.mainHeight
+
+            // 👉 config klinView's height, which decided by each section's height
+            // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
+            self.contentHeight.constant = self.klineView.neededHeight
+
+            // 👉 tell kline to redraw
+            self.klineView.draw()
+        }
+
     }
 
     override func viewDidLayoutSubviews() {
         klineView.frame = contentView.bounds
-        // 👉 config klinView's height, which decided by each section's height
-        // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
-        contentHeight.constant = klineView.neededHeight
     }
 
     @IBAction func settingsAction(_ sender: Any) {
-
-
+        settingsView.show()
     }
 
 }

@@ -29,7 +29,6 @@
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <action selector="settingsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIj-Ff-wuw"/>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c4V-8H-KxJ"/>
                                 </connections>
                             </button>
                         </subviews>
