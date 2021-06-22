@@ -10,7 +10,10 @@ import Charts
 
 open class KDJ {
 
+    required public init() {}
+    
     public static var days = [9, 3, 3]
+    var days: [Int] { return Self.days }
 
         /**
      三根线：K，D，J
@@ -77,12 +80,14 @@ open class KDJ {
 extension KDJ: KLIndicator {
 
     public static var style: KLStyle = KLStyle.default
-
-    public static func calculate(_ data: inout [KLineData]) {
+    public static func calculate(_ data: inout [Any]) {
+        guard var data = data as? [KLineData] else { return }
         calculateKDJ(&data)
     }
 
-    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
+    public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
+        guard let data = data as? [KLineData] else { return nil }
+
         var sets = [LineChartDataSet]()
         for (index, _) in days.enumerated() {
             let entries = data.compactMap{ (d) -> ChartDataEntry? in

@@ -8,15 +8,28 @@
 import UIKit
 import KLine
 
+enum DateFormat: String {
+    case min = "mm:ss"
+    case hour = "dd-MM hh:mm"
+    case day = "yyyy-MM-dd"
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    lazy var klineView = KLineView([KLSection([Candle.self, MA.self], 300),
-                                    KLSection([MA.self], 74),
-                                    KLSection([KDJ.self], 74)])
+    // 👉 config each section by (elements, height), sections can be modified after
+    var section1 = KLSection([Candle(), MA()], 300)
+    var section2 = KLSection([MA()], 74)
+    var section3 = KLSection([KDJ()], 74)
 
+    lazy var klineView = KLineView([section1,
+                                    section2,
+                                    section3])
+
+    // 👉 create demo data, in real project you may create it by request
+    // 👉 the type [KLineData] can be customed to [Any]
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
         let count = 360
@@ -48,9 +61,23 @@ class ViewController: UIViewController {
 
         contentView.addSubview(klineView)
 
+        // 👉 set data
         klineView.data = data
 
-        /* set data with a completion block
+        // 👉 set x date formatter
+        KLDateFormatter.format = DateFormat.day.rawValue
+        section1.xAxis.valueFormatter = KLDateFormatter()
+
+        // 👉 set a limit line
+        let line = LimitLine(300, .horizontal)
+        section1.indicators.append(line)
+        line.label.text = "pikacode"
+        line.label.color = UIColor.white
+        line.label.bgColor = line.style.lineColor1
+
+
+        /* 👉 set data with a completion block
+           👉 u can use this to handle a loading status while calculating data
 
          // data is [KLineData]
          klineView.setData(data) {
@@ -68,16 +95,14 @@ class ViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         klineView.frame = contentView.bounds
-        contentHeight.constant = klineView.needHeight
+        // 👉 config klinView's height, which decided by each section's height
+        // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
+        contentHeight.constant = klineView.neededHeight
     }
 
-    @IBAction func test(_ sender: Any) {
-        // klineView.sections.first?.chartView
+    @IBAction func settingsAction(_ sender: Any) {
 
-    }
 
-    @IBAction func action(_ sender: Any) {
-        present(CombinedChartViewController(), animated: true, completion: nil)
     }
 
 }

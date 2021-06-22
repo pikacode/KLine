@@ -128,12 +128,12 @@ open class KLCombinedChartView: CombinedChartView {
 
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
-        guard let p = crossPoint,
-              let context = UIGraphicsGetCurrentContext(),
-              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label })
-        else { return }
-        let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
-        renderer?.drawHighlighted(context: context, indices: [h])
+//        guard let p = crossPoint,
+//              let context = UIGraphicsGetCurrentContext(),
+//              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label })
+//        else { return }
+//        let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
+//        renderer?.drawHighlighted(context: context, indices: [h])
     }
 
 }

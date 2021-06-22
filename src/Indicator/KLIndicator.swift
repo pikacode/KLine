@@ -9,62 +9,36 @@ import UIKit
 import Charts
 
 public protocol KLIndicator {
-    static func calculate(_ data: inout [KLineData])
 
-    // to handle custom data
-    static func calculate(custom data: inout [Any])
+    init()
 
     static var style: KLStyle { get set }
 
-    static func candleDataSet(_ data: [KLineData]) -> [CandleChartDataSet]?
-    static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]?
-    static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]?
+    /// data is [KLineData] or custom data
+    static func calculate(_ data: inout [Any])
 
-    static func candleDataSet(custom data: [Any]) -> [CandleChartDataSet]?
-    static func lineDataSet(custom data: [Any]) -> [LineChartDataSet]?
-    static func barDataSet(custom data: [Any]) -> [BarChartDataSet]?
-
-    static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]?
+    func candleDataSet(_ data: [Any]) -> [CandleChartDataSet]?
+    func lineDataSet(_ data: [Any]) -> [LineChartDataSet]?
+    func barDataSet(_ data: [Any]) -> [BarChartDataSet]?
 
 }
 
 extension KLIndicator {
-    public static var name: String { return "\(self)" }
 
-    public static func calculate(_ data: inout [KLineData]) {
+    public static func calculate(_ data: inout [Any]) {}
 
-    }
+    public func candleDataSet(_ data: [Any]) -> [CandleChartDataSet]? { return nil }
+    public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? { return nil }
+    public func barDataSet(_ data: [Any]) -> [BarChartDataSet]? { return nil }
 
-    public static func calculate(custom data: inout [Any]) {
-
-    }
-
-    public static func candleDataSet(_ data: [KLineData]) -> [CandleChartDataSet]? {
-        return nil
-    }
-
-    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
-        return nil
-    }
-
-    public static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]? {
-        return nil
-    }
-
-    public static func candleDataSet(custom data: [Any]) -> [CandleChartDataSet]? {
-        return nil
-    }
-
-    public static func lineDataSet(custom data: [Any]) -> [LineChartDataSet]? {
-        return nil
-    }
-
-    public static func barDataSet(custom data: [Any]) -> [BarChartDataSet]? {
-        return nil
-    }
-
-    public static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]? {
-        return nil
-    }
+    public var style: KLStyle { return Self.style }
 
 }
+
+public protocol Init {
+    init()
+}
+
+//extension KLIndicator: Init {
+//
+//}

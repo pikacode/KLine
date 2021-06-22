@@ -10,16 +10,13 @@ import Charts
 
 class Crosshair {
 
+    required public init() {}
+
     static let label = "KLCross"
 
-    let horizontal: LimitLine
-    let vertical: LimitLine
+    let horizontal = LimitLine(0, .horizontal)
+    let vertical = LimitLine(0, .vertical)
 
-    init() {
-        horizontal = LimitLine()
-        vertical = LimitLine()
-    }
-    
 }
 
 extension Crosshair: KLIndicator {

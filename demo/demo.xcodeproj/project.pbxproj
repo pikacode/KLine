@@ -16,6 +16,8 @@
 		3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */; };
 		3B11D57E26663F1E009517FC /* DemoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */; };
 		3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D58026663F4C009517FC /* AxisValueFormatter.swift */; };
+		3B568AD12681BD5F00E2B69D /* ChartSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B568AD02681BD5F00E2B69D /* ChartSettingsView.swift */; };
+		3B568AD42681BD7A00E2B69D /* ChartSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */; };
 		3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B61861E2667339E00691E39 /* CombinedChartViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedChartViewController.swift; sourceTree = "<group>"; };
 		3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoBaseViewController.swift; sourceTree = "<group>"; };
 		3B11D58026663F4C009517FC /* AxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisValueFormatter.swift; sourceTree = "<group>"; };
+		3B568AD02681BD5F00E2B69D /* ChartSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSettingsView.swift; sourceTree = "<group>"; };
+		3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartSettingsView.xib; sourceTree = "<group>"; };
 		3B61861E2667339E00691E39 /* CombinedChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombinedChartViewController.xib; sourceTree = "<group>"; };
 		941396932459EA8B2D4442C4 /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		C031B8CBFDDA8F4479B227BC /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,18 +73,28 @@
 		3B11D5212665E630009517FC /* demo */ = {
 			isa = PBXGroup;
 			children = (
-				3B11D5222665E630009517FC /* AppDelegate.swift */,
+				3B568AD62681BD8500E2B69D /* other */,
 				3B11D5262665E630009517FC /* ViewController.swift */,
-				3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */,
-				3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */,
-				3B61861E2667339E00691E39 /* CombinedChartViewController.xib */,
-				3B11D58026663F4C009517FC /* AxisValueFormatter.swift */,
+				3B568AD02681BD5F00E2B69D /* ChartSettingsView.swift */,
+				3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
+		3B568AD62681BD8500E2B69D /* other */ = {
+			isa = PBXGroup;
+			children = (
 				3B11D5282665E630009517FC /* Main.storyboard */,
 				3B11D52B2665E633009517FC /* Assets.xcassets */,
 				3B11D52D2665E633009517FC /* LaunchScreen.storyboard */,
 				3B11D5302665E633009517FC /* Info.plist */,
+				3B11D5222665E630009517FC /* AppDelegate.swift */,
+				3B11D57D26663F1E009517FC /* DemoBaseViewController.swift */,
+				3B11D57A26663EF5009517FC /* CombinedChartViewController.swift */,
+				3B61861E2667339E00691E39 /* CombinedChartViewController.xib */,
+				3B11D58026663F4C009517FC /* AxisValueFormatter.swift */,
 			);
-			path = demo;
+			path = other;
 			sourceTree = "<group>";
 		};
 		8713294F63E26943E9072A09 /* Frameworks */ = {
@@ -163,6 +177,7 @@
 				3B11D52C2665E633009517FC /* Assets.xcassets in Resources */,
 				3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */,
 				3B11D52A2665E630009517FC /* Main.storyboard in Resources */,
+				3B568AD42681BD7A00E2B69D /* ChartSettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +232,7 @@
 			files = (
 				3B11D5272665E630009517FC /* ViewController.swift in Sources */,
 				3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */,
+				3B568AD12681BD5F00E2B69D /* ChartSettingsView.swift in Sources */,
 				3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */,
 				3B11D57E26663F1E009517FC /* DemoBaseViewController.swift in Sources */,
 				3B11D5232665E630009517FC /* AppDelegate.swift in Sources */,
@@ -369,7 +385,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7DR5RX3FJ7;
-				INFOPLIST_FILE = demo/Info.plist;
+				INFOPLIST_FILE = demo/other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -390,7 +406,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7DR5RX3FJ7;
-				INFOPLIST_FILE = demo/Info.plist;
+				INFOPLIST_FILE = demo/other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
