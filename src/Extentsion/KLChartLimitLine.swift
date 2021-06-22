@@ -8,6 +8,6 @@
 import UIKit
 import Charts
 
-class KLChartLimitLine: ChartLimitLine {
-
+open class KLChartLimitLine: ChartLimitLine {
+    public var bgColor = LimitLine.style.label.bgColor
 }

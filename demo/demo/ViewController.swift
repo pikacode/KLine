@@ -62,10 +62,14 @@ class ViewController: UIViewController {
 
         KLDateFormatter.format = DateFormat.day.rawValue
         section1.xAxis.valueFormatter = KLDateFormatter()
-
-        let line = LimitLine(200, .horizontal)
+//
+        let line = LimitLine(300, .horizontal)
         section1.indicators.append(line)
-        section1.draw()
+
+        line.label.text = "pikacode"
+        line.label.color = UIColor.white
+        line.label.bgColor = line.style.lineColor1
+
 
         /* set data with a completion block
 

@@ -24,6 +24,8 @@ open class KLSection {
     open lazy var chartView: KLCombinedChartView = {
         let v = KLCombinedChartView(frame: .zero)
         v.xAxis.valueFormatter = KLEmptyFormatter()
+        v.leftYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.leftAxis, transformer: v.getTransformer(forAxis: .left))
+        v.rightYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.rightAxis, transformer: v.getTransformer(forAxis: .right))
         return v
     }()
 
@@ -45,20 +47,30 @@ open class KLSection {
 
     open func draw() {
 
-        guard data.count > 0 else {
-            indicators.forEach{
-                if let l = $0 as? LimitLine {
-                    let line = ChartLimitLine(limit: Double(l.value), label: "开仓")
-                    line.lineWidth = 1
-                    line.lineDashLengths = [5, 5]
-                    line.labelPosition = .topRight
-                    line.valueFont = .systemFont(ofSize: 10)
-                    let leftAxis = chartView.leftAxis
-                    leftAxis.removeAllLimitLines()
+        leftAxis.removeAllLimitLines()
+        rightAxis.removeAllLimitLines()
+        xAxis.removeAllLimitLines()
+        indicators.forEach{
+            if let l = $0 as? LimitLine {
+                let line = KLChartLimitLine(limit: Double(l.value), label: l.label.text)
+                line.lineWidth = l.lineWidth
+                line.lineDashLengths = l.dashLengths
+                line.labelPosition = .topLeft
+                line.valueFont = l.label.font
+                line.lineColor = l.lineColor
+                line.valueTextColor = l.label.color
+                line.bgColor = l.label.bgColor
+                line.yOffset = -6
+                if l.direction == .horizontal {
                     leftAxis.addLimitLine(line)
-                    leftAxis.gridLineDashLengths = [5, 5]
+                    rightAxis.addLimitLine(line)
+                } else {
+                    xAxis.addLimitLine(line)
                 }
             }
+        }
+
+        guard data.count > 0 else {
             return
         }
 
