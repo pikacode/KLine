@@ -7,13 +7,9 @@
 
 import UIKit
 
-open class RSI: KLIndicator {
+open class RSI {
 
-    required public init() {
-
-    }
-    
-    public static var style: KLStyle = KLStyle.default
+    required public init() {}
     public static var days = [6, 12, 24]
     
     //RSI指标参数
@@ -27,10 +23,19 @@ open class RSI: KLIndicator {
     var rsi12: Double      = 0
     var rsi24: Double      = 0
     
+     
+  
     
-    public func calculate(_ data: inout [Any]) {
-        guard let data = data as? [KLineData] else { return }
+}
 
+
+extension RSI: KLIndicator{
+
+    public static var style: KLStyle = KLStyle.default
+    public func calculate(_ data: inout [Any]) {
+//        guard let data = data as? [KLineData] else { return }
+        
     }
+    
     
 }

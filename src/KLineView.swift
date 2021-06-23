@@ -103,7 +103,7 @@ open class KLineView: UIView {
                                 $0.data = self.data
                             }
                             self.setDataCompletion()
-                            if self.autoMoveToXMaxAfterSetData {
+                            if self.autoMoveToXMaxAfterSetData && self.data.count > 52 {
                                 self.moveToXMax()
                             }
                         }
@@ -180,7 +180,9 @@ extension KLineView: ChartViewDelegate {
         let views = sections.map{ $0.chartView }.filter{ $0 != chartView }
         let t = chartView.viewPortHandler.touchMatrix
         views.forEach{
-            _ = $0.viewPortHandler.zoom(scaleX: scaleX, scaleY: scaleY)
+            if abs($0.chartXMax) != .greatestFiniteMagnitude {
+                _ = $0.viewPortHandler.zoom(scaleX: scaleX, scaleY: scaleY)
+            }
             $0.viewPortHandler.refresh(newMatrix: t, chart: $0, invalidate: true)
         }
     }

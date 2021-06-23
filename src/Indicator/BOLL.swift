@@ -2,7 +2,7 @@
 //  BOLL.swift
 //  KLine
 //
-//  Created by pikacode on 2021/6/22.
+//  Created by aax1 on 2021/6/23.
 //
 
 import UIKit
@@ -15,6 +15,8 @@ open class BOLL {
 
 extension BOLL: KLIndicator {
     public static var style: KLStyle = KLStyle.default
-
     
+    public func calculate(_ data: inout [Any]) {
+        
+    }
 }
