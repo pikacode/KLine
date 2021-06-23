@@ -64,7 +64,7 @@ open class KLCombinedChartView: CombinedChartView {
 
         rightAxis.labelPosition = .insideChart
         rightAxis.gridColor = KLStyle.default.darkGrayColor
-        rightAxis.labelTextColor = KLStyle.default.label.color
+        rightAxis.labelTextColor = UIColor.white.alpha(0.6)
         rightAxis.labelFont = KLStyle.default.label.font
 
         scaleXEnabled = true

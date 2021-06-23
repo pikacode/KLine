@@ -48,6 +48,10 @@ open class KLineView: UIView {
         sections.forEach{ $0.draw() }
     }
 
+    /// 一个经验值，控制 label 的密度，数字越大数量越多
+    /// 可以通过修改 chartView.rightAxis.labelCount 自行控制具体数量
+    open var labelGranularity: CGFloat = 1
+
     open func layout() {
         let transform = sections.first?.chartView.viewPortHandler.touchMatrix
         let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
@@ -72,6 +76,7 @@ open class KLineView: UIView {
                 view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
                 view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
             }
+            view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
     }
 

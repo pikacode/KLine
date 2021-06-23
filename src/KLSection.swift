@@ -94,7 +94,9 @@ open class KLSection {
         }
 
         chartView.data = combinedData
+
         chartView.viewPortHandler.setMaximumScaleX(20)
+
         chartView.xAxis.spaceMin = 2
         if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
             chartView.xAxis.spaceMax = Double("\(Int(chartView.chartYMax))".count) * 2
