@@ -8,8 +8,14 @@
 import UIKit
 
 open class BOLL {
-    required public init() {
-
+    required public init() {}
+    
+    var up_boll: Double = 0
+    var mid_boll: Double = 0
+    var dn_boll: Double = 0
+    
+    private static func calculateBOLL(_ data: inout [KLineData]) {
+        
     }
 }
 

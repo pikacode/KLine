@@ -11,10 +11,15 @@ open class MAVOL {
     required public init() {
 
     }
+    private static func calculateMAVOL(_ data: inout [KLineData]) {
+        
+    }
+    
+    
 }
 
 extension MAVOL: KLIndicator {
     public static var style: KLStyle = KLStyle.default
-
+    
 
 }
