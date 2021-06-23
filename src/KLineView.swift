@@ -12,6 +12,9 @@ open class KLineView: UIView {
 
     // MARK: - public
 
+    /// true: 自动移到图表最后
+    open var autoMoveToXMaxAfterSetData = true
+
     public init(_ sections: [KLSection]) {
         self.sections = sections
         super.init(frame: .zero)
@@ -46,6 +49,8 @@ open class KLineView: UIView {
     }
 
     open func layout() {
+        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
+        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
         subviews.forEach{ $0.removeFromSuperview() }
         sections.forEach{
             let view = $0.chartView
@@ -63,6 +68,10 @@ open class KLineView: UIView {
             let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
             let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
             self.addConstraints([left, right, top, height])
+            if let transform = transform {
+                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
+            }
         }
     }
 
@@ -94,6 +103,9 @@ open class KLineView: UIView {
                                 $0.data = self.data
                             }
                             self.setDataCompletion()
+                            if self.autoMoveToXMaxAfterSetData {
+                                self.moveToXMax()
+                            }
                         }
                     }
                 }
@@ -115,12 +127,23 @@ open class KLineView: UIView {
     var tempData = [Any]()
     var realData = [Any]()
 
+    func moveToXMax() {
+        sections.forEach{
+            $0.chartView.moveViewToX($0.chartView.chartXMax)
+        }
+    }
+
+    func moveToXMin() {
+        sections.forEach{
+            $0.chartView.moveViewToX(0)
+        }
+    }
+
     open override func layoutSubviews() {
         if subviews.count != sections.count {
             let s = sections
             sections = s
         }
-
     }
 
 //    open override func didMoveToSuperview() {
@@ -150,6 +173,15 @@ extension KLineView: ChartViewDelegate {
             var matrix = CGAffineTransform(translationX: p.x, y: p.y)
             matrix = originalMatrix.concatenating(matrix)
             $0.viewPortHandler.refresh(newMatrix: matrix, chart: $0, invalidate: true)
+        }
+    }
+
+    public func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        let views = sections.map{ $0.chartView }.filter{ $0 != chartView }
+        let t = chartView.viewPortHandler.touchMatrix
+        views.forEach{
+            _ = $0.viewPortHandler.zoom(scaleX: scaleX, scaleY: scaleY)
+            $0.viewPortHandler.refresh(newMatrix: t, chart: $0, invalidate: true)
         }
     }
 

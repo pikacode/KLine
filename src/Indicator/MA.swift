@@ -76,7 +76,6 @@ extension MA: KLIndicator {
             set.drawCirclesEnabled = false
             set.drawValuesEnabled = false
             set.axisDependency = .left
-            set.forEach{ print($0) }
             return set
         }
 

@@ -87,17 +87,15 @@ open class KLCombinedChartView: CombinedChartView {
 //            }
 //        }
 
-        if showCrosshair {
-            let point = recognizer.location(in: self)
-            let point1 = (self.highlighter as? ChartHighlighter)?.getValsForTouch(x: point.x, y: point.y)
-            crossPoint = point1
-        }
+//        if showCrosshair {
+//            let point = recognizer.location(in: self)
+//            let point1 = (self.highlighter as? ChartHighlighter)?.getValsForTouch(x: point.x, y: point.y)
+//            crossPoint = point1
+//        }
     }
 
     var crossPoint: CGPoint? {
         didSet {
-//            data = CombinedChartData()
-            //print(crossPoint)
             guard let chartData = data as? CombinedChartData else { return }
 
             let crossSet: LineChartDataSet = {

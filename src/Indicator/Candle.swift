@@ -25,7 +25,7 @@ open class Candle: KLIndicator {
         set.shadowColorSameAsCandle = true
         set.valueFont = .systemFont(ofSize: 10)
         set.drawValuesEnabled = false
-        set.shadowWidth = 1
+        set.shadowWidth = style.lineWidth1
         return [set]
     }
 

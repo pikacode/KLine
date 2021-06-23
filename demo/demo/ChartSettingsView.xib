@@ -190,6 +190,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="mainIndicatorAction1:" destination="iN0-l3-epB" eventType="touchUpInside" id="mDD-T8-9zy"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-k9-fPI">
                                             <rect key="frame" x="75" y="44" width="64" height="22"/>
@@ -205,6 +208,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="mainIndicatorAction2:" destination="iN0-l3-epB" eventType="touchUpInside" id="IUa-cy-KgQ"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGD-FG-Zll">
                                             <rect key="frame" x="138" y="44" width="64" height="22"/>
@@ -220,6 +226,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="mainIndicatorAction3:" destination="iN0-l3-epB" eventType="touchUpInside" id="OEf-xM-a7I"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
                                             <rect key="frame" x="12" y="128" width="64" height="22"/>
@@ -235,6 +244,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction1:" destination="iN0-l3-epB" eventType="touchUpInside" id="KHp-2q-KFz"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
                                             <rect key="frame" x="75" y="128" width="64" height="22"/>
@@ -250,6 +262,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction2:" destination="iN0-l3-epB" eventType="touchUpInside" id="K7W-iw-dq7"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
                                             <rect key="frame" x="138" y="128" width="64" height="22"/>
@@ -265,6 +280,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction3:" destination="iN0-l3-epB" eventType="touchUpInside" id="t6P-jc-asx"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-y3-IhE">
                                             <rect key="frame" x="201" y="128" width="64" height="22"/>
@@ -280,6 +298,9 @@
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction4:" destination="iN0-l3-epB" eventType="touchUpInside" id="dev-9O-EaL"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.054901960780000002" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

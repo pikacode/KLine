@@ -94,13 +94,23 @@ open class KLSection {
         }
 
         chartView.data = combinedData
-        chartView.viewPortHandler.setMaximumScaleX(10)
-
-        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
-            chartView.zoomToCenter(scaleX: 10, scaleY: 1)
+        chartView.viewPortHandler.setMaximumScaleX(20)
+        chartView.xAxis.spaceMin = 2
+        if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
+            chartView.xAxis.spaceMax = Double("\(Int(chartView.chartYMax))".count) * 2
+        } else {
+            chartView.xAxis.spaceMax = 10
         }
 
-        
+        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            chartView.setVisibleXRangeMaximum(52)
+            chartView.setScaleMinima(1.5, scaleY: 1)
+            if data.count < 52 {
+                let n = (chartView.xAxis.axisMaximum - chartView.xAxis.axisMinimum)/Double(data.count)
+                chartView.xAxis.axisMaximum = n * 52 + chartView.xAxis.axisMinimum
+            }
+        }
+
     }
 
 }
