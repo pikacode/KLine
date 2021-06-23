@@ -9,7 +9,15 @@ import UIKit
 
 open class KLStyle {
 
-    public static var `default` = KLStyle(true)
+    static var _default = KLStyle(true)
+    public static var `default`: KLStyle {
+        get {
+            return KLStyle(false)
+        }
+        set {
+            _default = newValue
+        }
+    }
 
     public var lineWidth1: CGFloat
 
@@ -31,6 +39,8 @@ open class KLStyle {
     public var upGradient: GradientColor
     public var downGradient: GradientColor
 
+    public var darkGrayColor: UIColor
+
     public var label: KLLabel
 
     public struct GradientColor {
@@ -47,6 +57,7 @@ open class KLStyle {
             lineColor1 = 0x039fff.toColor
             lineColor2 = 0x01d0f7.toColor
             lineColor3 = 0xff7401.toColor
+            darkGrayColor = 0x262626.toColor
             upColor = 0x02cc99.toColor
             downColor = 0xff2500.toColor
             upBarColor = 0xC33137.toColor
@@ -55,7 +66,7 @@ open class KLStyle {
             downGradient = GradientColor(top: downColor.alpha(0.8), bottom: downColor.alpha(0.1))
             label = KLLabel()
         } else {
-            let style = KLStyle.default
+            let style = KLStyle._default
             lineWidth1 = style.lineWidth1
             maxBarWidth = style.maxBarWidth
             minBarWidth = style.minBarWidth
@@ -63,13 +74,18 @@ open class KLStyle {
             lineColor1 = style.lineColor1
             lineColor2 = style.lineColor2
             lineColor3 = style.lineColor3
+            darkGrayColor = style.darkGrayColor
             upColor = style.upColor
             downColor = style.downColor
             upBarColor = style.upBarColor
             downBarColor = style.downBarColor
             upGradient = style.upGradient
             downGradient = style.downGradient
-            label = style.label
+            label = KLLabel()
+            label.font = style.label.font
+            label.color = style.label.color
+            label.bgColor = style.label.bgColor
+            label.position = style.label.position
         }
     }
 

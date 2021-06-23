@@ -29,6 +29,21 @@ class ChartSettingsView: UIView {
         }
     }
 
+    @IBAction func mainIndicatorAction1(_ sender: Any) { changeMainIndicator(0) }
+    @IBAction func mainIndicatorAction2(_ sender: Any) { changeMainIndicator(1) }
+    @IBAction func mainIndicatorAction3(_ sender: Any)  { changeMainIndicator(2) }
+    func changeMainIndicator(_ index: Int) {
+
+    }
+
+    @IBAction func otherIndicatorAction1(_ sender: Any) { changeOtherIndicator(0) }
+    @IBAction func otherIndicatorAction2(_ sender: Any) { changeOtherIndicator(1) }
+    @IBAction func otherIndicatorAction3(_ sender: Any) { changeOtherIndicator(2) }
+    @IBAction func otherIndicatorAction4(_ sender: Any) { changeOtherIndicator(3) }
+    func changeOtherIndicator(_ index: Int) {
+
+    }
+
     override func awakeFromNib() {
         contentTrailing.constant = -280
         bgView.alpha = 0

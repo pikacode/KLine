@@ -9,7 +9,7 @@ import UIKit
 
 public class KLLabel {
 
-    public static var color = UIColor.black
+    public static var color = UIColor.white.alpha(0.6)
     public static var font = UIFont.systemFont(ofSize: 10)
 
     public static var bgColor = UIColor.clear

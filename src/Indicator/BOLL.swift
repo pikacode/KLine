@@ -8,12 +8,14 @@
 import UIKit
 
 open class BOLL {
-    required public init() {}
+    required public init() {
+
+    }
 }
 
-
-extension BOLL: KLIndicator{
+extension BOLL: KLIndicator {
     public static var style: KLStyle = KLStyle.default
+    
     public func calculate(_ data: inout [Any]) {
         
     }
