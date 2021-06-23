@@ -23,10 +23,12 @@ class ViewController: UIViewController {
     var section1 = KLSection([Candle(), MA()], 300)
     var section2 = KLSection([MA()], 74)
     var section3 = KLSection([KDJ()], 74)
+    var section4 = KLSection([RSI()], 74)
 
     lazy var klineView = KLineView([section1,
                                     section2,
-                                    section3])
+                                    section3,
+                                    section4])
 
     // 👉 create demo data, in real project you may create it by request
     // 👉 the type [KLineData] can be customed to [Any]
