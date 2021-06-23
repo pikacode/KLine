@@ -54,16 +54,16 @@ extension MA: KLIndicator {
 
         }
 
-        let sets = days.compactMap { (day) -> LineChartDataSet? in
-            let entries = data.compactMap{ (d) -> ChartDataEntry? in
+        let sets = days.compactMap { (day) -> LineChartDataSet in
+            var entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ma?.data[day] as? Double {
                     return ChartDataEntry(x: d.x, y: value)
                 } else {
                     return nil
                 }
             }
-            if entries.count == 0 {
-                return nil
+            if entries.count == 0, let d = data.first {
+                entries.append(ChartDataEntry(x: d.x, y: d.open))
             }
             let last = entries.last?.y ?? 0
             let label = String(format: "MA\(day):%.8f", last)
