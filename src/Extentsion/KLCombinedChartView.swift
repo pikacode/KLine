@@ -55,17 +55,17 @@ open class KLCombinedChartView: CombinedChartView {
         legend.yOffset = 2
 
         xAxis.labelPosition = .bottomInside
-        xAxis.gridColor = 0x262626.toColor
-        xAxis.labelTextColor = UIColor.white.alpha(0.6)
-        xAxis.labelFont = UIFont.systemFont(ofSize: 9)
+        xAxis.gridColor = KLStyle.default.darkGrayColor
+        xAxis.labelTextColor = KLStyle.default.label.color
+        xAxis.labelFont = KLStyle.default.label.font
 
         leftAxis.drawLabelsEnabled = false
-        leftAxis.gridColor = 0x262626.toColor
+        leftAxis.gridColor = KLStyle.default.darkGrayColor
 
         rightAxis.labelPosition = .insideChart
-        rightAxis.gridColor = 0x262626.toColor
-        rightAxis.labelTextColor = UIColor.white.alpha(0.6)
-        rightAxis.labelFont = UIFont.systemFont(ofSize: 9)
+        rightAxis.gridColor = KLStyle.default.darkGrayColor
+        rightAxis.labelTextColor = KLStyle.default.label.color
+        rightAxis.labelFont = KLStyle.default.label.font
 
         scaleXEnabled = true
         scaleYEnabled = false
