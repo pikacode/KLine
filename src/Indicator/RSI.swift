@@ -27,7 +27,7 @@ open class RSI: KLIndicator {
     var rsi12: Double      = 0
     var rsi24: Double      = 0
     
-    
+     
     public func calculate(_ data: inout [Any]) {
         guard let data = data as? [KLineData] else { return }
 
