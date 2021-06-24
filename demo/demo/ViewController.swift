@@ -107,6 +107,7 @@ class ViewController: UIViewController {
             // 👉 set indicators to main section
             let mainSection = self.klineView.sections.first!
             mainSection.indicators = mainIndicators
+            mainSection.height = settings.mainHeight
 
             //---------------- 2. create other sections ----------------//
             let others = settings.otherIndicators.filter{ $0.on }.map{ $0.indicator }
