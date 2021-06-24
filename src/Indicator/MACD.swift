@@ -21,7 +21,7 @@ open class MACD {
      DEA（MACD）= 前一日DEA×8/10＋今日DIF×2/10
      BAR=2×(DIFF－DEA)
      */
-    static func calculateSignMACD(_ data: inout [KLineData]) {
+    static func calculateMACD(_ data: inout [KLineData]) {
         
         for index in 0..<data.count {
             let model = data[index]
@@ -51,7 +51,7 @@ extension MACD: KLIndicator {
 
     public static func calculate(_ data: inout [Any]) {
         guard var data = data as? [KLineData] else { return }
-        calculateSignMACD(&data)
+        calculateMACD(&data)
     }
 
     public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
