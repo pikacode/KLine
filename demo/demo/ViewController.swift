@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     var section1 = KLSection([Candle(), MA()], 300)
     var section2 = KLSection([MA()], 74)
     var section3 = KLSection([KDJ()], 74)
-    var section4 = KLSection([RSI()], 74)
+    var section4 = KLSection([BOLL()], 74)
 
     lazy var klineView = KLineView([section1,
                                     section2,
