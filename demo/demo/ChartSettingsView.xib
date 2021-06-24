@@ -176,24 +176,6 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-mS-8Tz">
-                                            <rect key="frame" x="12" y="44" width="64" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="64" id="EKk-Ga-OZM"/>
-                                                <constraint firstAttribute="height" constant="22" id="JIN-hq-HTC"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="MA" backgroundImage="chart_rect_normal">
-                                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <state key="selected" backgroundImage="chart_rect_selected">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ula-j7-PNd"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-k9-fPI">
                                             <rect key="frame" x="75" y="44" width="64" height="22"/>
                                             <constraints>
@@ -230,40 +212,22 @@
                                                 <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sWx-9d-S9A"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
-                                            <rect key="frame" x="12" y="128" width="64" height="22"/>
+                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-mS-8Tz">
+                                            <rect key="frame" x="12" y="44" width="64" height="22"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="JPw-gr-D5m"/>
-                                                <constraint firstAttribute="width" constant="64" id="htC-Ts-FsG"/>
+                                                <constraint firstAttribute="width" constant="64" id="EKk-Ga-OZM"/>
+                                                <constraint firstAttribute="height" constant="22" id="JIN-hq-HTC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="MAVOL" backgroundImage="chart_rect_normal">
+                                            <state key="normal" title="MA" backgroundImage="chart_rect_normal">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="selected" backgroundImage="chart_rect_selected">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qwe-x4-wrN"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
-                                            <rect key="frame" x="75" y="128" width="64" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="L8W-nf-Qr5"/>
-                                                <constraint firstAttribute="width" constant="64" id="OAf-qv-xdO"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="MACD" backgroundImage="chart_rect_normal">
-                                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <state key="selected" backgroundImage="chart_rect_selected">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUF-1K-Vql"/>
+                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ula-j7-PNd"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
@@ -300,6 +264,42 @@
                                             </state>
                                             <connections>
                                                 <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="zHQ-ie-yF9"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
+                                            <rect key="frame" x="12" y="128" width="64" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="JPw-gr-D5m"/>
+                                                <constraint firstAttribute="width" constant="64" id="htC-Ts-FsG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="MAVOL" backgroundImage="chart_rect_normal">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="selected" backgroundImage="chart_rect_selected">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qwe-x4-wrN"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
+                                            <rect key="frame" x="75" y="128" width="64" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="L8W-nf-Qr5"/>
+                                                <constraint firstAttribute="width" constant="64" id="OAf-qv-xdO"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="MACD" backgroundImage="chart_rect_normal">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="selected" backgroundImage="chart_rect_selected">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUF-1K-Vql"/>
                                             </connections>
                                         </button>
                                     </subviews>

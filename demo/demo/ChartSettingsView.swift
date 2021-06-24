@@ -25,10 +25,14 @@ class ChartSettingsView: UIView {
         }
     }
 
-
     //主图指标
     @IBAction func mainIndicatorAction(_ sender: UIButton) {
         sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.superview?.bringSubviewToFront(sender)
+        } else {
+            sender.superview?.sendSubviewToBack(sender)
+        }
         var s = settings.mainIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.mainIndicators[sender.tag] = s
@@ -37,6 +41,11 @@ class ChartSettingsView: UIView {
     //副图指标
     @IBAction func otherIndicatorAction(_ sender: UIButton) {
         sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.superview?.bringSubviewToFront(sender)
+        } else {
+            sender.superview?.sendSubviewToBack(sender)
+        }
         var s = settings.otherIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.otherIndicators[sender.tag] = s
