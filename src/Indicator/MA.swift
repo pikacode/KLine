@@ -78,7 +78,6 @@ extension MA: KLIndicator {
             set.axisDependency = .left
             return set
         }
-//todo 处理空的情况
         return sets
     }
 

@@ -8,19 +8,19 @@
 import UIKit
 import Charts
 
-class Crosshair {
-
+open class Crosshair {
     required public init() {}
 
     static let label = "KLCross"
 
-    let horizontal = LimitLine(0, .horizontal)
-    let vertical = LimitLine(0, .vertical)
+    /// set it nil if u want to hide
+    public var horizontal: LimitLine? = LimitLine(0, .horizontal)
+    public var vertical: LimitLine? = LimitLine(0, .vertical)
 
 }
 
 extension Crosshair: KLIndicator {
-    static var style: KLStyle = KLStyle.default
+    public static var style: KLStyle = KLStyle.default
 
     static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]? {
         return nil

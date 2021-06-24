@@ -19,12 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    // 👉 config each section by (elements, height), sections can be modified after
-    var mainSection = KLSection([Candle(), MA()], 300)
-
-    lazy var klineView = KLineView([mainSection,
-                                    KLSection([MA()], 74),
-                                    KLSection([KDJ()], 74)])
+    var klineView: KLineView!
 
     // 👉 create demo data, in real project you may create it by request
     // 👉 the type [KLineData] can be customed to [Any]
@@ -63,64 +58,72 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //---------------- ⭐️ Easy Use ----------------//
+
+        // 👉 1. create KLineView by sections
+        // 👉 sections can be modified after
+        klineView = KLineView([KLSection([Candle(), MA()], 300),
+                               KLSection([MAVOL()], 74),
+                               KLSection([MACD()], 74)])
+
         contentView.addSubview(klineView)
 
-        // 👉 set data
+        // 👉 2. set data
         klineView.data = data
 
-        // 👉 set x date formatter
+        // 👉 3. set x date formatter for first section
         KLDateFormatter.format = DateFormat.day.rawValue
-        mainSection.xAxis.valueFormatter = KLDateFormatter()
-
-        // 👉 set a limit line
-        let line = LimitLine(300, .horizontal)
-        mainSection.indicators.append(line)
-        line.label.text = "pikacode"
-        line.label.color = UIColor.white
-        line.label.bgColor = line.style.lineColor1
+        klineView.sections.first?.xAxis.valueFormatter = KLDateFormatter()
 
 
-        /* 👉 set data with a completion block
-           👉 u can use this to handle a loading status while calculating data
-
-         // data is [KLineData]
-         klineView.setData(data) {
-            //finish
-         }
-
-         // data is [Any]
-         klineView.setCustomData(data) {
-            //finish
-         }
-
-         */
 
 
+
+        //---------------- ⭐️⭐️ Advanced ----------------//
+
+        // 👉 [Advanced]: change settings of klineView
         ChartSettings.shared.changed = { (settings) in
 
-            self.mainSection.height = settings.mainHeight
+            //---------------- 1. create main section ----------------//
 
-            var main = settings.mainIndicators.filter{ $0.on }.map{ $0.indicator }
-            main.insert(Candle(), at: 0)
+            // 👉 append candle
+            var mainIndicators = [KLIndicator]()
+            mainIndicators.append(Candle())
 
-            // 👉 set indicators of main section
-            self.mainSection.indicators = main
+            // 👉 append main indicators (MA/EMA/BOLL)
+            let mains = settings.mainIndicators.filter{ $0.on }.map{ $0.indicator }
+            mainIndicators.append(contentsOf: mains)
 
-            // 👉 create other sections
+            // 👉 append a limit line
+            let line: LimitLine = {
+                let line = LimitLine(300, .horizontal)
+                line.label.text = "pikacode"
+                line.label.color = UIColor.white
+                line.label.bgColor = line.style.lineColor1
+                return line
+            }()
+            mainIndicators.append(line)
+
+            // 👉 set indicators to main section
+            let mainSection = self.klineView.sections.first!
+            mainSection.indicators = mainIndicators
+
+            //---------------- 2. create other sections ----------------//
             let others = settings.otherIndicators.filter{ $0.on }.map{ $0.indicator }
-            var sections = others.map{ KLSection([$0], 74) }
+            let othersSections = others.map{ KLSection([$0], 74) }
 
-            sections.insert(self.mainSection, at: 0)
 
-            // 👉 set sections
+            //---------------- 3. set sections to klineView ----------------//
+            var sections = [KLSection]()
+            sections.append(mainSection)
+            sections.append(contentsOf: othersSections)
             self.klineView.sections = sections
 
-            // 👉 config klinView's height, which decided by each section's height
+
+            // 👉 config contentView's height, which decided by each section's height
             // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
             self.contentHeight.constant = self.klineView.neededHeight
 
-            // 👉 tell kline to redraw
-            self.klineView.draw()
         }
 
     }

@@ -34,11 +34,3 @@ extension KLIndicator {
     public var style: KLStyle { return Self.style }
 
 }
-
-public protocol Init {
-    init()
-}
-
-//extension KLIndicator: Init {
-//
-//}
