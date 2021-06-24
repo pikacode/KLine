@@ -17,13 +17,13 @@ open class BOLL {
     public static var boll_average: Int = 2
     
     public enum BollType {
-        case average
         case up
+        case mb
         case down
     }
-    public static var boll_type: [BollType] = [.up, .average, .down]
+    public static var boll_type: [BollType] = [.up, .mb, .down]
     
-    var avg_boll: Double = 0
+    var mb_boll: Double = 0
     var up_boll: Double = 0
     var dn_boll: Double = 0
 
@@ -35,46 +35,44 @@ open class BOLL {
         
         for i in 0 ..< data.count {
             let boll = data[i].boll ?? BOLL()
-            boll.avg_boll = calculateAveragePrice(day: boll_day, index: i, data: &data)
-            boll.up_boll = boll.avg_boll + calculateStd(day: boll_day, avg: boll_average, index: i, data: &data) * Double(boll_average)
-            boll.dn_boll = boll.avg_boll - calculateStd(day: boll_day, avg: boll_average, index: i, data: &data) * Double(boll_average)
+            boll.mb_boll = calculateAveragePrice(index: i, data: &data)
+            let md = calculateMD(index: i, data: &data)
+            boll.up_boll = boll.mb_boll + (md * Double(boll_average))
+            boll.dn_boll = boll.mb_boll - (md * Double(boll_average))
+            
             data[i].boll = boll
         }
         
         
     }
     //平均线
-    static func calculateAveragePrice(day: Int, index: Int, data: inout [KLineData]) -> Double{
-        
+    static func calculateAveragePrice(index: Int, data: inout [KLineData]) -> Double{
+        let day = boll_day
         if index < day - 1 { return 0 }
-        
         var sum: Double = 0
-        
-        for i in stride(from: index, to: day, by: -1) {
+        for i in day - 1 ..< index {
             let model = data[i]
             sum += model.close
         }
-    
-        return sum / Double(day)
+        return sum / Double(index)
         
     }
     //标准差
-    static func calculateStd(day: Int, avg: Int, index: Int, data: inout [KLineData]) -> Double{
+    static func calculateMD(index: Int, data: inout [KLineData]) -> Double{
+        
+        let day = boll_day
+        let avg = boll_average
+        
         if index < day - 1 { return 0}
-        
         var sum: Double = 0
-        var avg_boll: Double = 0
         
-        for i in stride(from: index, to: day - 1, by: -1) {
+        for i in day - 1 ..< index {
             let model = data[i]
             let boll = data[i].boll ?? BOLL()
-            if avg_boll == 0 {
-                avg_boll = boll.avg_boll
-            }
-            sum += pow(model.close - avg_boll, Double(avg))
-    
+            sum += pow(model.close - boll.mb_boll, Double(avg))
         }
-        return sqrt(sum / Double(day))
+
+        return sqrt(sum / Double(index))
         
     }
 }
@@ -91,12 +89,15 @@ extension BOLL: KLIndicator {
         guard let data = data as? [KLineData] else { return nil}
         var sets = [LineChartDataSet]()
         
-        for (index, b) in BOLL.boll_type.enumerated() {
+        for (index, type) in BOLL.boll_type.enumerated() {
             let entries = data.compactMap { (model) -> ChartDataEntry? in
                 let boll = model.boll ??  BOLL()
-                return ChartDataEntry(x: model.x, y: b == .average ? boll.avg_boll : b == .up ? boll.up_boll : boll.dn_boll)
+                return ChartDataEntry(x: model.x, y: type == .mb ? boll.mb_boll : type == .up ? boll.up_boll : boll.dn_boll)
             }
             let label = ""
+            if index == 0 {
+                
+            }
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
