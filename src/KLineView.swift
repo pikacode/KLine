@@ -25,7 +25,12 @@ open class KLineView: UIView {
             newValue.forEach{ $0.offset = sections[0].offset }
         }
         didSet {
-            layout()
+            queue.async {
+                self.indicators.forEach{ type(of: $0).calculate(&self.data) }
+                DispatchQueue.main.async {
+                    self.draw()
+                }
+            }
         }
     }
 
@@ -48,32 +53,9 @@ open class KLineView: UIView {
         sections.forEach{ $0.draw() }
     }
 
-    open func layout() {
-        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
-        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
-        subviews.forEach{ $0.removeFromSuperview() }
-        sections.forEach{
-            let view = $0.chartView
-            view.delegate = self
-            view.translatesAutoresizingMaskIntoConstraints = false
-            let top: NSLayoutConstraint
-            if let last = self.subviews.last {
-                top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: 0)
-            } else {
-                top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
-            }
-            self.addSubview(view)
-            view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: 0.3)
-            let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: $0.height)
-            let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
-            let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
-            self.addConstraints([left, right, top, height])
-            if let transform = transform {
-                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
-                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
-            }
-        }
-    }
+    /// 一个经验值，控制 label 的密度，数字越大数量越多
+    /// 可以通过修改 chartView.rightAxis.labelCount 自行控制具体数量
+    open var labelGranularity: CGFloat = 1
 
     /// [KLineData] or custom [Any]
     open var data: [Any] {
@@ -136,6 +118,34 @@ open class KLineView: UIView {
     func moveToXMin() {
         sections.forEach{
             $0.chartView.moveViewToX(0)
+        }
+    }
+
+    func layout() {
+        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
+        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
+        subviews.forEach{ $0.removeFromSuperview() }
+        sections.forEach{
+            let view = $0.chartView
+            view.delegate = self
+            view.translatesAutoresizingMaskIntoConstraints = false
+            let top: NSLayoutConstraint
+            if let last = self.subviews.last {
+                top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: 0)
+            } else {
+                top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
+            }
+            self.addSubview(view)
+            view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: 0.3)
+            let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: $0.height)
+            let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
+            let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
+            self.addConstraints([left, right, top, height])
+            if let transform = transform {
+                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
+            }
+            view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
     }
 

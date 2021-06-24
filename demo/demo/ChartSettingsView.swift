@@ -17,31 +17,35 @@ class ChartSettingsView: UIView {
 
     let settings = ChartSettings.shared
 
-
-    @IBAction func heightAction1(_ sender: Any) { changeHeight(0) }
-    @IBAction func heightAction2(_ sender: Any) { changeHeight(1) }
-    @IBAction func heightAction3(_ sender: Any) { changeHeight(2) }
-    func changeHeight(_ index: Int) {
-        heightRectLeading.constant = [0, 121, 242][index]
-        settings.mainHeight = [182, 282, 382][index]
+    @IBAction func heightAction(_ sender: UIButton) {
+        heightRectLeading.constant = [0, 121, 242][sender.tag]
+        settings.mainHeight = [182, 282, 382][sender.tag]
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
     }
 
-    @IBAction func mainIndicatorAction1(_ sender: Any) { changeMainIndicator(0) }
-    @IBAction func mainIndicatorAction2(_ sender: Any) { changeMainIndicator(1) }
-    @IBAction func mainIndicatorAction3(_ sender: Any)  { changeMainIndicator(2) }
-    func changeMainIndicator(_ index: Int) {
 
+    //主图指标
+    @IBAction func mainIndicatorAction(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        var s = settings.mainIndicators[sender.tag]
+        s.1 = sender.isSelected
+        settings.mainIndicators[sender.tag] = s
     }
 
-    @IBAction func otherIndicatorAction1(_ sender: Any) { changeOtherIndicator(0) }
-    @IBAction func otherIndicatorAction2(_ sender: Any) { changeOtherIndicator(1) }
-    @IBAction func otherIndicatorAction3(_ sender: Any) { changeOtherIndicator(2) }
-    @IBAction func otherIndicatorAction4(_ sender: Any) { changeOtherIndicator(3) }
-    func changeOtherIndicator(_ index: Int) {
+    //副图指标
+    @IBAction func otherIndicatorAction(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        var s = settings.otherIndicators[sender.tag]
+        s.1 = sender.isSelected
+        settings.otherIndicators[sender.tag] = s
+    }
 
+    //线
+    @IBAction func switchAction(_ sender: UISwitch) {
+        //sender.isOn.toggle()
+        settings.switchs[sender.tag] = sender.isOn
     }
 
     override func awakeFromNib() {

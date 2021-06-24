@@ -37,8 +37,6 @@ open class KLSection {
         }
     }
 
-    public let combinedData = CombinedChartData()
-
     var offset: CGFloat = 0
 
     public var xAxis: XAxis { chartView.xAxis }
@@ -47,6 +45,7 @@ open class KLSection {
 
     open func draw() {
 
+        /// 画 limit line
         leftAxis.removeAllLimitLines()
         rightAxis.removeAllLimitLines()
         xAxis.removeAllLimitLines()
@@ -71,9 +70,11 @@ open class KLSection {
         }
 
         guard data.count > 0 else {
+            chartView.data = nil
             return
         }
 
+        let combinedData = CombinedChartData()
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()
@@ -93,8 +94,8 @@ open class KLSection {
             }
         }
 
-        chartView.data = combinedData
         chartView.viewPortHandler.setMaximumScaleX(20)
+
         chartView.xAxis.spaceMin = 2
         if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
             chartView.xAxis.spaceMax = Double("\(Int(chartView.chartYMax))".count) * 2
@@ -103,6 +104,9 @@ open class KLSection {
         }
 
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            
+            chartView.data = combinedData
+
             chartView.setVisibleXRangeMaximum(52)
             chartView.setScaleMinima(1.5, scaleY: 1)
             if data.count < 52 {

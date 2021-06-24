@@ -79,27 +79,27 @@
                                                 <constraint firstAttribute="height" constant="22" id="cSv-kb-PMW"/>
                                             </constraints>
                                             <connections>
-                                                <action selector="heightAction1:" destination="iN0-l3-epB" eventType="touchUpInside" id="keC-EZ-jFB"/>
+                                                <action selector="heightAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qH5-Ve-cGR"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEo-PD-EOd">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEo-PD-EOd">
                                             <rect key="frame" x="103" y="103" width="74" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="DoL-BY-QJh"/>
                                                 <constraint firstAttribute="width" constant="74" id="qH3-EM-XTT"/>
                                             </constraints>
                                             <connections>
-                                                <action selector="heightAction2:" destination="iN0-l3-epB" eventType="touchUpInside" id="7rD-mQ-VwD"/>
+                                                <action selector="heightAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="7no-jB-nKH"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zae-Jh-Jnj">
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zae-Jh-Jnj">
                                             <rect key="frame" x="194" y="103" width="74" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="dNG-Oo-2IB"/>
                                                 <constraint firstAttribute="width" constant="74" id="vGO-7r-ttZ"/>
                                             </constraints>
                                             <connections>
-                                                <action selector="heightAction3:" destination="iN0-l3-epB" eventType="touchUpInside" id="ViE-kQ-oVi"/>
+                                                <action selector="heightAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="49o-xW-YwQ"/>
                                             </connections>
                                         </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart_settings_line" translatesAutoresizingMaskIntoConstraints="NO" id="RIi-3O-qnn">
@@ -191,10 +191,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction1:" destination="iN0-l3-epB" eventType="touchUpInside" id="mDD-T8-9zy"/>
+                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ula-j7-PNd"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-k9-fPI">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-k9-fPI">
                                             <rect key="frame" x="75" y="44" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="oRh-aC-gCE"/>
@@ -209,10 +209,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction2:" destination="iN0-l3-epB" eventType="touchUpInside" id="IUa-cy-KgQ"/>
+                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="7aZ-Nj-gQB"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGD-FG-Zll">
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGD-FG-Zll">
                                             <rect key="frame" x="138" y="44" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="3v2-ay-h2O"/>
@@ -227,7 +227,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction3:" destination="iN0-l3-epB" eventType="touchUpInside" id="OEf-xM-a7I"/>
+                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sWx-9d-S9A"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
@@ -245,10 +245,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction1:" destination="iN0-l3-epB" eventType="touchUpInside" id="KHp-2q-KFz"/>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qwe-x4-wrN"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
                                             <rect key="frame" x="75" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="L8W-nf-Qr5"/>
@@ -263,10 +263,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction2:" destination="iN0-l3-epB" eventType="touchUpInside" id="K7W-iw-dq7"/>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUF-1K-Vql"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
                                             <rect key="frame" x="138" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="tjB-o7-DKq"/>
@@ -281,10 +281,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction3:" destination="iN0-l3-epB" eventType="touchUpInside" id="t6P-jc-asx"/>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="XnB-Xo-H04"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-y3-IhE">
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-y3-IhE">
                                             <rect key="frame" x="201" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="Kyi-m9-2DO"/>
@@ -299,7 +299,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction4:" destination="iN0-l3-epB" eventType="touchUpInside" id="dev-9O-EaL"/>
+                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="zHQ-ie-yF9"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -352,6 +352,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8y4-be-1ic">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607843137253" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="9ZR-wp-Etg"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfs-eU-oBn">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -397,9 +400,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIq-va-nsc">
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIq-va-nsc">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="DwK-4q-HMX"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rei-nY-1XJ">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -445,9 +451,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hd5-Zp-Ei0">
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hd5-Zp-Ei0">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="5CI-AP-wFk"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-ux-zfX">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -493,9 +502,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="No1-4Z-h1f">
+                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="No1-4Z-h1f">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="ZEG-cc-dEM"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="px8-kO-hgW">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -541,9 +553,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8a-Wk-GGF">
+                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8a-Wk-GGF">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="YO2-h9-wDR"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aup-pu-Adq">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -589,9 +604,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WxV-qW-lVB">
+                                                <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WxV-qW-lVB">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="kQP-TC-E0K"/>
+                                                    </connections>
                                                 </switch>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txq-Q1-1Sm">
                                                     <rect key="frame" x="47" y="17.5" width="10" height="10"/>
@@ -637,9 +655,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0F3-W0-v9V">
+                                                <switch opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0F3-W0-v9V">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="RpL-7H-1Fv"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -753,7 +774,7 @@
                 <outlet property="contentTrailing" destination="Eaw-tS-hjI" id="MX7-5u-aDH"/>
                 <outlet property="heightRectLeading" destination="gfu-Rh-oee" id="yz5-of-Jc3"/>
             </connections>
-            <point key="canvasLocation" x="578" y="143"/>
+            <point key="canvasLocation" x="270" y="140"/>
         </view>
     </objects>
     <resources>

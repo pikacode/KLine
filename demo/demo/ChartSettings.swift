@@ -23,13 +23,16 @@ class ChartSettings {
     var effectImmediately = true
 
     var mainHeight: CGFloat = 282 { didSet{ save() } }
-    var mainIndicators: [(KLIndicator, Bool)] = [(MA(), true),
-                                                 (EMA(), false),
-                                                 (BOLL(), false)] { didSet{ save() } }
-    var otherIndicators: [(KLIndicator, Bool)] = [(MAVOL(), true),
-                                                  (MACD(), true),
-                                                  (KDJ(), false),
-                                                  (RSI(), false)] { didSet{ save() } }
+
+    var mainIndicators: [(indicator: KLIndicator, on: Bool)] = [(MA(), true),
+                                                                (EMA(), false),
+                                                                (BOLL(), false)] { didSet{ save() } }
+
+    var otherIndicators: [(indicator: KLIndicator, on: Bool)] = [(MAVOL(), true),
+                                                                 (MACD(), true),
+                                                                 (KDJ(), false),
+                                                                 (RSI(), false)] { didSet{ save() } }
+
     var switchs = [true, true, false, false, false, false, true] { didSet{ save() } }
 
     static func readFromLocal() -> ChartSettings {
