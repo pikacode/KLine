@@ -37,8 +37,6 @@ open class KLSection {
         }
     }
 
-    public let combinedData = CombinedChartData()
-
     var offset: CGFloat = 0
 
     public var xAxis: XAxis { chartView.xAxis }
@@ -47,6 +45,7 @@ open class KLSection {
 
     open func draw() {
 
+        /// 画 limit line
         leftAxis.removeAllLimitLines()
         rightAxis.removeAllLimitLines()
         xAxis.removeAllLimitLines()
@@ -71,9 +70,11 @@ open class KLSection {
         }
 
         guard data.count > 0 else {
+            chartView.data = nil
             return
         }
 
+        let combinedData = CombinedChartData()
         let lineData = LineChartData()
         let candleData = CandleChartData()
         let barData = BarChartData()

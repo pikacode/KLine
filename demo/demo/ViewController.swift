@@ -20,13 +20,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
     // 👉 config each section by (elements, height), sections can be modified after
-    var section1 = KLSection([Candle(), MA()], 300)
-    var section2 = KLSection([MA()], 74)
-    var section3 = KLSection([KDJ()], 74)
+    var mainSection = KLSection([Candle(), MA()], 300)
 
-    lazy var klineView = KLineView([section1,
-                                    section2,
-                                    section3])
+    lazy var klineView = KLineView([mainSection,
+                                    KLSection([MA()], 74),
+                                    KLSection([KDJ()], 74)])
 
     // 👉 create demo data, in real project you may create it by request
     // 👉 the type [KLineData] can be customed to [Any]
@@ -72,11 +70,11 @@ class ViewController: UIViewController {
 
         // 👉 set x date formatter
         KLDateFormatter.format = DateFormat.day.rawValue
-        section1.xAxis.valueFormatter = KLDateFormatter()
+        mainSection.xAxis.valueFormatter = KLDateFormatter()
 
         // 👉 set a limit line
         let line = LimitLine(300, .horizontal)
-        section1.indicators.append(line)
+        mainSection.indicators.append(line)
         line.label.text = "pikacode"
         line.label.color = UIColor.white
         line.label.bgColor = line.style.lineColor1
@@ -100,7 +98,22 @@ class ViewController: UIViewController {
 
         ChartSettings.shared.changed = { (settings) in
 
-            self.section1.height = settings.mainHeight
+            self.mainSection.height = settings.mainHeight
+
+            var main = settings.mainIndicators.filter{ $0.on }.map{ $0.indicator }
+            main.insert(Candle(), at: 0)
+
+            // 👉 set indicators of main section
+            self.mainSection.indicators = main
+
+            // 👉 create other sections
+            let others = settings.otherIndicators.filter{ $0.on }.map{ $0.indicator }
+            var sections = others.map{ KLSection([$0], 74) }
+
+            sections.insert(self.mainSection, at: 0)
+
+            // 👉 set sections
+            self.klineView.sections = sections
 
             // 👉 config klinView's height, which decided by each section's height
             // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
