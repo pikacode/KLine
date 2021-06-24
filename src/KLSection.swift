@@ -94,8 +94,6 @@ open class KLSection {
             }
         }
 
-        chartView.data = combinedData
-
         chartView.viewPortHandler.setMaximumScaleX(20)
 
         chartView.xAxis.spaceMin = 2
@@ -106,6 +104,9 @@ open class KLSection {
         }
 
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            
+            chartView.data = combinedData
+
             chartView.setVisibleXRangeMaximum(52)
             chartView.setScaleMinima(1.5, scaleY: 1)
             if data.count < 52 {
