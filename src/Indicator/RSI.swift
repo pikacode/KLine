@@ -86,6 +86,7 @@ open class RSI {
 extension RSI: KLIndicator{
 
     public static var style: KLStyle = KLStyle.default
+    
     public static func calculate(_ data: inout [Any]) {
         guard var data = data as? [KLineData] else { return }
         RSI.calculateRSI(&data)
