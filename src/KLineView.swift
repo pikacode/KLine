@@ -26,8 +26,8 @@ open class KLineView: UIView {
             queue.async {
                 self.indicators.forEach{ type(of: $0).calculate(&self.data) }
                 DispatchQueue.main.async {
-                    self.layout()
                     self.draw()
+                    self.layout()
                 }
             }
         }
@@ -58,8 +58,9 @@ open class KLineView: UIView {
                         self.data = self.tempData
                     } else {
                         DispatchQueue.main.async {
-                            self.sections.forEach{
-                                $0.data = self.data
+                            self.draw()
+                            if self.subviews.count == 0 {
+                                self.layout()
                             }
                             self.setDataCompletion()
                         }
@@ -87,8 +88,9 @@ open class KLineView: UIView {
         }
     }
 
+    /// should call draw before layout
     open func draw() {
-        sections.forEach{ $0.draw() }
+        sections.forEach{ $0.data = self.data }
     }
 
     /// 一个经验值，控制 label 的密度，数字越大数量越多

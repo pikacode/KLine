@@ -67,6 +67,7 @@ class ViewController: UIViewController {
                                KLSection([MACD()], 74)])
 
         contentView.addSubview(klineView)
+        contentHeight.constant = klineView.neededHeight
 
         // 👉 2. set data
         klineView.data = data
@@ -78,8 +79,7 @@ class ViewController: UIViewController {
 
 
 
-
-
+            
         //---------------- ⭐️⭐️ Advanced ----------------//
 
         // 👉 [Advanced]: change settings of klineView
