@@ -43,6 +43,7 @@ open class KLSection {
     public var leftAxis: YAxis { chartView.leftAxis }
     public var rightAxis: YAxis { chartView.rightAxis }
 
+    /// only draw data
     open func draw() {
 
         /// 画 limit line

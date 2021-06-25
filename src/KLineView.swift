@@ -12,14 +12,12 @@ open class KLineView: UIView {
 
     // MARK: - public
 
-    /// true: 自动移到图表最后
-    open var autoMoveToXMaxAfterSetData = true
-
     public init(_ sections: [KLSection]) {
         self.sections = sections
         super.init(frame: .zero)
     }
 
+    /// set sections will trigger [calculate] - [layout] - [draw]
     open var sections: [KLSection] {
         willSet {
             newValue.forEach{ $0.offset = sections[0].offset }
@@ -28,36 +26,15 @@ open class KLineView: UIView {
             queue.async {
                 self.indicators.forEach{ type(of: $0).calculate(&self.data) }
                 DispatchQueue.main.async {
+                    self.layout()
                     self.draw()
                 }
             }
         }
     }
 
-    open var neededHeight: CGFloat {
-        return sections.reduce(0, { $0 + $1.height })
-    }
-
-    open func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
-        setDataCompletion = completion
-        self.data = data
-    }
-
-    open func setCustomData(_ data: [Any], completion: @escaping ()->() = {}) {
-        setDataCompletion = completion
-        self.data = data
-    }
-
-    open func draw() {
-        layout()
-        sections.forEach{ $0.draw() }
-    }
-
-    /// 一个经验值，控制 label 的密度，数字越大数量越多
-    /// 可以通过修改 chartView.rightAxis.labelCount 自行控制具体数量
-    open var labelGranularity: CGFloat = 1
-
     /// [KLineData] or custom [Any]
+    /// set data will trigger [calculate] - [draw]
     open var data: [Any] {
         get {
             return realData
@@ -92,9 +69,50 @@ open class KLineView: UIView {
         }
     }
 
+    open var neededHeight: CGFloat {
+        return sections.reduce(0, { $0 + $1.height })
+    }
+
+    public func moveToXMax() {
+        needMoveToXMax = true
+        sections.forEach{
+            $0.chartView.moveViewToX($0.chartView.chartXMax)
+        }
+    }
+
+    public func moveToXMin() {
+        needMoveToXMin = true
+        sections.forEach{
+            $0.chartView.moveViewToX(0)
+        }
+    }
+
+    open func draw() {
+        sections.forEach{ $0.draw() }
+    }
+
+    /// 一个经验值，控制 label 的密度，数字越大数量越多
+    /// 可以通过修改 chartView.rightAxis.labelCount 自行控制具体数量
+    open var labelGranularity: CGFloat = 1
+
+    open func setData(_ data: [KLineData], completion: @escaping ()->() = {}) {
+        setDataCompletion = completion
+        self.data = data
+    }
+
+    open func setCustomData(_ data: [Any], completion: @escaping ()->() = {}) {
+        setDataCompletion = completion
+        self.data = data
+    }
+
+
     // MARK: - private
 
     var setDataCompletion = {}
+
+    var needMoveToXMax = false
+
+    var needMoveToXMin = false
 
     let queue = DispatchQueue(label: "KLine")
 
@@ -106,21 +124,10 @@ open class KLineView: UIView {
     var tempData = [Any]()
     var realData = [Any]()
 
-    func moveToXMax() {
-        sections.forEach{
-            $0.chartView.moveViewToX($0.chartView.chartXMax)
-        }
-    }
-
-    func moveToXMin() {
-        sections.forEach{
-            $0.chartView.moveViewToX(0)
-        }
-    }
-
     func layout() {
         let transform = sections.first?.chartView.viewPortHandler.touchMatrix
         let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
+        subviews.forEach{ $0.removeFromSuperview() }
         sections.forEach{
             let view = $0.chartView
             view.delegate = self
@@ -140,11 +147,17 @@ open class KLineView: UIView {
             if let transform = transform, transform.tx != 0 {
                 view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
                 view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
-            } else if self.autoMoveToXMaxAfterSetData && self.data.count > 52 {
-                self.moveToXMax()
+            }
+            if needMoveToXMax {
+                view.moveViewToX(view.chartXMax)
+            }
+            if needMoveToXMin {
+                view.moveViewToX(0)
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
+        needMoveToXMax = false
+        needMoveToXMin = false
     }
 
 
@@ -170,10 +183,10 @@ extension KLineView: ChartViewDelegate {
     public func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
         let views = sections.map{ $0.chartView }.filter{ $0 != chartView }
         let p = CGPoint(x: dX, y: dY)
+        let touchMatrix = chartView.viewPortHandler.touchMatrix
+        var matrix = CGAffineTransform(translationX: p.x, y: p.y)
+        matrix = touchMatrix.concatenating(matrix)
         views.forEach{
-            let originalMatrix = $0.viewPortHandler.touchMatrix
-            var matrix = CGAffineTransform(translationX: p.x, y: p.y)
-            matrix = originalMatrix.concatenating(matrix)
             $0.viewPortHandler.refresh(newMatrix: matrix, chart: $0, invalidate: true)
         }
     }

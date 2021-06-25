@@ -70,6 +70,7 @@ class ViewController: UIViewController {
 
         // 👉 2. set data
         klineView.data = data
+        klineView.moveToXMax()
 
         // 👉 3. set x date formatter for first section
         KLDateFormatter.format = DateFormat.day.rawValue
