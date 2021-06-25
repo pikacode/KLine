@@ -11,8 +11,23 @@ import Charts
 open class MACD {
 
     required public init() {}
-
-    public static var emaDay = [12, 26]
+    
+    public enum MacdType{
+        case dif
+        case dea
+        case macd
+    }
+    public static var macd_type: [MacdType] = [.dif, .dea, .macd]
+    
+    public static var short_period: Int = 12 //短周期
+    public static var long_period: Int = 26 //长周期
+    public static var ma_period: Int = 9 //移动平均周期
+    
+    var dif: Double = 0
+    var dea: Double = 0
+    var macd: Double = 0
+    var longEma: Double = 0
+    var shortEma: Double = 0
 
     /**
      EMA（12）= 前一日EMA（12）×11/13＋今日收盘价×2/13
@@ -23,70 +38,88 @@ open class MACD {
      */
     static func calculateMACD(_ data: inout [KLineData]) {
         
-        for index in 0..<data.count {
-            let model = data[index]
+        let short = Double(short_period)
+        let long =  Double(long_period)
+        let ma =  Double(ma_period)
+        
+        for i in 0..<data.count {
+            let model = data[i]
+            let macd = model.macd ?? MACD()
+            
             //计算EMA12，EMA26, DEA
-            if index == 0 {
-                model.big_macd = model.close
-                model.small_macd = model.close
-                model.dif = 0
-                model.dea = 0
+            if i == 0 {
+                macd.longEma = model.close
+                macd.shortEma = model.close
+                macd.dif = 0
+                macd.dea = 0
             } else {
-                let lastModel = data[index - 1]
-                model.big_macd = lastModel.big_macd * 25 / 27 + model.close * 2 / 27
-                model.small_macd = lastModel.small_macd * 11 / 13 + model.close * 2 / 13
-                model.dif =  model.small_macd - model.big_macd
-                model.dea  = lastModel.dea * (8.0 / 10.0) + model.dif * (2.0 / 10.0)
+                let lastMacd = data[i - 1].macd ?? MACD()
+                macd.shortEma = lastMacd.shortEma
+                macd.shortEma = lastMacd.shortEma * (short - 1.0) / (short + 1.0) +  model.close * 2.0 / (short + 1.0)
+                macd.longEma = lastMacd.longEma * (long - 1.0) / (long + 1.0) + model.close * 2.0 / (long + 1.0)
+                macd.dif =  macd.shortEma - macd.longEma
+                macd.dea  = lastMacd.dea * (ma - 1.0) / (ma + 1.0) + macd.dif * 2.0 / (ma + 1.0)
             }
-            model.macd_macd = 2 * (model.dif - model.dea)
-            data[index] =  model
+            macd.macd = 2 * (macd.dif - macd.dea)
+            data[i].macd = macd
         }
     }
+    
+    
     
 }
 
 extension MACD: KLIndicator {
     
     public static var style: KLStyle = KLStyle.default
-
     public static func calculate(_ data: inout [Any]) {
         guard var data = data as? [KLineData] else { return }
         calculateMACD(&data)
     }
 
-    public static func lineDataSet(_ data: [KLineData]) -> [LineChartDataSet]? {
-        let sets = emaDay.map { (day) -> LineChartDataSet in
-            let index = emaDay.firstIndex(of: day) ?? 0
-            let entries = data.compactMap{ (d) -> ChartDataEntry? in
-                return ChartDataEntry(x: d.x, y: index == 0 ? d.dif : d.dea)
+    public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
+        guard let data = data as? [KLineData] else { return nil }
+        var sets = [LineChartDataSet]()
+        for (index, type) in MACD.macd_type.enumerated() {
+            if type == .macd { break}
+            let entries = data.compactMap{ (model) -> ChartDataEntry? in
+                let macd = model.macd ?? MACD()
+                return ChartDataEntry(x: model.x, y: type == .dif ? macd.dif : macd.dea)
             }
-            let set = LineChartDataSet(entries: entries, label: "")
+            var label = ""
+            if index == 0 {
+                label = "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"
+            }
+            label += type == .dea ? String(format: " DEA:%.2f",entries.last?.y ?? 0) : String(format: " DIF:%.2f",entries.last?.y ?? 0)
+            
+            let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2][index]
             set.setColor(color)
-
             set.lineWidth = style.lineWidth1
             set.circleRadius = 0
             set.circleHoleRadius = 0
             set.mode = .cubicBezier
             set.drawValuesEnabled = true
-
             set.axisDependency = .left
-            return set
+            sets.append(set)
         }
+        
         return sets
     }
 
-    public static func barDataSet(_ data: [KLineData]) -> [BarChartDataSet]? {
-        let entries = data.compactMap{ (d) -> BarChartDataEntry in
-            return BarChartDataEntry(x: d.x, y: d.macd_macd)
+    public func barDataSet(_ data: [Any]) -> [BarChartDataSet]? {
+        guard let data = data as? [KLineData] else { return nil }
+        if !MACD.macd_type.contains(.macd) { return nil }
+        var colors = [UIColor]()
+        let entries = data.compactMap{ (model) -> BarChartDataEntry in
+            let macd = model.macd ?? MACD()
+            colors.append(macd.macd > 0 ? style.upBarColor : style.downBarColor)
+            return BarChartDataEntry(x: model.x, y: macd.macd)
         }
-        let colors = entries.map { (entry) -> NSUIColor in
-            return entry.y > 0 ? style.upBarColor : style.downBarColor
-        }
-        let set = BarChartDataSet(entries: entries)
+        let label = String(format: " MACD:%.2f",entries.last?.y ?? 0)
+        let set = BarChartDataSet(entries: entries, label: label)
         set.colors = colors
-        set.valueColors = colors
+        set.drawValuesEnabled = true
         return [set]
     }
-
 }

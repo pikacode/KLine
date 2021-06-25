@@ -14,14 +14,6 @@ open class KLineData {
     public var low: Double = 0
     public var vol: Double = 0
     public var time: TimeInterval = 0
-        
-    
-    //MACD技术指标
-    public var dif: Double = 0.0
-    public var dea: Double = 0.0
-    public var small_macd: Double = 0.0
-    public var big_macd: Double = 0.0
-    public var macd_macd: Double = 0.0
     
 
     //KDJ技术指标

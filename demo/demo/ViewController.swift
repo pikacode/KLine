@@ -26,7 +26,6 @@ class ViewController: UIViewController {
     var section3 = KLSection([KDJ()], 74)
     var section4 = KLSection([BOLL()], 74)
     var mainSection = KLSection([Candle(), MA()], 300)
-
     lazy var klineView = KLineView([mainSection,
                                     KLSection([MA()], 74),
                                     KLSection([KDJ()], 74)])
