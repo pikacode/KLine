@@ -43,6 +43,7 @@ open class KLSection {
     public var leftAxis: YAxis { chartView.leftAxis }
     public var rightAxis: YAxis { chartView.rightAxis }
 
+    /// only draw data
     open func draw() {
 
         /// 画 limit line
@@ -94,6 +95,16 @@ open class KLSection {
             }
         }
 
+        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            chartView.data = combinedData
+            chartView.setVisibleXRangeMaximum(52)
+            chartView.setScaleMinima(1.5, scaleY: 1)
+            if data.count < 52 {
+                let n = (chartView.xAxis.axisMaximum - chartView.xAxis.axisMinimum)/Double(data.count)
+                chartView.xAxis.axisMaximum = n * 52 + chartView.xAxis.axisMinimum
+            }
+        }
+
         chartView.viewPortHandler.setMaximumScaleX(20)
 
         chartView.xAxis.spaceMin = 2
@@ -101,18 +112,6 @@ open class KLSection {
             chartView.xAxis.spaceMax = Double("\(Int(chartView.chartYMax))".count) * 2
         } else {
             chartView.xAxis.spaceMax = 10
-        }
-
-        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
-            
-            chartView.data = combinedData
-
-            chartView.setVisibleXRangeMaximum(52)
-            chartView.setScaleMinima(1.5, scaleY: 1)
-            if data.count < 52 {
-                let n = (chartView.xAxis.axisMaximum - chartView.xAxis.axisMinimum)/Double(data.count)
-                chartView.xAxis.axisMaximum = n * 52 + chartView.xAxis.axisMinimum
-            }
         }
 
     }
