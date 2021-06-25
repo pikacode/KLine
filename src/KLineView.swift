@@ -85,9 +85,6 @@ open class KLineView: UIView {
                                 $0.data = self.data
                             }
                             self.setDataCompletion()
-                            if self.autoMoveToXMaxAfterSetData && self.data.count > 52 {
-                                self.moveToXMax()
-                            }
                         }
                     }
                 }
@@ -140,9 +137,11 @@ open class KLineView: UIView {
             let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
             let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
             self.addConstraints([left, right, top, height])
-            if let transform = transform {
+            if let transform = transform, transform.tx != 0 {
                 view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
                 view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
+            } else if self.autoMoveToXMaxAfterSetData && self.data.count > 52 {
+                self.moveToXMax()
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
