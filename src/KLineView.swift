@@ -124,7 +124,6 @@ open class KLineView: UIView {
     func layout() {
         let transform = sections.first?.chartView.viewPortHandler.touchMatrix
         let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
-        subviews.forEach{ $0.removeFromSuperview() }
         sections.forEach{
             let view = $0.chartView
             view.delegate = self
@@ -136,7 +135,7 @@ open class KLineView: UIView {
                 top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
             }
             self.addSubview(view)
-            view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: 0.3)
+//            view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: 0.3)
             let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: $0.height)
             let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
             let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
@@ -149,12 +148,6 @@ open class KLineView: UIView {
         }
     }
 
-    open override func layoutSubviews() {
-        if subviews.count != sections.count {
-            let s = sections
-            sections = s
-        }
-    }
 
 //    open override func didMoveToSuperview() {
 //        super.didMoveToSuperview()
