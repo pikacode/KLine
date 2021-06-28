@@ -12,27 +12,45 @@ open class EMA {
 
     required public init() {}
     
-    public static var days = [7, 25, 99]
-    var days: [Int] { return Self.days }
-
-    public var data: [Int: Double] = EMA.days.reduce(into: [Int: Double]()) { $0[$1] = 0 }
+    public enum EMAType{
+        case short(Int) //短线
+        case mid(Int)  //中线
+        case long(Int) //长线
+    }
+    public static var emaDays:[EMAType] = [.short(7), .mid(25), .long(99)]
     
-    static func calculateEMA(_ data: inout [KLineData], day: Int) {
-        for i in 0..<(data.count - 1) {
+    public var short_ema: Double = 0
+    public var mid_ema: Double = 0
+    public var long_ema: Double = 0
+    
+    
+    static func calculateEMA(_ data: inout [KLineData]) {
+        
+        for i in 0 ..< data.count {
             let model = data[i]
             let ema = data[i].ema ?? EMA()
             if i == 0 {
                 //第一天的ema12 是收盘价
-                ema.data[day] =  model.close
+                ema.short_ema = model.close
+                ema.mid_ema = model.close
+                ema.long_ema = model.close
+                
             } else {
-                if  let lastEmaDay = model.ema?.data[day - 1] {
-                    ema.data[day] = Double((2 / (day + 1))) * (model.close - lastEmaDay) + lastEmaDay
+                let lastEma = data[i - 1].ema ?? EMA()
+                for type in emaDays {
+                    switch type {
+                    case .short(let day):
+                        ema.short_ema =  (2 / Double(day + 1)) * (model.close - lastEma.short_ema) + lastEma.short_ema
+                    case .mid(let day):
+                        ema.mid_ema =  (2 / Double(day + 1)) * (model.close - lastEma.mid_ema) + lastEma.mid_ema
+                    case .long(let day):
+                        ema.long_ema =  (2 / Double(day + 1)) * (model.close - lastEma.long_ema) + lastEma.long_ema
+                    }
                 }
             }
             data[i].ema = ema
         }
     }
-
 }
 
 extension EMA: KLIndicator {
@@ -41,37 +59,47 @@ extension EMA: KLIndicator {
 
     public static func calculate(_ data: inout [Any]) {
         guard var data = data as? [KLineData] else { return }
-        days.forEach{
-            self.calculateEMA(&data, day: $0)
-        }
+            self.calculateEMA(&data)
     }
 
     public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
         guard let data = data as? [KLineData] else { return nil }
 
-        let sets = days.map { (day) -> LineChartDataSet in
-            let entries = data.compactMap{ (d) -> ChartDataEntry? in
-                if let value = d.ema?.data[day] {
-                    return ChartDataEntry(x: d.x, y: value)
-                } else {
-                    return nil
+        var sets = [LineChartDataSet]()
+        var label: String = ""
+        for (index, type) in EMA.emaDays.enumerated() {
+            let entries = data.compactMap{ (model) -> ChartDataEntry? in
+
+                let ema = model.ema ?? EMA()
+                var emaDay: Int = 0
+                var emaValue: Double = 0
+                
+                
+                switch type {
+                case .short(let day):
+                    emaDay = day
+                    emaValue = ema.short_ema
+                case .mid(let day):
+                    emaDay = day
+                    emaValue = ema.mid_ema
+                case .long(day: let day):
+                    emaDay = day
+                    emaValue = ema.long_ema
                 }
+                if emaDay == 0{ return nil}
+                label =  String(format:"EMA(\(emaDay)):%.2f",emaValue)
+                return ChartDataEntry(x: model.x, y: emaValue)
             }
-            let set = LineChartDataSet(entries: entries, label: "")
-            let index = days.firstIndex(of: day) ?? 0
+            let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
-            set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-            set.lineWidth = 0.5
+            set.lineWidth = style.lineWidth1
             set.circleRadius = 0
             set.circleHoleRadius = 0
-            set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
             set.mode = .cubicBezier
             set.drawValuesEnabled = true
-            set.valueFont = .systemFont(ofSize: 0)
-            set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
             set.axisDependency = .left
-            return set
+            sets.append(set)
         }
         return sets
     }
