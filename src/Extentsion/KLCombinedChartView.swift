@@ -10,9 +10,19 @@ import Charts
 
 open class KLCombinedChartView: CombinedChartView {
 
+    open var showCrosshair = true {
+        didSet{
+            if !showCrosshair {
+                changeCrosshair(nil)
+                setNeedsDisplay()
+            }
+        }
+    }
+
+    var crosshairChanged = { (_: CGPoint?) in }
+
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
-
         if didExchangeMethod { return }
         didExchangeMethod = true
         let s1 = Selector("panGestureRecognized:")
@@ -73,65 +83,79 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
 
+        highlightPerTapEnabled = false
+
+        addGestureRecognizer(longPressGesture)
+        gestureRecognizers?.forEach{
+            if let pan = $0 as? UIPanGestureRecognizer {
+                pan.require(toFail: self.longPressGesture)
+            }
+        }
+
 //        viewPortHandler.setMaximumScaleX(10)
 //        zoomToCenter(scaleX: 3, scaleY: 1)
     }
 
+    /// for Crosshair
+
+    public let crosshair = Crosshair()
+
+    public lazy var longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureSelector(_:)))
+    public lazy var tapPressGesture = UITapGestureRecognizer(target: self, action: #selector(tapPressGestureSelector(_:)))
+
+    @objc func tapPressGestureSelector(_ ges: UILongPressGestureRecognizer) {
+        guard showCrosshair else {
+            return
+        }
+        let translation = ges.location(in: self)
+        let point = valueForTouchPoint(point: translation, axis: .left)
+        changeCrosshair(point)
+        crosshairChanged(point)
+    }
+
+    @objc func longPressGestureSelector(_ ges: UILongPressGestureRecognizer) {
+        guard showCrosshair else {
+            return
+        }
+        let translation = ges.location(in: self)
+        let point = valueForTouchPoint(point: translation, axis: .left)
+        changeCrosshair(point)
+        crosshairChanged(point)
+    }
+
     override func panGestureRecognized_1(_ recognizer: NSUIPanGestureRecognizer) {
         super.panGestureRecognized_1(recognizer)
-        if recognizer.state != NSUIGestureRecognizerState.changed { return }
-//        if let ivar = class_getInstanceVariable(BarLineChartViewBase.self, "_isDragging") {
-//            let isDragging = object_getIvar(self, ivar) as? Bool ?? false
-//            if isDragging {
-//                return
-//            }
-//        }
-
-//        if showCrosshair {
-//            let point = recognizer.location(in: self)
-//            let point1 = (self.highlighter as? ChartHighlighter)?.getValsForTouch(x: point.x, y: point.y)
-//            crossPoint = point1
-//        }
+        changeCrosshair(nil)
+        crosshairChanged(nil)
     }
 
-    var crossPoint: CGPoint? {
-        didSet {
-            guard let chartData = data as? CombinedChartData else { return }
+}
 
-            let crossSet: LineChartDataSet = {
-                guard let p = crossPoint else { return LineChartDataSet() }
-                let entries = [ChartDataEntry(x: Double(p.x), y: Double(p.y))]
-                let set = LineChartDataSet(entries: entries, label: Crosshair.label)
-                set.setColor(UIColor.blue)
-                set.lineWidth = 2.5
-                set.mode = .linear
-                set.drawValuesEnabled = false
-                set.drawCirclesEnabled = false
-                set.axisDependency = .left
-                set.highlightColor = 0x979797.toColor
-                set.highlightLineDashPhase = 2
-                set.highlightLineDashLengths = [4]
-                return set
-            }()
 
-            if let index = chartData.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label }) {
-                chartData.lineData?.dataSets[index] = crossSet
-            } else {
-                chartData.lineData?.addDataSet(crossSet)
+/// Crosshair
+extension KLCombinedChartView {
+
+    open func changeCrosshair(_ point: CGPoint?) {
+        [leftAxis, rightAxis, xAxis].forEach { (axis) in
+            axis.limitLines.filter { (l) -> Bool in
+                return l.label == Crosshair.label
+            }.forEach { (l) in
+                axis.removeLimitLine(l)
             }
-            data = chartData
-            setNeedsDisplay()
         }
-    }
 
-    open override func draw(_ rect: CGRect) {
-        super.draw(rect)
-//        guard let p = crossPoint,
-//              let context = UIGraphicsGetCurrentContext(),
-//              let index = (data as? CombinedChartData)?.lineData?.dataSets.firstIndex(where: { $0.label == Crosshair.label })
-//        else { return }
-//        let h = Highlight(x: Double(p.x), y: Double(p.y), dataSetIndex: index)
-//        renderer?.drawHighlighted(context: context, indices: [h])
+        guard let point = point else { return }
+
+        crosshair.point = point
+
+        var h = crosshair.horizontal
+        leftAxis.addLimitLine(h.limitLine)
+        rightAxis.addLimitLine(h.limitLine)
+
+        var v = crosshair.vertical
+        xAxis.addLimitLine(v.limitLine)
+
+        setNeedsDisplay()
     }
 
 }
@@ -139,15 +163,15 @@ open class KLCombinedChartView: CombinedChartView {
 extension BarLineChartViewBase {
 
     //十字光标
-    private static var showCrosshairKey = 0
-    var showCrosshair: Bool {
-        set {
-            objc_setAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
-        }
-        get {
-            objc_getAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey) as? Bool ?? true
-        }
-    }
+//    private static var showCrosshairKey = 0
+//    var showCrosshair: Bool {
+//        set {
+//            objc_setAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+//        }
+//        get {
+//            objc_getAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey) as? Bool ?? true
+//        }
+//    }
 
     @objc func panGestureRecognized_1(_ recognizer: NSUIPanGestureRecognizer) {
         panGestureRecognized_1(recognizer)

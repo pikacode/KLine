@@ -15,9 +15,14 @@ public class KLLabel {
     public static var bgColor = UIColor.clear
     public static var position = KLPosition.left(.zero)
 
+    public static var dashLengths: [CGFloat] = [4, 1]
+    public static var dashPhase = CGFloat.zero
+
     public var text = ""
     public var font = KLLabel.font
     public var color = KLLabel.color
     public var bgColor = KLLabel.bgColor
     public var position = KLLabel.position
+    public var dashLengths = KLLabel.dashLengths
+    public var dashPhase = KLLabel.dashPhase
 }

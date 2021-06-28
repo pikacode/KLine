@@ -13,16 +13,27 @@ open class Crosshair {
 
     static let label = "KLCross"
 
-    /// set it nil if u want to hide
-    public var horizontal: LimitLine? = LimitLine(0, .horizontal)
-    public var vertical: LimitLine? = LimitLine(0, .vertical)
+    var showHorizontal = true
+
+    var point = CGPoint.zero  
+
+    /// set to nil if u want to hide
+    public var horizontal: LimitLine {
+        var l = LimitLine(point.y.double, .horizontal)
+        l.limitLine.label = Crosshair.label
+        l.limitLine.drawLabelEnabled = false
+        return l
+    }
+
+    public var vertical: LimitLine {
+        var l = LimitLine(point.x.double, .vertical)
+        l.limitLine.label = Crosshair.label
+        l.limitLine.drawLabelEnabled = false
+        return l
+    }
 
 }
 
 extension Crosshair: KLIndicator {
     public static var style: KLStyle = KLStyle.default
-
-    static func lineDataSet(points data: [KLPoint]) -> [LineChartDataSet]? {
-        return nil
-    }
 }
