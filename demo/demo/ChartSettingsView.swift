@@ -63,12 +63,12 @@ class ChartSettingsView: UIView {
         contentTrailing.constant = -280
         bgView.alpha = 0
 
-//        back.addTap { [weak self] in
-//            self?.dismiss()
-//        }
-//        bgView.addTap { [weak self] in
-//            self?.dismiss()
-//        }
+        back.addTap { [weak self] in
+            self?.dismiss()
+        }
+        bgView.addTap { [weak self] in
+            self?.dismiss()
+        }
     }
 
     func show() {
