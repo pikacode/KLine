@@ -16,21 +16,33 @@ public struct LimitLine {
 
     public static var style: KLStyle = KLStyle.default
 
-    public var value: Double
+    public var value: Double {
+        didSet {
+            limitLine.limit = value
+        }
+    }
 
     public var direction: KLDirection
-
-    public var dashLengths: [CGFloat] = [4, 1]
-    public var dashPhase = CGFloat.zero
-
-    public var lineColor = style.lineColor1
-    public var lineWidth = style.lineWidth1
-    public var label = style.label
 
     public init(_ value: Double, _ direction: KLDirection) {
         self.value = value
         self.direction = direction
     }
+
+    public lazy var limitLine: KLChartLimitLine = {
+        let line = KLChartLimitLine(limit: Double(value), label: style.label.text)
+        line.labelPosition = .topLeft
+        line.yOffset = -6
+        line.lineWidth = style.lineWidth1
+        line.lineColor = style.lineColor1
+        line.lineDashLengths = style.label.dashLengths
+        line.lineDashPhase = style.label.dashPhase
+        line.valueFont = style.label.font
+        line.valueTextColor = style.label.color
+        line.bgColor = style.label.bgColor
+        return line
+    }()
+
 }
 
 extension LimitLine: KLIndicator {}

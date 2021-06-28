@@ -37,6 +37,12 @@ open class KLSection {
         }
     }
 
+    open var showCrosshair = true {
+        didSet {
+            chartView.showCrosshair = showCrosshair
+        }
+    }
+
     var offset: CGFloat = 0
 
     public var xAxis: XAxis { chartView.xAxis }
@@ -51,16 +57,8 @@ open class KLSection {
         rightAxis.removeAllLimitLines()
         xAxis.removeAllLimitLines()
         indicators.forEach{
-            if let l = $0 as? LimitLine {
-                let line = KLChartLimitLine(limit: Double(l.value), label: l.label.text)
-                line.lineWidth = l.lineWidth
-                line.lineDashLengths = l.dashLengths
-                line.labelPosition = .topLeft
-                line.valueFont = l.label.font
-                line.lineColor = l.lineColor
-                line.valueTextColor = l.label.color
-                line.bgColor = l.label.bgColor
-                line.yOffset = -6
+            if var l = $0 as? LimitLine {
+                let line = l.limitLine
                 if l.direction == .horizontal {
                     leftAxis.addLimitLine(line)
                     rightAxis.addLimitLine(line)

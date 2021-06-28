@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0FFF99750300DB43A4A503D4 /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4CC2519C9BFB0128672582 /* Pods_demo.framework */; };
 		3B11D5232665E630009517FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5222665E630009517FC /* AppDelegate.swift */; };
-		3B11D5272665E630009517FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5262665E630009517FC /* ViewController.swift */; };
 		3B11D52A2665E630009517FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D5282665E630009517FC /* Main.storyboard */; };
 		3B11D52C2665E633009517FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D52B2665E633009517FC /* Assets.xcassets */; };
 		3B11D52F2665E633009517FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B11D52D2665E633009517FC /* LaunchScreen.storyboard */; };
@@ -20,6 +19,7 @@
 		3B568AD42681BD7A00E2B69D /* ChartSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */; };
 		3B568AE32681E7AE00E2B69D /* ChartSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B568AE22681E7AE00E2B69D /* ChartSettings.swift */; };
 		3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B61861E2667339E00691E39 /* CombinedChartViewController.xib */; };
+		3BC451D72685D2420007A606 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5262665E630009517FC /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,11 +233,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B11D5272665E630009517FC /* ViewController.swift in Sources */,
 				3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */,
 				3B568AD12681BD5F00E2B69D /* ChartSettingsView.swift in Sources */,
 				3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */,
 				3B568AE32681E7AE00E2B69D /* ChartSettings.swift in Sources */,
+				3BC451D72685D2420007A606 /* ViewController.swift in Sources */,
 				3B11D57E26663F1E009517FC /* DemoBaseViewController.swift in Sources */,
 				3B11D5232665E630009517FC /* AppDelegate.swift in Sources */,
 			);

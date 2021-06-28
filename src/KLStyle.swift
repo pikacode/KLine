@@ -86,6 +86,8 @@ open class KLStyle {
             label.color = style.label.color
             label.bgColor = style.label.bgColor
             label.position = style.label.position
+            label.dashPhase = style.label.dashPhase
+            label.dashLengths = style.label.dashLengths
         }
     }
 

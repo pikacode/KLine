@@ -95,15 +95,9 @@ class ViewController: UIViewController {
             let mains = settings.mainIndicators.filter{ $0.on }.map{ $0.indicator }
             mainIndicators.append(contentsOf: mains)
 
-            // 👉 append a limit line
-            let line: LimitLine = {
-                let line = LimitLine(300, .horizontal)
-                line.label.text = "pikacode"
-                line.label.color = UIColor.white
-                line.label.bgColor = line.style.lineColor1
-                return line
-            }()
-            mainIndicators.append(line)
+            // 👉 append limit lines
+            let lines = self.createLimitLines()
+            mainIndicators.append(contentsOf: lines)
 
             // 👉 set indicators to main section
             let mainSection = self.klineView.sections.first!
@@ -128,6 +122,20 @@ class ViewController: UIViewController {
 
         }
 
+    }
+
+    func createLimitLines() -> [LimitLine] {
+
+//        let values: (label: String, color: UIColor, value: Double)
+//            =  [("价格线")]
+//        let line: LimitLine = {
+//            let line = LimitLine(300, .horizontal)
+//            line.label.text = "pikacode"
+//            line.label.color = UIColor.white
+//            line.label.bgColor = line.style.lineColor1
+//            return line
+//        }()
+         return [LimitLine]()
     }
 
     override func viewDidLayoutSubviews() {

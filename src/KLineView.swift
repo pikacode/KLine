@@ -88,7 +88,7 @@ open class KLineView: UIView {
         }
     }
 
-    /// should call draw before layout
+    /// ⭐️ should call draw before layout
     open func draw() {
         sections.forEach{ $0.data = self.data }
     }
@@ -150,7 +150,7 @@ open class KLineView: UIView {
                 view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
                 view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
             }
-            if needMoveToXMax {
+            if needMoveToXMax && self.data.count > 52 {
                 view.moveViewToX(view.chartXMax)
             }
             if needMoveToXMin {
@@ -158,6 +158,17 @@ open class KLineView: UIView {
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
+        let charts = sections.map{ $0.chartView }
+        charts.forEach { (c1) in
+            c1.crosshairChanged = { (p) in
+                charts.forEach { (c2) in
+                    if c1 != c2 {
+                        c2.changeCrosshair(p)
+                    }
+                }
+            }
+        }
+
         needMoveToXMax = false
         needMoveToXMin = false
     }
