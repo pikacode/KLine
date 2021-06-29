@@ -19,7 +19,7 @@ open class KLCombinedChartView: CombinedChartView {
         }
     }
 
-    var crosshairChanged = { (_: CGPoint?) in }
+    static var crosshairChanged = { (_: CGPoint?) in }
 
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
@@ -86,6 +86,7 @@ open class KLCombinedChartView: CombinedChartView {
         highlightPerTapEnabled = false
 
         addGestureRecognizer(longPressGesture)
+        addGestureRecognizer(tapPressGesture)
         gestureRecognizers?.forEach{
             if let pan = $0 as? UIPanGestureRecognizer {
                 pan.require(toFail: self.longPressGesture)
@@ -110,7 +111,6 @@ open class KLCombinedChartView: CombinedChartView {
         let translation = ges.location(in: self)
         let point = valueForTouchPoint(point: translation, axis: .left)
         changeCrosshair(point)
-        crosshairChanged(point)
     }
 
     @objc func longPressGestureSelector(_ ges: UILongPressGestureRecognizer) {
@@ -120,13 +120,11 @@ open class KLCombinedChartView: CombinedChartView {
         let translation = ges.location(in: self)
         let point = valueForTouchPoint(point: translation, axis: .left)
         changeCrosshair(point)
-        crosshairChanged(point)
     }
 
     override func panGestureRecognized_1(_ recognizer: NSUIPanGestureRecognizer) {
         super.panGestureRecognized_1(recognizer)
         changeCrosshair(nil)
-        crosshairChanged(nil)
     }
 
 }
@@ -135,7 +133,12 @@ open class KLCombinedChartView: CombinedChartView {
 /// Crosshair
 extension KLCombinedChartView {
 
-    open func changeCrosshair(_ point: CGPoint?) {
+    open func changeCrosshair(_ point: CGPoint?, drawHorizontal: Bool = true) {
+
+        if point == crosshair.point {
+            return
+        }
+
         [leftAxis, rightAxis, xAxis].forEach { (axis) in
             axis.limitLines.filter { (l) -> Bool in
                 return l.label == Crosshair.label
@@ -144,16 +147,22 @@ extension KLCombinedChartView {
             }
         }
 
-        guard let point = point else { return }
-
         crosshair.point = point
 
-        var h = crosshair.horizontal
-        leftAxis.addLimitLine(h.limitLine)
-        rightAxis.addLimitLine(h.limitLine)
+        if drawHorizontal {
+            KLCombinedChartView.crosshairChanged(crosshair.point)
+        }
 
-        var v = crosshair.vertical
-        xAxis.addLimitLine(v.limitLine)
+        if drawHorizontal {
+            if var h = crosshair.horizontal {
+                leftAxis.addLimitLine(h.limitLine)
+                rightAxis.addLimitLine(h.limitLine)
+            }
+        }
+
+        if var v = crosshair.vertical {
+            xAxis.addLimitLine(v.limitLine)
+        }
 
         setNeedsDisplay()
     }

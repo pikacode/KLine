@@ -15,21 +15,29 @@ open class Crosshair {
 
     var showHorizontal = true
 
-    var point = CGPoint.zero  
+    var point: CGPoint?
 
     /// set to nil if u want to hide
-    public var horizontal: LimitLine {
-        var l = LimitLine(point.y.double, .horizontal)
-        l.limitLine.label = Crosshair.label
-        l.limitLine.drawLabelEnabled = false
-        return l
+    public var horizontal: LimitLine? {
+        if let y = point?.y {
+            var l = LimitLine(y.double, .horizontal)
+            l.limitLine.label = Crosshair.label
+            l.limitLine.drawLabelEnabled = false
+            return l
+        } else {
+            return nil
+        }
     }
 
-    public var vertical: LimitLine {
-        var l = LimitLine(point.x.double, .vertical)
-        l.limitLine.label = Crosshair.label
-        l.limitLine.drawLabelEnabled = false
-        return l
+    public var vertical: LimitLine? {
+        if let x = point?.x {
+            var l = LimitLine(x.double, .vertical)
+            l.limitLine.label = Crosshair.label
+            l.limitLine.drawLabelEnabled = false
+            return l
+        } else {
+            return nil
+        }
     }
 
 }

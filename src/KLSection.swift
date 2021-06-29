@@ -107,9 +107,9 @@ open class KLSection {
 
         chartView.xAxis.spaceMin = 2
         if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
-            chartView.xAxis.spaceMax = Double("\(Int(chartView.chartYMax))".count) * 2
+            chartView.xAxis.spaceMax = 8
         } else {
-            chartView.xAxis.spaceMax = 10
+            chartView.xAxis.spaceMax = 8
         }
 
     }

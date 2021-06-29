@@ -158,15 +158,8 @@ open class KLineView: UIView {
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
-        let charts = sections.map{ $0.chartView }
-        charts.forEach { (c1) in
-            c1.crosshairChanged = { (p) in
-                charts.forEach { (c2) in
-                    if c1 != c2 {
-                        c2.changeCrosshair(p)
-                    }
-                }
-            }
+        KLCombinedChartView.crosshairChanged = { (p) in
+            self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
         }
 
         needMoveToXMax = false
