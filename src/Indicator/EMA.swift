@@ -19,10 +19,9 @@ open class EMA {
     }
     public static var emaDays:[EMAType] = [.short(7), .mid(25), .long(99)]
     
-    public var short_ema: Double = 0
-    public var mid_ema: Double = 0
-    public var long_ema: Double = 0
-    
+    var short_ema: Double = 0
+    var mid_ema: Double = 0
+    var long_ema: Double = 0
     
     static func calculateEMA(_ data: inout [KLineData]) {
         
@@ -59,7 +58,7 @@ extension EMA: KLIndicator {
 
     public static func calculate(_ data: inout [Any]) {
         guard var data = data as? [KLineData] else { return }
-            self.calculateEMA(&data)
+        self.calculateEMA(&data)
     }
 
     public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
