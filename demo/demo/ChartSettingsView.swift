@@ -36,6 +36,7 @@ class ChartSettingsView: UIView {
         var s = settings.mainIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.mainIndicators[sender.tag] = s
+        dismiss()
     }
 
     //副图指标
@@ -49,6 +50,7 @@ class ChartSettingsView: UIView {
         var s = settings.otherIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.otherIndicators[sender.tag] = s
+        dismiss()
     }
 
     //线

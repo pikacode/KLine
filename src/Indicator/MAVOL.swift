@@ -8,9 +8,7 @@
 import UIKit
 import Charts
 open class MAVOL {
-    required public init() {
-
-    }
+    required public init() { }
         
 }
 
