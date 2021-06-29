@@ -22,10 +22,10 @@ open class MAVOL {
         if data.count < day { return }
         for i in day - 1 ..< data.count - 1 {
             var sum: Double = 0
-            if let lastSum = data[(i - 1)].mavol?.data[day] as? Double, let close = data[(i-day)~]?.close  {
-    sum = lastSum * Double(day) - close + data[i].close
+            if let lastSum = data[(i - 1)].mavol?.data[day] as? Double, let close = data[(i-day)~]?.vol  {
+    sum = lastSum * Double(day) - close + data[i].vol
             }else{
-                sum = data[(i-day+1)...i].reduce(into: 0) { $0 += $1.close }
+                sum = data[(i-day+1)...i].reduce(into: 0) { $0 += $1.vol }
             }
             let mavol = data[i].mavol ?? MAVOL()
             mavol.data[day] = sum/Double(day)
@@ -50,9 +50,9 @@ extension MAVOL: KLIndicator {
             return nil }
 
         let sets = days.compactMap { (day) -> LineChartDataSet in
-            var entries = data.compactMap{ (d) -> ChartDataEntry? in
-                if let value = d.mavol?.data[day] as? Double {
-                    return ChartDataEntry(x: d.x, y: value)
+            var entries = data.compactMap{ (model) -> ChartDataEntry? in
+                if let value = model.mavol?.data[day] as? Double {
+                    return ChartDataEntry(x: model.x, y: value)
                 } else {
                     return nil
                 }
@@ -60,10 +60,14 @@ extension MAVOL: KLIndicator {
             if entries.count == 0, let d = data.first {
                 entries.append(ChartDataEntry(x: d.x, y: d.open))
             }
-            let last = entries.last?.y ?? 0
-            let label = String(format: "MAVOL\(day):%.2f", last)
-            let set = LineChartDataSet(entries: entries, label: label)
+            
             let index = days.firstIndex(of: day) ?? 0
+            var label = ""
+            if index == 0 {
+                label = String(format: "VOL:%.2f", data.last?.vol ?? 0)
+            }
+            label = label + String(format: " MAVOL\(day):%.2f", entries.last?.y ?? 0)
+            let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1
@@ -82,7 +86,7 @@ extension MAVOL: KLIndicator {
         var colors = [UIColor]()
         let entries = data.compactMap{ (model) -> BarChartDataEntry in
             colors.append( model.open >= model.close ? style.upBarColor : style.downBarColor)
-            return BarChartDataEntry(x: model.x, y: model.open)
+            return BarChartDataEntry(x: model.x, y: model.vol)
         }
         
         let set = BarChartDataSet(entries: entries)
