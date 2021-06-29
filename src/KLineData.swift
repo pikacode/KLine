@@ -16,12 +16,6 @@ open class KLineData {
     public var time: TimeInterval = 0
     
 
-    //KDJ技术指标
-    public var k: Double = 0.0
-    public var d: Double = 0.0
-    public var j: Double = 0.0
-    public var rsv: Double = 0.0
-
     /// 对时间戳的缩放  x = timeInterval / timeXScale
     public static var timeXScale: Double = 90000
 

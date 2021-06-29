@@ -14,6 +14,22 @@ open class KDJ {
     
     public static var days = [9, 3, 3]
     var days: [Int] { return Self.days }
+    
+    public static var calculate_period: Int = 9 //计算周期
+    public static var ma1_period: Int = 3 //移动平均周期1
+    public static var ma2_period: Int = 3 //移动平均周期2
+    public enum KDJType{
+        case K
+        case D
+        case J
+    }
+    public static var macd_type: [KDJType] = [.K, .D, .J]
+    
+    //KDJ技术指标
+    var k: Double = 0.0
+    var d: Double = 0.0
+    var j: Double = 0.0
+    var rsv: Double = 0.0
 
         /**
      三根线：K，D，J
@@ -28,21 +44,18 @@ open class KDJ {
     private static func calculateKDJ(_ data: inout [KLineData]) {
        
         for i in 0 ..< data.count {
-            let model = data[i]
+            let model = data[i].kdj ?? KDJ()
             if i == 0 {
                 model.k = 50
                 model.d = 50
             } else {
-                let lastModel = data[i - 1]
+                let lastModel = data[i - 1].kdj ?? KDJ()
                 model.rsv = calculateRSV(endIndex: i, data: data)
-                
-                let kArg = days.firstIndex(of: 1) ?? 3
-                let dArg = days.firstIndex(of: 2) ?? 3
-                model.k = (2 * lastModel.k + model.rsv) / Double(kArg)
-                model.d = (2 * lastModel.d + model.k) / Double(dArg)
+                model.k = (2 * lastModel.k + model.rsv) / Double(ma1_period)
+                model.d = (2 * lastModel.d + model.k) / Double(ma2_period)
             }
             model.j = 3 * model.d - 2 * model.k
-            data[i] =  model
+            data[i].kdj =  model
         }
     }
     
@@ -57,8 +70,7 @@ open class KDJ {
         var Ln = Double(MAXFLOAT)
         var Hn = Double(-MAXFLOAT)
         let cn: Double = data[endIndex].close
-        let rsvArg: Int = days.first ?? 9
-        var startIndex = endIndex - (rsvArg - 1)
+        var startIndex = endIndex - (calculate_period - 1)
         if startIndex < 0 {
             startIndex = 0
         }
@@ -89,16 +101,34 @@ extension KDJ: KLIndicator {
         guard let data = data as? [KLineData] else { return nil }
 
         var sets = [LineChartDataSet]()
-        for (index, _) in days.enumerated() {
-            let entries = data.compactMap{ (d) -> ChartDataEntry? in
-                return ChartDataEntry(x: d.x, y: index == 0 ? d.k : index == 1 ? d.d : d.j)
+        
+        for (index, type) in KDJ.macd_type.enumerated() {
+            let entries = data.compactMap{ (model) -> ChartDataEntry? in
+                let kdj = model.kdj ?? KDJ()
+                var yValue: Double = 0
+                switch type {
+                case .K:
+                    yValue = kdj.k
+                case .D:
+                    yValue = kdj.d
+                case .J:
+                    yValue = kdj.j
+                }
+                return ChartDataEntry(x: model.x, y: yValue)
             }
-            let labelArr = ["K", "D", "J"]
-            var lable = String(format: "\(labelArr[index]):%.2f ", entries.last?.y ?? 0)
-            if index == 0 {
-                lable = "KDJ(\(days.map{String($0)}.joined(separator: ","))） \(lable)"
+            
+            let yValue = entries.last?.y ?? 0
+            var label = ""
+            switch type {
+            case .K:
+                label = String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period) K:%.2f ",yValue)
+            case .D:
+                label = String(format: " D:%.2f ",yValue)
+            case .J:
+                label = String(format: " J:%.2f ",yValue)
+                
             }
-            let set = LineChartDataSet(entries: entries, label: lable)
+            let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1

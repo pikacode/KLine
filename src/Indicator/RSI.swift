@@ -11,7 +11,6 @@ import Charts
 open class RSI {
 
     required public init() {}
-    public static var days = [6, 12, 24]
     public enum RSIType{
         case RSI1(Int)
         case RSI2(Int)
