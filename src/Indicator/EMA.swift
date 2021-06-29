@@ -66,12 +66,12 @@ extension EMA: KLIndicator {
         guard let data = data as? [KLineData] else { return nil }
 
         var sets = [LineChartDataSet]()
-        var label: String = ""
+        var emaDay: Int = 0
         for (index, type) in EMA.emaDays.enumerated() {
             let entries = data.compactMap{ (model) -> ChartDataEntry? in
 
                 let ema = model.ema ?? EMA()
-                var emaDay: Int = 0
+                
                 var emaValue: Double = 0
                 
                 
@@ -87,9 +87,10 @@ extension EMA: KLIndicator {
                     emaValue = ema.long_ema
                 }
                 if emaDay == 0{ return nil}
-                label =  String(format:"EMA(\(emaDay)):%.2f",emaValue)
+                
                 return ChartDataEntry(x: model.x, y: emaValue)
             }
+            let label =  String(format:"EMA(\(emaDay)):%.2f",entries.last?.y ?? 0)
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)

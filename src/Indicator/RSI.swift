@@ -12,7 +12,12 @@ open class RSI {
 
     required public init() {}
     public static var days = [6, 12, 24]
-    
+    public enum RSIType{
+        case RSI1(Int)
+        case RSI2(Int)
+        case RSI3(Int)
+    }
+    public static var rsiDays:[RSIType] = [.RSI1(6), .RSI2(12), .RSI3(24)]
     //RSI指标参数
     var up_avg_6: Double   = 0
     var up_avg_12: Double  = 0
@@ -24,7 +29,23 @@ open class RSI {
     var rsi12: Double      = 0
     var rsi24: Double      = 0
     
+    static var min_day: Int = 0
+    static var mid_day: Int = 0
+    static var max_day: Int = 0
+    
     private static func calculateRSI(_ data: inout [KLineData]) {
+        
+        for type in rsiDays {
+            switch type{
+            case .RSI1(let day):
+                 min_day = day
+            case .RSI2(let day):
+                mid_day = day
+            case .RSI3(let day):
+                max_day = day
+            }
+        }
+        
         if data.count >= 5 {
             for i in 1 ..< data.count {
                     // 计算RS
@@ -55,12 +76,12 @@ open class RSI {
         let dn: Double = abs(fmin(0.0, diff))
         
         let rsi = model.rsi ?? RSI()
-        let lastRsi = model.rsi ?? RSI()
+        let lastRsi = lastModel.rsi ?? RSI()
         
-        let min_avg = Double(days[0])
-        let mid_avg = Double(days[1])
-        let max_avg = Double(days[2])
-        
+        let min_avg = Double(RSI.min_day)
+        let mid_avg = Double(RSI.mid_day)
+        let max_avg = Double(RSI.max_day)
+            
         if index == 1 {
             rsi.up_avg_6  = up / min_avg
             rsi.up_avg_12 = up / mid_avg
@@ -96,13 +117,27 @@ extension RSI: KLIndicator{
         guard let data = data as? [KLineData] else { return nil }
 
         var sets = [LineChartDataSet]()
-        for (index, day) in RSI.days.enumerated() {
-            let entries = data.compactMap{ (d) -> ChartDataEntry? in
-                let rsi = d.rsi ?? RSI()
-                return ChartDataEntry(x: d.x, y: index == 0 ? rsi.rsi6 : index == 1 ? rsi.rsi12 : rsi.rsi24)
+        var rsiDay: Int = 0
+        for (index, type) in RSI.rsiDays.enumerated() {
+            let entries = data.compactMap{ (model) -> ChartDataEntry? in
+                let rsi = model.rsi ?? RSI()
+                var yValue: Double = 0
+                switch type{
+                case .RSI1(let day):
+                    rsiDay = day
+                    yValue = rsi.rsi6
+                case .RSI2(let day):
+                    rsiDay = day
+                    yValue = rsi.rsi12
+                case .RSI3(let day):
+                    rsiDay = day
+                    yValue = rsi.rsi24
+                }
+                if yValue == 0 {return nil}
+                return ChartDataEntry(x: model.x, y: yValue)
             }
             
-            let lable = String(format: "RSI(\(day)):%.2f", entries.last?.y ?? 0)
+            let lable = String(format: "RSI(\(rsiDay)):%.2f", entries.last?.y ?? 0)
             let set = LineChartDataSet(entries: entries, label: lable)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
@@ -114,6 +149,7 @@ extension RSI: KLIndicator{
             set.axisDependency = .left
             sets.append(set)
         }
+        
         return sets
     }
     
