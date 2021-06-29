@@ -39,7 +39,6 @@ open class BOLL {
             let md = calculateMD(index: i, data: &data)
             boll.up_boll = boll.mb_boll + (md * Double(boll_average))
             boll.dn_boll = boll.mb_boll - (md * Double(boll_average))
-            
             data[i].boll = boll
         }
         
@@ -47,33 +46,31 @@ open class BOLL {
     }
     //平均线
     static func calculateAveragePrice(index: Int, data: inout [KLineData]) -> Double{
-        let day = boll_day
-        if index < day - 1 { return 0 }
+        let day = boll_day - 1
+        if index < day  { return 0 }
         var sum: Double = 0
-        for i in day - 1 ..< index {
+        for i in index - day ... index {
             let model = data[i]
             sum += model.close
         }
-        return sum / Double(index)
+        
+        return sum / Double(boll_day)
         
     }
     //标准差
     static func calculateMD(index: Int, data: inout [KLineData]) -> Double{
         
-        let day = boll_day
+        let day = boll_day - 1
         let avg = boll_average
         
-        if index < day - 1 { return 0}
+        if index < day { return 0}
         var sum: Double = 0
-        
-        for i in day - 1 ..< index {
+        for i in index - day ... index  {
             let model = data[i]
             let boll = data[i].boll ?? BOLL()
             sum += pow(model.close - boll.mb_boll, Double(avg))
         }
-
-        return sqrt(sum / Double(index))
-        
+        return sqrt(sum / Double(boll_day))
     }
 }
 
@@ -92,12 +89,17 @@ extension BOLL: KLIndicator {
         for (index, type) in BOLL.boll_type.enumerated() {
             let entries = data.compactMap { (model) -> ChartDataEntry? in
                 let boll = model.boll ??  BOLL()
-                return ChartDataEntry(x: model.x, y: type == .mb ? boll.mb_boll : type == .up ? boll.up_boll : boll.dn_boll)
+                let bollValue = type == .mb ? boll.mb_boll : type == .up ? boll.up_boll : boll.dn_boll
+                if bollValue == 0 { return nil}
+                return ChartDataEntry(x: model.x, y: bollValue)
             }
-            let label = ""
+            
+            var label = ""
             if index == 0 {
-                
+                label = "BOLL(\(BOLL.boll_day),\(BOLL.boll_average))"
             }
+            let labelValue = entries.last?.y ?? 0
+            label += type == .up ? String(format: " UP:%.2f",labelValue) : type == .mb ?  String(format: " MB:%.2f", labelValue) : String(format: " DN:%.2f", labelValue)
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
