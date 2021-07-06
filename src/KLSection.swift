@@ -95,7 +95,11 @@ open class KLSection {
 
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
             chartView.data = combinedData
-            chartView.setVisibleXRangeMaximum(52)
+            if visibleXMaxCountReal != visibleXMaxCount {
+                //设置多次会有bug
+                visibleXMaxCountReal = visibleXMaxCount
+                chartView.setVisibleXRangeMaximum(visibleXMaxCount)
+            }
             chartView.setScaleMinima(1.5, scaleY: 1)
             if data.count < 52 {
                 let n = (chartView.xAxis.axisMaximum - chartView.xAxis.axisMinimum)/Double(data.count)
@@ -111,7 +115,9 @@ open class KLSection {
         } else {
             chartView.xAxis.spaceMax = 8
         }
-
     }
+
+    open var visibleXMaxCount: Double = 52
+    var visibleXMaxCountReal: Double = 0
 
 }

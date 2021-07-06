@@ -26,8 +26,8 @@ open class KLineView: UIView {
             queue.async {
                 self.indicators.forEach{ type(of: $0).calculate(&self.data) }
                 DispatchQueue.main.async {
-                    self.draw()
                     self.layout()
+                    self.draw()
                 }
             }
         }
@@ -90,7 +90,16 @@ open class KLineView: UIView {
 
     /// ⭐️ should call draw before layout
     open func draw() {
+        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
+        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
         sections.forEach{ $0.data = self.data }
+
+        if let transform = transform, transform.tx != 0 {
+            sections.forEach{
+                $0.chartView.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+                $0.chartView.viewPortHandler.refresh(newMatrix: transform, chart: $0.chartView, invalidate: true)
+            }
+        }
     }
 
     /// 一个经验值，控制 label 的密度，数字越大数量越多
@@ -127,8 +136,9 @@ open class KLineView: UIView {
     var realData = [Any]()
 
     func layout() {
-        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
-        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
+//        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
+//        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
+
         subviews.forEach{ $0.removeFromSuperview() }
         sections.forEach{
             let view = $0.chartView
@@ -141,15 +151,14 @@ open class KLineView: UIView {
                 top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
             }
             self.addSubview(view)
-//            view.backgroundColor = UIColor(red: CGFloat.random(in: 0...255)/255, green: CGFloat.random(in: 0...255)/255, blue: CGFloat.random(in: 0...255)/255, alpha: 0.3)
             let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: $0.height)
             let left = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
             let right = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
             self.addConstraints([left, right, top, height])
-            if let transform = transform, transform.tx != 0 {
-                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
-                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
-            }
+//            if let transform = transform, transform.tx != 0 {
+//                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+//                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
+//            }
             if needMoveToXMax && self.data.count > 52 {
                 view.moveViewToX(view.chartXMax)
             }
@@ -158,6 +167,9 @@ open class KLineView: UIView {
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
         }
+
+        layoutIfNeeded()
+
         KLCombinedChartView.crosshairChanged = { (p) in
             self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
         }
