@@ -31,23 +31,27 @@ class ChartSettings {
 
     var mainHeight: CGFloat = 282 { didSet{ save() } }
 
-    var mainIndicators: [(indicator: KLIndicator, on: Bool)] = [(MA(), true),
-                                                                (EMA(), false),
-                                                                (BOLL(), false)] { didSet{ save() } }
+    var mainIndicators = [(MA(), true),
+                          (EMA(), false),
+                          (BOLL(), false)]
+    as [(indicator: KLIndicator, on: Bool)] { didSet{ save() } }
 
-    var otherIndicators: [(indicator: KLIndicator, on: Bool)] = [(MAVOL(), true),
-                                                                 (MACD(), true),
-                                                                 (KDJ(), false),
-                                                                 (RSI(), false)] { didSet{ save() } }
+    var otherIndicators = [(MAVOL(), true),
+                           (MACD(), true),
+                           (KDJ(), false),
+                           (RSI(), false)]
+    as [(indicator: KLIndicator, on: Bool)] { didSet{ save() } }
 
-    var priceLines = [KPriceLine(label: "价格线", color: 0xffffff99, value: Double.random(in: 100...500), enabled: true),
-                      KPriceLine(label: "指数线", color: 0x0077f3ff, value: Double.random(in: 100...500), enabled: true),
-                      KPriceLine(label: "强平线", color: 0x8080ffff, value: Double.random(in: 100...500), enabled: false),
-                      KPriceLine(label: "持仓线", color: 0xecc413ff, value: Double.random(in: 100...500), enabled: false),
-                      KPriceLine(label: "止盈线", color: 0xcf780bff, value: Double.random(in: 100...500), enabled: true),
-                      KPriceLine(label: "止损线", color: 0xf600ffff, value: Double.random(in: 100...500), enabled: false),
-                      KPriceLine(label: "网格线", color: 0xffffff00, value: Double.random(in: 100...500), enabled: true),]
-    { didSet{ save() } }
+    var priceLines = [("价格线", 0xffffff99, true),
+                      ("指数线", 0x0077f3ff, false),
+                      ("强平线", 0x8080ffff, true),
+                      ("持仓线", 0xecc413ff, true),
+                      ("止盈线", 0xcf780bff, false),
+                      ("止损线", 0xf600ffff, false),
+                      ("网格线", 0xffffff00, true)]
+    .map{
+        KPriceLine(label: $0.0, color: $0.1, value: Double.random(in: 150...450), enabled: $0.2)
+    } { didSet{ save() } }
 
     static func readFromLocal() -> ChartSettings {
         // read from local
@@ -59,7 +63,5 @@ class ChartSettings {
         // save to local
 
     }
-
-
 
 }

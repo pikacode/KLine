@@ -400,7 +400,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIq-va-nsc">
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UIq-va-nsc">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
@@ -451,7 +451,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hd5-Zp-Ei0">
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hd5-Zp-Ei0">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
@@ -502,7 +502,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="No1-4Z-h1f">
+                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="No1-4Z-h1f">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
@@ -553,7 +553,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8a-Wk-GGF">
+                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l8a-Wk-GGF">
                                                     <rect key="frame" x="207" y="7" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
