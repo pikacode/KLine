@@ -36,7 +36,20 @@ extension KLIndicator {
     public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? { return nil }
     public func barDataSet(_ data: [Any]) -> [BarChartDataSet]? { return nil }
 
-    public var style: KLStyle { return Self.style }
+    public var style: KLStyle {
+        set {
+            objc_setAssociatedObject(self, &KLStyle.StoreKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            if let s = objc_getAssociatedObject(self, &KLStyle.StoreKey) as? KLStyle {
+                return s
+            } else {
+                let s = KLStyle(Self.style)
+                objc_setAssociatedObject(self, &KLStyle.StoreKey, s, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return s
+            }
+        }
+    }
 
     public static var name: String { return "\(Self.self)" }
     public var name: String { return Self.name }

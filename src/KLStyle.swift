@@ -7,12 +7,14 @@
 
 import UIKit
 
-open class KLStyle {
+open class KLStyle: NSObject {
 
-    static var _default = KLStyle(true)
+    static var StoreKey = "KLStoreKey"
+
+    static var _default = KLStyle()
     public static var `default`: KLStyle {
         get {
-            return KLStyle(false)
+            return KLStyle(_default)
         }
         set {
             _default = newValue
@@ -48,8 +50,24 @@ open class KLStyle {
         let bottom: UIColor
     }
 
-    public init(_ isDefault: Bool = false) {
-        if isDefault {
+    public init(_ style: KLStyle? = nil) {
+        if let style = style {
+            lineWidth1 = style.lineWidth1
+            maxBarWidth = style.maxBarWidth
+            minBarWidth = style.minBarWidth
+            space = style.space
+            lineColor1 = style.lineColor1
+            lineColor2 = style.lineColor2
+            lineColor3 = style.lineColor3
+            darkGrayColor = style.darkGrayColor
+            upColor = style.upColor
+            downColor = style.downColor
+            upBarColor = style.upBarColor
+            downBarColor = style.downBarColor
+            upGradient = style.upGradient
+            downGradient = style.downGradient
+            label = KLLabel(style.label)
+        } else {
             lineWidth1 = 1
             maxBarWidth = 4
             minBarWidth = 1
@@ -65,29 +83,6 @@ open class KLStyle {
             upGradient = GradientColor(top: upColor.alpha(0.8), bottom: upColor.alpha(0.1))
             downGradient = GradientColor(top: downColor.alpha(0.8), bottom: downColor.alpha(0.1))
             label = KLLabel()
-        } else {
-            let style = KLStyle._default
-            lineWidth1 = style.lineWidth1
-            maxBarWidth = style.maxBarWidth
-            minBarWidth = style.minBarWidth
-            space = style.space
-            lineColor1 = style.lineColor1
-            lineColor2 = style.lineColor2
-            lineColor3 = style.lineColor3
-            darkGrayColor = style.darkGrayColor
-            upColor = style.upColor
-            downColor = style.downColor
-            upBarColor = style.upBarColor
-            downBarColor = style.downBarColor
-            upGradient = style.upGradient
-            downGradient = style.downGradient
-            label = KLLabel()
-            label.font = style.label.font
-            label.color = style.label.color
-            label.bgColor = style.label.bgColor
-            label.position = style.label.position
-            label.dashPhase = style.label.dashPhase
-            label.dashLengths = style.label.dashLengths
         }
     }
 

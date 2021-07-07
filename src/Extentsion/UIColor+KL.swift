@@ -16,11 +16,18 @@ extension UIColor {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1.0)
     }
 
-    convenience init(hex: UInt, alpha: CGFloat = 1.0) {
+    convenience init(hex: Int, alpha: CGFloat = 1) {
         self.init(red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
                   green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
                   blue: CGFloat(hex & 0x0000FF) / 255.0,
                   alpha: alpha)
+    }
+
+    public convenience init(kl_hex: Int) {
+        self.init(red: CGFloat((kl_hex & 0xFF000000) >> 24) / 255.0,
+                  green: CGFloat((kl_hex & 0x00FF0000) >> 16) / 255.0,
+                  blue: CGFloat((kl_hex & 0x0000FF00) >> 8) / 255.0,
+                  alpha: CGFloat(kl_hex & 0x000000FF) / 255.0)
     }
 
     func alpha(_ a: CGFloat) -> UIColor { return withAlphaComponent(a) }

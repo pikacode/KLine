@@ -125,17 +125,28 @@ class ViewController: UIViewController {
     }
 
     func createLimitLines() -> [LimitLine] {
-
-//        let values: (label: String, color: UIColor, value: Double)
-//            =  [("价格线")]
-//        let line: LimitLine = {
-//            let line = LimitLine(300, .horizontal)
-//            line.label.text = "pikacode"
-//            line.label.color = UIColor.white
+        let pls = settingsView.settings.priceLines
+        var lines = [LimitLine]()
+        for i in 0..<pls.count {
+            let pl = pls[i]
+            if pl.enabled {
+                let line = LimitLine(pl.value, .horizontal)
+                line.label.text = pl.label + String(format: " %.2f", pl.value)
+                line.style.lineColor1 = UIColor(kl_hex: pl.color)
+                line.label.bgColor = line.style.lineColor1
+                line.label.color = UIColor.black
+                lines.append(line)
+            }
+        }
+        return lines
+//        return settingsView.settings.priceLines.filter { $0.enabled }.map { (pl) -> LimitLine in
+//            let line = LimitLine(pl.value, .horizontal)
+//            line.label.text = pl.label
+//            line.style.lineColor1 = UIColor(kl_hex: pl.color)
 //            line.label.bgColor = line.style.lineColor1
+//            line.label.color = UIColor.black
 //            return line
-//        }()
-         return [LimitLine]()
+//        }
     }
 
     override func viewDidLayoutSubviews() {

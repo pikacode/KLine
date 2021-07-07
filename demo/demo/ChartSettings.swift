@@ -8,6 +8,13 @@
 import UIKit
 import KLine
 
+struct KPriceLine {
+    var label = ""
+    var color = 0x00000000
+    var value: Double = 0
+    var enabled = false
+}
+
 class ChartSettings {
 
     static var shared = readFromLocal()
@@ -33,7 +40,14 @@ class ChartSettings {
                                                                  (KDJ(), false),
                                                                  (RSI(), false)] { didSet{ save() } }
 
-    var switchs = [true, true, false, false, false, false, true] { didSet{ save() } }
+    var priceLines = [KPriceLine(label: "价格线", color: 0xffffff99, value: Double.random(in: 100...500), enabled: true),
+                      KPriceLine(label: "指数线", color: 0x0077f3ff, value: Double.random(in: 100...500), enabled: true),
+                      KPriceLine(label: "强平线", color: 0x8080ffff, value: Double.random(in: 100...500), enabled: false),
+                      KPriceLine(label: "持仓线", color: 0xecc413ff, value: Double.random(in: 100...500), enabled: false),
+                      KPriceLine(label: "止盈线", color: 0xcf780bff, value: Double.random(in: 100...500), enabled: true),
+                      KPriceLine(label: "止损线", color: 0xf600ffff, value: Double.random(in: 100...500), enabled: false),
+                      KPriceLine(label: "网格线", color: 0xffffff00, value: Double.random(in: 100...500), enabled: true),]
+    { didSet{ save() } }
 
     static func readFromLocal() -> ChartSettings {
         // read from local

@@ -8,7 +8,7 @@
 import UIKit
 
 public extension Int {
-    var toColor: UIColor { return UIColor(hex: UInt(self)) }
+    var toColor: UIColor { return UIColor(hex: Int(self)) }
 
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }

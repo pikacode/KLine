@@ -56,7 +56,11 @@ class ChartSettingsView: UIView {
     //线
     @IBAction func switchAction(_ sender: UISwitch) {
         //sender.isOn.toggle()
-        settings.switchs[sender.tag] = sender.isOn
+//        settings.switchs[sender.tag] = sender.isOn
+
+        var p = settings.priceLines[sender.tag]
+        p.enabled.toggle()
+        settings.priceLines[sender.tag] = p
     }
 
     override func awakeFromNib() {

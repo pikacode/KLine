@@ -25,4 +25,16 @@ public class KLLabel {
     public var position = KLLabel.position
     public var dashLengths = KLLabel.dashLengths
     public var dashPhase = KLLabel.dashPhase
+
+    init(_ label: KLLabel? = nil) {
+        if let label = label {
+            text = ""
+            font = label.font
+            color = label.color
+            bgColor = label.bgColor
+            position = label.position
+            dashLengths = label.dashLengths
+            dashPhase = label.dashPhase
+        }
+    }
 }

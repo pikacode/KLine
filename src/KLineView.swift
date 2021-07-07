@@ -178,21 +178,9 @@ open class KLineView: UIView {
         needMoveToXMin = false
     }
 
-
-//    open override func didMoveToSuperview() {
-//        super.didMoveToSuperview()
-//        chartView.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(chartView)
-//        [NSLayoutConstraint.Attribute.top, .bottom, .left, .right].forEach{
-//            let c = NSLayoutConstraint(item: self, attribute: $0, relatedBy: .equal, toItem: chartView, attribute: $0, multiplier: 1, constant: 0)
-//            self.addConstraint(c)
-//        }
-//    }
-
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 
 }
 
