@@ -36,7 +36,6 @@ class ChartSettingsView: UIView {
         var s = settings.mainIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.mainIndicators[sender.tag] = s
-        //dismiss()
     }
 
     //副图指标
@@ -50,14 +49,10 @@ class ChartSettingsView: UIView {
         var s = settings.otherIndicators[sender.tag]
         s.1 = sender.isSelected
         settings.otherIndicators[sender.tag] = s
-        //dismiss()
     }
 
     //线
     @IBAction func switchAction(_ sender: UISwitch) {
-        //sender.isOn.toggle()
-//        settings.switchs[sender.tag] = sender.isOn
-
         var p = settings.priceLines[sender.tag]
         p.enabled.toggle()
         settings.priceLines[sender.tag] = p
