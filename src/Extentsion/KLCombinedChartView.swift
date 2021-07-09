@@ -141,7 +141,7 @@ extension KLCombinedChartView {
 
         [leftAxis, rightAxis, xAxis].forEach { (axis) in
             axis.limitLines.filter { (l) -> Bool in
-                return l.label == Crosshair.label
+                return l.isCrosshair
             }.forEach { (l) in
                 axis.removeLimitLine(l)
             }

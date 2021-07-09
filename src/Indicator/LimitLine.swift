@@ -32,7 +32,7 @@ public class LimitLine {
 
     public var label = KLLabel(style.label)
 
-    public  var limitLine: KLChartLimitLine   {
+    public lazy var limitLine: KLChartLimitLine = {
         let line = KLChartLimitLine(limit: Double(value), label: label.text)
         line.labelPosition = .topLeft
         line.yOffset = -6
@@ -44,6 +44,10 @@ public class LimitLine {
         line.valueTextColor = label.color
         line.bgColor = label.bgColor
         return line
+    }()
+
+    public var isCrosshair: Bool {
+        return limitLine is KLCrosshairLimitLine
     }
 
 }

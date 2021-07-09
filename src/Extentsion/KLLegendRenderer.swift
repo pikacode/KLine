@@ -11,9 +11,9 @@ import Charts
 open class KLLegendRenderer: LegendRenderer {
 
     @objc open override func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor) {
-        if label == Crosshair.label {
-            return
-        }
+//        if label == Crosshair.label {
+//            return
+//        }
         guard let entries = legend?.entries,
             let e = entries.first(where: { $0.label == label }),
             let color = e.formColor else {

@@ -11,3 +11,11 @@ import Charts
 open class KLChartLimitLine: ChartLimitLine {
     public var bgColor = LimitLine.style.label.bgColor
 }
+
+open class KLCrosshairLimitLine: ChartLimitLine {}
+
+extension ChartLimitLine {
+    var isCrosshair: Bool {
+        return self is KLCrosshairLimitLine
+    }
+}

@@ -11,8 +11,6 @@ import Charts
 open class Crosshair {
     required public init() {}
 
-    static let label = "KLCross"
-
     var showHorizontal = true
 
     var point: CGPoint?
@@ -20,8 +18,8 @@ open class Crosshair {
     /// set to nil if u want to hide
     public var horizontal: LimitLine? {
         if let y = point?.y {
-            var l = LimitLine(y.double, .horizontal)
-            l.limitLine.label = Crosshair.label
+            let l = LimitLine(y.double, .horizontal)
+            object_setClass(l.limitLine, KLCrosshairLimitLine.self)
             l.limitLine.drawLabelEnabled = false
             return l
         } else {
@@ -31,8 +29,8 @@ open class Crosshair {
 
     public var vertical: LimitLine? {
         if let x = point?.x {
-            var l = LimitLine(x.double, .vertical)
-            l.limitLine.label = Crosshair.label
+            let l = LimitLine(x.double, .vertical)
+            object_setClass(l.limitLine, KLCrosshairLimitLine.self)
             l.limitLine.drawLabelEnabled = false
             return l
         } else {
