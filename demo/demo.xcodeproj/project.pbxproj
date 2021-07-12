@@ -19,8 +19,8 @@
 		3B568AD42681BD7A00E2B69D /* ChartSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */; };
 		3B568AE32681E7AE00E2B69D /* ChartSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B568AE22681E7AE00E2B69D /* ChartSettings.swift */; };
 		3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B61861E2667339E00691E39 /* CombinedChartViewController.xib */; };
-		D196AFBB2689C24B00639C9B /* depth.json in Resources */ = {isa = PBXBuildFile; fileRef = D196AFBA2689C24B00639C9B /* depth.json */; };
 		3BC451D72685D2420007A606 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5262665E630009517FC /* ViewController.swift */; };
+		D196AFBB2689C24B00639C9B /* depth.json in Resources */ = {isa = PBXBuildFile; fileRef = D196AFBA2689C24B00639C9B /* depth.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -392,7 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7DR5RX3FJ7;
+				DEVELOPMENT_TEAM = 2GP9NQW3T9;
 				INFOPLIST_FILE = demo/other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -413,7 +413,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7DR5RX3FJ7;
+				DEVELOPMENT_TEAM = 2GP9NQW3T9;
 				INFOPLIST_FILE = demo/other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

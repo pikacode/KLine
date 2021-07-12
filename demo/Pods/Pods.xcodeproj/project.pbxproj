@@ -159,7 +159,10 @@
 		CB6E235EB0A5B896F9D1815877757EF9 /* CandleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E783FA79E7C5FEE6D62879F518ABF0A /* CandleChartData.swift */; };
 		CDABB0AA47F0EEE957FCE629F8D2DB6B /* BubbleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F657E07032F55A96BEE75F573FBC54D1 /* BubbleChartView.swift */; };
 		CEC814CFD549BCDDAB65F5918969182E /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7045AE44AA41F438E17FF48B7B8DCA /* IHighlighter.swift */; };
+		D17BF84626982B5C002CF2BC /* KLMarkerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17BF84526982B5C002CF2BC /* KLMarkerData.swift */; };
 		D196AFB62689B0D500639C9B /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D196AFB52689B0D500639C9B /* Depth.swift */; };
+		D1A22366269C481400FE6306 /* KLMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A22365269C481400FE6306 /* KLMarkerView.swift */; };
+		D1A2236E269C486700FE6306 /* KLMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A2236D269C486700FE6306 /* KLMarker.swift */; };
 		D68F93293888B6776369185028CB60B0 /* IBarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEA8AC06FB34D00653F00EB4DA31444 /* IBarChartDataSet.swift */; };
 		D6E011A7BA193945CEA69517E40CBD48 /* XShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116AB9BF75A2A772277869CDD16CFD5 /* XShapeRenderer.swift */; };
 		D7B623CFD7231E00FB60419AA17A3E82 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F617C946A8AF36F4BE67A3944DCD159 /* MoveViewJob.swift */; };
@@ -374,7 +377,10 @@
 		CE6013C31DB5F628FCFF459656034379 /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
 		CEEED036C18816CECC0CE22C86D1282A /* YAxisRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRenderer.swift; path = Source/Charts/Renderers/YAxisRenderer.swift; sourceTree = "<group>"; };
 		D064CCBEB3D8F86F6C6EB1E51C427CFA /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarHighlighter.swift; path = Source/Charts/Highlight/PieRadarHighlighter.swift; sourceTree = "<group>"; };
+		D17BF84526982B5C002CF2BC /* KLMarkerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLMarkerData.swift; sourceTree = "<group>"; };
 		D196AFB52689B0D500639C9B /* Depth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
+		D1A22365269C481400FE6306 /* KLMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLMarkerView.swift; sourceTree = "<group>"; };
+		D1A2236D269C486700FE6306 /* KLMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLMarker.swift; sourceTree = "<group>"; };
 		D466846EAE78237BBF2B30F1C005611F /* RadarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataEntry.swift; sourceTree = "<group>"; };
 		D5870D99A8B67AFF39FEA87AED03835E /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };
 		D5FEE353272BEE5C708FA21E23DC00A5 /* KLineView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KLineView.swift; path = src/KLineView.swift; sourceTree = "<group>"; };
@@ -469,6 +475,7 @@
 				FA1F8691C81F794A4302391F39BF64A3 /* KLPoint.swift */,
 				160F366C5ECA7EE79C3EE890B004D98A /* KLSection.swift */,
 				500545AE4761D31021752C4624B64EF6 /* KLStyle.swift */,
+				D17BF84526982B5C002CF2BC /* KLMarkerData.swift */,
 				3309924EBFD76C670B29DC5B491AE49D /* Extentsion */,
 				18B914B3CE1D436E276380BA6D7808E1 /* Indicator */,
 				50F23E75333A2F8C000AD15DFD4D7F52 /* Pod */,
@@ -493,6 +500,7 @@
 				15A1B73E2705EF81744BD3EC85B93397 /* RSI.swift */,
 				37EB24CF79A8EA8BB1CD767AB072E582 /* BOLL.swift */,
 				D196AFB52689B0D500639C9B /* Depth.swift */,
+				D1A22365269C481400FE6306 /* KLMarkerView.swift */,
 			);
 			name = Indicator;
 			path = src/Indicator;
@@ -509,6 +517,7 @@
 				7150A02BF4E9A609B3ABD18B3D224939 /* KLYAxisRenderer.swift */,
 				F7BD5270450FD4E6347238AFFF58A8DE /* UIColor+KL.swift */,
 				98F35E9B6465737C816E01C090CEAF98 /* UIView+KL.swift */,
+				D1A2236D269C486700FE6306 /* KLMarker.swift */,
 			);
 			name = Extentsion;
 			path = src/Extentsion;
@@ -938,9 +947,11 @@
 				8897F6439EAB30C9995B30D4195AA5F7 /* KLCombinedChartView.swift in Sources */,
 				C4F43AD0BBE57812A0DDC6DBBA34D7BE /* KLDateFormatter.swift in Sources */,
 				975BEB4BE8B21A1308AF859E7F9F8084 /* KLDepthPoint.swift in Sources */,
+				D17BF84626982B5C002CF2BC /* KLMarkerData.swift in Sources */,
 				9646F3A1233945912F6C1E0C635CCA06 /* KLEnum.swift in Sources */,
 				BFBB4A38416CFEA9C1A8E3EAE7678986 /* KLIndicator.swift in Sources */,
 				A32D879900A8BA9E37D2F8294A6CB364 /* KLine-dummy.m in Sources */,
+				D1A2236E269C486700FE6306 /* KLMarker.swift in Sources */,
 				3F18BD3AFF8A87F878B1517C2EB481E7 /* KLineData.swift in Sources */,
 				E2D11CFEB66B4DD8DB75C0EC98EB5DA7 /* KLineView.swift in Sources */,
 				77FA743DE387824848DEE2F765E60E7F /* KLLabel.swift in Sources */,
@@ -949,6 +960,7 @@
 				FCD0F00A11057C0958BAD6C2FDAF3903 /* KLSection.swift in Sources */,
 				371DF1CCDBF874C4F128E0C906F9F815 /* KLStyle.swift in Sources */,
 				8EB60DFC41B0028D499627F3CD9D9414 /* KLYAxisRenderer.swift in Sources */,
+				D1A22366269C481400FE6306 /* KLMarkerView.swift in Sources */,
 				ACA1656C0EA1FBFE1921991912BEDB96 /* LimitLine.swift in Sources */,
 				B1543C81AD1C1405A747568CCBD315CD /* MA.swift in Sources */,
 				EDEDCBD75C00756DD6E42AB725C73117 /* MACD.swift in Sources */,
