@@ -7,7 +7,6 @@
 
 import UIKit
 import Charts
-
 open class KLSection {
 
     public init(_ indicators: [KLIndicator], _ height: CGFloat) {
@@ -23,6 +22,7 @@ open class KLSection {
 
     open lazy var chartView: KLCombinedChartView = {
         let v = KLCombinedChartView(frame: .zero)
+        v.needMark = indicators.contains { (dd) -> Bool in return dd is Candle}
         v.xAxis.valueFormatter = KLEmptyFormatter()
         v.leftYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.leftAxis, transformer: v.getTransformer(forAxis: .left))
         v.rightYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.rightAxis, transformer: v.getTransformer(forAxis: .right))
@@ -51,13 +51,14 @@ open class KLSection {
 
     /// only draw data
     open func draw() {
-
+        
         /// 画 limit line
         leftAxis.removeAllLimitLines()
         rightAxis.removeAllLimitLines()
         xAxis.removeAllLimitLines()
         indicators.forEach{
             if var l = $0 as? LimitLine {
+                
                 let line = l.limitLine
                 if l.direction == .horizontal {
                     leftAxis.addLimitLine(line)

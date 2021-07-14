@@ -31,7 +31,7 @@ open class KLCombinedChartView: CombinedChartView {
               let m2 = class_getInstanceMethod(BarLineChartViewBase.self, s2) else { return }
         method_exchangeImplementations(m1, m2)
     }
-
+    
     public override init(frame: CGRect) {
         KLCombinedChartView.exchangeMethod()
         super.init(frame: frame)
@@ -43,12 +43,14 @@ open class KLCombinedChartView: CombinedChartView {
         super.init(coder: aDecoder)
         initUI()
     }
-
+    let klMarker = KLMarkerView()
+    public var needMark: Bool = false
     open func initUI() {
-
         drawGridBackgroundEnabled = true
         gridBackgroundColor = 0x0e0e0e.toColor
-
+        klMarker.initUI()
+        klMarker.markerView.chartView = self
+        
         autoScaleMinMaxEnabled = true
 
         minOffset = 0
@@ -82,8 +84,8 @@ open class KLCombinedChartView: CombinedChartView {
         dragXEnabled = true
         dragYEnabled = false
         doubleTapToZoomEnabled = false
-
         highlightPerTapEnabled = false
+        
 
         addGestureRecognizer(longPressGesture)
         addGestureRecognizer(tapPressGesture)
@@ -166,7 +168,25 @@ extension KLCombinedChartView {
 
         setNeedsDisplay()
     }
-
+    
+    open override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        if !needMark { return }
+        let optionalContext = UIGraphicsGetCurrentContext()
+        guard let context = optionalContext else { return }
+        
+        guard let point = crosshair.point else {
+            return
+        }
+        let trans = getTransformer(forAxis: .left)
+        let x = point.x
+        let y = point.y
+        let pt = trans.pixelForValues(x: Double(x), y: Double(y))
+               
+        klMarker.markerView.draw(context: context, point: pt)
+        
+        
+    }
 }
 
 extension BarLineChartViewBase {

@@ -25,22 +25,23 @@ class KLMarker: NSUIView, IMarker {
         
         let width = self.bounds.size.width
         let height = self.bounds.size.height
-        print(point.x)
+
         if point.x < width + 20 {
             offset.x = point.x + 10
         }else{
             offset.x = point.x - width - 10
         }
         
-        if point.y + offset.y < 0
-        {
-            offset.y = -point.y
-        }
-        else if point.y + height + offset.y > chart.bounds.size.height
-        {
-            offset.y = chart.bounds.size.height - point.y - height
-        }
+        let chartH = chart.bounds.size.height
         
+        if point.y > chartH - height / 2 {
+            offset.y = chartH - height
+        }else if point.y < height / 2{
+            offset.y = 10
+        }else{
+            offset.y = point.y - height / 2
+        }
+
         return offset
     }
     
@@ -55,7 +56,7 @@ class KLMarker: NSUIView, IMarker {
         
         context.saveGState()
         context.translateBy(x: offset.x,
-                              y: point.y + offset.y)
+                              y:  offset.y)
         UIGraphicsPushContext(context)
         self.layer.render(in: context)
         UIGraphicsPopContext()
