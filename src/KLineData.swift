@@ -17,7 +17,7 @@ open class KLineData {
     
 
     /// 对时间戳的缩放  x = timeInterval / timeXScale
-    public static var timeXScale: Double = 90000
+    public static var timeXScale: Double = 86400
 
     public var x: Double {
         return time/KLineData.timeXScale

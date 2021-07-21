@@ -11,7 +11,7 @@ import Charts
 open class Crosshair {
     required public init() {}
 
-    var showHorizontal = true
+    public var showHorizontal = true
 
     var point: CGPoint?
 
