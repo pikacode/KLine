@@ -92,11 +92,24 @@ Pod::Spec.new do |s|
     #  Not including the public_header_files will make all headers public.
     #
   
-    s.source_files  = "src", "src/*.{swift}", "src/**/*.{swift}"
-  
+    # s.source_files  = "src", "src/*.{swift}", "src/**/*.{swift}"
+    # s.public_header_files = "src/*.{h}"
   #  s.exclude_files = "Classes/Exclude"
   
-     s.public_header_files = "src/*.{h}"
+   
+     s.source_files = 'src/*.{swift}'
+     s.public_header_files = 'src/*.{h, swift}'
+ 
+
+  s.subspec 'Indicator' do |ss|
+    ss.source_files = 'src/Indicator/*.{swift}'
+    ss.public_header_files = 'src/Indicator/*.{h, swift}'
+  end
+
+  s.subspec 'Extentsion' do |ss|
+    ss.source_files = 'src/Extentsion/*.{swift}'
+    ss.public_header_files = 'src/Extentsion/*.{h, swift}'
+  end
   
   
     # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

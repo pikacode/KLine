@@ -50,6 +50,10 @@ open class KLSection {
     public var xAxis: XAxis { chartView.xAxis }
     public var leftAxis: YAxis { chartView.leftAxis }
     public var rightAxis: YAxis { chartView.rightAxis }
+    public var xValueFormatter: Charts.IAxisValueFormatter? {
+        get { return xAxis.valueFormatter }
+        set { xAxis.valueFormatter = newValue }
+    }
 
     /// only draw data
     open func draw() {
