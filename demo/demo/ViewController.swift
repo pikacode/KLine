@@ -74,8 +74,9 @@ class ViewController: UIViewController {
         klineView.moveToXMax() // if u append new data and want to scroll to the end of th chart
 
         // 👉 3. set x date formatter for first section
-        KLDateFormatter.format = DateFormat.day.rawValue
-        klineView.sections.first?.xAxis.valueFormatter = KLDateFormatter()
+        let formatter = DateFormatter()
+        formatter.dateFormat = DateFormat.day.rawValue
+        klineView.sections.first?.xAxis.valueFormatter = KLDateFormatter(formatter)
 
 
 
