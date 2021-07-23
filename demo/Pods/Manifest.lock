@@ -4,6 +4,12 @@ PODS:
   - Charts/Core (3.6.0)
   - KLine (1.0.0):
     - Charts (~> 3.6.0)
+    - KLine/Extentsion (= 1.0.0)
+    - KLine/Indicator (= 1.0.0)
+  - KLine/Extentsion (1.0.0):
+    - Charts (~> 3.6.0)
+  - KLine/Indicator (1.0.0):
+    - Charts (~> 3.6.0)
 
 DEPENDENCIES:
   - KLine (from `../`)
@@ -18,7 +24,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  KLine: 11d180bb6539ad118ca7bb3e4f801c4fe7fedc95
+  KLine: 634749fffd188c07a84cf963323d26e85d5ae6af
 
 PODFILE CHECKSUM: bb2183f5f700664ca68d2f964e9b3220b67389a6
 
