@@ -76,8 +76,7 @@ class ViewController: UIViewController {
         // 👉 3. set x date formatter for first section
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormat.day.rawValue
-        klineView.sections.first?.xAxis.valueFormatter = KLDateFormatter(formatter)
-
+        klineView.sections.first?.xValueFormatter = KLDateFormatter(formatter)
 
 
             
