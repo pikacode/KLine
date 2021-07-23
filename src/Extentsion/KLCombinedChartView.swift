@@ -156,13 +156,13 @@ extension KLCombinedChartView {
         }
 
         if drawHorizontal {
-            if var h = crosshair.horizontal {
+            if let h = crosshair.horizontal {
                 leftAxis.addLimitLine(h.limitLine)
                 rightAxis.addLimitLine(h.limitLine)
             }
         }
 
-        if var v = crosshair.vertical {
+        if let v = crosshair.vertical {
             xAxis.addLimitLine(v.limitLine)
         }
 
@@ -178,13 +178,16 @@ extension KLCombinedChartView {
         guard let point = crosshair.point else {
             return
         }
-        let trans = getTransformer(forAxis: .left)
         let x = point.x
         let y = point.y
-        let pt = trans.pixelForValues(x: Double(x), y: Double(y))
-               
-        klMarker.markerView.draw(context: context, point: pt)
         
+        let pt = self.pixelForValues(x: Double(x), y: Double(y), axis: .left)
+        if let entry = self.combinedData?.candleData?.dataSets[0].entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry{
+            
+            
+            klMarker.markerView.draw(context: context, point: pt)
+            klMarker.updateValue(model: entry)
+        }
         
     }
 }

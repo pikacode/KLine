@@ -9,17 +9,13 @@ import UIKit
 import UIKit
 import Charts
 class KLMarkerView: UIView {
-    var openLabel: UILabel?
-    var closeLabel: UILabel?
-    var highLabel: UILabel?
-    var lowLabel: UILabel?
-    var volLabel: UILabel?
-    var changeRateLabel: UILabel?
-    var changeQuotaLabel: UILabel?
+
     var markerView: KLMarker!
+    var labelArr: [UILabel] = []
+    
     
     func initUI() {
-        let labelArr = [openLabel, closeLabel, highLabel, lowLabel, volLabel, changeQuotaLabel, changeRateLabel]
+//        labelArr = [openLabel, closeLabel, highLabel, lowLabel, volLabel, changeQuotaLabel, changeRateLabel]
         let titleArr = ["开","收","高","低","量","涨跌额","涨跌幅"]
         
         markerView = KLMarker.init(frame: CGRect.init(x: 0, y: 0, width: 130, height: 173))
@@ -28,22 +24,23 @@ class KLMarkerView: UIView {
         markerView.layer.borderWidth = 0.5
         markerView.layer.borderColor = UIColor.init(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 0.4).cgColor
 
-        for (index, item) in labelArr.enumerated() {
+        for index in 0 ..< titleArr.count {
         let tView = UIView.init()
 
-            let height = markerView.bounds.size.height / CGFloat(labelArr.count)
+            let height = markerView.bounds.size.height / CGFloat(titleArr.count)
             let top = CGFloat(height) * CGFloat(index)
 
             tView.frame = CGRect.init(x: 0, y: top, width: markerView.bounds.size.width, height: height)
             markerView.addSubview(tView)
             tView.backgroundColor = .clear
-
-            addCell(title: titleArr[index], valueLabel: item ?? UILabel(), bgView: tView)
+            
+            addCell(title: titleArr[index],  bgView: tView)
+            
         }
     }
     
     
-    func addCell(title: String, valueLabel: UILabel , bgView: UIView)  {
+    func addCell(title: String, bgView: UIView) {
         
         let label = addLabel(title: title)
         let W = bgView.bounds.size.width - 12.0
@@ -59,6 +56,7 @@ class KLMarkerView: UIView {
         bgView.addSubview(valueLabel)
         valueLabel.frame = CGRect.init(x: 6, y: 0, width: W, height: H)
         valueLabel.textAlignment = .right
+        labelArr.append(valueLabel)
     }
     
     func addLabel(title: String, valueLabel: Bool = false) -> UILabel {
@@ -69,7 +67,18 @@ class KLMarkerView: UIView {
         return label
     }
     
-    func updateValue() {
+    func updateValue(model: CandleChartDataEntry) {
+        
+        
+        labelArr[0].text = "\(model.open)"
+        labelArr[1].text = "\(model.close)"
+        labelArr[2].text = "\(model.high)"
+        labelArr[3].text = "\(model.low)"
+
+//        volLabel?.text = "\(model.open)"
+//        changeRateLabel?.text = "\(model.open)"
+//        changeQuotaLabel?.text = "\(model.open)"
+
         
     }
 

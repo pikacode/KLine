@@ -30,6 +30,8 @@ open class KLSection {
     }()
 
     open var height: CGFloat
+    
+    open var markView: KLMarker
 
     open var data = [Any]() {
         didSet {
