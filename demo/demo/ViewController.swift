@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         //---------------- ⭐️⭐️ Advanced ----------------//
 
         // 👉 [Advanced]: change settings of klineView
-        ChartSettings.shared.changed { (settings) in
+        ChartSettings.shared.changed(dependence: self) { (settings) in
 
             //---------------- 1. create main section ----------------//
 

@@ -107,7 +107,7 @@ class ChartSettings {
 
     func save() {
         // trigger changed
-        changedBlock(self)
+        changedBlocks.forEach{ $0.block(self) }
 
         // save to local
         var dict = [String : Any]()
