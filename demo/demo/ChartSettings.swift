@@ -19,16 +19,18 @@ class ChartSettings {
 
     static var shared = readFromLocal()
 
-    private var changedBlock = { (s: ChartSettings) in } {
+    private var changedBlocks = [(dependence: NSObject?, block: (ChartSettings)->())]() {
         didSet {
+            changedBlocks.removeAll{ $0.dependence == nil }
             if effectImmediately {
-                changedBlock(self)
+                changedBlocks.forEach{ $0.block(self) }
             }
         }
     }
 
-    func changed(_ block: @escaping (ChartSettings)->()) {
-        changedBlock = block
+    func changed(dependence: NSObject?, _ block: @escaping (ChartSettings)->()) {
+        changedBlocks.removeAll(where: { $0.dependence == dependence })
+        changedBlocks.append((dependence, block))
     }
 
     var effectImmediately = true
@@ -38,7 +40,7 @@ class ChartSettings {
     var mainIndicators = [(MA(), true),
                           (EMA(), false),
                           (BOLL(), false),
-                          (Candle(), false),]
+                          (Candle(), true),]
     as [(indicator: KLIndicator, on: Bool)] { didSet{ save() } }
 
     var otherIndicators = [(MAVOL(), true),

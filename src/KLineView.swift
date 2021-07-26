@@ -105,6 +105,16 @@ open class KLineView: UIView {
                 $0.chartView.viewPortHandler.refresh(newMatrix: transform, chart: $0.chartView, invalidate: true)
             }
         }
+
+        if needMoveToXMax && self.data.count > 52 {
+            moveToXMax()
+        }
+        needMoveToXMax = false
+
+        if needMoveToXMin {
+            moveToXMin()
+        }
+        needMoveToXMin = false
     }
 
     /// 一个经验值，控制 label 的密度，数字越大数量越多

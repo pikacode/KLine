@@ -55,7 +55,10 @@ open class KLSection {
 
     /// only draw data
     open func draw() {
-        
+
+        let transform = chartView.viewPortHandler.touchMatrix
+        let scale = chartView.viewPortHandler.scaleX
+
         /// 画 limit line
         leftAxis.removeAllLimitLines()
         rightAxis.removeAllLimitLines()
@@ -120,6 +123,9 @@ open class KLSection {
         } else {
             chartView.xAxis.spaceMax = 8
         }
+
+        chartView.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+        chartView.viewPortHandler.refresh(newMatrix: transform, chart: chartView, invalidate: true)
     }
 
     open var visibleXMaxCount: Double = 52

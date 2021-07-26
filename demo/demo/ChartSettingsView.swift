@@ -77,7 +77,9 @@ class ChartSettingsView: UIView {
         }
 
         settings.mainIndicators.enumerated().forEach{
-            self.mainButtons[$0.offset].isSelected = $0.element.on
+            if self.mainButtons.count >= $0.offset+1 {
+                self.mainButtons[$0.offset].isSelected = $0.element.on
+            }
         }
 
         settings.otherIndicators.enumerated().forEach{
