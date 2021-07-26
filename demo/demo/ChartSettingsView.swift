@@ -14,8 +14,11 @@ class ChartSettingsView: UIView {
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var back: UIImageView!
     @IBOutlet weak var heightRectLeading: NSLayoutConstraint!
+    @IBOutlet var mainButtons: [UIButton]!
+    @IBOutlet var otherButtons: [UIButton]!
+    @IBOutlet var switchs: [UISwitch]!
 
-    let settings = ChartSettings.shared
+    var settings: ChartSettings { return ChartSettings.shared }
 
     @IBAction func heightAction(_ sender: UIButton) {
         heightRectLeading.constant = [0, 121, 242][sender.tag]
@@ -67,6 +70,22 @@ class ChartSettingsView: UIView {
         }
         bgView.addTap { [weak self] in
             self?.dismiss()
+        }
+
+        if let index = [182, 282, 382].firstIndex(where: { $0 == settings.mainHeight }) {
+            heightRectLeading.constant = [0, 121, 242][index]
+        }
+
+        settings.mainIndicators.enumerated().forEach{
+            self.mainButtons[$0.offset].isSelected = $0.element.on
+        }
+
+        settings.otherIndicators.enumerated().forEach{
+            self.otherButtons[$0.offset].isSelected = $0.element.on
+        }
+
+        settings.priceLines.enumerated().forEach{
+            self.switchs[$0.offset].isOn = $0.element.enabled
         }
     }
 

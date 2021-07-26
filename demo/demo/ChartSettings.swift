@@ -19,12 +19,16 @@ class ChartSettings {
 
     static var shared = readFromLocal()
 
-    var changed = { (s: ChartSettings) in } {
+    private var changedBlock = { (s: ChartSettings) in } {
         didSet {
             if effectImmediately {
-                changed(self)
+                changedBlock(self)
             }
         }
+    }
+
+    func changed(_ block: @escaping (ChartSettings)->()) {
+        changedBlock = block
     }
 
     var effectImmediately = true
@@ -33,7 +37,8 @@ class ChartSettings {
 
     var mainIndicators = [(MA(), true),
                           (EMA(), false),
-                          (BOLL(), false)]
+                          (BOLL(), false),
+                          (Candle(), false),]
     as [(indicator: KLIndicator, on: Bool)] { didSet{ save() } }
 
     var otherIndicators = [(MAVOL(), true),
@@ -54,14 +59,71 @@ class ChartSettings {
     } { didSet{ save() } }
 
     static func readFromLocal() -> ChartSettings {
-        // read from local
-        return ChartSettings()
+        guard let str = UserDefaults.standard.value(forKey: userDefaultsKey) as? String,
+              let data = str.data(using: .utf8),
+              let dict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any]
+        else {
+            return ChartSettings()
+        }
+        let settgins = ChartSettings()
+
+        if let h = dict["mainHeight"] as? CGFloat {
+            settgins.mainHeight = h
+        }
+
+        (dict["mainIndicators"] as? [String: Bool])?.forEach{ pair in
+            let name = pair.key
+            let on = pair.value
+            if let index = settgins.mainIndicators.firstIndex(where: { $0.indicator.name == name }) {
+                let item = settgins.mainIndicators[index]
+                settgins.mainIndicators[index] = (item.indicator, on)
+            }
+        }
+
+        (dict["otherIndicators"] as? [String: Bool])?.forEach{ pair in
+            let name = pair.key
+            let on = pair.value
+            if let index = settgins.otherIndicators.firstIndex(where: { $0.indicator.name == name }) {
+                let item = settgins.otherIndicators[index]
+                settgins.otherIndicators[index] = (item.indicator, on)
+            }
+        }
+
+        (dict["priceLines"] as? [String: Bool])?.forEach{ pair in
+            let name = pair.key
+            let on = pair.value
+            if let index = settgins.priceLines.firstIndex(where: { $0.label == name }) {
+                let item = settgins.priceLines[index]
+                settgins.priceLines[index] = KPriceLine(label: name, color: item.color, value: item.value, enabled: on)
+            }
+        }
+
+        return settgins
     }
 
-    func save() {
-        changed(self)
-        // save to local
+    static let userDefaultsKey = "chartSettginsKey"
 
+    func save() {
+        // trigger changed
+        changedBlock(self)
+
+        // save to local
+        var dict = [String : Any]()
+        dict["mainHeight"] = mainHeight
+        dict["mainIndicators"] = mainIndicators.reduce(into: [String: Bool](), {
+            $0[$1.indicator.name] = $1.on
+        })
+        dict["otherIndicators"] = otherIndicators.reduce(into: [String: Bool](), {
+            $0[$1.indicator.name] = $1.on
+        })
+        dict["priceLines"] = priceLines.reduce(into: [String: Bool](), {
+            $0[$1.label] = $1.enabled
+        })
+
+        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed) {
+            let str = String(data: data, encoding: .utf8)
+            UserDefaults.standard.setValue(str, forKey: ChartSettings.userDefaultsKey)
+        }
     }
 
 }
