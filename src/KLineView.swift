@@ -24,7 +24,7 @@ open class KLineView: UIView {
         }
         didSet {
             queue.async {
-                self.indicators.forEach{ type(of: $0).calculate(&self.data) }
+                self.indicators.forEach{ type(of: $0).calculate(&self.realData) }
                 DispatchQueue.main.async {
                     self.layout()
                     self.draw()
