@@ -19,8 +19,8 @@ open class KLCombinedChartView: CombinedChartView {
         }
     }
 
-    static var crosshairChanged = { (_: CGPoint?) in }
-    static var highlightIndex = { (index: Int) in}
+    var crosshairChanged = { (_: CGPoint?) in }
+    var highlightIndex = { (index: Int) in}
 
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
@@ -157,7 +157,7 @@ extension KLCombinedChartView {
         crosshair.point = point
 
         if drawHorizontal {
-            KLCombinedChartView.crosshairChanged(crosshair.point)
+            crosshairChanged(crosshair.point)
         }
 
         if drawHorizontal {
@@ -187,9 +187,9 @@ extension KLCombinedChartView {
         let y = point.y
         
         let pt = self.pixelForValues(x: Double(x), y: Double(y), axis: .left)
-        if let entry = self.combinedData?.candleData?.dataSets[0].entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry{
-            guard let index = self.combinedData?.candleData?.dataSets[0].entryIndex(entry: entry) else { return }
-            KLCombinedChartView.highlightIndex(index)
+        if let entry = self.combinedData?.candleData?.dataSets.first?.entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry {
+            guard let index = self.combinedData?.candleData?.dataSets.first?.entryIndex(entry: entry) else { return }
+            highlightIndex(index)
             klMarker?.draw(context: context, point: pt)
         }
 

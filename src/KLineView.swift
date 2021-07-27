@@ -10,8 +10,7 @@ import Charts
 
 open class KLineView: UIView {
 
-    // MARK: - public
-    public static var highlightIndex = { (index: Int) in}
+    public var highlightIndex = { (index: Int) in}
 
     public init(_ sections: [KLSection]) {
         self.sections = sections
@@ -188,11 +187,11 @@ open class KLineView: UIView {
 
         layoutIfNeeded()
 
-        KLCombinedChartView.crosshairChanged = { (p) in
-            self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
-        }
-        KLCombinedChartView.highlightIndex = {(index) in
-            KLineView.highlightIndex(index)
+        sections.forEach{
+            $0.chartView.crosshairChanged = { (p) in
+                self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
+            }
+            $0.chartView.highlightIndex = self.highlightIndex
         }
 
         needMoveToXMax = false

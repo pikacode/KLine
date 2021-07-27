@@ -1,5 +1,5 @@
 //
-//  KLMarkerView.swift
+//  MarkerView.swift
 //  KLine
 //
 //  Created by aax1 on 2021/7/12.
@@ -8,12 +8,11 @@
 import UIKit
 import Charts
 import KLine
-class KLMarkerView: UIView {
 
-//    var markerView: KLMarker!
+class MarkerView: UIView {
+
     var labelArr: [UILabel] = []
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
@@ -22,8 +21,7 @@ class KLMarkerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     func initUI() {
         let titleArr = ["开","收","高","低","量","涨跌额","涨跌幅"]
         
@@ -45,8 +43,7 @@ class KLMarkerView: UIView {
             
         }
     }
-    
-    
+
     func addCell(title: String, bgView: UIView) {
         
         let label = addLabel(title: title)
@@ -75,16 +72,10 @@ class KLMarkerView: UIView {
     }
     
     func updateValue(model: KLineData) {
-        
-        labelArr[0].text = String.init(format: "%.2f", model.open)
-        labelArr[1].text = String.init(format: "%.2f", model.close)
-        labelArr[2].text = String.init(format: "%.2f", model.high)
-        labelArr[3].text = String.init(format: "%.2f", model.low)
-        labelArr[4].text = String.init(format: "%.2f", model.vol)
-        labelArr[5].text = String.init(format: "%.2f", model.vol)
-        labelArr[6].text = String.init(format: "%.2f", model.vol)
-
-        
+        let data = [model.open, model.close, model.high, model.low, model.vol, model.vol, model.vol]
+        labelArr.enumerated().forEach{
+            $0.element.text = String(format: "%.2f", data[$0.offset])
+        }
     }
 
 }
