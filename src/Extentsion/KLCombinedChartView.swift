@@ -31,7 +31,7 @@ open class KLCombinedChartView: CombinedChartView {
               let m2 = class_getInstanceMethod(BarLineChartViewBase.self, s2) else { return }
         method_exchangeImplementations(m1, m2)
     }
-    
+
     public override init(frame: CGRect) {
         KLCombinedChartView.exchangeMethod()
         super.init(frame: frame)
@@ -46,11 +46,14 @@ open class KLCombinedChartView: CombinedChartView {
     let klMarker = KLMarkerView()
     public var needMark: Bool = false
     open func initUI() {
+
+        backgroundColor = KLStyle.default.backgroundColor
+
         drawGridBackgroundEnabled = true
-        gridBackgroundColor = 0x0e0e0e.toColor
+        gridBackgroundColor = KLStyle.default.backgroundColor
         klMarker.initUI()
         klMarker.markerView.chartView = self
-        
+
         autoScaleMinMaxEnabled = true
 
         minOffset = 0
@@ -58,7 +61,7 @@ open class KLCombinedChartView: CombinedChartView {
         object_setClass(legendRenderer, KLLegendRenderer.self)
         legend.form = .none
         legend.verticalAlignment = .top
-        legend.drawInside = true
+        legend.drawInside = false
         legend.font = UIFont.systemFont(ofSize: 9)
         legend.formSize = 0
         legend.xEntrySpace = 10
@@ -66,10 +69,11 @@ open class KLCombinedChartView: CombinedChartView {
         legend.xOffset = 10
         legend.yOffset = 2
 
-        xAxis.labelPosition = .bottomInside
+        xAxis.labelPosition = .bottom
         xAxis.gridColor = KLStyle.default.darkGrayColor
         xAxis.labelTextColor = KLStyle.default.label.color
         xAxis.labelFont = KLStyle.default.label.font
+        xAxis.labelHeight = 20
 
         leftAxis.drawLabelsEnabled = false
         leftAxis.gridColor = KLStyle.default.darkGrayColor
@@ -169,13 +173,13 @@ extension KLCombinedChartView {
 
         setNeedsDisplay()
     }
-    
+
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
         if !needMark { return }
         let optionalContext = UIGraphicsGetCurrentContext()
         guard let context = optionalContext else { return }
-        
+
         guard let point = crosshair.point else {
             return
         }
@@ -183,10 +187,10 @@ extension KLCombinedChartView {
         let x = point.x
         let y = point.y
         let pt = trans.pixelForValues(x: Double(x), y: Double(y))
-               
+
         klMarker.markerView.draw(context: context, point: pt)
-        
-        
+
+
     }
 }
 

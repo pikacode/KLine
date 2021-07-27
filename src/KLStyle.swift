@@ -41,6 +41,7 @@ open class KLStyle: NSObject {
     public var upGradient: GradientColor
     public var downGradient: GradientColor
 
+    public var backgroundColor: UIColor
     public var darkGrayColor: UIColor
 
     public var label: KLLabel
@@ -59,6 +60,7 @@ open class KLStyle: NSObject {
             lineColor1 = style.lineColor1
             lineColor2 = style.lineColor2
             lineColor3 = style.lineColor3
+            backgroundColor = style.backgroundColor
             darkGrayColor = style.darkGrayColor
             upColor = style.upColor
             downColor = style.downColor
@@ -75,6 +77,7 @@ open class KLStyle: NSObject {
             lineColor1 = 0x039fff.toColor
             lineColor2 = 0x01d0f7.toColor
             lineColor3 = 0xff7401.toColor
+            backgroundColor = 0x0e0e0e.toColor
             darkGrayColor = 0x262626.toColor
             upColor = 0x02cc99.toColor
             downColor = 0xff2500.toColor
