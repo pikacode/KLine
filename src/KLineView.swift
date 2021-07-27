@@ -141,7 +141,8 @@ open class KLineView: UIView {
 
     var needMoveToXMin = false
 
-    let queue = DispatchQueue(label: "KLine")
+//    let queue = DispatchQueue(label: "KLine")
+    let queue = DispatchQueue.main
 
     var indicators: [KLIndicator] { return sections.flatMap{ $0.indicators } }
 

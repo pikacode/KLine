@@ -54,9 +54,9 @@ open class KLCombinedChartView: CombinedChartView {
 
         drawGridBackgroundEnabled = true
 
+        noDataText = ""
+
         gridBackgroundColor = KLStyle.default.backgroundColor
-//        klMarker.initUI()
-//        klMarker.markerView.chartView = self
 
         autoScaleMinMaxEnabled = true
 
@@ -65,7 +65,7 @@ open class KLCombinedChartView: CombinedChartView {
         object_setClass(legendRenderer, KLLegendRenderer.self)
         legend.form = .none
         legend.verticalAlignment = .top
-        legend.drawInside = false
+        legend.drawInside = true
         legend.font = UIFont.systemFont(ofSize: 9)
         legend.formSize = 0
         legend.xEntrySpace = 10
@@ -73,7 +73,7 @@ open class KLCombinedChartView: CombinedChartView {
         legend.xOffset = 10
         legend.yOffset = 2
 
-        xAxis.labelPosition = .bottom
+        xAxis.labelPosition = .bottomInside
         xAxis.gridColor = KLStyle.default.darkGrayColor
         xAxis.labelTextColor = KLStyle.default.label.color
         xAxis.labelFont = KLStyle.default.label.font
@@ -93,12 +93,8 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
         highlightPerTapEnabled = false
-//        xAxisRenderer.transformer
 
-//        let t = Transformer(viewPortHandler: viewPortHandler)
-//        xAxisRenderer = XAxisRenderer(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: t)
         object_setClass(xAxisRenderer.transformer, KLTransformer.self)
-//        xAxisRenderer.transformer
 
         addGestureRecognizer(longPressGesture)
         addGestureRecognizer(tapPressGesture)
@@ -197,7 +193,17 @@ extension KLCombinedChartView {
             KLCombinedChartView.highlightIndex(index)
             klMarker?.draw(context: context, point: pt)
         }
-        
+
+        //rang
+        if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled
+        {
+            leftYAxisRenderer.renderLimitLines(context: context)
+        }
+
+        if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled
+        {
+            rightYAxisRenderer.renderLimitLines(context: context)
+        }
     }
 }
 

@@ -48,7 +48,7 @@ public class KLMarker: NSUIView, IMarker {
         
         context.saveGState()
         context.translateBy(x: offset.x,
-                              y:  offset.y)
+                            y: offset.y)
         UIGraphicsPushContext(context)
         self.layer.render(in: context)
         UIGraphicsPopContext()
