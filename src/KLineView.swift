@@ -25,7 +25,7 @@ open class KLineView: UIView {
         }
         didSet {
             queue.async {
-                self.indicators.forEach{ type(of: $0).calculate(&self.data) }
+                self.indicators.forEach{ type(of: $0).calculate(&self.realData) }
                 DispatchQueue.main.async {
                     self.layout()
                     self.draw()
@@ -106,6 +106,16 @@ open class KLineView: UIView {
                 $0.chartView.viewPortHandler.refresh(newMatrix: transform, chart: $0.chartView, invalidate: true)
             }
         }
+
+        if needMoveToXMax && self.data.count > 52 {
+            moveToXMax()
+        }
+        needMoveToXMax = false
+
+        if needMoveToXMin {
+            moveToXMin()
+        }
+        needMoveToXMin = false
     }
 
     /// 一个经验值，控制 label 的密度，数字越大数量越多

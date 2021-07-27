@@ -773,6 +773,20 @@
                 <outlet property="bgView" destination="H5j-x2-QOR" id="NZR-jr-Gt4"/>
                 <outlet property="contentTrailing" destination="Eaw-tS-hjI" id="MX7-5u-aDH"/>
                 <outlet property="heightRectLeading" destination="gfu-Rh-oee" id="yz5-of-Jc3"/>
+                <outletCollection property="mainButtons" destination="3uZ-mS-8Tz" collectionClass="NSMutableArray" id="BFA-tF-Cj8"/>
+                <outletCollection property="mainButtons" destination="pCL-k9-fPI" collectionClass="NSMutableArray" id="er1-yy-YZI"/>
+                <outletCollection property="mainButtons" destination="iGD-FG-Zll" collectionClass="NSMutableArray" id="Vdt-XG-uk2"/>
+                <outletCollection property="otherButtons" destination="JLw-eQ-O5O" collectionClass="NSMutableArray" id="KTX-I3-Yra"/>
+                <outletCollection property="otherButtons" destination="z3T-nE-VTO" collectionClass="NSMutableArray" id="l2S-dB-CUt"/>
+                <outletCollection property="otherButtons" destination="2h4-qE-hwf" collectionClass="NSMutableArray" id="0Ay-0H-YzB"/>
+                <outletCollection property="otherButtons" destination="7Oo-y3-IhE" collectionClass="NSMutableArray" id="B6N-Vt-iFb"/>
+                <outletCollection property="switchs" destination="8y4-be-1ic" collectionClass="NSMutableArray" id="cUP-xQ-WnY"/>
+                <outletCollection property="switchs" destination="UIq-va-nsc" collectionClass="NSMutableArray" id="izk-Hf-Bab"/>
+                <outletCollection property="switchs" destination="Hd5-Zp-Ei0" collectionClass="NSMutableArray" id="ScG-L9-LVe"/>
+                <outletCollection property="switchs" destination="No1-4Z-h1f" collectionClass="NSMutableArray" id="Qr0-WQ-hfc"/>
+                <outletCollection property="switchs" destination="l8a-Wk-GGF" collectionClass="NSMutableArray" id="dfe-XY-zdL"/>
+                <outletCollection property="switchs" destination="WxV-qW-lVB" collectionClass="NSMutableArray" id="DH4-sd-CJI"/>
+                <outletCollection property="switchs" destination="0F3-W0-v9V" collectionClass="NSMutableArray" id="BAI-gZ-9BX"/>
             </connections>
             <point key="canvasLocation" x="270" y="140"/>
         </view>

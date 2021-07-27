@@ -88,7 +88,8 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
         highlightPerTapEnabled = false
-        
+
+        xAxisRenderer.transformer = Transformer(viewPortHandler: viewPortHandler)
 
         addGestureRecognizer(longPressGesture)
         addGestureRecognizer(tapPressGesture)

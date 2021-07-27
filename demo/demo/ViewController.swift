@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         //---------------- ⭐️⭐️ Advanced ----------------//
 
         // 👉 [Advanced]: change settings of klineView
-        ChartSettings.shared.changed = { (settings) in
+        ChartSettings.shared.changed(dependence: self) { (settings) in
 
             //---------------- 1. create main section ----------------//
 
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
             let mains = settings.mainIndicators.filter{ $0.on }.map{ $0.indicator }
             mainIndicators.append(contentsOf: mains)
 
-            // 👉 append limit lines
+            // 👉 append limit lines to main section
             let lines = self.createLimitLines()
             mainIndicators.append(contentsOf: lines)
 

@@ -70,7 +70,7 @@ open class KLSection {
 
     /// only draw data
     open func draw() {
-        
+
         /// 画 limit line
         leftAxis.removeAllLimitLines()
         rightAxis.removeAllLimitLines()
@@ -136,6 +136,7 @@ open class KLSection {
         } else {
             chartView.xAxis.spaceMax = 8
         }
+
     }
 
     open var visibleXMaxCount: Double = 52
