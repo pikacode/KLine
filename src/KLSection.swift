@@ -34,6 +34,8 @@ open class KLSection {
         didSet {
             if let markView = markView {
                 chartView.klMarker = KLMarker(view: markView, chartView: chartView)
+            } else {
+                chartView.klMarker = nil
             }
         }
     }
