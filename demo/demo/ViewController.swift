@@ -85,7 +85,10 @@ class ViewController: UIViewController {
         // 👉 4. config tap marker
         let markView = MarkerView(frame: CGRect(x: 0, y: 0, width: 130, height: 173))
         candleSection.markView = markView
-        klineView.highlightIndex = { [weak self] (index) in
+        klineView.highlightedChanged = { [weak self] (index) in
+            if #available(iOS 10.0, *) {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            }
             guard let strongSelf = self else {
                 return
             }

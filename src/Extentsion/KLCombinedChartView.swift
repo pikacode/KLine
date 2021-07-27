@@ -22,6 +22,9 @@ open class KLCombinedChartView: CombinedChartView {
     var crosshairChanged = { (_: CGPoint?) in }
     var highlightIndex = { (index: Int) in}
 
+    var highlightedIndex: Int?
+    var oldHighlightedIndex: Int?
+
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
         if didExchangeMethod { return }
@@ -146,6 +149,10 @@ extension KLCombinedChartView {
             return
         }
 
+        guard let p = point, let entry = combinedData?.candleData?.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan) as? CandleChartDataEntry else {
+            return
+        }
+
         [leftAxis, rightAxis, xAxis].forEach { (axis) in
             axis.limitLines.filter { (l) -> Bool in
                 return l.isCrosshair
@@ -154,7 +161,8 @@ extension KLCombinedChartView {
             }
         }
 
-        crosshair.point = point
+        //让 x 一格一格的改变，y可以随意改变
+        crosshair.point = CGPoint(x: CGFloat(entry.x), y: p.y)
 
         if drawHorizontal {
             crosshairChanged(crosshair.point)
@@ -171,27 +179,15 @@ extension KLCombinedChartView {
             xAxis.addLimitLine(v.limitLine)
         }
 
+        highlightedIndex = self.combinedData?.candleData?.dataSets.first?.entryIndex(entry: entry)
+
         setNeedsDisplay()
     }
 
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if klMarker == nil { return }
-        let optionalContext = UIGraphicsGetCurrentContext()
-        guard let context = optionalContext else { return }
 
-        guard let point = crosshair.point else {
-            return
-        }
-        let x = point.x
-        let y = point.y
-        
-        let pt = self.pixelForValues(x: Double(x), y: Double(y), axis: .left)
-        if let entry = self.combinedData?.candleData?.dataSets.first?.entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry {
-            guard let index = self.combinedData?.candleData?.dataSets.first?.entryIndex(entry: entry) else { return }
-            highlightIndex(index)
-            klMarker?.draw(context: context, point: pt)
-        }
+        guard let context = UIGraphicsGetCurrentContext() else { return }
 
         //rang
         if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled
@@ -203,7 +199,29 @@ extension KLCombinedChartView {
         {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
+
+        renderKLMarker(context: context)
     }
+
+    func renderKLMarker(context: CGContext) {
+
+        if klMarker == nil { return }
+
+        guard let newIndex = highlightedIndex else { return }
+
+        guard let point = crosshair.point else {
+            return
+        }
+
+        if oldHighlightedIndex != highlightedIndex {
+            oldHighlightedIndex = highlightedIndex
+            highlightIndex(newIndex)
+        }
+
+        let pt = self.pixelForValues(x: point.x.double, y: point.y.double, axis: .left)
+        klMarker?.draw(context: context, point: pt)
+    }
+
 }
 
 extension BarLineChartViewBase {

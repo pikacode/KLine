@@ -10,7 +10,7 @@ import Charts
 
 open class KLineView: UIView {
 
-    public var highlightIndex = { (index: Int) in}
+    public var highlightedChanged = { (index: Int) in }
 
     public init(_ sections: [KLSection]) {
         self.sections = sections
@@ -191,7 +191,7 @@ open class KLineView: UIView {
             $0.chartView.crosshairChanged = { (p) in
                 self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
             }
-            $0.chartView.highlightIndex = self.highlightIndex
+            $0.chartView.highlightIndex = self.highlightedChanged
         }
 
         needMoveToXMax = false

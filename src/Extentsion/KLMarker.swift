@@ -12,7 +12,9 @@ import Charts
 #if canImport(AppKit)
 import AppKit
 #endif
+
 public class KLMarker: IMarker {
+
     open var offset: CGPoint = CGPoint()
     
     open weak var chartView: ChartViewBase?

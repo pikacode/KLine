@@ -22,7 +22,6 @@
 		171D7FC46EC56CF9B16D97877A176C10 /* ChartUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840460E6B20D57B0C6D83CAF5284438 /* ChartUtils.swift */; };
 		1730C4105E5A8F11ECC0115A9BB63E18 /* EMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A272FA14AD76317EFACF359ABF59531 /* EMA.swift */; };
 		18400D1324A9B8C900FAA4F0342798EB /* Candle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BDEBCBE4818893FF21EFE042A40F0 /* Candle.swift */; };
-		19C6DE0B7FDB2AB1DEC6A209793A4C6F /* MarkerView+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A08DC5E1F29C381F82EA96E4C07A /* MarkerView+KL.swift */; };
 		1AF2A57E2B15E7DB326A38D8D8A4FBE2 /* ChartViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E83764B86E2AD6C8404CE9E3E3973FC /* ChartViewBase.swift */; };
 		1BA531D4556D4005496308074856EBF7 /* KLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EDC852DF6210C20F223B1237DF85F8 /* KLineView.swift */; };
 		1C2DB744A980164665CE687581222A12 /* Charts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D67F763094F475FC117DDA0423C310 /* Charts-dummy.m */; };
@@ -265,7 +264,6 @@
 		48027FA544793BB96B21AC8F1F684204 /* Charts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Charts.debug.xcconfig; sourceTree = "<group>"; };
 		481D40C9074CC4EB8C17C82539628899 /* MAVOL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MAVOL.swift; path = src/Indicator/MAVOL.swift; sourceTree = "<group>"; };
 		4926FB589990AB6F079A9D6A138D5497 /* PieChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataSet.swift; sourceTree = "<group>"; };
-		4A63A08DC5E1F29C381F82EA96E4C07A /* MarkerView+KL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkerView+KL.swift"; path = "src/Extentsion/MarkerView+KL.swift"; sourceTree = "<group>"; };
 		4B455CB3260113D06D0708E1A7EF6C70 /* AxisRendererBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AxisRendererBase.swift; path = Source/Charts/Renderers/AxisRendererBase.swift; sourceTree = "<group>"; };
 		4BD493BB0F0A3F7D7A61E2E7B5AE9B15 /* PieHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieHighlighter.swift; path = Source/Charts/Highlight/PieHighlighter.swift; sourceTree = "<group>"; };
 		4BEF19D891C300E9F3E61B100982A371 /* TransformerHorizontalBarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformerHorizontalBarChart.swift; path = Source/Charts/Utils/TransformerHorizontalBarChart.swift; sourceTree = "<group>"; };
@@ -714,7 +712,6 @@
 				F60354CCC0CCF7C8BF3E9C879D575F31 /* KLLegendRenderer.swift */,
 				1BEABB753380EEA80DC1585BDB2D1F70 /* KLMarker.swift */,
 				2E823E30D3919DFA4CF2EE33F46960C2 /* KLYAxisRenderer.swift */,
-				4A63A08DC5E1F29C381F82EA96E4C07A /* MarkerView+KL.swift */,
 				2E9191F242CFD34B45793A401293FF74 /* UIColor+KL.swift */,
 				5F4EAFEB9F1971FA55EE3C858E940596 /* UIView+KL.swift */,
 			);
@@ -1118,7 +1115,6 @@
 				FA5285F3673DEE45FCB1ED09A44D9B51 /* LimitLine.swift in Sources */,
 				9D77679AF26382A6EA1BB08525CE3609 /* MA.swift in Sources */,
 				C67DE22FE879D4BBFB34D7348FBACD30 /* MACD.swift in Sources */,
-				19C6DE0B7FDB2AB1DEC6A209793A4C6F /* MarkerView+KL.swift in Sources */,
 				24F050BB1C294797187E147806E6D285 /* MAVOL.swift in Sources */,
 				75C328EA439707D727171DA4D0989276 /* RSI.swift in Sources */,
 				A8DA4E78C06CC5311A33611D29396630 /* UIColor+KL.swift in Sources */,
