@@ -44,10 +44,9 @@ open class KLCombinedChartView: CombinedChartView {
         super.init(coder: aDecoder)
         initUI()
     }
+
     open var klMarker: KLMarker?
-    
-    public var needMark: Bool = false
-    
+        
     open func initUI() {
 
         backgroundColor = KLStyle.default.backgroundColor
@@ -177,7 +176,7 @@ extension KLCombinedChartView {
 
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if !needMark { return }
+        if klMarker == nil { return }
         let optionalContext = UIGraphicsGetCurrentContext()
         guard let context = optionalContext else { return }
 

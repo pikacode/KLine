@@ -12,18 +12,25 @@ import Charts
 #if canImport(AppKit)
 import AppKit
 #endif
-public class KLMarker: NSUIView, IMarker {
+public class KLMarker: IMarker {
     open var offset: CGPoint = CGPoint()
     
-    @objc open weak var chartView: ChartViewBase?
+    open weak var chartView: ChartViewBase?
+
+    public let view: UIView
+
+    init(view: UIView, chartView: ChartViewBase) {
+        self.view = view
+        self.chartView = chartView
+    }
     
     open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint
     {
         guard let chart = chartView else { return self.offset }
-        
+
         var offset = self.offset
         
-        let width = self.bounds.size.width
+        let width = self.view.bounds.size.width
         let chartW = chart.bounds.size.width
         
         if point.x > chartW / 2{
@@ -50,7 +57,7 @@ public class KLMarker: NSUIView, IMarker {
         context.translateBy(x: offset.x,
                             y: offset.y)
         UIGraphicsPushContext(context)
-        self.layer.render(in: context)
+        self.view.layer.render(in: context)
         UIGraphicsPopContext()
         context.restoreGState()
     }

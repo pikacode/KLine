@@ -64,7 +64,6 @@ class ViewController: UIViewController {
         // 👉 sections can be modified after
         let markView = KLMarkerView.init(frame: CGRect.init(x: 0, y: 0, width: 130, height: 173))
         let candleSection = KLSection([Candle(), MA()], 300)
-        candleSection.needMarkView = true
         candleSection.markView = markView
         
         klineView = KLineView([candleSection,

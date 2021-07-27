@@ -29,19 +29,11 @@ open class KLSection {
     }()
 
     open var height: CGFloat
-    
-    open var needMarkView: Bool = false
 
     open var markView: UIView? {
         didSet {
-            if let markView = markView{
-                if !needMarkView {
-                    return
-                }
-                chartView.klMarker = KLMarker.init(frame: markView.frame)
-                chartView.klMarker?.chartView = chartView
-                chartView.needMark = needMarkView
-                chartView.klMarker?.addSubview(markView)
+            if let markView = markView {
+                chartView.klMarker = KLMarker(view: markView, chartView: chartView)
             }
         }
     }
