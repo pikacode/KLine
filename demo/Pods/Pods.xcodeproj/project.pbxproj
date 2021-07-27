@@ -49,6 +49,7 @@
 		35C57ED01BE2D7FD6F4DACD96F5EDFE1 /* IFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA427B68ADA2432EB0ADB4B261CC04A9 /* IFillFormatter.swift */; };
 		39E13C8ED0C32E9EC0B353CA45C70CF2 /* AnimatedMoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B286BDFE78ABF03B0C4DDCFD8FBF6 /* AnimatedMoveViewJob.swift */; };
 		3A5078F021BB004E2F4463F360D41391 /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A85FF755B71FE7150933C213AD28 /* HorizontalBarChartView.swift */; };
+		3B791A6526AFDF2800FFE7AA /* KLTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B791A6426AFDF2800FFE7AA /* KLTransformer.swift */; };
 		3D57709B53538839313AA6A6DC6E322C /* ILineRadarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C4B267A4820A775520B1F23ECE97E0 /* ILineRadarChartDataSet.swift */; };
 		3EAC9B9D96C569653EF71750289EB0D0 /* CandleChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5FAA917CB8604181B74E2806CB081 /* CandleChartDataEntry.swift */; };
 		4602535FF1B8156B23411D8D5D54E40D /* KDJ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A26641C66B01C531B506E1ECB978062 /* KDJ.swift */; };
@@ -65,7 +66,6 @@
 		58398B0E03224E5EBE7FCFAD62F8FB69 /* ILineChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF31F6C01D1D5CEBABFF06A1EA53B83 /* ILineChartDataSet.swift */; };
 		5847AEA5F6021F082A9238BDD5801079 /* Platform+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C772E5330CFA8563393FB3B93F49D19 /* Platform+Accessibility.swift */; };
 		59522C6DFF1ABB5F52A609B841E54351 /* Crosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD3ADD70F64B922EF8E962D1FF5693C /* Crosshair.swift */; };
-		5A8255901FCB1E7E310E4B3DC5B2B5B0 /* KLMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7704688D74AA5DBF1C58229597443D3 /* KLMarkerView.swift */; };
 		5B96DE0FB615C832ACB06B9E16B49740 /* IValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1EB0270C9AF81C443D76CEF39F2274 /* IValueFormatter.swift */; };
 		5C790091CB1B0D41E23A4AE5FA727983 /* IBubbleChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF0442BC2DEEBAD45CD4240D2002ED8 /* IBubbleChartDataSet.swift */; };
 		5D02340D4E3744737AEDC22943109B74 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEA0BC1F07E1A86B55BAF582790E95E /* Foundation.framework */; };
@@ -252,6 +252,7 @@
 		361F7A3E2259B2B52B112ACAC2CE35C4 /* CandleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/CandleChartDataSet.swift; sourceTree = "<group>"; };
 		377F2443D65EA44184E8190051E7FC3D /* Depth.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Depth.swift; path = src/Indicator/Depth.swift; sourceTree = "<group>"; };
 		3A4DB505F06D59AEF8D380731C3F6A1D /* PieChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataEntry.swift; sourceTree = "<group>"; };
+		3B791A6426AFDF2800FFE7AA /* KLTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KLTransformer.swift; path = src/Extentsion/KLTransformer.swift; sourceTree = "<group>"; };
 		3CC1CAEC7CC7F954BB49C60C7987BAC5 /* IAxisValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IAxisValueFormatter.swift; path = Source/Charts/Formatters/IAxisValueFormatter.swift; sourceTree = "<group>"; };
 		3DFD8284D505942F173AB98D06E36376 /* Platform+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Platform+Color.swift"; path = "Source/Charts/Utils/Platform+Color.swift"; sourceTree = "<group>"; };
 		4186796F0F1A447948DBB31A0BB6C13D /* CombinedHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedHighlighter.swift; path = Source/Charts/Highlight/CombinedHighlighter.swift; sourceTree = "<group>"; };
@@ -352,7 +353,6 @@
 		A2BA199F97C72A9D0A0EFFC2FD30DBB6 /* BubbleChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataProvider.swift; path = Source/Charts/Interfaces/BubbleChartDataProvider.swift; sourceTree = "<group>"; };
 		A5A15E35076A3B667B8FD0509EB3AF06 /* CombinedChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedChartRenderer.swift; path = Source/Charts/Renderers/CombinedChartRenderer.swift; sourceTree = "<group>"; };
 		A763AF52AFF556911CCB6DE94DCAB56E /* DefaultAxisValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultAxisValueFormatter.swift; path = Source/Charts/Formatters/DefaultAxisValueFormatter.swift; sourceTree = "<group>"; };
-		A7704688D74AA5DBF1C58229597443D3 /* KLMarkerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KLMarkerView.swift; path = src/Indicator/KLMarkerView.swift; sourceTree = "<group>"; };
 		A90D03D5BD551CF9814FDA9DBA45C503 /* ILineScatterCandleRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ILineScatterCandleRadarChartDataSet.swift; path = Source/Charts/Data/Interfaces/ILineScatterCandleRadarChartDataSet.swift; sourceTree = "<group>"; };
 		AA6F28936150B774D174F70EC133595F /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		ACA11F4A1B918C7BEB459B8DE15FBA42 /* Fill.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Fill.swift; path = Source/Charts/Utils/Fill.swift; sourceTree = "<group>"; };
@@ -473,7 +473,6 @@
 				5A272FA14AD76317EFACF359ABF59531 /* EMA.swift */,
 				2A26641C66B01C531B506E1ECB978062 /* KDJ.swift */,
 				D4A3A083F9BEF3FED295C1FF3A0AE4BB /* KLIndicator.swift */,
-				A7704688D74AA5DBF1C58229597443D3 /* KLMarkerView.swift */,
 				926AE727F2755EEF4BE876612025DB0F /* LimitLine.swift */,
 				8CC4C5035A125D6B29259E0C8BFB7E29 /* MA.swift */,
 				5EE9C95ED82AE7C9B2705FA83D3AF492 /* MACD.swift */,
@@ -711,6 +710,7 @@
 				4636D16D381542C80F4F09D4729114E2 /* Int+KL.swift */,
 				F16543CC2311B0F11252C6866D49A207 /* KLChartLimitLine.swift */,
 				9E326EB2DDC54D086A749F9C8D0A6F1A /* KLCombinedChartView.swift */,
+				3B791A6426AFDF2800FFE7AA /* KLTransformer.swift */,
 				F60354CCC0CCF7C8BF3E9C879D575F31 /* KLLegendRenderer.swift */,
 				1BEABB753380EEA80DC1585BDB2D1F70 /* KLMarker.swift */,
 				2E823E30D3919DFA4CF2EE33F46960C2 /* KLYAxisRenderer.swift */,
@@ -1108,9 +1108,9 @@
 				E0CD89C51E173822F1D1512F9B150F57 /* KLineData.swift in Sources */,
 				1BA531D4556D4005496308074856EBF7 /* KLineView.swift in Sources */,
 				6796A86DCB34DD45A8C2F1AF1424D926 /* KLLabel.swift in Sources */,
+				3B791A6526AFDF2800FFE7AA /* KLTransformer.swift in Sources */,
 				FF1588B335AB6601F42D787BD9D47309 /* KLLegendRenderer.swift in Sources */,
 				1EEA275BCC47F7C15E22F477642CE224 /* KLMarker.swift in Sources */,
-				5A8255901FCB1E7E310E4B3DC5B2B5B0 /* KLMarkerView.swift in Sources */,
 				B61C946A83E5C3BECF488D5D50E71C99 /* KLPoint.swift in Sources */,
 				2369CA8075E9D0662AD9B570831B1FCF /* KLSection.swift in Sources */,
 				C24FCDE113BEE6ABED1D870744803B13 /* KLStyle.swift in Sources */,

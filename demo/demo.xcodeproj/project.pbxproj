@@ -21,6 +21,7 @@
 		3B61861F2667339E00691E39 /* CombinedChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B61861E2667339E00691E39 /* CombinedChartViewController.xib */; };
 		3BC451D72685D2420007A606 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B11D5262665E630009517FC /* ViewController.swift */; };
 		D196AFBB2689C24B00639C9B /* depth.json in Resources */ = {isa = PBXBuildFile; fileRef = D196AFBA2689C24B00639C9B /* depth.json */; };
+		D1B78E8F26AAC91F0016B35B /* KLMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B78E8E26AAC91F0016B35B /* KLMarkerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		941396932459EA8B2D4442C4 /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		C031B8CBFDDA8F4479B227BC /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		D196AFBA2689C24B00639C9B /* depth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = depth.json; sourceTree = "<group>"; };
+		D1B78E8E26AAC91F0016B35B /* KLMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLMarkerView.swift; sourceTree = "<group>"; };
 		DD4CC2519C9BFB0128672582 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				3B568AD02681BD5F00E2B69D /* ChartSettingsView.swift */,
 				3B568AD32681BD7A00E2B69D /* ChartSettingsView.xib */,
 				D196AFBA2689C24B00639C9B /* depth.json */,
+				D1B78E8E26AAC91F0016B35B /* KLMarkerView.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B11D58126663F4C009517FC /* AxisValueFormatter.swift in Sources */,
+				D1B78E8F26AAC91F0016B35B /* KLMarkerView.swift in Sources */,
 				3B568AD12681BD5F00E2B69D /* ChartSettingsView.swift in Sources */,
 				3B11D57B26663EF5009517FC /* CombinedChartViewController.swift in Sources */,
 				3B568AE32681E7AE00E2B69D /* ChartSettings.swift in Sources */,

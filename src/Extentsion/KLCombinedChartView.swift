@@ -20,6 +20,7 @@ open class KLCombinedChartView: CombinedChartView {
     }
 
     static var crosshairChanged = { (_: CGPoint?) in }
+    static var highlightIndex = { (index: Int) in}
 
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
@@ -43,16 +44,19 @@ open class KLCombinedChartView: CombinedChartView {
         super.init(coder: aDecoder)
         initUI()
     }
-    let klMarker = KLMarkerView()
+    open var klMarker: KLMarker?
+    
     public var needMark: Bool = false
+    
     open func initUI() {
 
         backgroundColor = KLStyle.default.backgroundColor
 
         drawGridBackgroundEnabled = true
+
         gridBackgroundColor = KLStyle.default.backgroundColor
-        klMarker.initUI()
-        klMarker.markerView.chartView = self
+//        klMarker.initUI()
+//        klMarker.markerView.chartView = self
 
         autoScaleMinMaxEnabled = true
 
@@ -89,8 +93,12 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
         highlightPerTapEnabled = false
+//        xAxisRenderer.transformer
 
-        xAxisRenderer.transformer = Transformer(viewPortHandler: viewPortHandler)
+//        let t = Transformer(viewPortHandler: viewPortHandler)
+//        xAxisRenderer = XAxisRenderer(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: t)
+        object_setClass(xAxisRenderer.transformer, KLTransformer.self)
+//        xAxisRenderer.transformer
 
         addGestureRecognizer(longPressGesture)
         addGestureRecognizer(tapPressGesture)
@@ -99,9 +107,6 @@ open class KLCombinedChartView: CombinedChartView {
                 pan.require(toFail: self.longPressGesture)
             }
         }
-
-//        viewPortHandler.setMaximumScaleX(10)
-//        zoomToCenter(scaleX: 3, scaleY: 1)
     }
 
     /// for Crosshair
@@ -161,13 +166,13 @@ extension KLCombinedChartView {
         }
 
         if drawHorizontal {
-            if var h = crosshair.horizontal {
+            if let h = crosshair.horizontal {
                 leftAxis.addLimitLine(h.limitLine)
                 rightAxis.addLimitLine(h.limitLine)
             }
         }
 
-        if var v = crosshair.vertical {
+        if let v = crosshair.vertical {
             xAxis.addLimitLine(v.limitLine)
         }
 
@@ -183,14 +188,16 @@ extension KLCombinedChartView {
         guard let point = crosshair.point else {
             return
         }
-        let trans = getTransformer(forAxis: .left)
         let x = point.x
         let y = point.y
-        let pt = trans.pixelForValues(x: Double(x), y: Double(y))
-
-        klMarker.markerView.draw(context: context, point: pt)
-
-
+        
+        let pt = self.pixelForValues(x: Double(x), y: Double(y), axis: .left)
+        if let entry = self.combinedData?.candleData?.dataSets[0].entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry{
+            guard let index = self.combinedData?.candleData?.dataSets[0].entryIndex(entry: entry) else { return }
+            KLCombinedChartView.highlightIndex(index)
+            klMarker?.draw(context: context, point: pt)
+        }
+        
     }
 }
 

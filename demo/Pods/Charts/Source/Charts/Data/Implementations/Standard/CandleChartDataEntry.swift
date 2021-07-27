@@ -33,7 +33,6 @@ open class CandleChartDataEntry: ChartDataEntry
     @objc public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double)
     {
         super.init(x: x, y: (shadowH + shadowL) / 2.0)
-        
         self.high = shadowH
         self.low = shadowL
         self.open = open

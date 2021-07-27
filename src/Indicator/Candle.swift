@@ -9,9 +9,9 @@ import UIKit
 import Charts
 
 open class Candle: KLIndicator {
-
+    
     required public init() {}
- 
+    
     public func candleDataSet(_ data: [Any]) -> [CandleChartDataSet]? {
         guard let data = data as? [KLineData] else { return nil }
         let entries = data.map{
