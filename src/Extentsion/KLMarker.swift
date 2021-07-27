@@ -12,7 +12,7 @@ import Charts
 #if canImport(AppKit)
 import AppKit
 #endif
-class KLMarker: NSUIView, IMarker {
+public class KLMarker: NSUIView, IMarker {
     open var offset: CGPoint = CGPoint()
     
     @objc open weak var chartView: ChartViewBase?
@@ -24,23 +24,15 @@ class KLMarker: NSUIView, IMarker {
         var offset = self.offset
         
         let width = self.bounds.size.width
-        let height = self.bounds.size.height
-
-        if point.x < width + 20 {
-            offset.x = point.x + 10
+        let chartW = chart.bounds.size.width
+        
+        if point.x > chartW / 2{
+            offset.x = 10
         }else{
-            offset.x = point.x - width - 10
+            offset.x = chartW - width - 10
         }
         
-        let chartH = chart.bounds.size.height
-        
-        if point.y > chartH - height / 2 {
-            offset.y = chartH - height
-        }else if point.y < height / 2{
-            offset.y = 10
-        }else{
-            offset.y = point.y - height / 2
-        }
+        offset.y = 10
 
         return offset
     }

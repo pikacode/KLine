@@ -62,24 +62,35 @@ class ViewController: UIViewController {
 
         // 👉 1. create KLineView by sections
         // 👉 sections can be modified after
-        klineView = KLineView([KLSection([Candle(), MA()], 300),
+        let markView = KLMarkerView.init(frame: CGRect.init(x: 0, y: 0, width: 130, height: 173))
+        let candleSection = KLSection([Candle(), MA()], 300)
+        candleSection.needMarkView = true
+        candleSection.markView = markView
+        
+        klineView = KLineView([candleSection,
                                KLSection([MAVOL()], 74),
                                KLSection([MACD()], 74)])
-
+        
         contentView.addSubview(klineView)
         contentHeight.constant = klineView.neededHeight
-
+        
         // 👉 2. set data
         klineView.data = data
         klineView.moveToXMax() // if u append new data and want to scroll to the end of th chart
-
+        
+        
+        KLineView.highlightIndex = { [weak self](index) in
+            guard let strongSelf = self else {
+                return
+            }
+            let dd = strongSelf.data[index] 
+            markView.updateValue(model: dd)
+        }
         // 👉 3. set x date formatter for first section
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormat.day.rawValue
         klineView.sections.first?.xValueFormatter = KLDateFormatter(formatter)
-
-
-            
+        
         //---------------- ⭐️⭐️ Advanced ----------------//
 
         // 👉 [Advanced]: change settings of klineView

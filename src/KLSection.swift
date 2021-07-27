@@ -19,10 +19,9 @@ open class KLSection {
             draw()
         }
     }
-
+    
     open lazy var chartView: KLCombinedChartView = {
         let v = KLCombinedChartView(frame: .zero)
-        v.needMark = indicators.contains { (dd) -> Bool in return dd is Candle}
         v.xAxis.valueFormatter = KLEmptyFormatter()
         v.leftYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.leftAxis, transformer: v.getTransformer(forAxis: .left))
         v.rightYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.rightAxis, transformer: v.getTransformer(forAxis: .right))
@@ -31,7 +30,21 @@ open class KLSection {
 
     open var height: CGFloat
     
-    open var markView: KLMarker
+    open var needMarkView: Bool = false
+
+    open var markView: UIView? {
+        didSet {
+            if let markView = markView{
+                if !needMarkView {
+                    return
+                }
+                chartView.klMarker = KLMarker.init(frame: markView.frame)
+                chartView.klMarker?.chartView = chartView
+                chartView.needMark = needMarkView
+                chartView.klMarker?.addSubview(markView)
+            }
+        }
+    }
 
     open var data = [Any]() {
         didSet {
@@ -63,6 +76,7 @@ open class KLSection {
         rightAxis.removeAllLimitLines()
         xAxis.removeAllLimitLines()
         indicators.forEach{
+            
             if var l = $0 as? LimitLine {
                 
                 let line = l.limitLine
@@ -99,7 +113,7 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-
+        
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
             chartView.data = combinedData
             if visibleXMaxCountReal != visibleXMaxCount {

@@ -11,6 +11,7 @@ import Charts
 open class KLineView: UIView {
 
     // MARK: - public
+    public static var highlightIndex = { (index: Int) in}
 
     public init(_ sections: [KLSection]) {
         self.sections = sections
@@ -139,7 +140,8 @@ open class KLineView: UIView {
 
     var tempData = [Any]()
     var realData = [Any]()
-
+    
+    
     func layout() {
 //        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
 //        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
@@ -177,6 +179,9 @@ open class KLineView: UIView {
 
         KLCombinedChartView.crosshairChanged = { (p) in
             self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
+        }
+        KLCombinedChartView.highlightIndex = {(index) in
+            KLineView.highlightIndex(index)
         }
 
         needMoveToXMax = false

@@ -20,6 +20,7 @@ open class KLCombinedChartView: CombinedChartView {
     }
 
     static var crosshairChanged = { (_: CGPoint?) in }
+    static var highlightIndex = { (index: Int) in}
 
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
@@ -43,13 +44,15 @@ open class KLCombinedChartView: CombinedChartView {
         super.init(coder: aDecoder)
         initUI()
     }
-    let klMarker = KLMarkerView()
+    open var klMarker: KLMarker?
+    
     public var needMark: Bool = false
+    
     open func initUI() {
         drawGridBackgroundEnabled = true
         gridBackgroundColor = 0x0e0e0e.toColor
-        klMarker.initUI()
-        klMarker.markerView.chartView = self
+//        klMarker.initUI()
+//        klMarker.markerView.chartView = self
         
         autoScaleMinMaxEnabled = true
 
@@ -94,9 +97,6 @@ open class KLCombinedChartView: CombinedChartView {
                 pan.require(toFail: self.longPressGesture)
             }
         }
-
-//        viewPortHandler.setMaximumScaleX(10)
-//        zoomToCenter(scaleX: 3, scaleY: 1)
     }
 
     /// for Crosshair
@@ -183,10 +183,9 @@ extension KLCombinedChartView {
         
         let pt = self.pixelForValues(x: Double(x), y: Double(y), axis: .left)
         if let entry = self.combinedData?.candleData?.dataSets[0].entryForXValue(Double(x), closestToY: .nan) as? CandleChartDataEntry{
-            
-            
-            klMarker.markerView.draw(context: context, point: pt)
-            klMarker.updateValue(model: entry)
+            guard let index = self.combinedData?.candleData?.dataSets[0].entryIndex(entry: entry) else { return }
+            KLCombinedChartView.highlightIndex(index)
+            klMarker?.draw(context: context, point: pt)
         }
         
     }

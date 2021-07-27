@@ -6,32 +6,39 @@
 //
 
 import UIKit
-import UIKit
 import Charts
+import KLine
 class KLMarkerView: UIView {
 
-    var markerView: KLMarker!
+//    var markerView: KLMarker!
     var labelArr: [UILabel] = []
     
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     func initUI() {
-//        labelArr = [openLabel, closeLabel, highLabel, lowLabel, volLabel, changeQuotaLabel, changeRateLabel]
         let titleArr = ["开","收","高","低","量","涨跌额","涨跌幅"]
         
-        markerView = KLMarker.init(frame: CGRect.init(x: 0, y: 0, width: 130, height: 173))
-        
-        markerView.backgroundColor = UIColor.init(red: 38 / 255, green: 38 / 255, blue: 38 / 255, alpha: 0.8)
-        markerView.layer.borderWidth = 0.5
-        markerView.layer.borderColor = UIColor.init(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 0.4).cgColor
+        self.backgroundColor = UIColor.init(red: 38 / 255, green: 38 / 255, blue: 38 / 255, alpha: 0.8)
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.init(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 0.4).cgColor
 
         for index in 0 ..< titleArr.count {
         let tView = UIView.init()
 
-            let height = markerView.bounds.size.height / CGFloat(titleArr.count)
+            let height = self.bounds.size.height / CGFloat(titleArr.count)
             let top = CGFloat(height) * CGFloat(index)
 
-            tView.frame = CGRect.init(x: 0, y: top, width: markerView.bounds.size.width, height: height)
-            markerView.addSubview(tView)
+            tView.frame = CGRect.init(x: 0, y: top, width: self.bounds.size.width, height: height)
+            self.addSubview(tView)
             tView.backgroundColor = .clear
             
             addCell(title: titleArr[index],  bgView: tView)
@@ -62,22 +69,20 @@ class KLMarkerView: UIView {
     func addLabel(title: String, valueLabel: Bool = false) -> UILabel {
         let label = UILabel.init()
         label.text = title
-        label.textColor = valueLabel ? .white : UIColor.init(r: 153, g: 153, b: 153)
+        label.textColor = valueLabel ? .white : .init(red: 153 / 255, green: 153 / 255, blue: 153 / 255, alpha: 1)
         label.font = .systemFont(ofSize: 12)
         return label
     }
     
-    func updateValue(model: CandleChartDataEntry) {
+    func updateValue(model: KLineData) {
         
-        
-        labelArr[0].text = "\(model.open)"
-        labelArr[1].text = "\(model.close)"
-        labelArr[2].text = "\(model.high)"
-        labelArr[3].text = "\(model.low)"
-
-//        volLabel?.text = "\(model.open)"
-//        changeRateLabel?.text = "\(model.open)"
-//        changeQuotaLabel?.text = "\(model.open)"
+        labelArr[0].text = String.init(format: "%.2f", model.open)
+        labelArr[1].text = String.init(format: "%.2f", model.close)
+        labelArr[2].text = String.init(format: "%.2f", model.high)
+        labelArr[3].text = String.init(format: "%.2f", model.low)
+        labelArr[4].text = String.init(format: "%.2f", model.vol)
+        labelArr[5].text = String.init(format: "%.2f", model.vol)
+        labelArr[6].text = String.init(format: "%.2f", model.vol)
 
         
     }
