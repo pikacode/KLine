@@ -187,13 +187,6 @@ open class KLineView: UIView {
 
         layoutIfNeeded()
 
-        sections.forEach{
-            $0.chartView.crosshairChanged = { (p) in
-                self.sections.forEach{ $0.chartView.changeCrosshair(p, drawHorizontal: false) }
-            }
-            $0.chartView.highlightIndex = self.highlightedChanged
-        }
-
         needMoveToXMax = false
         needMoveToXMin = false
     }

@@ -19,12 +19,6 @@ open class KLCombinedChartView: CombinedChartView {
         }
     }
 
-    var crosshairChanged = { (_: CGPoint?) in }
-    var highlightIndex = { (index: Int) in}
-
-    var highlightedIndex: Int?
-    var oldHighlightedIndex: Int?
-
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
         if didExchangeMethod { return }
@@ -145,43 +139,54 @@ extension KLCombinedChartView {
 
     open func changeCrosshair(_ point: CGPoint?, drawHorizontal: Bool = true) {
 
-        if point == crosshair.point {
-            return
-        }
+        guard let klView = superview as? KLineView else { return }
 
-        guard let p = point, let entry = combinedData?.candleData?.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan) as? CandleChartDataEntry else {
-            return
-        }
+        guard point != crosshair.point else { return }
 
-        [leftAxis, rightAxis, xAxis].forEach { (axis) in
-            axis.limitLines.filter { (l) -> Bool in
-                return l.isCrosshair
-            }.forEach { (l) in
-                axis.removeLimitLine(l)
+        let views = klView.subviews.compactMap{ $0 as? KLCombinedChartView }
+
+        views.forEach{
+            //移除
+            [$0.leftAxis, $0.rightAxis, $0.xAxis].forEach { (axis) in
+                axis.limitLines.filter { (l) -> Bool in
+                    return l.isCrosshair
+                }.forEach { (l) in
+                    axis.removeLimitLine(l)
+                }
             }
         }
 
-        //让 x 一格一格的改变，y可以随意改变
-        crosshair.point = CGPoint(x: CGFloat(entry.x), y: p.y)
+        guard let p = point else { return }
 
-        if drawHorizontal {
-            crosshairChanged(crosshair.point)
+        guard let candleData = views.compactMap({ $0.combinedData?.candleData }).first,
+              let entry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan) as? CandleChartDataEntry
+        else {
+            return
         }
 
-        if drawHorizontal {
-            if let h = crosshair.horizontal {
-                leftAxis.addLimitLine(h.limitLine)
-                rightAxis.addLimitLine(h.limitLine)
+        if let index = candleData.dataSets.first?.entryIndex(entry: entry) {
+            klView.highlightedChanged(index)
+        }
+
+        views.forEach{
+
+            //让 x 一格一格的改变，y可以随意改变
+            $0.crosshair.point = CGPoint(x: CGFloat(entry.x), y: p.y)
+
+            //当前画横轴
+            if $0 == self {
+                if let h = $0.crosshair.horizontal {
+                    $0.leftAxis.addLimitLine(h.limitLine)
+                    $0.rightAxis.addLimitLine(h.limitLine)
+                }
             }
+            if let v = $0.crosshair.vertical {
+                $0.xAxis.addLimitLine(v.limitLine)
+            }
+
+            $0.setNeedsDisplay()
         }
 
-        if let v = crosshair.vertical {
-            xAxis.addLimitLine(v.limitLine)
-        }
-
-        highlightedIndex = self.combinedData?.candleData?.dataSets.first?.entryIndex(entry: entry)
-
-        setNeedsDisplay()
     }
 
     open override func draw(_ rect: CGRect) {
@@ -205,21 +210,14 @@ extension KLCombinedChartView {
 
     func renderKLMarker(context: CGContext) {
 
-        if klMarker == nil { return }
-
-        guard let newIndex = highlightedIndex else { return }
+        guard let marker = klMarker else { return }
 
         guard let point = crosshair.point else {
             return
         }
 
-        if oldHighlightedIndex != highlightedIndex {
-            oldHighlightedIndex = highlightedIndex
-            highlightIndex(newIndex)
-        }
-
         let pt = self.pixelForValues(x: point.x.double, y: point.y.double, axis: .left)
-        klMarker?.draw(context: context, point: pt)
+        marker.draw(context: context, point: pt)
     }
 
 }
