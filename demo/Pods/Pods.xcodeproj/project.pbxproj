@@ -49,6 +49,7 @@
 		39E13C8ED0C32E9EC0B353CA45C70CF2 /* AnimatedMoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B286BDFE78ABF03B0C4DDCFD8FBF6 /* AnimatedMoveViewJob.swift */; };
 		3A5078F021BB004E2F4463F360D41391 /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A85FF755B71FE7150933C213AD28 /* HorizontalBarChartView.swift */; };
 		3B791A6526AFDF2800FFE7AA /* KLTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B791A6426AFDF2800FFE7AA /* KLTransformer.swift */; };
+		3BCDBB7526B2A83300C8B35C /* UIViewController+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCDBB7426B2A83300C8B35C /* UIViewController+KL.swift */; };
 		3D57709B53538839313AA6A6DC6E322C /* ILineRadarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C4B267A4820A775520B1F23ECE97E0 /* ILineRadarChartDataSet.swift */; };
 		3EAC9B9D96C569653EF71750289EB0D0 /* CandleChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5FAA917CB8604181B74E2806CB081 /* CandleChartDataEntry.swift */; };
 		4602535FF1B8156B23411D8D5D54E40D /* KDJ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A26641C66B01C531B506E1ECB978062 /* KDJ.swift */; };
@@ -252,6 +253,7 @@
 		377F2443D65EA44184E8190051E7FC3D /* Depth.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Depth.swift; path = src/Indicator/Depth.swift; sourceTree = "<group>"; };
 		3A4DB505F06D59AEF8D380731C3F6A1D /* PieChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataEntry.swift; sourceTree = "<group>"; };
 		3B791A6426AFDF2800FFE7AA /* KLTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KLTransformer.swift; path = src/Extentsion/KLTransformer.swift; sourceTree = "<group>"; };
+		3BCDBB7426B2A83300C8B35C /* UIViewController+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+KL.swift"; path = "src/Extentsion/UIViewController+KL.swift"; sourceTree = "<group>"; };
 		3CC1CAEC7CC7F954BB49C60C7987BAC5 /* IAxisValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IAxisValueFormatter.swift; path = Source/Charts/Formatters/IAxisValueFormatter.swift; sourceTree = "<group>"; };
 		3DFD8284D505942F173AB98D06E36376 /* Platform+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Platform+Color.swift"; path = "Source/Charts/Utils/Platform+Color.swift"; sourceTree = "<group>"; };
 		4186796F0F1A447948DBB31A0BB6C13D /* CombinedHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedHighlighter.swift; path = Source/Charts/Highlight/CombinedHighlighter.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				2E823E30D3919DFA4CF2EE33F46960C2 /* KLYAxisRenderer.swift */,
 				2E9191F242CFD34B45793A401293FF74 /* UIColor+KL.swift */,
 				5F4EAFEB9F1971FA55EE3C858E940596 /* UIView+KL.swift */,
+				3BCDBB7426B2A83300C8B35C /* UIViewController+KL.swift */,
 			);
 			name = Extentsion;
 			sourceTree = "<group>";
@@ -1119,6 +1122,7 @@
 				75C328EA439707D727171DA4D0989276 /* RSI.swift in Sources */,
 				A8DA4E78C06CC5311A33611D29396630 /* UIColor+KL.swift in Sources */,
 				79EE8E47F391E8D41A4036DFBD9E867D /* UIView+KL.swift in Sources */,
+				3BCDBB7526B2A83300C8B35C /* UIViewController+KL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
