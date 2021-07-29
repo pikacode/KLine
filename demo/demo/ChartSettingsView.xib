@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChartSettingsView" customModule="demo" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChartSettingsView" customModule="Exchange" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -22,7 +22,7 @@
                     <rect key="frame" x="134" y="0.0" width="280" height="896"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QRK-YN-YUY">
-                            <rect key="frame" x="0.0" y="110" width="280" height="744"/>
+                            <rect key="frame" x="0.0" y="110" width="280" height="786"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odg-oy-wa1">
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="134"/>
@@ -191,7 +191,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="7aZ-Nj-gQB"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="QKZ-V2-ewM"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGD-FG-Zll">
@@ -209,7 +209,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sWx-9d-S9A"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="quI-q8-Hws"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-mS-8Tz">
@@ -227,10 +227,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="mainIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ula-j7-PNd"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="YuB-Hf-kOg"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
+                                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h4-qE-hwf">
                                             <rect key="frame" x="138" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="tjB-o7-DKq"/>
@@ -245,10 +245,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="XnB-Xo-H04"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9vi-eS-YRu"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-y3-IhE">
+                                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-y3-IhE">
                                             <rect key="frame" x="201" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="Kyi-m9-2DO"/>
@@ -263,10 +263,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="zHQ-ie-yF9"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="tcS-oc-i6X"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-eQ-O5O">
                                             <rect key="frame" x="12" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="JPw-gr-D5m"/>
@@ -281,10 +281,10 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qwe-x4-wrN"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="vv4-VY-64c"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-nE-VTO">
                                             <rect key="frame" x="75" y="128" width="64" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="L8W-nf-Qr5"/>
@@ -299,7 +299,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="otherIndicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUF-1K-Vql"/>
+                                                <action selector="indicatorAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="qN6-TV-wID"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -330,7 +330,7 @@
                                         <constraint firstItem="z3T-nE-VTO" firstAttribute="centerY" secondItem="JLw-eQ-O5O" secondAttribute="centerY" id="x44-Ow-eP1"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gon-du-t6B">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gon-du-t6B" userLabel="pView">
                                     <rect key="frame" x="0.0" y="316" width="280" height="314"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDM-ai-FWT">
@@ -750,10 +750,10 @@
                         <constraint firstAttribute="width" constant="280" id="AT6-Mz-IJJ"/>
                         <constraint firstItem="3qM-Nm-CHM" firstAttribute="top" secondItem="1e4-Vq-cwA" secondAttribute="topMargin" constant="14" id="Pzf-Nh-f6c"/>
                         <constraint firstItem="QRK-YN-YUY" firstAttribute="leading" secondItem="1e4-Vq-cwA" secondAttribute="leading" id="V60-cC-2hk"/>
-                        <constraint firstAttribute="bottomMargin" secondItem="QRK-YN-YUY" secondAttribute="bottom" id="bMm-ue-8Zp"/>
                         <constraint firstItem="3qM-Nm-CHM" firstAttribute="leading" secondItem="1e4-Vq-cwA" secondAttribute="leading" id="mdo-cO-ZhP"/>
                         <constraint firstItem="QRK-YN-YUY" firstAttribute="top" secondItem="3qM-Nm-CHM" secondAttribute="bottom" id="puC-IL-04v"/>
                         <constraint firstAttribute="trailing" secondItem="3qM-Nm-CHM" secondAttribute="trailing" id="v0S-Zf-Jrq"/>
+                        <constraint firstAttribute="bottom" secondItem="QRK-YN-YUY" secondAttribute="bottom" id="x4F-tH-Isf"/>
                     </constraints>
                 </view>
             </subviews>
@@ -762,7 +762,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="1e4-Vq-cwA" secondAttribute="bottom" id="BJP-zE-EE8"/>
                 <constraint firstItem="1e4-Vq-cwA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Bz5-xk-aOb"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1e4-Vq-cwA" secondAttribute="trailing" id="Eaw-tS-hjI"/>
+                <constraint firstAttribute="trailing" secondItem="1e4-Vq-cwA" secondAttribute="trailing" id="Eaw-tS-hjI"/>
                 <constraint firstAttribute="bottom" secondItem="H5j-x2-QOR" secondAttribute="bottom" id="M7R-a9-w25"/>
                 <constraint firstItem="H5j-x2-QOR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="WqX-ev-Ccd"/>
                 <constraint firstAttribute="trailing" secondItem="H5j-x2-QOR" secondAttribute="trailing" id="hsH-Wa-vMg"/>
@@ -773,13 +773,6 @@
                 <outlet property="bgView" destination="H5j-x2-QOR" id="NZR-jr-Gt4"/>
                 <outlet property="contentTrailing" destination="Eaw-tS-hjI" id="MX7-5u-aDH"/>
                 <outlet property="heightRectLeading" destination="gfu-Rh-oee" id="yz5-of-Jc3"/>
-                <outletCollection property="mainButtons" destination="3uZ-mS-8Tz" collectionClass="NSMutableArray" id="BFA-tF-Cj8"/>
-                <outletCollection property="mainButtons" destination="pCL-k9-fPI" collectionClass="NSMutableArray" id="er1-yy-YZI"/>
-                <outletCollection property="mainButtons" destination="iGD-FG-Zll" collectionClass="NSMutableArray" id="Vdt-XG-uk2"/>
-                <outletCollection property="otherButtons" destination="JLw-eQ-O5O" collectionClass="NSMutableArray" id="KTX-I3-Yra"/>
-                <outletCollection property="otherButtons" destination="z3T-nE-VTO" collectionClass="NSMutableArray" id="l2S-dB-CUt"/>
-                <outletCollection property="otherButtons" destination="2h4-qE-hwf" collectionClass="NSMutableArray" id="0Ay-0H-YzB"/>
-                <outletCollection property="otherButtons" destination="7Oo-y3-IhE" collectionClass="NSMutableArray" id="B6N-Vt-iFb"/>
                 <outletCollection property="switchs" destination="8y4-be-1ic" collectionClass="NSMutableArray" id="cUP-xQ-WnY"/>
                 <outletCollection property="switchs" destination="UIq-va-nsc" collectionClass="NSMutableArray" id="izk-Hf-Bab"/>
                 <outletCollection property="switchs" destination="Hd5-Zp-Ei0" collectionClass="NSMutableArray" id="ScG-L9-LVe"/>
@@ -787,8 +780,15 @@
                 <outletCollection property="switchs" destination="l8a-Wk-GGF" collectionClass="NSMutableArray" id="dfe-XY-zdL"/>
                 <outletCollection property="switchs" destination="WxV-qW-lVB" collectionClass="NSMutableArray" id="DH4-sd-CJI"/>
                 <outletCollection property="switchs" destination="0F3-W0-v9V" collectionClass="NSMutableArray" id="BAI-gZ-9BX"/>
+                <outletCollection property="indicatorButtons" destination="3uZ-mS-8Tz" collectionClass="NSMutableArray" id="GAp-8B-9Cm"/>
+                <outletCollection property="indicatorButtons" destination="pCL-k9-fPI" collectionClass="NSMutableArray" id="0iq-bf-k7n"/>
+                <outletCollection property="indicatorButtons" destination="iGD-FG-Zll" collectionClass="NSMutableArray" id="4SO-6k-WYq"/>
+                <outletCollection property="indicatorButtons" destination="JLw-eQ-O5O" collectionClass="NSMutableArray" id="A24-7O-3zO"/>
+                <outletCollection property="indicatorButtons" destination="z3T-nE-VTO" collectionClass="NSMutableArray" id="D5W-ET-xza"/>
+                <outletCollection property="indicatorButtons" destination="2h4-qE-hwf" collectionClass="NSMutableArray" id="pRR-z3-0Nk"/>
+                <outletCollection property="indicatorButtons" destination="7Oo-y3-IhE" collectionClass="NSMutableArray" id="Nzb-aK-d43"/>
             </connections>
-            <point key="canvasLocation" x="270" y="140"/>
+            <point key="canvasLocation" x="269.56521739130437" y="139.95535714285714"/>
         </view>
     </objects>
     <resources>

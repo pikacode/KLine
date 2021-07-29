@@ -7,6 +7,7 @@
 
 import UIKit
 import Charts
+import KLine
 
 class ChartSettingsView: UIView {
 
@@ -14,44 +15,54 @@ class ChartSettingsView: UIView {
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var back: UIImageView!
     @IBOutlet weak var heightRectLeading: NSLayoutConstraint!
-    @IBOutlet var mainButtons: [UIButton]!
-    @IBOutlet var otherButtons: [UIButton]!
+    @IBOutlet var indicatorButtons: [UIButton]!
     @IBOutlet var switchs: [UISwitch]!
 
     var settings: ChartSettings { return ChartSettings.shared }
 
     @IBAction func heightAction(_ sender: UIButton) {
         heightRectLeading.constant = [0, 121, 242][sender.tag]
-        settings.mainHeight = [182, 282, 382][sender.tag]
+        settings.mainHeight = settings.mainHeights[sender.tag]
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
     }
 
-    //主图指标
-    @IBAction func mainIndicatorAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        if sender.isSelected {
-            sender.superview?.bringSubviewToFront(sender)
+    @IBAction func indicatorAction(_ sender: UIButton) {
+        if indicatorButtons[0...2].contains(sender) {
+            indicatorButtons[0...2].forEach{
+                if $0 == sender {
+                    $0.isSelected.toggle()
+                } else {
+                    $0.isSelected = false
+                }
+            }
         } else {
-            sender.superview?.sendSubviewToBack(sender)
+            sender.isSelected.toggle()
         }
-        var s = settings.mainIndicators[sender.tag]
-        s.1 = sender.isSelected
-        settings.mainIndicators[sender.tag] = s
-    }
 
-    //副图指标
-    @IBAction func otherIndicatorAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
         if sender.isSelected {
             sender.superview?.bringSubviewToFront(sender)
         } else {
             sender.superview?.sendSubviewToBack(sender)
         }
-        var s = settings.otherIndicators[sender.tag]
-        s.1 = sender.isSelected
-        settings.otherIndicators[sender.tag] = s
+
+        let selecteds1 = Array(indicatorButtons.map{ $0.isSelected }[0...2])
+        let selecteds2 = Array(indicatorButtons.map{ $0.isSelected }[3...6])
+        var mains = ChartSettings.shared.mainIndicators
+        mains.enumerated().forEach{
+            if let on = selecteds1[$0.offset~] {
+                mains[$0.offset] = ($0.element.indicator, on)
+            }
+        }
+        ChartSettings.shared.mainIndicators = mains
+
+        var others = ChartSettings.shared.otherIndicators
+        others.enumerated().forEach{
+            let on = selecteds2[$0.offset]
+            others[$0.offset] = ($0.element.indicator, on)
+        }
+        ChartSettings.shared.otherIndicators = others
     }
 
     //线
@@ -77,13 +88,19 @@ class ChartSettingsView: UIView {
         }
 
         settings.mainIndicators.enumerated().forEach{
-            if self.mainButtons.count >= $0.offset+1 {
-                self.mainButtons[$0.offset].isSelected = $0.element.on
+            let b = self.mainButtons[$0.offset~]
+            b?.isSelected = $0.element.on
+            if $0.element.on {
+                b?.bringToFront()
             }
         }
 
         settings.otherIndicators.enumerated().forEach{
-            self.otherButtons[$0.offset].isSelected = $0.element.on
+            let b = self.otherButtons[$0.offset~]
+            b?.isSelected = $0.element.on
+            if $0.element.on {
+                b?.bringToFront()
+            }
         }
 
         settings.priceLines.enumerated().forEach{
