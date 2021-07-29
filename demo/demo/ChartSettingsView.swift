@@ -29,6 +29,7 @@ class ChartSettingsView: UIView {
     }
 
     @IBAction func indicatorAction(_ sender: UIButton) {
+        //主图指标先全改为false
         if indicatorButtons[0...2].contains(sender) {
             indicatorButtons[0...2].forEach{
                 if $0 == sender {
@@ -88,18 +89,18 @@ class ChartSettingsView: UIView {
         }
 
         settings.mainIndicators.enumerated().forEach{
-            let b = self.mainButtons[$0.offset~]
+            let b = self.indicatorButtons[$0.offset~]
             b?.isSelected = $0.element.on
-            if $0.element.on {
-                b?.bringToFront()
+            if $0.element.on, let b = b {
+                b.superview?.bringSubviewToFront(b)
             }
         }
 
         settings.otherIndicators.enumerated().forEach{
-            let b = self.otherButtons[$0.offset~]
+            let b = self.indicatorButtons[(3+$0.offset)~]
             b?.isSelected = $0.element.on
-            if $0.element.on {
-                b?.bringToFront()
+            if $0.element.on, let b = b {
+                b.superview?.bringSubviewToFront(b)
             }
         }
 

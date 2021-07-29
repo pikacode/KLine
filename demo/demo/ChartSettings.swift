@@ -37,6 +37,8 @@ class ChartSettings {
 
     var mainHeight: CGFloat = 282 { didSet{ save() } }
 
+    let mainHeights: [CGFloat] = [182, 282, 382]
+
     var mainIndicators = [(MA(), true),
                           (EMA(), false),
                           (BOLL(), false),
@@ -67,43 +69,43 @@ class ChartSettings {
         else {
             return ChartSettings()
         }
-        let settgins = ChartSettings()
+        let settings = ChartSettings()
 
         if let h = dict["mainHeight"] as? CGFloat {
-            settgins.mainHeight = h
+            settings.mainHeight = h
         }
 
         (dict["mainIndicators"] as? [String: Bool])?.forEach{ pair in
             let name = pair.key
             let on = pair.value
-            if let index = settgins.mainIndicators.firstIndex(where: { $0.indicator.name == name }) {
-                let item = settgins.mainIndicators[index]
-                settgins.mainIndicators[index] = (item.indicator, on)
+            if let index = settings.mainIndicators.firstIndex(where: { $0.indicator.name == name }) {
+                let item = settings.mainIndicators[index]
+                settings.mainIndicators[index] = (item.indicator, on)
             }
         }
 
         (dict["otherIndicators"] as? [String: Bool])?.forEach{ pair in
             let name = pair.key
             let on = pair.value
-            if let index = settgins.otherIndicators.firstIndex(where: { $0.indicator.name == name }) {
-                let item = settgins.otherIndicators[index]
-                settgins.otherIndicators[index] = (item.indicator, on)
+            if let index = settings.otherIndicators.firstIndex(where: { $0.indicator.name == name }) {
+                let item = settings.otherIndicators[index]
+                settings.otherIndicators[index] = (item.indicator, on)
             }
         }
 
         (dict["priceLines"] as? [String: Bool])?.forEach{ pair in
             let name = pair.key
             let on = pair.value
-            if let index = settgins.priceLines.firstIndex(where: { $0.label == name }) {
-                let item = settgins.priceLines[index]
-                settgins.priceLines[index] = KPriceLine(label: name, color: item.color, value: item.value, enabled: on)
+            if let index = settings.priceLines.firstIndex(where: { $0.label == name }) {
+                let item = settings.priceLines[index]
+                settings.priceLines[index] = KPriceLine(label: name, color: item.color, value: item.value, enabled: on)
             }
         }
 
-        return settgins
+        return settings
     }
 
-    static let userDefaultsKey = "chartSettginsKey"
+    static let userDefaultsKey = "chartsettingsKey"
 
     func save() {
         // trigger changed
