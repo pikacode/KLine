@@ -86,6 +86,10 @@ open class KLineView: UIView {
         }
     }
 
+    public func clearCrosshair() {
+        sections.forEach{ $0.chartView.changeCrosshair(nil) }
+    }
+
     public func moveToXMin() {
         needMoveToXMin = true
         sections.forEach{

@@ -43,7 +43,7 @@ open class KLCombinedChartView: CombinedChartView {
     }
 
     open var klMarker: KLMarker?
-        
+
     open func initUI() {
 
         backgroundColor = KLStyle.default.backgroundColor
@@ -158,6 +158,7 @@ extension KLCombinedChartView {
                     axis.removeLimitLine(l)
                 }
             }
+            $0.setNeedsDisplay()
         }
 
         guard let p = point else { return }
