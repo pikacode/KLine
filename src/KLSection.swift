@@ -19,7 +19,7 @@ open class KLSection {
             draw()
         }
     }
-    
+
     open lazy var chartView: KLCombinedChartView = {
         let v = KLCombinedChartView(frame: .zero)
         v.xAxis.valueFormatter = KLEmptyFormatter()
@@ -66,13 +66,10 @@ open class KLSection {
     open func draw() {
 
         /// 画 limit line
-        leftAxis.removeAllLimitLines()
-        rightAxis.removeAllLimitLines()
-        xAxis.removeAllLimitLines()
+        removeLimitLines()
+
         indicators.forEach{
-            
-            if var l = $0 as? LimitLine {
-                
+            if let l = $0 as? LimitLine {
                 let line = l.limitLine
                 if l.direction == .horizontal {
                     leftAxis.addLimitLine(line)
@@ -107,7 +104,7 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-        
+
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
             chartView.data = combinedData
             if visibleXMaxCountReal != visibleXMaxCount {
@@ -131,18 +128,29 @@ open class KLSection {
             chartView.xAxis.spaceMax = 8
         }
 
+        if combinedData.candleData != nil {
+            chartView.changeCrosshair(chartView.crosshair.point, force: true)
+        }
+
     }
 
     //except Crosshair
     open func removeLimitLines() {
-        let i = indicators.filter{
-            if let line = $0 as? LimitLine {
-                return line.isCrosshair
-            } else {
-                return true
+        leftAxis.limitLines.enumerated().forEach{
+            if !$0.element.isCrosshair {
+                leftAxis.removeLimitLine($0.element)
             }
         }
-        indicators = i
+        rightAxis.limitLines.enumerated().forEach{
+            if !$0.element.isCrosshair {
+                rightAxis.removeLimitLine($0.element)
+            }
+        }
+        xAxis.limitLines.enumerated().forEach{
+            if !$0.element.isCrosshair {
+                xAxis.removeLimitLine($0.element)
+            }
+        }
     }
 
     open func crosshairLines() -> [LimitLine] {

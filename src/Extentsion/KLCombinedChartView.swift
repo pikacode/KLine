@@ -141,11 +141,40 @@ open class KLCombinedChartView: CombinedChartView {
 /// Crosshair
 extension KLCombinedChartView {
 
-    open func changeCrosshair(_ point: CGPoint?, drawHorizontal: Bool = true) {
+    open override func draw(_ rect: CGRect) {
+        super.draw(rect)
+
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+
+        //rang
+        if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled {
+            leftYAxisRenderer.renderLimitLines(context: context)
+        }
+
+        if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled {
+            rightYAxisRenderer.renderLimitLines(context: context)
+        }
+
+        renderKLMarker(context: context)
+    }
+
+    func renderKLMarker(context: CGContext) {
+
+        guard let marker = klMarker else { return }
+
+        guard let point = crosshair.point else {
+            return
+        }
+
+        let pt = self.pixelForValues(x: point.x.double, y: point.y.double, axis: .left)
+        marker.draw(context: context, point: pt)
+    }
+
+    open func changeCrosshair(_ point: CGPoint?, force: Bool = false) {
 
         guard let klView = superview as? KLineView else { return }
 
-        guard point != crosshair.point else { return }
+        guard point != crosshair.point || force else { return }
 
         let views = klView.subviews.compactMap{ $0 as? KLCombinedChartView }
 
@@ -194,51 +223,9 @@ extension KLCombinedChartView {
 
     }
 
-    open override func draw(_ rect: CGRect) {
-        super.draw(rect)
-
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-
-        //rang
-        if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled
-        {
-            leftYAxisRenderer.renderLimitLines(context: context)
-        }
-
-        if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled
-        {
-            rightYAxisRenderer.renderLimitLines(context: context)
-        }
-
-        renderKLMarker(context: context)
-    }
-
-    func renderKLMarker(context: CGContext) {
-
-        guard let marker = klMarker else { return }
-
-        guard let point = crosshair.point else {
-            return
-        }
-
-        let pt = self.pixelForValues(x: point.x.double, y: point.y.double, axis: .left)
-        marker.draw(context: context, point: pt)
-    }
-
 }
 
 extension BarLineChartViewBase {
-
-    //十字光标
-//    private static var showCrosshairKey = 0
-//    var showCrosshair: Bool {
-//        set {
-//            objc_setAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
-//        }
-//        get {
-//            objc_getAssociatedObject(self, &BarLineChartViewBase.showCrosshairKey) as? Bool ?? true
-//        }
-//    }
 
     @objc func panGestureRecognized_1(_ recognizer: NSUIPanGestureRecognizer) {
         panGestureRecognized_1(recognizer)
