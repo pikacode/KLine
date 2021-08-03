@@ -14,7 +14,7 @@ open class MA {
     
     public var data: [Int: Double?] = MA.days.reduce(into: [Int: Double]()) { $0[$1] = nil }
 
-    public static var days = [5, 10, 30]
+    public static var days = [5, 10, 20]
     var days: [Int] { return Self.days }
 
     static func calculateMA(_ data: inout [KLineData], day: Int) {

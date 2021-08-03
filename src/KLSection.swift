@@ -133,6 +133,18 @@ open class KLSection {
 
     }
 
+    //except Crosshair
+    open func removeLimitLines() {
+        let i = indicators.filter{
+            if let line = $0 as? LimitLine {
+                return line.isCrosshair
+            } else {
+                return true
+            }
+        }
+        indicators = i
+    }
+
     open var visibleXMaxCount: Double = 52
     var visibleXMaxCountReal: Double = 0
 
