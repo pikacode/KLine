@@ -145,6 +145,16 @@ open class KLSection {
         indicators = i
     }
 
+    open func crosshairLines() -> [LimitLine] {
+        return indicators.compactMap {
+            if let l = $0 as? LimitLine, l.isCrosshair {
+                return l
+            } else {
+                return nil
+            }
+        }
+    }
+
     open var visibleXMaxCount: Double = 52
     var visibleXMaxCountReal: Double = 0
 
