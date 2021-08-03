@@ -17,7 +17,7 @@ open class EMA {
         case mid(Int)  //中线
         case long(Int) //长线
     }
-    public static var emaDays:[EMAType] = [.short(7), .mid(25), .long(99)]
+    public static var emaDays:[EMAType] = [.short(5), .mid(10), .long(20)]
     
     var short_ema: Double = 0
     var mid_ema: Double = 0
