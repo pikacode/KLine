@@ -99,7 +99,7 @@ extension MACD: KLIndicator {
             set.circleRadius = 0
             set.circleHoleRadius = 0
             set.mode = .cubicBezier
-            set.drawValuesEnabled = true
+            set.drawValuesEnabled = false
             set.axisDependency = .left
             sets.append(set)
         }
