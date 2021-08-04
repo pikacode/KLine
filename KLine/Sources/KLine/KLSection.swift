@@ -121,13 +121,14 @@ open class KLSection {
 
         chartView.viewPortHandler.setMaximumScaleX(20)
 
-        chartView.xAxis.spaceMin = 2
-        if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
-            chartView.xAxis.spaceMax = 8
-        } else {
-            chartView.xAxis.spaceMax = 8
-        }
-
+        chartView.xAxis.spaceMin = 5
+//        chartView.leftAxis.spaceMin = 3
+//        chartView.rightAxis.spaceMin = 20
+//        if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
+//            chartView.xAxis.spaceMax = 8
+//        } else {
+            //chartView.xAxis.spaceMax = 3
+//        }
         if combinedData.candleData != nil {
             chartView.changeCrosshair(chartView.crosshair.point, force: true)
         }

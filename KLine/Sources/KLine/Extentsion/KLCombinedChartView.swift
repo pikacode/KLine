@@ -14,7 +14,7 @@ open class KLCombinedChartView: CombinedChartView {
         didSet{
             if !showCrosshair {
                 changeCrosshair(nil)
-                setNeedsDisplay()
+               // setNeedsDisplay()
             }
         }
     }
@@ -187,7 +187,7 @@ extension KLCombinedChartView {
                     axis.removeLimitLine(l)
                 }
             }
-            $0.setNeedsDisplay()
+            //$0.setNeedsDisplay()
         }
 
         guard let p = point else { return }
@@ -218,7 +218,7 @@ extension KLCombinedChartView {
                 $0.xAxis.addLimitLine(v.limitLine)
             }
 
-            $0.setNeedsDisplay()
+           // $0.setNeedsDisplay()
         }
 
     }
