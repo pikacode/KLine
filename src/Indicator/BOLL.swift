@@ -33,7 +33,7 @@ open class BOLL {
             return
         }
         
-        for i in 0 ..< data.count {
+        for i in boll_day - 1 ..< data.count {
             let boll = data[i].boll ?? BOLL()
             boll.mb_boll = calculateAveragePrice(index: i, data: &data)
             let md = calculateMD(index: i, data: &data)
@@ -64,13 +64,19 @@ open class BOLL {
         let avg = boll_average
         
         if index < day { return 0}
+        var daya = boll_day
+        
         var sum: Double = 0
         for i in index - day ... index  {
             let model = data[i]
             let boll = data[i].boll ?? BOLL()
-            sum += pow(model.close - boll.mb_boll, Double(avg))
+            if boll.mb_boll == 0 {
+                daya -= 1
+            }else{
+                sum += pow(model.close - boll.mb_boll, Double(avg))
+            }
         }
-        return sqrt(sum / Double(boll_day))
+        return sqrt(sum / Double(daya))
     }
 }
 
@@ -107,7 +113,7 @@ extension BOLL: KLIndicator {
             set.circleRadius = 0
             set.circleHoleRadius = 0
             set.mode = .cubicBezier
-            set.drawValuesEnabled = true
+            set.drawValuesEnabled = false
             set.axisDependency = .left
             sets.append(set)
             

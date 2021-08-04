@@ -99,7 +99,7 @@ extension MACD: KLIndicator {
             set.circleRadius = 0
             set.circleHoleRadius = 0
             set.mode = .cubicBezier
-            set.drawValuesEnabled = true
+            set.drawValuesEnabled = false
             set.axisDependency = .left
             sets.append(set)
         }
@@ -119,7 +119,7 @@ extension MACD: KLIndicator {
         let label = String(format: " MACD:%.2f",entries.last?.y ?? 0)
         let set = BarChartDataSet(entries: entries, label: label)
         set.colors = colors
-        set.drawValuesEnabled = true
+        set.drawValuesEnabled = false
         return [set]
     }
 }

@@ -15,17 +15,34 @@ class Depth {
     
         var sum: Double = 0.0
         var index: Int = 0
+        var buyArr = data.filter { (model) -> Bool in return model.type ==  .buy}
+        var sellArr = data.filter { (model) -> Bool in return model.type ==  .sell }
         
-        for i in 0 ..< data.count {
-            var model = data[i]
-            sum += model.vol
-            if index == i {
-                index += 1
-                model.depthNum = sum
-                data[i] = model
-                break
-            }
+        buyArr.sort { (m1, m2) -> Bool in
+            return m1.price > m2.price
         }
+        
+        sellArr.sort { (m1, m2) -> Bool in
+            return m1.price < m2.price
+        }
+        let buySum = buyArr.reduce(0) { (total, model) in return total + model.vol}
+        let sellSum = sellArr.reduce(0) { (total, model) in return total + model.vol}
+      
+        
+        
+        
+        
+        
+//        for i in 0 ..< data.count {
+//            var model = data[i]
+//            sum += model.vol
+//            if index == i {
+//                index += 1
+//                model.depthNum = sum
+//                data[i] = model
+//                break
+//            }
+//        }
     }
 }
 
