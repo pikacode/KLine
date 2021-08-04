@@ -10,12 +10,12 @@
 //
 
 import Foundation
-import Charts
 
 /// An interface for providing custom axis Strings.
 @objc(ChartAxisValueFormatter)
 public protocol AxisValueFormatter: class
 {
+    
     /// Called when a value from an axis is formatted before being drawn.
     ///
     /// For performance reasons, avoid excessive calculations and memory allocations inside this method.
