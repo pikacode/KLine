@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     // 👉 the type [KLineData] can be customed to [Any]
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
-        let count = 360
+        let count = 60
         var temp = [KLineData]()
         for i in 0..<count {
             let v = Double.random(in: 500000...3000000)
