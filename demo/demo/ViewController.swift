@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
-    var depthContenView = UIView.init(frame: CGRect.init(x: 0, y: 500, width: UIScreen.main.bounds.size.width, height: 300))
+    var depthContenView = UIView.init(frame: CGRect.init(x: 0, y: 500, width: UIScreen.main.bounds.size.width, height: 200))
     var depthKLineView: KLineView!
     var klineView: KLineView!
 
