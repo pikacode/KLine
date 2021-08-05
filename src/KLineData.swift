@@ -32,6 +32,8 @@ open class KLineData {
     public var kdj: KDJ? //随机指标
     public var rsi: RSI? //相对强弱指标
     public var mavol: MAVOL? //成交量均线
+    
+    public var depth: Depth? //深度图
 
     public init(o: Double, c: Double, h: Double, l: Double, v: Double, t: TimeInterval) {
         open = o

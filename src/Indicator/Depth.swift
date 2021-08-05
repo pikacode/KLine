@@ -7,42 +7,46 @@
 
 import UIKit
 import Charts
-class Depth {
+open class Depth {
     required public init() {}
-    
 
     private static func calculateDepth(_ data: inout [KLDepthPoint]){
     
-        var sum: Double = 0.0
-        var index: Int = 0
         var buyArr = data.filter { (model) -> Bool in return model.type ==  .buy}
         var sellArr = data.filter { (model) -> Bool in return model.type ==  .sell }
         
         buyArr.sort { (m1, m2) -> Bool in
-            return m1.price > m2.price
+            return m1.price < m2.price
         }
         
         sellArr.sort { (m1, m2) -> Bool in
             return m1.price < m2.price
         }
-        let buySum = buyArr.reduce(0) { (total, model) in return total + model.vol}
-        let sellSum = sellArr.reduce(0) { (total, model) in return total + model.vol}
+        let buySum = buyArr.reduce(0) { (total, model) in return total + model.amount}
+        let sellSum = sellArr.reduce(0) { (total, model) in return total + model.amount}
       
+    
+        buyArr[0].depthNum = buySum
+        for index in 1 ..< buyArr.count {
+
+            let item = buyArr[index]
+            let lastItem = buyArr[index - 1]
+            item.depthNum = lastItem.depthNum - lastItem.amount
+            buyArr[index] = item
+        }
+        let count = sellArr.count - 1
         
+        sellArr[0].depthNum = sellArr[0].amount
+        sellArr[count].depthNum = sellSum
         
+        for index in stride(from: count, through: 1, by: -1) {
+            let item = sellArr[index]
+            let lastItem = sellArr[index - 1]
+            lastItem.depthNum = item.depthNum - item.amount
+            sellArr[index - 1] = lastItem
+        }
         
-        
-        
-//        for i in 0 ..< data.count {
-//            var model = data[i]
-//            sum += model.vol
-//            if index == i {
-//                index += 1
-//                model.depthNum = sum
-//                data[i] = model
-//                break
-//            }
-//        }
+        data.append(contentsOf: sellArr)
     }
 }
 
@@ -56,22 +60,42 @@ extension Depth: KLIndicator {
     
     
     public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
-        guard let data = data as? [KLDepthPoint] else { return nil }
+        guard var data = data as? [KLDepthPoint] else { return nil }
         var sets = [LineChartDataSet]()
        
-        let entries = data.compactMap{ (model) -> ChartDataEntry? in
-            return ChartDataEntry(x: Double(model.x), y: model.depthNum)
+        
+        data.sort { (m1, m2) -> Bool in
+            return m1.price < m2.price
         }
-        let set = LineChartDataSet(entries: entries)
-        let color = style.lineColor1
-        set.setColor(color)
-        set.lineWidth = style.lineWidth1
-        set.circleRadius = 0
-        set.circleHoleRadius = 0
-        set.mode = .cubicBezier
-        set.drawValuesEnabled = true
-        set.axisDependency = .left
-        sets.append(set)
+        
+        let data1 = data.filter { (model) -> Bool in return model.type == .buy}
+        let data2 = data.filter { (model) -> Bool in return model.type == .sell}
+        
+        let dataArr = [data1, data2]
+        let colors = [style.downColor, style.upColor]
+        
+        for (index, item) in dataArr.enumerated() {
+            let entries = item.compactMap{ (model) -> ChartDataEntry? in
+                return ChartDataEntry(x: model.price, y: model.depthNum)
+            }
+            let set = LineChartDataSet(entries: entries)
+            set.setColor(colors[index])
+            set.lineWidth = style.lineWidth1
+            set.drawFilledEnabled = true
+
+            set.circleRadius = 0
+            set.circleHoleRadius = 0
+            set.mode = .cubicBezier
+            set.drawValuesEnabled = false
+
+            set.axisDependency = .left
+            //生成渐变色
+            let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                           colors: [colors[index].cgColor, UIColor.white.cgColor] as CFArray, locations: [1.0, 0.0])
+            //将渐变色作为填充对象
+            set.fill = Fill.fillWithLinearGradient(gradient!, angle: 90.0)
+            sets.append(set)
+        }
         
         return sets
     }

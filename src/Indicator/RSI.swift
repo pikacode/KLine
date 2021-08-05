@@ -132,7 +132,7 @@ extension RSI: KLIndicator{
                     rsiDay = day
                     yValue = rsi.rsi24
                 }
-                if yValue == 0 {return nil}
+//                if yValue == 0 {return nil}
                 return ChartDataEntry(x: model.x, y: yValue)
             }
             

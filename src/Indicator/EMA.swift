@@ -85,7 +85,7 @@ extension EMA: KLIndicator {
                     emaDay = day
                     emaValue = ema.long_ema
                 }
-                if emaDay == 0{ return nil}
+//                if emaDay == 0{ return nil}
                 
                 return ChartDataEntry(x: model.x, y: emaValue)
             }
