@@ -106,7 +106,7 @@ open class ChartData: NSObject
         
         // right axis
         let firstRight = getFirstRight(dataSets: dataSets)
-
+        
         if firstRight !== nil
         {
             _rightAxisMax = firstRight!.yMax

@@ -114,8 +114,15 @@ open class AxisRendererBase: Renderer
         {
             interval = interval < axis.granularity ? axis.granularity : interval
         }
+
+        //kline
+        if interval.isNaN {
+            return
+        }
+        //kline
         
         // Normalize interval
+
         let intervalMagnitude = pow(10.0, Double(Int(log10(interval)))).roundedToNextSignficant()
         let intervalSigDigit = Int(interval / intervalMagnitude)
         if intervalSigDigit > 5

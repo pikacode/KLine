@@ -3,29 +3,35 @@ PODS:
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
   - KLine (1.0.0):
-    - Charts (~> 3.6.0)
+    - Charts
     - KLine/Extentsion (= 1.0.0)
     - KLine/Indicator (= 1.0.0)
   - KLine/Extentsion (1.0.0):
-    - Charts (~> 3.6.0)
+    - Charts
   - KLine/Indicator (1.0.0):
-    - Charts (~> 3.6.0)
-
-DEPENDENCIES:
-  - KLine (from `../`)
-
-SPEC REPOS:
-  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Charts
 
+DEPENDENCIES:
+  - Charts (from `https://github.com/pikacode/Charts.git`, commit `6aba70ba95e3bff1941e43677923d057799ca22c`, branch `kline`)
+  - KLine (from `../`)
+
 EXTERNAL SOURCES:
+  Charts:
+    :branch: kline
+    :commit: 6aba70ba95e3bff1941e43677923d057799ca22c
+    :git: https://github.com/pikacode/Charts.git
   KLine:
     :path: "../"
 
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: 6aba70ba95e3bff1941e43677923d057799ca22c
+    :git: https://github.com/pikacode/Charts.git
+
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  KLine: 634749fffd188c07a84cf963323d26e85d5ae6af
+  KLine: 00ce9a85e0ef9bd489eb6ffc42acadbb14a4ee67
 
-PODFILE CHECKSUM: bb2183f5f700664ca68d2f964e9b3220b67389a6
+PODFILE CHECKSUM: 06530f0a76359f5af24dff9341144d9b36f44773
 
 COCOAPODS: 1.10.1

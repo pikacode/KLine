@@ -26,7 +26,7 @@
   "requires_arc": true,
   "dependencies": {
     "Charts": [
-      "~> 3.6.0"
+
     ]
   },
   "subspecs": [

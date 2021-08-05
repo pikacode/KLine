@@ -309,7 +309,7 @@ open class ViewPortHandler: NSObject
 //            newValue = 1.0
 //        }
         //kline
-
+        
         _minScaleX = newValue
         
         limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
