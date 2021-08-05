@@ -54,6 +54,8 @@ open class KLSection {
 
     var offset: CGFloat = 0
 
+    weak var delegate: KLineView?
+
     public var xAxis: XAxis { chartView.xAxis }
     public var leftAxis: YAxis { chartView.leftAxis }
     public var rightAxis: YAxis { chartView.rightAxis }
@@ -110,12 +112,14 @@ open class KLSection {
             if visibleXMaxCountReal != visibleXMaxCount {
                 //设置多次会有bug
                 visibleXMaxCountReal = visibleXMaxCount
-                chartView.setVisibleXRangeMaximum(visibleXMaxCount)
+                chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
             }
-            chartView.setScaleMinima(1.5, scaleY: 1)
-            if data.count < 52, let max = chartView.data?.dataSets.first?.xMax, let min = chartView.data?.dataSets.first?.xMin, max > min, min.isFinite, min != Double.greatestFiniteMagnitude {
+            if visibleXMaxCount != 0 {
+                chartView.setScaleMinima(1.5, scaleY: 1)
+            }
+            if data.count < Int(visibleXMaxCount), let max = chartView.data?.dataSets.first?.xMax, let min = chartView.data?.dataSets.first?.xMin, max > min, min.isFinite, min != Double.greatestFiniteMagnitude {
                 let n = (max - min)/Double(data.count)
-                chartView.xAxis.axisMaximum = n * 52 + min
+                chartView.xAxis.axisMaximum = n * Double(visibleXMaxCount) + min
             }
         }
 
@@ -163,7 +167,7 @@ open class KLSection {
         }
     }
 
-    open var visibleXMaxCount: Double = 52
-    var visibleXMaxCountReal: Double = 0
+    var visibleXMaxCount: Int { return delegate?.visibleXMaxCount ?? 0 }
+    var visibleXMaxCountReal: Int = 0
 
 }

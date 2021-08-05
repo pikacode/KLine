@@ -194,12 +194,13 @@ class ViewController: UIViewController {
         view.addSubview(depthContenView)
         depthContenView.backgroundColor = .red
         depthKLineView = KLineView([KLSection([Depth()], 200)])
+        depthKLineView.visibleXMaxCount = 0
+
 //        depthKLineView.legend.direction = .RightToLeft
         depthKLineView.frame = depthContenView.bounds
         depthKLineView.backgroundColor = .green
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
-        
     }
     
     func createLimitLines() -> [LimitLine] {
