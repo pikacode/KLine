@@ -302,12 +302,14 @@ open class ViewPortHandler: NSObject
     @objc open func setMinimumScaleX(_ xScale: CGFloat)
     {
         var newValue = xScale
-        
-        if newValue < 1.0
-        {
-            newValue = 1.0
-        }
-        
+
+        //kline
+//        if newValue < 1.0
+//        {
+//            newValue = 1.0
+//        }
+        //kline
+
         _minScaleX = newValue
         
         limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)

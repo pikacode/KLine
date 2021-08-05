@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     // 👉 the type [KLineData] can be customed to [Any]
     let data: [KLineData] = {
         let start: TimeInterval = 1623749243
-        let count = 360
+        let count = 500
         var temp = [KLineData]()
         for i in 0..<count {
             let v = Double.random(in: 500000...3000000)
@@ -102,6 +102,8 @@ class ViewController: UIViewController {
         return view
     }()
 
+    var lastIndex = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -114,7 +116,7 @@ class ViewController: UIViewController {
         klineView = KLineView([candleSection,
                                KLSection([MAVOL()], 74),
                                KLSection([MACD()], 74)])
-        
+
         contentView.addSubview(klineView)
         contentHeight.constant = klineView.neededHeight
         
@@ -133,8 +135,14 @@ class ViewController: UIViewController {
         let markView = MarkerView(frame: CGRect(x: 0, y: 0, width: 130, height: 173))
         candleSection.markView = markView
         klineView.highlightedChanged = { [weak self] (index) in
-            if #available(iOS 10.0, *) {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            guard let index = index else {
+                markView.isHidden = true
+                return
+            }
+            markView.isHidden = false
+            if #available(iOS 10.0, *), self?.lastIndex != index {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                self?.lastIndex = index
             }
             guard let strongSelf = self else {
                 return
@@ -184,8 +192,9 @@ class ViewController: UIViewController {
             self.contentHeight.constant = self.klineView.neededHeight
 
         }
-        addDepthView()
 
+
+        addDepthView()
     }
 
     
@@ -194,7 +203,7 @@ class ViewController: UIViewController {
         view.addSubview(depthContenView)
         depthContenView.backgroundColor = .red
         depthKLineView = KLineView([KLSection([Depth()], 200)])
-        depthKLineView.visibleXMaxCount = 0
+        depthKLineView.scaleXEnabled = false
 
 //        depthKLineView.legend.direction = .RightToLeft
         depthKLineView.frame = depthContenView.bounds

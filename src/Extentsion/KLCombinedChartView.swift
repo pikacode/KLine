@@ -83,7 +83,7 @@ open class KLCombinedChartView: CombinedChartView {
         rightAxis.labelTextColor = UIColor.white.alpha(0.6)
         rightAxis.labelFont = KLStyle.default.label.font
 
-        scaleXEnabled = false
+        scaleXEnabled = true
         scaleYEnabled = false
         dragXEnabled = true
         dragYEnabled = false
@@ -190,7 +190,10 @@ extension KLCombinedChartView {
             $0.setNeedsDisplay()
         }
 
-        guard let p = point else { return }
+        guard let p = point else {
+            klView.highlightedChanged(nil)
+            return
+        }
 
         guard let candleData = views.compactMap({ $0.combinedData?.candleData }).first,
               let entry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan) as? CandleChartDataEntry

@@ -112,24 +112,43 @@ open class KLSection {
             if visibleXMaxCountReal != visibleXMaxCount {
                 //设置多次会有bug
                 visibleXMaxCountReal = visibleXMaxCount
-                chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
             }
-            if visibleXMaxCount != 0 {
-                chartView.setScaleMinima(1.5, scaleY: 1)
+//            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
+//            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
+
+            if visibleXMaxCount == 0 {
+
+            } else if data.count >= visibleXMaxCount {
+                chartView.setVisibleXRange(minXRange: 1, maxXRange: Double(visibleXMaxCount))
+            } else {
+//                chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
+                //chartView.setVisibleXRangeMinimum(Double(visibleXMaxCount))
             }
-            if data.count < Int(visibleXMaxCount), let max = chartView.data?.dataSets.first?.xMax, let min = chartView.data?.dataSets.first?.xMin, max > min, min.isFinite, min != Double.greatestFiniteMagnitude {
+
+            //经验值
+            chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
+
+            if data.count < Int(visibleXMaxCount),
+               let max = chartView.data?.dataSets.first?.xMax,
+               let min = chartView.data?.dataSets.first?.xMin,
+               max > min, min.isFinite,
+               min != Double.greatestFiniteMagnitude,
+               visibleXMaxCount != 0 {
+
                 let n = (max - min)/Double(data.count)
-                chartView.xAxis.axisMaximum = n * Double(visibleXMaxCount) + min
+                chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
             }
+
         }
 
         chartView.viewPortHandler.setMaximumScaleX(20)
 
-        chartView.xAxis.spaceMin = 2
-        if chartView.chartYMax != .infinity && chartView.chartYMax != .nan {
+        chartView.xAxis.spaceMin = 4
+
+        if data.count >= visibleXMaxCount {
             chartView.xAxis.spaceMax = 8
         } else {
-            chartView.xAxis.spaceMax = 8
+            chartView.xAxis.spaceMax = Double(visibleXMaxCount - data.count - 2)
         }
 
         if combinedData.candleData != nil {

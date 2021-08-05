@@ -10,7 +10,7 @@ import Charts
 
 open class KLineView: UIView {
 
-    public var highlightedChanged = { (index: Int) in }
+    public var highlightedChanged = { (index: Int?) in }
 
     public init(_ sections: [KLSection]) {
         self.sections = sections
@@ -86,6 +86,8 @@ open class KLineView: UIView {
             $0.chartView.moveViewToX($0.chartView.chartXMax)
         }
     }
+
+    public var scaleXEnabled: Bool = true
 
     public func clearCrosshair() {
         sections.forEach{ $0.chartView.changeCrosshair(nil) }
@@ -187,13 +189,15 @@ open class KLineView: UIView {
 //                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
 //                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
 //            }
-            if needMoveToXMax && data.count > visibleXMaxCount {
+            if needMoveToXMax {
                 view.moveViewToX(view.chartXMax)
             }
             if needMoveToXMin {
                 view.moveViewToX(0)
             }
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
+
+            view.scaleXEnabled = self.scaleXEnabled
         }
 
         layoutIfNeeded()
