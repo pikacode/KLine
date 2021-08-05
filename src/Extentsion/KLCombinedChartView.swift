@@ -83,7 +83,7 @@ open class KLCombinedChartView: CombinedChartView {
         rightAxis.labelTextColor = UIColor.white.alpha(0.6)
         rightAxis.labelFont = KLStyle.default.label.font
 
-        scaleXEnabled = true
+        scaleXEnabled = false
         scaleYEnabled = false
         dragXEnabled = true
         dragYEnabled = false

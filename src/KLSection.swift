@@ -114,7 +114,9 @@ open class KLSection {
                 visibleXMaxCountReal = visibleXMaxCount
                 chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
             }
-            chartView.setScaleMinima(1.5, scaleY: 1)
+            if visibleXMaxCount != 0 {
+                chartView.setScaleMinima(1.5, scaleY: 1)
+            }
             if data.count < Int(visibleXMaxCount), let max = chartView.data?.dataSets.first?.xMax, let min = chartView.data?.dataSets.first?.xMin, max > min, min.isFinite, min != Double.greatestFiniteMagnitude {
                 let n = (max - min)/Double(data.count)
                 chartView.xAxis.axisMaximum = n * Double(visibleXMaxCount) + min

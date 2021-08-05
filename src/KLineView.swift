@@ -142,7 +142,7 @@ open class KLineView: UIView {
         self.data = data
     }
 
-    open var visibleXMaxCount: Int = 52 
+    open var visibleXMaxCount: Int = 52
 
     // MARK: - private
 
