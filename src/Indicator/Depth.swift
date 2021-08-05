@@ -78,14 +78,14 @@ extension Depth: KLIndicator {
             let entries = item.compactMap{ (model) -> ChartDataEntry? in
                 return ChartDataEntry(x: model.price, y: model.depthNum)
             }
-            let set = LineChartDataSet(entries: entries)
+            
+            let set = LineChartDataSet(entries: entries, label: "")
             set.setColor(colors[index])
             set.lineWidth = style.lineWidth1
             set.drawFilledEnabled = true
-
+            
             set.circleRadius = 0
             set.circleHoleRadius = 0
-            set.mode = .cubicBezier
             set.drawValuesEnabled = false
 
             set.axisDependency = .left
