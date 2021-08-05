@@ -64,9 +64,7 @@ open class KLSection {
         set { xAxis.valueFormatter = newValue }
     }
 
-    /// only draw data
-    open func draw() {
-
+    open func drawLimitLines() {
         /// 画 limit line
         removeLimitLines()
 
@@ -81,6 +79,12 @@ open class KLSection {
                 }
             }
         }
+    }
+
+    /// only draw data
+    open func draw() {
+
+        drawLimitLines()
 
         guard data.count > 0 else {
             chartView.data = nil
