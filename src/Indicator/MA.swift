@@ -22,6 +22,9 @@ open class MA {
             return
         }
         for i in (day-1)..<(data.count-1) {
+            if data[i].ma?.data[day] != nil {
+                continue
+            }
             let sum: Double
             if let lastMA = data[(i-1)~]?.ma?.data[day] as? Double, let closeN = data[(i-day)~]?.close {
                 //上一个值存在，减去第一个，加上最后一个即可

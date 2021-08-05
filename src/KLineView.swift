@@ -23,6 +23,7 @@ open class KLineView: UIView {
             newValue.forEach{ $0.offset = sections[0].offset }
         }
         didSet {
+            sections.forEach{ $0.delegate = self }
             queue.async {
                 self.indicators.forEach{ type(of: $0).calculate(&self.realData) }
                 DispatchQueue.main.async {
@@ -110,7 +111,7 @@ open class KLineView: UIView {
             }
         }
 
-        if needMoveToXMax && self.data.count > 52 {
+        if needMoveToXMax && data.count > visibleXMaxCount {
             moveToXMax()
         }
         needMoveToXMax = false
@@ -120,6 +121,12 @@ open class KLineView: UIView {
         }
         needMoveToXMin = false
     }
+
+//    /// tell the view needupdate when data changed without redraw
+//    open func needUpdate() {
+//        indicators.forEach{ type(of: $0).calculate(&newData) }
+//        sections.forEach{ $0.}
+//    }
 
     /// 一个经验值，控制 label 的密度，数字越大数量越多
     /// 可以通过修改 chartView.rightAxis.labelCount 自行控制具体数量
@@ -135,6 +142,7 @@ open class KLineView: UIView {
         self.data = data
     }
 
+    open var visibleXMaxCount: Int = 52 
 
     // MARK: - private
 
@@ -179,7 +187,7 @@ open class KLineView: UIView {
 //                view.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
 //                view.viewPortHandler.refresh(newMatrix: transform, chart: view, invalidate: true)
 //            }
-            if needMoveToXMax && self.data.count > 52 {
+            if needMoveToXMax && data.count > visibleXMaxCount {
                 view.moveViewToX(view.chartXMax)
             }
             if needMoveToXMin {

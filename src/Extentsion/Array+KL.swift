@@ -32,7 +32,7 @@ postfix func ~ (value: CountableClosedRange<Int>?) -> OptionalRange {
 
 extension Array {
 
-    subscript(int: OptionalInt, file: String = #file, function: String = #function, line: Int = #line) -> Element? {
+    subscript(int: OptionalInt) -> Element? {
         get {
             if let index = int.index {
                 if (self.startIndex..<self.endIndex).contains(index) {
@@ -54,7 +54,7 @@ extension Array {
         }
     }
 
-    subscript(bounds: OptionalRange, file: String = #file, function: String = #function, line: Int = #line) -> ArraySlice<Element>? {
+    subscript(bounds: OptionalRange) -> ArraySlice<Element>? {
         get {
             if let range = bounds.range {
                 return self[range.clamped(to: self.startIndex ..< self.endIndex)]
