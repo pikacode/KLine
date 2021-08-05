@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
+    var depthContenView = UIView.init(frame: CGRect.init(x: 0, y: 500, width: UIScreen.main.bounds.size.width, height: 300))
+    var depthKLineView: KLineView!
     var klineView: KLineView!
 
     // 👉 create demo data, in real project you may create it by request
@@ -48,7 +50,52 @@ class ViewController: UIViewController {
         }
         return temp
     }()
-
+    
+    let depthData: [KLDepthPoint] = {
+        let start: TimeInterval = 1623749243
+        let count = 40
+        var temp = [KLDepthPoint]()
+        let path = Bundle.main.path(forResource: "depth", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        do{
+            let jsonData:Any = try JSONSerialization.jsonObject(with: Data(contentsOf: url), options: JSONSerialization.ReadingOptions.mutableContainers)
+            let jsonArr = jsonData as? NSDictionary
+            let asks = jsonArr?["asks"] as? NSArray
+            let bids = jsonArr?["bids"] as? NSArray
+        
+            if let asks = jsonArr?["bids"] as? NSArray{
+                for item in asks {
+                    if let item = item as? NSArray {
+                        let type = KLDepthPoint.TradingType.buy
+                        let p = item.firstObject as? Double ?? 0
+                        let a = item.lastObject as? Double ?? 0
+                        let d = KLDepthPoint.init(p: p, t: type, a: a)
+                        temp.append(d)
+                        
+                    }
+                }
+            }
+            
+            if let bids = jsonArr?["asks"] as? NSArray{
+                for item in bids {
+                    if let item = item as? NSArray {
+                        let type = KLDepthPoint.TradingType.sell
+                        let p = item.firstObject as? Double ?? 0
+                        let a = item.lastObject as? Double ?? 0
+                        let d = KLDepthPoint.init(p: p, t: type, a: a)
+                        temp.append(d)
+                    }
+                }
+            }
+            
+        
+        }catch {
+            print("12333  error")
+        }
+        return temp
+      
+    }()
+    
     let settingsView: ChartSettingsView = {
         let view = Bundle.main.loadNibNamed("\(ChartSettingsView.self)", owner: nil, options: nil)?.last as! ChartSettingsView
         UIApplication.shared.keyWindow?.addSubview(view)
@@ -137,9 +184,24 @@ class ViewController: UIViewController {
             self.contentHeight.constant = self.klineView.neededHeight
 
         }
+        addDepthView()
 
     }
 
+    
+    
+    func addDepthView() {
+        view.addSubview(depthContenView)
+        depthContenView.backgroundColor = .red
+        depthKLineView = KLineView([KLSection([Depth()], 200)])
+//        depthKLineView.legend.direction = .RightToLeft
+        depthKLineView.frame = depthContenView.bounds
+        depthKLineView.backgroundColor = .green
+        depthContenView.addSubview(depthKLineView)
+        depthKLineView.data = depthData
+        
+    }
+    
     func createLimitLines() -> [LimitLine] {
         let pls = settingsView.settings.priceLines
         var lines = [LimitLine]()
