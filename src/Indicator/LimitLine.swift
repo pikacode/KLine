@@ -30,21 +30,43 @@ public class LimitLine {
         self.style.label.color = UIColor.black
     }
 
+    public var labelText: String {
+        set {
+            label.text = newValue
+            limitLine.label = newValue
+        }
+        get {
+            label.text
+        }
+    }
+    
     public var label = KLLabel(style.label)
 
-    public lazy var limitLine: KLChartLimitLine = {
+    lazy var _limitLine: KLChartLimitLine = {
         let line = KLChartLimitLine(limit: Double(value), label: label.text)
         line.labelPosition = .topLeft
         line.yOffset = -6
-        line.lineWidth = style.lineWidth1
-        line.lineColor = style.lineColor1
-        line.lineDashLengths = label.dashLengths
-        line.lineDashPhase = label.dashPhase
-        line.valueFont = label.font
-        line.valueTextColor = label.color
-        line.bgColor = label.bgColor
         return line
     }()
+
+    public var limitLine: KLChartLimitLine {
+        get {
+            let line = _limitLine
+            line.label = label.text
+            line.limit = value
+            line.lineWidth = style.lineWidth1
+            line.lineColor = style.lineColor1
+            line.lineDashLengths = label.dashLengths
+            line.lineDashPhase = label.dashPhase
+            line.valueFont = label.font
+            line.valueTextColor = label.color
+            line.bgColor = label.bgColor
+            return _limitLine
+        }
+        set {
+            _limitLine = newValue
+        }
+    }
 
     public var isCrosshair: Bool {
         return limitLine is KLCrosshairLimitLine

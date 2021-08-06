@@ -12,7 +12,7 @@ open class KLChartLimitLine: ChartLimitLine {
     public var bgColor = LimitLine.style.label.bgColor
 }
 
-open class KLCrosshairLimitLine: ChartLimitLine {}
+open class KLCrosshairLimitLine: KLChartLimitLine {}
 
 extension ChartLimitLine {
     var isCrosshair: Bool {
