@@ -31,7 +31,6 @@ open class KLYAxisRenderer: YAxisRenderer {
 
         for i in 0 ..< limitLines.count
         {
-
             let l = limitLines[i]
 
             if !l.isEnabled
@@ -39,11 +38,13 @@ open class KLYAxisRenderer: YAxisRenderer {
                 continue
             }
 
+            //kline
             var attributes = [NSAttributedString.Key.font: l.valueFont,
                               NSAttributedString.Key.foregroundColor: l.valueTextColor]
             if let l1 = l as? KLChartLimitLine {
                 attributes[.backgroundColor] = l1.bgColor
             }
+            //kline
 
             context.saveGState()
             defer { context.restoreGState() }

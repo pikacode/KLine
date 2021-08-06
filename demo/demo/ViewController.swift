@@ -107,11 +107,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        KLineView.precision = 2
+
         //---------------- ⭐️ Easy Use ----------------//
 
         // 👉 1. create KLineView by sections
         // 👉 sections can be modified after
         let candleSection = KLSection([Candle(), MA()], 300)
+        candleSection.drawVerticalCrosshairLabel = true //tell which section draw the label
         
         klineView = KLineView([candleSection,
                                KLSection([MAVOL()], 74),
@@ -191,6 +194,7 @@ class ViewController: UIViewController {
             // 👉 if u use frame instead of AutoLayout just set contentView.size.height = klineView.neededHeight
             self.contentHeight.constant = self.klineView.neededHeight
 
+            self.klineView.sections.first?.chartView.crosshair.vertical?.limitLine.drawLabelEnabled = true
         }
 
 

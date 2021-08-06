@@ -89,6 +89,8 @@ open class KLineView: UIView {
 
     public var scaleXEnabled: Bool = true
 
+    public static var precision: Int = 8
+
     public func clearCrosshair() {
         sections.forEach{ $0.chartView.changeCrosshair(nil) }
     }

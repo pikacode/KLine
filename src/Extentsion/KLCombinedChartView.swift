@@ -209,6 +209,7 @@ extension KLCombinedChartView {
 
             //让 x 一格一格的改变，y可以随意改变
             $0.crosshair.point = CGPoint(x: CGFloat(entry.x), y: p.y)
+            $0.crosshair.showHorizontal = $0 == self
 
             //当前画横轴
             if $0 == self {

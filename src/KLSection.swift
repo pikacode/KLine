@@ -23,6 +23,7 @@ open class KLSection {
     open lazy var chartView: KLCombinedChartView = {
         let v = KLCombinedChartView(frame: .zero)
         v.xAxis.valueFormatter = KLEmptyFormatter()
+        v.xAxisRenderer = KLXAxisRenderer(viewPortHandler: v.viewPortHandler, xAxis: v.xAxis, transformer: v.getTransformer(forAxis: .left))
         v.leftYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.leftAxis, transformer: v.getTransformer(forAxis: .left))
         v.rightYAxisRenderer = KLYAxisRenderer(viewPortHandler: v.viewPortHandler, yAxis: v.rightAxis, transformer: v.getTransformer(forAxis: .right))
         return v
@@ -62,6 +63,15 @@ open class KLSection {
     public var xValueFormatter: Charts.IAxisValueFormatter? {
         get { return xAxis.valueFormatter }
         set { xAxis.valueFormatter = newValue }
+    }
+
+    public var drawVerticalCrosshairLabel: Bool {
+        set {
+            chartView.crosshair._vertical.limitLine.drawLabelEnabled = newValue
+        }
+        get {
+            return chartView.crosshair._vertical.limitLine.drawLabelEnabled
+        }
     }
 
     open func drawLimitLines() {
