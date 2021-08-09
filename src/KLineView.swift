@@ -88,6 +88,7 @@ open class KLineView: UIView {
     }
 
     public var scaleXEnabled: Bool = true
+    public var drawGridLinesEnabled: Bool = true
 
     public static var precision: Int = 8
 
@@ -200,6 +201,9 @@ open class KLineView: UIView {
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
 
             view.scaleXEnabled = self.scaleXEnabled
+            view.xAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+            view.leftAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+            view.rightAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
         }
 
         layoutIfNeeded()
