@@ -198,7 +198,7 @@ class ViewController: UIViewController {
         }
 
 
-        addDepthView()
+//        addDepthView()
     }
 
     
