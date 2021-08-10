@@ -42,7 +42,7 @@ class ChartSettings {
     var mainIndicators = [(MA(), true),
                           (EMA(), false),
                           (BOLL(), false),
-                          (minu(), true),]
+                          (Candle(), true),]
     as [(indicator: KLIndicator, on: Bool)] { didSet{ save() } }
 
     var otherIndicators = [(MAVOL(), true),

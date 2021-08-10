@@ -46,6 +46,8 @@ open class KLStyle: NSObject {
 
     public var label: KLLabel
 
+    public var xOffset: CGFloat
+
     public struct GradientColor {
         let top: UIColor
         let bottom: UIColor
@@ -68,12 +70,14 @@ open class KLStyle: NSObject {
             downBarColor = style.downBarColor
             upGradient = style.upGradient
             downGradient = style.downGradient
+            xOffset = style.xOffset
             label = KLLabel(style.label)
         } else {
             lineWidth1 = 1
             maxBarWidth = 4
             minBarWidth = 1
             space = 1
+            xOffset = 0
             lineColor1 = 0x039fff.toColor
             lineColor2 = 0x01d0f7.toColor
             lineColor3 = 0xff7401.toColor

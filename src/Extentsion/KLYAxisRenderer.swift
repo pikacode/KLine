@@ -82,7 +82,11 @@ open class KLYAxisRenderer: YAxisRenderer {
             {
                 let labelLineHeight = l.valueFont.lineHeight
 
-                let xOffset: CGFloat = 4.0 + l.xOffset
+                //kline
+//                let xOffset: CGFloat = 4.0 + l.xOffset
+                let xOffset: CGFloat = l.xOffset
+                //kline
+
                 let yOffset: CGFloat = l.lineWidth + labelLineHeight + l.yOffset
 
                 if l.labelPosition == .topRight
