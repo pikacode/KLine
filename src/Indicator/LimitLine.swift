@@ -46,6 +46,7 @@ public class LimitLine {
         let line = KLChartLimitLine(limit: Double(value), label: label.text)
         line.labelPosition = .topLeft
         line.yOffset = -6
+        line.xOffset = style.xOffset
         return line
     }()
 
@@ -54,7 +55,6 @@ public class LimitLine {
             let line = _limitLine
             line.label = label.text
             line.limit = value
-            line.xOffset = style.xOffset
             line.lineWidth = style.lineWidth1
             line.lineColor = style.lineColor1
             line.lineDashLengths = label.dashLengths
