@@ -54,7 +54,7 @@ public class LimitLine {
             let line = _limitLine
             line.label = label.text
             line.limit = value
-            line.xOffset = 7 + style.xOffset
+            line.xOffset = style.xOffset
             line.lineWidth = style.lineWidth1
             line.lineColor = style.lineColor1
             line.lineDashLengths = label.dashLengths
