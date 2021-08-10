@@ -198,8 +198,16 @@ extension KLCombinedChartView {
             return
         }
 
-        guard let candleData = views.compactMap({ $0.combinedData?.candleData }).first,
-              let entry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan) as? CandleChartDataEntry
+        let data = views.compactMap{ (view)->(ChartData?) in
+            if view.combinedData?.candleData != nil {
+                return view.combinedData?.candleData
+            } else {
+                return view.combinedData?.lineData
+            }
+        }
+
+        guard let candleData = data.first,
+              let entry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan)
         else {
             return
         }
