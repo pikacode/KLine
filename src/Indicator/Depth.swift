@@ -25,21 +25,17 @@ open class Depth {
             let item = buyArr[index]
             let lastItem = buyArr[index - 1]
             item.depthNum = lastItem.depthNum - lastItem.amount
-            item.x = index
             buyArr[index] = item
         }
         let count = sellArr.count - 1
         
         sellArr[0].depthNum = sellArr[0].amount
         sellArr[count].depthNum = sellSum
-        sellArr[count].x = count + sellArr.count - 1
         for index in stride(from: count, through: 1, by: -1) {
             let item = sellArr[index]
             let lastItem = sellArr[index - 1]
             lastItem.depthNum = item.depthNum - item.amount
-            
-            lastItem.x = count + index - 1
-            print(lastItem.x, lastItem.depthNum)
+
             sellArr[index - 1] = lastItem
         }
         

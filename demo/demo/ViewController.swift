@@ -62,14 +62,14 @@ class ViewController: UIViewController {
             let jsonArr = jsonData as? NSDictionary
             let asks = jsonArr?["asks"] as? NSArray
             let bids = jsonArr?["bids"] as? NSArray
-        
+            let askCoutm = asks?.count ?? 20
             if let asks = jsonArr?["bids"] as? NSArray{
-                for item in asks {
+                for (index, item) in asks.enumerated() {
                     if let item = item as? NSArray {
                         let type = KLDepthPoint.TradingType.buy
                         let p = item.firstObject as? Double ?? 0
                         let a = item.lastObject as? Double ?? 0
-                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a)
+                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a, x: Double(index))
                         temp.append(d)
                         
                     }
@@ -77,12 +77,12 @@ class ViewController: UIViewController {
             }
             
             if let bids = jsonArr?["asks"] as? NSArray{
-                for item in bids {
+                for (index, item) in bids.enumerated() {
                     if let item = item as? NSArray {
                         let type = KLDepthPoint.TradingType.sell
                         let p = item.firstObject as? Double ?? 0
                         let a = item.lastObject as? Double ?? 0
-                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a)
+                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a, x: Double(index + askCoutm) )
                         temp.append(d)
                     }
                 }
@@ -91,9 +91,9 @@ class ViewController: UIViewController {
         }catch {
             print("12333  error")
         }
-        temp.sort { (m1, m2) -> Bool in
-            return m1.price < m2.price
-        }
+//        temp.sort { (m1, m2) -> Bool in
+//            return m1.price < m2.price
+//        }
 
         return temp
       
