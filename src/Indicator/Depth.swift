@@ -14,14 +14,7 @@ open class Depth {
     
         var buyArr = data.filter { (model) -> Bool in return model.type ==  .buy}
         var sellArr = data.filter { (model) -> Bool in return model.type ==  .sell }
-        
-        buyArr.sort { (m1, m2) -> Bool in
-            return m1.price < m2.price
-        }
-        
-        sellArr.sort { (m1, m2) -> Bool in
-            return m1.price < m2.price
-        }
+    
         let buySum = buyArr.reduce(0) { (total, model) in return total + model.amount}
         let sellSum = sellArr.reduce(0) { (total, model) in return total + model.amount}
       
@@ -32,21 +25,24 @@ open class Depth {
             let item = buyArr[index]
             let lastItem = buyArr[index - 1]
             item.depthNum = lastItem.depthNum - lastItem.amount
+            item.x = index
             buyArr[index] = item
         }
         let count = sellArr.count - 1
         
         sellArr[0].depthNum = sellArr[0].amount
         sellArr[count].depthNum = sellSum
-        
+        sellArr[count].x = count + sellArr.count - 1
         for index in stride(from: count, through: 1, by: -1) {
             let item = sellArr[index]
             let lastItem = sellArr[index - 1]
             lastItem.depthNum = item.depthNum - item.amount
+            
+            lastItem.x = count + index - 1
+            print(lastItem.x, lastItem.depthNum)
             sellArr[index - 1] = lastItem
         }
         
-        data.append(contentsOf: sellArr)
     }
 }
 
@@ -60,23 +56,17 @@ extension Depth: KLIndicator {
     
     
     public func lineDataSet(_ data: [Any]) -> [LineChartDataSet]? {
-        guard var data = data as? [KLDepthPoint] else { return nil }
+        guard let data = data as? [KLDepthPoint] else { return nil }
         var sets = [LineChartDataSet]()
-       
-        
-        data.sort { (m1, m2) -> Bool in
-            return m1.price < m2.price
-        }
-        
         let data1 = data.filter { (model) -> Bool in return model.type == .buy}
         let data2 = data.filter { (model) -> Bool in return model.type == .sell}
         
         let dataArr = [data1, data2]
         let colors = [style.downColor, style.upColor]
-        
         for (index, item) in dataArr.enumerated() {
             let entries = item.compactMap{ (model) -> ChartDataEntry? in
-                return ChartDataEntry(x: model.price, y: model.depthNum)
+                print(model.x, model.depthNum)
+                return ChartDataEntry(x: Double(model.x), y: model.depthNum)
             }
             
             let set = LineChartDataSet(entries: entries, label: "")
@@ -88,7 +78,6 @@ extension Depth: KLIndicator {
             set.circleHoleRadius = 0
             set.drawValuesEnabled = false
 
-            set.axisDependency = .left
             //生成渐变色
             let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                                            colors: [colors[index].cgColor, UIColor.white.cgColor] as CFArray, locations: [1.0, 0.0])

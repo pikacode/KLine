@@ -69,7 +69,7 @@ class ViewController: UIViewController {
                         let type = KLDepthPoint.TradingType.buy
                         let p = item.firstObject as? Double ?? 0
                         let a = item.lastObject as? Double ?? 0
-                        let d = KLDepthPoint.init(p: p, t: type, a: a)
+                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a)
                         temp.append(d)
                         
                     }
@@ -82,16 +82,19 @@ class ViewController: UIViewController {
                         let type = KLDepthPoint.TradingType.sell
                         let p = item.firstObject as? Double ?? 0
                         let a = item.lastObject as? Double ?? 0
-                        let d = KLDepthPoint.init(p: p, t: type, a: a)
+                        let d = KLDepthPoint.init(p: p - 222, t: type, a: a)
                         temp.append(d)
                     }
                 }
             }
-            
         
         }catch {
             print("12333  error")
         }
+        temp.sort { (m1, m2) -> Bool in
+            return m1.price < m2.price
+        }
+
         return temp
       
     }()
@@ -197,8 +200,7 @@ class ViewController: UIViewController {
             self.klineView.sections.first?.chartView.crosshair.vertical?.limitLine.drawLabelEnabled = true
         }
 
-
-//        addDepthView()
+        addDepthView()
     }
 
     
@@ -208,10 +210,12 @@ class ViewController: UIViewController {
         depthContenView.backgroundColor = .red
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
-
-//        depthKLineView.legend.direction = .RightToLeft
         depthKLineView.frame = depthContenView.bounds
-        depthKLineView.backgroundColor = .green
+//        chartView.xAxis.axisMinimum = 0
+//        chartView.xAxis.axisMaximum = 6
+//
+//        depthKLineView.sections.first?.chartView.xAxis.axisMinimum = 0
+//        depthKLineView.sections.first?.chartView.xAxis.axisMaximum = 40
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
     }
