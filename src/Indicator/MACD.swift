@@ -23,9 +23,9 @@ open class MACD {
     public static var long_period: Int = 26 //长周期
     public static var ma_period: Int = 9 //移动平均周期
     
-    var dif: Double = 0
-    var dea: Double = 0
-    var macd: Double = 0
+    public var dif: Double = 0
+    public var dea: Double = 0
+    public var macd: Double = 0
     var longEma: Double = 0
     var shortEma: Double = 0
 

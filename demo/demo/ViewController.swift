@@ -141,10 +141,14 @@ class ViewController: UIViewController {
         let markView = MarkerView(frame: CGRect(x: 0, y: 0, width: 130, height: 173))
         candleSection.markView = markView
         klineView.highlightedChanged = { [weak self] (index) in
+            
             guard let index = index else {
                 markView.isHidden = true
                 return
             }
+            
+            
+            
             markView.isHidden = false
             if #available(iOS 10.0, *), self?.lastIndex != index {
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -155,7 +159,41 @@ class ViewController: UIViewController {
             }
             let dd = strongSelf.data[index]
             markView.updateValue(model: dd)
+            guard let lineData = strongSelf.klineView.data[index] as? KLineData else {
+                return
+            }
+            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
+            for section in strongSelf.klineView.sections {
+                
+                for item in section.indicators {
+                    switch item {
+                    case is MA:
+                        print("123")
+                        
+                    case is Candle:
+                        print("111")
+                        print(section.chartView.data?.dataSets.first?.label)
+                    case  is EMA:
+                        print("2")
+                    case is BOLL:
+                        print("")
+                    case is MACD:
+                        print("")
+                        
+                    default:
+                        print("222")
+                    }
+                    if item is MA {
+                        
+                    }
+                }
+        
+            }
+            
+            
         }
+        
+        
         
         //---------------- ⭐️⭐️ Advanced ----------------//
 
@@ -211,6 +249,7 @@ class ViewController: UIViewController {
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
+        
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
     }

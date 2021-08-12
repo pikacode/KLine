@@ -10,6 +10,8 @@ import Charts
 
 open class KLLegendRenderer: LegendRenderer {
 
+    var index: Int?
+    
     @objc open override func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor) {
 //        if label == Crosshair.label {
 //            return
