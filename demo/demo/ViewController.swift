@@ -200,7 +200,7 @@ class ViewController: UIViewController {
             self.klineView.sections.first?.chartView.crosshair.vertical?.limitLine.drawLabelEnabled = true
         }
 
-        addDepthView()
+//        addDepthView()
     }
 
     
@@ -211,11 +211,6 @@ class ViewController: UIViewController {
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
-//        chartView.xAxis.axisMinimum = 0
-//        chartView.xAxis.axisMaximum = 6
-//
-//        depthKLineView.sections.first?.chartView.xAxis.axisMinimum = 0
-//        depthKLineView.sections.first?.chartView.xAxis.axisMaximum = 40
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
     }

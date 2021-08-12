@@ -11,7 +11,7 @@ open class Depth {
     required public init() {}
 
     private static func calculateDepth(_ data: inout [KLDepthPoint]){
-    
+    //待优化
         var buyArr = data.filter { (model) -> Bool in return model.type ==  .buy}
         var sellArr = data.filter { (model) -> Bool in return model.type ==  .sell }
     
@@ -61,7 +61,6 @@ extension Depth: KLIndicator {
         let colors = [style.downColor, style.upColor]
         for (index, item) in dataArr.enumerated() {
             let entries = item.compactMap{ (model) -> ChartDataEntry? in
-                print(model.x, model.depthNum)
                 return ChartDataEntry(x: Double(model.x), y: model.depthNum)
             }
             
