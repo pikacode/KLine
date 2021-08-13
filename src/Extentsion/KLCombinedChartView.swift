@@ -158,7 +158,9 @@ extension KLCombinedChartView {
         if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
-
+//        let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
+        
+//        legend.setCustom(entries: [lem])
         renderKLMarker(context: context)
     }
 
@@ -212,9 +214,11 @@ extension KLCombinedChartView {
         else {
             return
         }
-
+        
         if let index = candleData.dataSets.first?.entryIndex(entry: entry) {
+            KLLegendRenderer.index = index
             klView.highlightedChanged(index)
+            self.getIndex(index: index, klineView: klView)
         }
 
         views.forEach{
@@ -238,7 +242,67 @@ extension KLCombinedChartView {
         }
 
     }
+    
+    func getIndex(index: Int, klineView: KLineView) {
+        
+        guard let lineData = klineView.data[index] as? KLineData else {
+            return
+        }
+        
+        var label: [String]?
+        
+//            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
+        for section in klineView.sections {
+            
+            for item in section.indicators {
+                
+                switch item {
+                case is MA:
+                    guard let ma = lineData.ma else {
+                        return
+                    }
+                    
+                case is Candle:
+                    print("111")
+                    print(section.chartView.data?.dataSets.first?.label)
+                case  is EMA:
+                    print("2")
+                case is BOLL:
+                    print("")
+                case is MACD:
+                    guard let macd = lineData.macd else {
+                        return
+                    }
+                    let label1 = String(format: " MACD:%.2f", macd.macd)
+                    let label2 = String(format: " DEA:%.2f", macd.dea)
+                    let label3 = String(format: " DIF:%.2f", macd.dif)
+//                    label = [label1, label2, label3]
+                    
+                    setCustomLegend([label1, label2, label3], section, [item.style.lineColor1, item.style.lineColor1, item.style.lineColor2])
+                    
+                default:
+                    print("222")
+                }
 
+            }
+
+        }
+    }
+    
+    func setCustomLegend(_ labels: [String], _ section: KLSection, _ color: [UIColor]){
+        
+        var entries: [LegendEntry] = []
+        
+        for (index, label) in labels.enumerated() {
+            let lem = LegendEntry.init(label: label, form: .none, formSize: 0, formLineWidth: legend.formLineWidth, formLineDashPhase: 0, formLineDashLengths: nil, formColor: color[index~])
+            entries.append(lem)
+        }
+        if entries.count == 0 {
+            section.chartView.legend.resetCustom()
+            return
+        }
+        section.chartView.legend.setCustom(entries: entries)
+    }
 }
 
 extension BarLineChartViewBase {

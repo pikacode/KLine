@@ -159,36 +159,64 @@ class ViewController: UIViewController {
             }
             let dd = strongSelf.data[index]
             markView.updateValue(model: dd)
-            guard let lineData = strongSelf.klineView.data[index] as? KLineData else {
-                return
-            }
-            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
-            for section in strongSelf.klineView.sections {
-                
-                for item in section.indicators {
-                    switch item {
-                    case is MA:
-                        print("123")
-                        
-                    case is Candle:
-                        print("111")
-                        print(section.chartView.data?.dataSets.first?.label)
-                    case  is EMA:
-                        print("2")
-                    case is BOLL:
-                        print("")
-                    case is MACD:
-                        print("")
-                        
-                    default:
-                        print("222")
-                    }
-                    if item is MA {
-                        
-                    }
-                }
-        
-            }
+            
+//
+//            let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
+//
+            
+            
+//            legend.setCustom(entries: [lem])
+            
+//            guard let lineData = strongSelf.klineView.data[index] as? KLineData else {
+//                return
+//            }
+            
+//            var label: [String]?
+            
+//            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
+//            for section in strongSelf.klineView.sections {
+//
+//                for item in section.indicators {
+//
+//                    switch item {
+//                    case is MA:
+//                        guard let ma = lineData.ma else {
+//                            return
+//                        }
+//
+//                    case is Candle:
+//                        print("111")
+//                        print(section.chartView.data?.dataSets.first?.label)
+//                    case  is EMA:
+//                        print("2")
+//                    case is BOLL:
+//                        print("")
+//                    case is MACD:
+//                        guard let macd = lineData.macd else {
+//                            return
+//                        }
+//
+//                        let label1 = String(format: " MACD:%.2f", macd.macd)
+//                        let label2 = String(format: " DEA:%.2f", macd.dea)
+//                        let label3 = String(format: " DIF:%.2f", macd.dif)
+//                        label = [label1, label2, label3]
+//
+//
+//                    default:
+//                        print("222")
+//                    }
+//
+//                }
+//
+////                let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
+////                legend.setCustom(entries: [lem])
+////                let enter =
+//
+//
+//            }
+            
+                       
+            
             
             
         }
