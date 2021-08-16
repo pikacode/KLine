@@ -40,7 +40,6 @@ class MarkerView: UIView {
             tView.backgroundColor = .clear
             
             addCell(title: titleArr[index],  bgView: tView)
-            
         }
     }
 
@@ -55,7 +54,7 @@ class MarkerView: UIView {
         bgView.addSubview(label)
 
                 
-        let valueLabel = addLabel(title: "35420.12", valueLabel: true)
+        let valueLabel = addLabel(title: "--", valueLabel: true)
         valueLabel.textAlignment = .right
         bgView.addSubview(valueLabel)
         valueLabel.frame = CGRect.init(x: 6, y: 0, width: W, height: H)
@@ -77,5 +76,21 @@ class MarkerView: UIView {
             $0.element.text = String(format: "%.2f", data[$0.offset])
         }
     }
-
+    
+    func updatePoint(point: CGPoint?, top: CGFloat?) {
+        guard let point = point, let superV = self.superview, let top = top else {
+            return
+        }
+        var pointX: CGFloat = 0.0
+        let width: CGFloat = self.bounds.width
+        let superW: CGFloat = superV.bounds.width
+        
+        if point.x > superW / 2{
+            pointX = 10
+        }else{
+            pointX = superW - width - 10
+        }
+        
+        self.frame = CGRect.init(x: pointX, y: top, width: width, height: self.bounds.height)
+    }
 }

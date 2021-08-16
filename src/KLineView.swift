@@ -10,7 +10,7 @@ import Charts
 
 open class KLineView: UIView {
 
-    public var highlightedChanged = { (index: Int?) in }
+    public var highlightedChanged = { (index: Int?, point: CGPoint?) in }
 
     public init(_ sections: [KLSection]) {
         self.sections = sections

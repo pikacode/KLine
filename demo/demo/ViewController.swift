@@ -132,9 +132,10 @@ class ViewController: UIViewController {
 
 
         // 👉 4. config tap marker
-        let markView = MarkerView(frame: CGRect(x: 0, y: 0, width: 130, height: 173))
-        candleSection.markView = markView
-        klineView.highlightedChanged = { [weak self] (index) in
+        let markView = MarkerView(frame: CGRect(x: 0, y: 100, width: 130, height: 300))
+        self.view.addSubview(markView)
+//        candleSection.markView = markView
+        klineView.highlightedChanged = { [weak self] (index, point) in
             
             guard let index = index else {
                 markView.isHidden = true
@@ -150,6 +151,7 @@ class ViewController: UIViewController {
             }
             let dd = strongSelf.data[index]
             markView.updateValue(model: dd)
+            markView.updatePoint(point: point, top: 107)
         }
         
         

@@ -193,7 +193,7 @@ extension KLCombinedChartView {
         }
 
         guard let p = point else {
-            klView.highlightedChanged(nil)
+            klView.highlightedChanged(nil, nil)
             return
         }
 
@@ -213,12 +213,12 @@ extension KLCombinedChartView {
         
         if let index = candleData.dataSets.first?.entryIndex(entry: entry) {
             KLLegendRenderer.index = index
-            klView.highlightedChanged(index)
+            let pt = self.pixelForValues(x: p.x.double, y: p.y.double, axis: .left)
+            klView.highlightedChanged(index, pt)
             self.refreshCustomLegend(index: index, klineView: klView)
         }
 
         views.forEach{
-
             //让 x 一格一格的改变，y可以随意改变
             $0.crosshair.point = CGPoint(x: CGFloat(entry.x), y: p.y)
             $0.crosshair.showHorizontal = $0 == self
