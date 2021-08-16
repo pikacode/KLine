@@ -105,7 +105,9 @@ extension BOLL: KLIndicator {
                 label = "BOLL(\(BOLL.boll_day),\(BOLL.boll_average))"
             }
             let labelValue = entries.last?.y ?? 0
-            label += type == .up ? String(format: " UP:%.2f",labelValue) : type == .mb ?  String(format: " MB:%.2f", labelValue) : String(format: " DN:%.2f", labelValue)
+            let precision = KLineView.precision
+            
+            label += type == .up ? String(format: " UP:%.\(precision)f",labelValue) : type == .mb ?  String(format: " MB:%.\(precision)f", labelValue) : String(format: " DN:%.\(precision)f", labelValue)
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)

@@ -17,7 +17,7 @@ open class MACD {
         case dea
         case macd
     }
-    public static var macd_type: [MacdType] = [.dif, .dea, .macd]
+    public static var macd_type: [MacdType] = [.dea, .dif, .macd]
     
     public static var short_period: Int = 12 //短周期
     public static var long_period: Int = 26 //长周期
@@ -81,19 +81,20 @@ extension MACD: KLIndicator {
         guard let data = data as? [KLineData] else { return nil }
         var sets = [LineChartDataSet]()
         for (index, type) in MACD.macd_type.enumerated() {
-            if type == .macd { break}
             let entries = data.compactMap{ (model) -> ChartDataEntry? in
                 let macd = model.macd ?? MACD()
                 return ChartDataEntry(x: model.x, y: type == .dif ? macd.dif : macd.dea)
             }
             var label = ""
+            let precision = KLineView.precision
+            
             if index == 0 {
                 label = "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"
             }
-            label += type == .dea ? String(format: " DEA:%.2f",entries.last?.y ?? 0) : String(format: " DIF:%.2f",entries.last?.y ?? 0)
+            label += type == .dea ? String(format: " DEA:%.\(precision)f",entries.last?.y ?? 0) : type == .dif ? String(format: " DIF:%.\(precision)f",entries.last?.y ?? 0) : String(format: " MACD:%.\(precision)f",entries.last?.y ?? 0)
             
             let set = LineChartDataSet(entries: entries, label: label)
-            let color = [style.lineColor1, style.lineColor2][index]
+            let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1
             set.circleRadius = 0
@@ -116,8 +117,7 @@ extension MACD: KLIndicator {
             colors.append(macd.macd > 0 ? style.upBarColor : style.downBarColor)
             return BarChartDataEntry(x: model.x, y: macd.macd)
         }
-        let label = String(format: " MACD:%.2f",entries.last?.y ?? 0)
-        let set = BarChartDataSet(entries: entries, label: label)
+        let set = BarChartDataSet(entries: entries)
         set.colors = colors
         set.drawValuesEnabled = false
         return [set]

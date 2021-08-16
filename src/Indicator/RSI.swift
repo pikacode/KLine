@@ -137,7 +137,7 @@ extension RSI: KLIndicator{
                 
             }
             
-            let lable = String(format: "RSI(\(rsiDay)):%.2f", entries.last?.y ?? 0)
+            let lable = String(format: "RSI(\(rsiDay)):%.\(KLineView.precision)f", entries.last?.y ?? 0)
             let set = LineChartDataSet(entries: entries, label: lable)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)

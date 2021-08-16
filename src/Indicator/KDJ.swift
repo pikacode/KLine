@@ -119,13 +119,14 @@ extension KDJ: KLIndicator {
             
             let yValue = entries.last?.y ?? 0
             var label = ""
+            let precision = KLineView.precision
             switch type {
             case .K:
-                label = String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period) K:%.2f ",yValue)
+                label = String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ",yValue)
             case .D:
-                label = String(format: " D:%.2f ",yValue)
+                label = String(format: " D:%.\(precision)f ",yValue)
             case .J:
-                label = String(format: " J:%.2f ",yValue)
+                label = String(format: " J:%.\(precision)f ",yValue)
                 
             }
             let set = LineChartDataSet(entries: entries, label: label)

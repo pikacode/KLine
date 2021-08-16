@@ -166,6 +166,7 @@
 		CEC814CFD549BCDDAB65F5918969182E /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7045AE44AA41F438E17FF48B7B8DCA /* IHighlighter.swift */; };
 		D097867377CFA622E7AFBD514E7B4642 /* KLCombinedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AED4690B1EC93BA23931F679D66182 /* KLCombinedChartView.swift */; };
 		D0E11432F3033BBF59C77F416514A462 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F177F1E6C72276E2501569D4833FC541 /* Charts.framework */; };
+		D13023A626CA4A5C0067BED7 /* LimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13023A526CA4A5C0067BED7 /* LimitLine.swift */; };
 		D68F93293888B6776369185028CB60B0 /* IBarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEA8AC06FB34D00653F00EB4DA31444 /* IBarChartDataSet.swift */; };
 		D6E011A7BA193945CEA69517E40CBD48 /* XShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116AB9BF75A2A772277869CDD16CFD5 /* XShapeRenderer.swift */; };
 		D7B623CFD7231E00FB60419AA17A3E82 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F617C946A8AF36F4BE67A3944DCD159 /* MoveViewJob.swift */; };
@@ -390,6 +391,7 @@
 		CE6013C31DB5F628FCFF459656034379 /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
 		CEEED036C18816CECC0CE22C86D1282A /* YAxisRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRenderer.swift; path = Source/Charts/Renderers/YAxisRenderer.swift; sourceTree = "<group>"; };
 		D064CCBEB3D8F86F6C6EB1E51C427CFA /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarHighlighter.swift; path = Source/Charts/Highlight/PieRadarHighlighter.swift; sourceTree = "<group>"; };
+		D13023A526CA4A5C0067BED7 /* LimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitLine.swift; path = src/Indicator/LimitLine.swift; sourceTree = "<group>"; };
 		D19BA561ACEB8618FE161AF94ACE5873 /* Candle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Candle.swift; path = src/Indicator/Candle.swift; sourceTree = "<group>"; };
 		D466846EAE78237BBF2B30F1C005611F /* RadarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataEntry.swift; sourceTree = "<group>"; };
 		D5870D99A8B67AFF39FEA87AED03835E /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };

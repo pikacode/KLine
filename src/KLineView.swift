@@ -91,6 +91,7 @@ open class KLineView: UIView {
     public var drawGridLinesEnabled: Bool = true
 
     public static var precision: Int = 8
+    public static var volPrecision: Int = 2
 
     public func clearCrosshair() {
         sections.forEach{ $0.chartView.changeCrosshair(nil) }

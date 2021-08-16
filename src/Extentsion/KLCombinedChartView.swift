@@ -161,9 +161,6 @@ extension KLCombinedChartView {
         if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
-//        let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
-        
-//        legend.setCustom(entries: [lem])
         renderKLMarker(context: context)
     }
 
@@ -222,7 +219,7 @@ extension KLCombinedChartView {
         if let index = candleData.dataSets.first?.entryIndex(entry: entry) {
             KLLegendRenderer.index = index
             klView.highlightedChanged(index)
-            self.getIndex(index: index, klineView: klView)
+            self.refreshCustomLegend(index: index, klineView: klView)
         }
 
         views.forEach{
@@ -247,49 +244,127 @@ extension KLCombinedChartView {
 
     }
     
-    func getIndex(index: Int, klineView: KLineView) {
+    func refreshCustomLegend(index: Int, klineView: KLineView) {
         
         guard let lineData = klineView.data[index] as? KLineData else {
             return
         }
+        let precision = KLineView.precision
         
-        var label: [String]?
-        
-//            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
         for section in klineView.sections {
-            
             for item in section.indicators {
-                
                 switch item {
                 case is MA:
                     guard let ma = lineData.ma else {
                         return
                     }
+                    var labels = [String]()
+                    for data in ma.data {
+                        labels.append(String(format:  " MA\( data.key):%.\(precision)f", Double(data.value ?? 0)))
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
                     
-                case is Candle:
-                    print("111")
-                    print(section.chartView.data?.dataSets.first?.label)
                 case  is EMA:
-                    print("2")
+                    guard let ema = lineData.ema else {
+                        return
+                    }
+                    var labels = [String]()
+                    for  type in EMA.emaDays{
+                        switch type {
+                        case .short(let day):
+                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.short_ema))
+                        case .mid(let day):
+                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.mid_ema))
+                        case .long(let day):
+                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.long_ema))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
                 case is BOLL:
-                    print("")
+                    guard let boll = lineData.boll else {
+                        return
+                    }
+                    var labels = [String]()
+                    for  type in BOLL.boll_type{
+                        switch type {
+                        case .up:
+                            labels.append(String(format: "BOLL(\(BOLL.boll_day),\(BOLL.boll_average)) UP:%.\(precision)f ", boll.up_boll))
+                        case .mb:
+                            labels.append(String(format: " MB:%.\(precision)f ",boll.mb_boll))
+                        case .down:
+                            labels.append(String(format: " DN:%.\(precision)f ",boll.dn_boll))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
+                    
                 case is MACD:
                     guard let macd = lineData.macd else {
                         return
                     }
-                    let label1 = String(format: " MACD:%.2f", macd.macd)
-                    let label2 = String(format: " DEA:%.2f", macd.dea)
-                    let label3 = String(format: " DIF:%.2f", macd.dif)
-//                    label = [label1, label2, label3]
+
+                    var labels = [String]()
+                    for  type in MACD.macd_type{
+                        switch type {
+                        case .macd:
+                            labels.append(String(format: " MACD:%.\(precision)f ", macd.macd))
+                        case .dea:
+                            labels.append(String(format: "MACD(\(MACD.short_period),\(MACD.short_period),\(MACD.short_period)) DEA:%.\(precision)f ", macd.dea))
+                        case .dif:
+                            labels.append(String(format: " DIF:%.\(precision)f ", macd.dif))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
                     
-                    setCustomLegend([label1, label2, label3], section, [item.style.lineColor1, item.style.lineColor1, item.style.lineColor2])
+                case is MAVOL:
+                    guard let mavol = lineData.mavol else {
+                        return
+                    }
+                    var labels = [String]()
+                    let volPrecision = KLineView.volPrecision
                     
-                default:
-                    print("222")
+                    for (index, data) in mavol.data.enumerated() {
+                        if index == 0 {
+                            labels.append(String(format:  "VOL:%.\(volPrecision)f  MAVOL\( data.key):%.\(volPrecision)f", lineData.vol, Double(data.value ?? 0)))
+                        }else{
+                            labels.append(String(format:  " MAVOL\( data.key):%.\(volPrecision)f", Double(data.value ?? 0)))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
+                case is KDJ:
+                    guard let kdj = lineData.kdj else {
+                        return
+                    }
+                    var labels = [String]()
+                    for  type in KDJ.macd_type{
+                        switch type {
+                        case .K:
+                            labels.append(String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ", kdj.k))
+                        case .D:
+                            labels.append(String(format: " D:%.\(precision)f ",kdj.k))
+                        case .J:
+                            labels.append(String(format: " J:%.\(precision)f ",kdj.j))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
+                case is RSI:
+                    guard let rsi = lineData.rsi else {
+                        return
+                    }
+                    var labels = [String]()
+                    for  type in RSI.rsiDays{
+                        switch type {
+                        case .RSI1(let day):
+                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi6))
+                        case .RSI2(let day):
+                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi12))
+                        case .RSI3(let day):
+                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi24))
+                        }
+                    }
+                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
+                default: break
                 }
-
             }
-
         }
     }
     

@@ -85,11 +85,9 @@ extension EMA: KLIndicator {
                     emaDay = day
                     emaValue = ema.long_ema
                 }
-//                if emaDay == 0{ return nil}
-                
                 return ChartDataEntry(x: model.x, y: emaValue)
             }
-            let label =  String(format:"EMA(\(emaDay)):%.2f",entries.last?.y ?? 0)
+            let label =  String(format:"EMA(\(emaDay)):%.\(KLineView.precision)f",entries.last?.y ?? 0)
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
