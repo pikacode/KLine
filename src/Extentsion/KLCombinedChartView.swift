@@ -119,9 +119,13 @@ open class KLCombinedChartView: CombinedChartView {
         guard showCrosshair else {
             return
         }
-        let translation = ges.location(in: self)
-        let point = valueForTouchPoint(point: translation, axis: .left)
-        changeCrosshair(point)
+        if crosshair.point == nil {
+            let translation = ges.location(in: self)
+            let point = valueForTouchPoint(point: translation, axis: .left)
+            changeCrosshair(point)
+        } else {
+            changeCrosshair(nil)
+        }
     }
 
     @objc func longPressGestureSelector(_ ges: UILongPressGestureRecognizer) {
@@ -196,6 +200,7 @@ extension KLCombinedChartView {
         }
 
         guard let p = point else {
+            crosshair.point = point
             klView.highlightedChanged(nil)
             return
         }

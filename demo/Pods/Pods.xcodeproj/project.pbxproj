@@ -49,6 +49,7 @@
 		39E13C8ED0C32E9EC0B353CA45C70CF2 /* AnimatedMoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B286BDFE78ABF03B0C4DDCFD8FBF6 /* AnimatedMoveViewJob.swift */; };
 		3A5078F021BB004E2F4463F360D41391 /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A85FF755B71FE7150933C213AD28 /* HorizontalBarChartView.swift */; };
 		3A6D318FDBDC51328B830D1B34ECF7FE /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F026C8F1598664D9D5E06CC026D40F /* Depth.swift */; };
+		3B01A8C126CA4A0A00484903 /* LimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B01A8C026CA4A0A00484903 /* LimitLine.swift */; };
 		3B78841A26BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78841926BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift */; };
 		3B78842226BD3AF900BEA7E8 /* KLXAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78842126BD3AF900BEA7E8 /* KLXAxisRenderer.swift */; };
 		3B9BBCFE26C140A8005B8CE0 /* Minute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9BBCFD26C140A8005B8CE0 /* Minute.swift */; };
@@ -252,6 +253,7 @@
 		310F7771A75BD6E2CBACF851524328A8 /* PieRadarChartViewBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarChartViewBase.swift; path = Source/Charts/Charts/PieRadarChartViewBase.swift; sourceTree = "<group>"; };
 		361F7A3E2259B2B52B112ACAC2CE35C4 /* CandleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/CandleChartDataSet.swift; sourceTree = "<group>"; };
 		3A4DB505F06D59AEF8D380731C3F6A1D /* PieChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataEntry.swift; sourceTree = "<group>"; };
+		3B01A8C026CA4A0A00484903 /* LimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitLine.swift; path = src/Indicator/LimitLine.swift; sourceTree = "<group>"; };
 		3B78841926BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSDecimalNumber+KL.swift"; path = "src/Extentsion/NSDecimalNumber+KL.swift"; sourceTree = "<group>"; };
 		3B78842126BD3AF900BEA7E8 /* KLXAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KLXAxisRenderer.swift; path = src/Extentsion/KLXAxisRenderer.swift; sourceTree = "<group>"; };
 		3B9BBCFD26C140A8005B8CE0 /* Minute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Minute.swift; path = src/Indicator/Minute.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 		EF4616D29F1E1ECAC695DBFE4E14A634 /* Indicator */ = {
 			isa = PBXGroup;
 			children = (
+				3B01A8C026CA4A0A00484903 /* LimitLine.swift */,
 				6076086CDCB17EBE9E153ACA3FC09B1D /* BOLL.swift */,
 				3B9BBCFD26C140A8005B8CE0 /* Minute.swift */,
 				D19BA561ACEB8618FE161AF94ACE5873 /* Candle.swift */,
@@ -1113,6 +1116,7 @@
 				4435C67D5D88A45E03CBB7AEC28E9739 /* KLine-dummy.m in Sources */,
 				388695FE62165E3275BD2A28BD329E5A /* KLineData.swift in Sources */,
 				79E02CA1E7B3AFAC50F7D8E2D95E7AC3 /* KLineView.swift in Sources */,
+				3B01A8C126CA4A0A00484903 /* LimitLine.swift in Sources */,
 				DA6C753E9A8BA11B1A49DF56B967274A /* KLLabel.swift in Sources */,
 				7F84B2E55489D2BF62FC8AAE83FFBB70 /* KLLegendRenderer.swift in Sources */,
 				795203382E899AC456412AB45CCB5C5A /* KLMarker.swift in Sources */,
