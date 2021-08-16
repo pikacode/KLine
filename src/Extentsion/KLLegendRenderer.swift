@@ -10,12 +10,17 @@ import Charts
 
 open class KLLegendRenderer: LegendRenderer {
 
-    var index: Int?
+    static var index: Int?
     
     @objc open override func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor) {
-//        if label == Crosshair.label {
-//            return
+        
+//        var label = label
+//      
+//        
+//        if let index = Self.index {
+//            label = legend?.entries[index~]?.label ?? label
 //        }
+        
         guard let entries = legend?.entries,
             let e = entries.first(where: { $0.label == label }),
             let color = e.formColor else {
