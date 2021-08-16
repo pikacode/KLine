@@ -83,7 +83,6 @@
 		640C152125D86F7A3C9BDD7D18563CBA /* Platform+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E287149E74C235521D84600D0C9B280 /* Platform+Gestures.swift */; };
 		644CBE15115BFEDB16BF372F81CFF076 /* PieRadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064CCBEB3D8F86F6C6EB1E51C427CFA /* PieRadarHighlighter.swift */; };
 		64A0821B4F9954E56639DAF9BD7E575C /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219FD25090597D5812A06B145F0E6F75 /* Transformer.swift */; };
-		64A1644B5B6A062F865976CBA5843F74 /* LimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E6A7D2FEC802CD45C16CCABE2C5E93 /* LimitLine.swift */; };
 		66B829842549EECCE91E61D34FFABCBA /* ScatterChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7B411ABEF18348A1C24049179B0396 /* ScatterChartData.swift */; };
 		66FC952C43367208D641932AEB59DA8A /* LineChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D4C18DB4EABA7352BA57DD27731968 /* LineChartDataSet.swift */; };
 		675D24D585A2506762D77E6052517E00 /* IPieChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F14905E040D69883458A7BA60D77B3 /* IPieChartDataSet.swift */; };
@@ -377,7 +376,6 @@
 		C0F279C753B87FAB7C4138446C48EB5D /* UIColor+KL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIColor+KL.swift"; path = "src/Extentsion/UIColor+KL.swift"; sourceTree = "<group>"; };
 		C1C4B267A4820A775520B1F23ECE97E0 /* ILineRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ILineRadarChartDataSet.swift; path = Source/Charts/Data/Interfaces/ILineRadarChartDataSet.swift; sourceTree = "<group>"; };
 		C1F23B1E8AD414500DFB0D74174E0E02 /* KLEnum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KLEnum.swift; path = src/KLEnum.swift; sourceTree = "<group>"; };
-		C3E6A7D2FEC802CD45C16CCABE2C5E93 /* LimitLine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LimitLine.swift; path = src/Indicator/LimitLine.swift; sourceTree = "<group>"; };
 		C55B9E5C403DFA30709A4573DFF2E1A5 /* Crosshair.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Crosshair.swift; path = src/Indicator/Crosshair.swift; sourceTree = "<group>"; };
 		C6173E76B956E7C1315DEA28B19CA44C /* ChartAnimationEasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartAnimationEasing.swift; path = Source/Charts/Animation/ChartAnimationEasing.swift; sourceTree = "<group>"; };
 		C703A25169E5D43CAD96BBA0AAC69C53 /* YAxisRendererHorizontalBarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRendererHorizontalBarChart.swift; path = Source/Charts/Renderers/YAxisRendererHorizontalBarChart.swift; sourceTree = "<group>"; };
@@ -576,12 +574,12 @@
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		A93195AB5748F7569134F397E2674D09 /* Targets Support Files */ = {
+		A93195AB5748F7569134F397E2674D09 /* `A */ = {
 			isa = PBXGroup;
 			children = (
 				CBA4AB0AD989728D60465BDAA2076BA2 /* Pods-demo */,
 			);
-			name = "Targets Support Files";
+			name = "`A";
 			sourceTree = "<group>";
 		};
 		AE50847139E378013B792A5B9907532A /* Core */ = {
@@ -756,7 +754,7 @@
 				8DE370DECAD22366ECDF98A06BD160CD /* Frameworks */,
 				E5AB24ECFD8DBB88747DFD7EDF5BF05C /* Pods */,
 				DA8CF82BA9BCFECD56522AF0486FDF44 /* Products */,
-				A93195AB5748F7569134F397E2674D09 /* Targets Support Files */,
+				A93195AB5748F7569134F397E2674D09 /* `A */,
 			);
 			sourceTree = "<group>";
 		};
@@ -789,7 +787,6 @@
 				3C3E9EB40F9E043A4B7AC15DB289587E /* EMA.swift */,
 				A336EDC57BB0415000700BB6689806EF /* KDJ.swift */,
 				EFD56D921AE5CFB37A1939233C196FFD /* KLIndicator.swift */,
-				C3E6A7D2FEC802CD45C16CCABE2C5E93 /* LimitLine.swift */,
 				A7F6764E2FD686D128CC37DA04251678 /* MA.swift */,
 				92846E0D30B991FB5933507D2C60E0A4 /* MACD.swift */,
 				7C4FD8E13A11357276C571B73216FB6A /* MAVOL.swift */,
@@ -1126,7 +1123,6 @@
 				E1AA11B60D3A2C791E1576E4AF35E177 /* KLTransformer.swift in Sources */,
 				3B9BBCFE26C140A8005B8CE0 /* Minute.swift in Sources */,
 				A6334134130D9A88660724C49262C42A /* KLYAxisRenderer.swift in Sources */,
-				64A1644B5B6A062F865976CBA5843F74 /* LimitLine.swift in Sources */,
 				3B78842226BD3AF900BEA7E8 /* KLXAxisRenderer.swift in Sources */,
 				15014079D9B607A75B7446AA140D8E47 /* MA.swift in Sources */,
 				9CB212A0F5EB45FBECACE2EE3623B3B4 /* MACD.swift in Sources */,
