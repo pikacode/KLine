@@ -72,7 +72,6 @@ open class KLCombinedChartView: CombinedChartView {
         xAxis.labelPosition = .bottomInside
         xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.3)
         xAxis.labelTextColor = KLStyle.default.label.color
-        xAxis.labelTextColor = UIColor.white
         xAxis.labelFont = KLStyle.default.label.font
         xAxis.labelHeight = 20
         xAxis.axisLineColor = KLStyle.default.darkGrayColor
@@ -83,7 +82,7 @@ open class KLCombinedChartView: CombinedChartView {
         
         rightAxis.labelPosition = .insideChart
         rightAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.3)
-        rightAxis.labelTextColor = UIColor.white.alpha(0.6)
+        rightAxis.labelTextColor = KLStyle.default.label.color
         rightAxis.labelFont = KLStyle.default.label.font
         rightAxis.axisLineColor = UIColor.clear
 
