@@ -120,7 +120,6 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-        combinedData.lineData.dataSets.first?.label
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
             
             chartView.data = combinedData

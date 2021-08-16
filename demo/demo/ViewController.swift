@@ -71,7 +71,6 @@ class ViewController: UIViewController {
                         let a = item.lastObject as? Double ?? 0
                         let d = KLDepthPoint.init(p: p - 222, t: type, a: a, x: Double(index))
                         temp.append(d)
-                        
                     }
                 }
             }
@@ -89,14 +88,9 @@ class ViewController: UIViewController {
             }
         
         }catch {
-            print("12333  error")
         }
-//        temp.sort { (m1, m2) -> Bool in
-//            return m1.price < m2.price
-//        }
 
         return temp
-      
     }()
     
     let settingsView: ChartSettingsView = {
@@ -146,9 +140,6 @@ class ViewController: UIViewController {
                 markView.isHidden = true
                 return
             }
-            
-            
-            
             markView.isHidden = false
             if #available(iOS 10.0, *), self?.lastIndex != index {
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -159,66 +150,6 @@ class ViewController: UIViewController {
             }
             let dd = strongSelf.data[index]
             markView.updateValue(model: dd)
-            
-//
-//            let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
-//
-            
-            
-//            legend.setCustom(entries: [lem])
-            
-//            guard let lineData = strongSelf.klineView.data[index] as? KLineData else {
-//                return
-//            }
-            
-//            var label: [String]?
-            
-//            strongSelf.klineView.sections.first?.chartView.data?.dataSets.first?.label
-//            for section in strongSelf.klineView.sections {
-//
-//                for item in section.indicators {
-//
-//                    switch item {
-//                    case is MA:
-//                        guard let ma = lineData.ma else {
-//                            return
-//                        }
-//
-//                    case is Candle:
-//                        print("111")
-//                        print(section.chartView.data?.dataSets.first?.label)
-//                    case  is EMA:
-//                        print("2")
-//                    case is BOLL:
-//                        print("")
-//                    case is MACD:
-//                        guard let macd = lineData.macd else {
-//                            return
-//                        }
-//
-//                        let label1 = String(format: " MACD:%.2f", macd.macd)
-//                        let label2 = String(format: " DEA:%.2f", macd.dea)
-//                        let label3 = String(format: " DIF:%.2f", macd.dif)
-//                        label = [label1, label2, label3]
-//
-//
-//                    default:
-//                        print("222")
-//                    }
-//
-//                }
-//
-////                let lem = LegendEntry.init(label: "123", form: legend.form, formSize: legend.formSize, formLineWidth: legend.formLineWidth, formLineDashPhase: legend.formLineDashPhase, formLineDashLengths: nil, formColor: legend.textColor)
-////                legend.setCustom(entries: [lem])
-////                let enter =
-//
-//
-//            }
-            
-                       
-            
-            
-            
         }
         
         

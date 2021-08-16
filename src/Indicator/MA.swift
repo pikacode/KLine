@@ -69,7 +69,7 @@ extension MA: KLIndicator {
                 entries.append(ChartDataEntry(x: d.x, y: d.open))
             }
             let last = entries.last?.y ?? 0
-            let label = String(format: "MA\(day):%.8f", last)
+            let label = String(format: "MA\(day):%.\(KLineView.precision)f", last)
             let set = LineChartDataSet(entries: entries, label: label)
             let index = days.firstIndex(of: day) ?? 0
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
