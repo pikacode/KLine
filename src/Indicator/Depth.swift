@@ -58,16 +58,17 @@ extension Depth: KLIndicator {
         let data2 = data.filter { (model) -> Bool in return model.type == .sell}
         
         let dataArr = [data1, data2]
-        let colors = [style.downColor, style.upColor]
+        let colors = [style.upColor, style.downColor]
         for (index, item) in dataArr.enumerated() {
             let entries = item.compactMap{ (model) -> ChartDataEntry? in
+                print("price", model.depthNum)
                 return ChartDataEntry(x: Double(model.x), y: model.depthNum)
             }
             
             let set = LineChartDataSet(entries: entries, label: "")
             set.setColor(colors[index])
             set.lineWidth = style.lineWidth1
-            set.drawFilledEnabled = true
+           
             
             set.circleRadius = 0
             set.circleHoleRadius = 0
@@ -78,6 +79,7 @@ extension Depth: KLIndicator {
                                            colors: [colors[index].cgColor, UIColor.white.cgColor] as CFArray, locations: [1.0, 0.0])
             //将渐变色作为填充对象
             set.fill = Fill.fillWithLinearGradient(gradient!, angle: 90.0)
+            set.drawFilledEnabled = true
             sets.append(set)
         }
         

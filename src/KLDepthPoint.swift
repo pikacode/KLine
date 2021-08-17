@@ -23,7 +23,6 @@ open class KLDepthPoint {
     
     public var x: Double = 0
     
-    
     public init(p: Double, t: TradingType, a: Double, x: Double) {
         price = p
         amount = a

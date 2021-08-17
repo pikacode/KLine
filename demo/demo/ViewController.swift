@@ -132,7 +132,7 @@ class ViewController: UIViewController {
 
 
         // 👉 4. config tap marker
-        let markView = MarkerView(frame: CGRect(x: 0, y: 100, width: 130, height: 300))
+        let markView = MarkerView(frame: CGRect(x: 0, y: 100, width: 130, height: 173))
         self.view.addSubview(markView)
 //        candleSection.markView = markView
         klineView.highlightedChanged = { [weak self] (index, point) in
@@ -210,6 +210,17 @@ class ViewController: UIViewController {
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
+        if let chartView = depthKLineView.sections.first?.chartView {
+            chartView.xAxis.axisMinimum = 0
+            chartView.xAxis.axisMaximum = Double(depthData.count)
+            var priceArr = [String]()
+            for price in depthData {
+                priceArr.append(String(format: "%2.f", price.price))
+            }
+            chartView.xAxis.valueFormatter  = KLStringFormatter(priceArr)
+            chartView.xAxis.labelPosition = .bottom
+            chartView.leftAxis.axisMinimum = 0
+        }
         
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
