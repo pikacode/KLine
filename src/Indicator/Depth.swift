@@ -61,7 +61,6 @@ extension Depth: KLIndicator {
         let colors = [style.upColor, style.downColor]
         for (index, item) in dataArr.enumerated() {
             let entries = item.compactMap{ (model) -> ChartDataEntry? in
-                print("price", model.depthNum)
                 return ChartDataEntry(x: Double(model.x), y: model.depthNum)
             }
             
