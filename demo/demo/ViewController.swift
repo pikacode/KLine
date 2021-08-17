@@ -217,7 +217,7 @@ class ViewController: UIViewController {
             for price in depthData {
                 priceArr.append(String(format: "%2.f", price.price))
             }
-            chartView.xAxis.valueFormatter  = KLStringFormatter(priceArr)
+            chartView.xAxis.valueFormatter  = KLDepthFormatter(priceArr)
             chartView.xAxis.labelPosition = .bottom
             chartView.leftAxis.axisMinimum = 0
         }
