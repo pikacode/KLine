@@ -166,8 +166,8 @@ open class KLineView: UIView {
     var isCalculating = false
     var dataDidSetWhenCalculate = false
 
-    var tempData = [Any]()
-    open var realData = [Any]()
+    open var tempData = [Any]()
+    var realData = [Any]()
 
     func layout() {
 //        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
