@@ -67,7 +67,6 @@ extension Depth: KLIndicator {
             let set = LineChartDataSet(entries: entries, label: "")
             set.setColor(colors[index])
             set.lineWidth = style.lineWidth1
-           
             
             set.circleRadius = 0
             set.circleHoleRadius = 0
@@ -75,7 +74,7 @@ extension Depth: KLIndicator {
 
             //生成渐变色
             let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
-                                           colors: [colors[index].cgColor, UIColor.white.cgColor] as CFArray, locations: [1.0, 0.0])
+                                           colors: [colors[index].cgColor, UIColor.clear.cgColor] as CFArray, locations: [1.0, 0.0])
             //将渐变色作为填充对象
             set.fill = Fill.fillWithLinearGradient(gradient!, angle: 90.0)
             set.drawFilledEnabled = true
