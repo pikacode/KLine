@@ -166,8 +166,8 @@ open class KLineView: UIView {
     var isCalculating = false
     var dataDidSetWhenCalculate = false
 
-    var tempData = [Any]()
-    open var realData = [Any]()
+    open var tempData = [Any]()
+    var realData = [Any]()
 
     func layout() {
 //        let transform = sections.first?.chartView.viewPortHandler.touchMatrix
@@ -202,9 +202,18 @@ open class KLineView: UIView {
             view.rightAxis.labelCount = Int($0.height * $0.height / 12000 * self.labelGranularity)
 
             view.scaleXEnabled = self.scaleXEnabled
-            view.xAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
-            view.leftAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
-            view.rightAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+        }
+
+        sections.enumerated().forEach{
+            if $0.offset == 0 {
+                $0.element.xAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+                $0.element.leftAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+                $0.element.rightAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+            } else {
+                $0.element.xAxis.drawGridLinesEnabled = self.drawGridLinesEnabled
+                $0.element.leftAxis.drawGridLinesEnabled = false
+                $0.element.rightAxis.drawGridLinesEnabled = false
+            }
         }
 
         layoutIfNeeded()
