@@ -21,7 +21,7 @@ open class MA {
         if day > data.count {
             return
         }
-        for i in (day-1)..<(data.count-1) {
+        for i in (day-1)..<(data.count) {
             if data[i].ma?.data[day] != nil {
                 continue
             }
@@ -69,7 +69,7 @@ extension MA: KLIndicator {
             }
             let last = entries.last?.y ?? 0
             let label = String(format: "MA\(day):%.\(KLineView.precision)f", last)
-            let set = LineChartDataSet(entries: entries, label: label)
+            let set = LineChartDataSet(entries: entries)
             let index = days.firstIndex(of: day) ?? 0
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)

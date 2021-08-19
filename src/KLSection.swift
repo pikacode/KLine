@@ -119,7 +119,12 @@ open class KLSection {
                 candleData.dataSets.append(contentsOf: set)
                 combinedData.candleData = candleData
             }
+            if let da = delegate {
+                chartView.customLegend(item: $0, lineData: da.data.last as! KLineData, section: self, first: true)
+            }
         }
+        
+        
         if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
             
             chartView.data = combinedData

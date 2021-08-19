@@ -20,10 +20,10 @@ open class MAVOL {
     required public init() { }
     static func calculateMAVOL(_ data: inout [KLineData], day: Int) {
         if data.count < day { return }
-        for i in day - 1 ..< data.count - 1 {
+        for i in day - 1 ..< data.count {
             var sum: Double = 0
             if let lastSum = data[(i - 1)].mavol?.data[day] as? Double, let close = data[(i-day)~]?.vol  {
-    sum = lastSum * Double(day) - close + data[i].vol
+                sum = lastSum * Double(day) - close + data[i].vol
             }else{
                 sum = data[(i-day+1)...i].reduce(into: 0) { $0 += $1.vol }
             }
@@ -67,8 +67,10 @@ extension MAVOL: KLIndicator {
                 label = String(format: "VOL:%.\(KLineView.volPrecision)f", data.last?.vol ?? 0)
             }
             label = label + String(format: "MAVOL\(day):%.\(KLineView.volPrecision)f", entries.last?.y ?? 0)
-            let set = LineChartDataSet(entries: entries, label: label)
+            
+            let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
+            
             set.setColor(color)
             set.lineWidth = style.lineWidth1
             set.mode = .cubicBezier

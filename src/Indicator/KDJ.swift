@@ -129,13 +129,13 @@ extension KDJ: KLIndicator {
                 label = String(format: " J:%.\(precision)f ",yValue)
                 
             }
-            let set = LineChartDataSet(entries: entries, label: label)
+            let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1
             set.circleRadius = 0
             set.circleHoleRadius = 0
-            set.mode = .cubicBezier
+            set.mode = .linear
             set.drawValuesEnabled = false
             set.axisDependency = .left
             sets.append(set)

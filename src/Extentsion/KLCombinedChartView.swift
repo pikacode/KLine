@@ -251,134 +251,145 @@ extension KLCombinedChartView {
         guard let lineData = klineView.data[index] as? KLineData else {
             return
         }
-        let precision = KLineView.precision
-        
+       
         for section in klineView.sections {
             for item in section.indicators {
-                switch item {
-                case is MA:
-                    guard let ma = lineData.ma else {
-                        return
-                    }
-                    var labels = [String]()
-                    
-                    for type in MA.days{
-                        let madata = ma.data.first { (model) -> Bool in return model.key == type }
-                        labels.append(String(format:  " MA\(type):%.\(precision)f", Double(madata?.value ?? 0)))
-                        
-                    }
-                    
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                    
-                case  is EMA:
-                    guard let ema = lineData.ema else {
-                        return
-                    }
-                    var labels = [String]()
-                    for  type in EMA.emaDays{
-                        switch type {
-                        case .short(let day):
-                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.short_ema))
-                        case .mid(let day):
-                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.mid_ema))
-                        case .long(let day):
-                            labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.long_ema))
-                        }
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                case is BOLL:
-                    guard let boll = lineData.boll else {
-                        return
-                    }
-                    var labels = [String]()
-                    for  type in BOLL.boll_type{
-                        switch type {
-                        case .up:
-                            labels.append(String(format: "BOLL(\(BOLL.boll_day),\(BOLL.boll_average)) UP:%.\(precision)f ", boll.up_boll))
-                        case .mb:
-                            labels.append(String(format: " MB:%.\(precision)f ",boll.mb_boll))
-                        case .down:
-                            labels.append(String(format: " DN:%.\(precision)f ",boll.dn_boll))
-                        }
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                    
-                case is MACD:
-                    guard let macd = lineData.macd else {
-                        return
-                    }
-
-                    var labels = [String]()
-                    for  type in MACD.macd_type{
-                        switch type {
-                        case .macd:
-                            labels.append(String(format: " MACD:%.\(precision)f ", macd.macd))
-                        case .dea:
-                            labels.append(String(format: "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period)) DEA:%.\(precision)f ", macd.dea))
-                        case .dif:
-                            labels.append(String(format: " DIF:%.\(precision)f ", macd.dif))
-                        }
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                    
-                case is MAVOL:
-                    guard let mavol = lineData.mavol else {
-                        return
-                    }
-                    var labels = [String]()
-                    let volPrecision = KLineView.volPrecision
-                    
-                    for (index, type) in MAVOL.days.enumerated(){
-                        let volData = mavol.data.first { (model) -> Bool in return model.key == type }
-
-                        if index == 0 {
-                            labels.append(String(format:  "VOL:%.\(volPrecision)f MAVOL\( type):%.\(volPrecision)f", lineData.vol, Double(volData?.value ?? 0)))
-                        }else{
-                            labels.append(String(format:  " MAVOL\( type):%.\(volPrecision)f", Double(volData?.value ?? 0)))
-                        }
-                        
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                case is KDJ:
-                    guard let kdj = lineData.kdj else {
-                        return
-                    }
-                    var labels = [String]()
-                    for  type in KDJ.macd_type{
-                        switch type {
-                        case .K:
-                            labels.append(String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ", kdj.k))
-                        case .D:
-                            labels.append(String(format: " D:%.\(precision)f ",kdj.k))
-                        case .J:
-                            labels.append(String(format: " J:%.\(precision)f ",kdj.j))
-                        }
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                case is RSI:
-                    guard let rsi = lineData.rsi else {
-                        return
-                    }
-                    var labels = [String]()
-                    for  type in RSI.rsiDays{
-                        switch type {
-                        case .RSI1(let day):
-                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi6))
-                        case .RSI2(let day):
-                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi12))
-                        case .RSI3(let day):
-                            labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi24))
-                        }
-                    }
-                    setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
-                default: break
-                }
+                customLegend(item: item, lineData: lineData, section: section)
             }
         }
     }
-    
-    func setCustomLegend(_ labels: [String], _ section: KLSection, _ color: [UIColor]){
+    func customLegend(item: KLIndicator, lineData: KLineData, section: KLSection, first: Bool = false)  {
+        let precision = KLineView.precision
+        let legendColor = UIColor.color(red: 255, green: 255, blue: 255, alpha: 0.6)
         
+        switch item {
+        case is MA:
+            guard let ma = lineData.ma else {
+                return
+            }
+            var labels = [String]()
+            
+            for type in MA.days{
+                let madata = ma.data.first { (model) -> Bool in return model.key == type }
+                labels.append(String(format:  " MA\(type):%.\(precision)f", Double(madata?.value ?? 0)))
+            }
+            
+            setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3],first: first)
+            
+        case  is EMA:
+            guard let ema = lineData.ema else {
+                return
+            }
+            var labels = [String]()
+            for  type in EMA.emaDays{
+                switch type {
+                case .short(let day):
+                    labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.short_ema))
+                case .mid(let day):
+                    labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.mid_ema))
+                case .long(let day):
+                    labels.append(String(format: "EMA(\(day)):%.\(precision)f ",ema.long_ema))
+                }
+            }
+            
+            setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3],first: first)
+        case is BOLL:
+            guard let boll = lineData.boll else {
+                return
+            }
+            var labels = [String]()
+            for  type in BOLL.boll_type{
+                switch type {
+                case .up:
+                    labels.append(String(format: "UP:%.\(precision)f ", boll.up_boll))
+                case .mb:
+                    labels.append(String(format: " MB:%.\(precision)f ",boll.mb_boll))
+                case .down:
+                    labels.append(String(format: " DN:%.\(precision)f ",boll.dn_boll))
+                }
+            }
+            labels.insert(String(format: "BOLL(\(BOLL.boll_day),\(BOLL.boll_average))"), at: 0)
+            
+            setCustomLegend(labels, section, [legendColor, item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+            
+        case is MACD:
+            guard let macd = lineData.macd else {
+                return
+            }
+
+            var labels = [String]()
+            for  type in MACD.macd_type{
+                switch type {
+                case .macd:
+                    labels.append(String(format: " MACD:%.\(precision)f ", macd.macd))
+                case .dea:
+                    labels.append(String(format: " DEA:%.\(precision)f ", macd.dea))
+                case .dif:
+                    labels.append(String(format: " DIF:%.\(precision)f ", macd.dif))
+                }
+            }
+            
+            labels.insert(String(format: "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"), at: 0)
+            setCustomLegend(labels, section, [legendColor, item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+            
+        case is MAVOL:
+            guard let mavol = lineData.mavol else {
+                return
+            }
+            var labels = [String]()
+            let volPrecision = KLineView.volPrecision
+            
+            for (index, type) in MAVOL.days.enumerated(){
+                let volData = mavol.data.first { (model) -> Bool in return model.key == type }
+
+                if index == 0 {
+                    labels.append(String(format: "VOL:%.\(volPrecision)f", lineData.vol))
+                    labels.append(String(format: "MAVOL\( type):%.\(volPrecision)f", Double(volData?.value ?? 0)))
+                }else{
+                    labels.append(String(format:  " MAVOL\( type):%.\(volPrecision)f", Double(volData?.value ?? 0)))
+                }
+            }
+            
+            setCustomLegend(labels, section, [legendColor ,item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+        case is KDJ:
+            guard let kdj = lineData.kdj else {
+                return
+            }
+            var labels = [String]()
+            for  type in KDJ.macd_type{
+                switch type {
+                case .K:
+                    labels.append(String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ", kdj.k))
+                case .D:
+                    labels.append(String(format: " D:%.\(precision)f ",kdj.k))
+                case .J:
+                    labels.append(String(format: " J:%.\(precision)f ",kdj.j))
+                }
+            }
+            labels.insert(String(format:"KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period))"), at: 0)
+            
+            setCustomLegend(labels, section, [legendColor, item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+        case is RSI:
+            guard let rsi = lineData.rsi else {
+                return
+            }
+            var labels = [String]()
+            for  type in RSI.rsiDays{
+                switch type {
+                case .RSI1(let day):
+                    labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi6))
+                case .RSI2(let day):
+                    labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi12))
+                case .RSI3(let day):
+                    labels.append(String(format: "RSI(\(day)):%.\(precision)f ",rsi.rsi24))
+                }
+            }
+            setCustomLegend(labels, section,[item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+        default: break
+        }
+    }
+    
+    func setCustomLegend(_ labels: [String], _ section: KLSection, _ color: [UIColor], first: Bool = false){
         var entries: [LegendEntry] = []
         
         for (index, label) in labels.enumerated() {
@@ -389,7 +400,12 @@ extension KLCombinedChartView {
             section.chartView.legend.resetCustom()
             return
         }
-        section.chartView.legend.setCustom(entries: entries)
+        
+        if !first {
+            section.chartView.legend.setCustom(entries: entries)
+        }else{
+            self.legend.setCustom(entries: entries)
+        }
     }
 }
 
