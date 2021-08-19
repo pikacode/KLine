@@ -33,3 +33,20 @@ open class KLDateFormatter: IAxisValueFormatter {
     }
 
 }
+open class KLDepthFormatter: IAxisValueFormatter {
+
+    let priceArr: [String]
+
+    public init(_ priceArr: [String]) {
+        self.priceArr = priceArr
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        guard let string = priceArr[Int(value)~]  else {
+            return ""
+        }
+        return string
+    }
+
+}
+

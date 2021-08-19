@@ -14,13 +14,6 @@ open class KLLegendRenderer: LegendRenderer {
     
     @objc open override func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor) {
         
-//        var label = label
-//      
-//        
-//        if let index = Self.index {
-//            label = legend?.entries[index~]?.label ?? label
-//        }
-        
         guard let entries = legend?.entries,
             let e = entries.first(where: { $0.label == label }),
             let color = e.formColor else {
