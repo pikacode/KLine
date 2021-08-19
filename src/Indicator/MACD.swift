@@ -93,7 +93,7 @@ extension MACD: KLIndicator {
             }
             label += type == .dea ? String(format: " DEA:%.\(precision)f",entries.last?.y ?? 0) : type == .dif ? String(format: " DIF:%.\(precision)f",entries.last?.y ?? 0) : String(format: " MACD:%.\(precision)f",entries.last?.y ?? 0)
             
-            let set = LineChartDataSet(entries: entries, label: label)
+            let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1

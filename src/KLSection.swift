@@ -119,6 +119,9 @@ open class KLSection {
                 candleData.dataSets.append(contentsOf: set)
                 combinedData.candleData = candleData
             }
+            if let da = delegate {
+                chartView.customLegend(item: $0, lineData: da.data.last as! KLineData, section: self, first: true)
+            }
         }
 
         chartView.xAxis.spaceMin = 4

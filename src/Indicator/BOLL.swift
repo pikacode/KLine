@@ -108,7 +108,7 @@ extension BOLL: KLIndicator {
             let precision = KLineView.precision
             
             label += type == .up ? String(format: " UP:%.\(precision)f",labelValue) : type == .mb ?  String(format: " MB:%.\(precision)f", labelValue) : String(format: " DN:%.\(precision)f", labelValue)
-            let set = LineChartDataSet(entries: entries, label: label)
+            let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
             set.lineWidth = style.lineWidth1
