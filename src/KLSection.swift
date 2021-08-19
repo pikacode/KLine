@@ -120,42 +120,6 @@ open class KLSection {
                 combinedData.candleData = candleData
             }
         }
-        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
-            
-            chartView.data = combinedData
-            if visibleXMaxCountReal != visibleXMaxCount {
-                //设置多次会有bug
-                visibleXMaxCountReal = visibleXMaxCount
-            }
-//            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
-//            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
-
-            if visibleXMaxCount == 0 {
-
-            } else if data.count >= visibleXMaxCount {
-                chartView.setVisibleXRange(minXRange: 1, maxXRange: Double(visibleXMaxCount))
-            } else {
-//                chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
-                //chartView.setVisibleXRangeMinimum(Double(visibleXMaxCount))
-            }
-
-            //经验值
-            chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
-
-            if data.count < Int(visibleXMaxCount),
-               let max = chartView.data?.dataSets.first?.xMax,
-               let min = chartView.data?.dataSets.first?.xMin,
-               max > min, min.isFinite,
-               min != Double.greatestFiniteMagnitude,
-               visibleXMaxCount != 0 {
-
-                let n = (max - min)/Double(data.count)
-                chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
-            }
-
-        }
-
-        chartView.viewPortHandler.setMaximumScaleX(20)
 
         chartView.xAxis.spaceMin = 4
 
@@ -163,6 +127,42 @@ open class KLSection {
             chartView.xAxis.spaceMax = 8
         } else {
             chartView.xAxis.spaceMax = Double(visibleXMaxCount - data.count - 2)
+        }
+        
+        if combinedData.lineData != nil || combinedData.barData != nil || combinedData.candleData != nil {
+            
+            chartView.data = combinedData
+
+//            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
+//            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
+
+            //经验值
+            chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
+
+            chartView.viewPortHandler.setMaximumScaleX(20)
+
+            if //data.count < Int(visibleXMaxCount),
+               let max = chartView.data?.dataSets.first?.xMax,
+               let min = chartView.data?.dataSets.first?.xMin,
+               max > min, min.isFinite,
+               min != Double.greatestFiniteMagnitude,
+               visibleXMaxCount != 0 {
+
+                let n = (max - min)/Double(data.count)
+                if data.count < Int(visibleXMaxCount) {
+                    chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
+                } else {
+                    chartView.xAxis.axisMaximum = n * (Double(data.count) + 8) + min
+                }
+            }
+
+            if data.count >= visibleXMaxCount && visibleXMaxCount > 0 {
+//                chartView.setVisibleXRange(minXRange: 1, maxXRange: 1)
+//                chartView.moveViewToX(chartView.chartXMax)
+//                chartView.viewPortHandler.refresh(newMatrix: .identity, chart: chartView, invalidate: false)
+                chartView.setVisibleXRange(minXRange: 10, maxXRange: Double(visibleXMaxCount))
+            }
+
         }
 
         if combinedData.candleData != nil {
@@ -201,6 +201,5 @@ open class KLSection {
     }
 
     var visibleXMaxCount: Int { return delegate?.visibleXMaxCount ?? 0 }
-    var visibleXMaxCountReal: Int = 0
 
 }

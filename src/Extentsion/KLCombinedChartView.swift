@@ -70,7 +70,7 @@ open class KLCombinedChartView: CombinedChartView {
         legend.yOffset = 2
 
         xAxis.labelPosition = .bottomInside
-        xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
+        xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.6)
         xAxis.labelTextColor = KLStyle.default.label.color
         xAxis.labelFont = KLStyle.default.label.font
         xAxis.labelHeight = 20
@@ -78,12 +78,12 @@ open class KLCombinedChartView: CombinedChartView {
         xAxis.axisLineWidth = 2
 
         leftAxis.drawLabelsEnabled = false
-        leftAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
+        leftAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.6)
         leftAxis.axisLineColor = UIColor.clear
         
         
         rightAxis.labelPosition = .insideChart
-        rightAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
+        rightAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.6)
         rightAxis.labelTextColor = KLStyle.default.label.color
         rightAxis.labelFont = KLStyle.default.label.font
         rightAxis.axisLineColor = UIColor.clear
@@ -261,9 +261,13 @@ extension KLCombinedChartView {
                         return
                     }
                     var labels = [String]()
-                    for data in ma.data {
-                        labels.append(String(format:  " MA\( data.key):%.\(precision)f", Double(data.value ?? 0)))
+                    
+                    for type in MA.days{
+                        let madata = ma.data.first { (model) -> Bool in return model.key == type }
+                        labels.append(String(format:  " MA\(type):%.\(precision)f", Double(madata?.value ?? 0)))
+                        
                     }
+                    
                     setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
                     
                 case  is EMA:
@@ -310,7 +314,7 @@ extension KLCombinedChartView {
                         case .macd:
                             labels.append(String(format: " MACD:%.\(precision)f ", macd.macd))
                         case .dea:
-                            labels.append(String(format: "MACD(\(MACD.short_period),\(MACD.short_period),\(MACD.short_period)) DEA:%.\(precision)f ", macd.dea))
+                            labels.append(String(format: "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period)) DEA:%.\(precision)f ", macd.dea))
                         case .dif:
                             labels.append(String(format: " DIF:%.\(precision)f ", macd.dif))
                         }
@@ -324,12 +328,15 @@ extension KLCombinedChartView {
                     var labels = [String]()
                     let volPrecision = KLineView.volPrecision
                     
-                    for (index, data) in mavol.data.enumerated() {
+                    for (index, type) in MAVOL.days.enumerated(){
+                        let volData = mavol.data.first { (model) -> Bool in return model.key == type }
+
                         if index == 0 {
-                            labels.append(String(format:  "VOL:%.\(volPrecision)f  MAVOL\( data.key):%.\(volPrecision)f", lineData.vol, Double(data.value ?? 0)))
+                            labels.append(String(format:  "VOL:%.\(volPrecision)f MAVOL\( type):%.\(volPrecision)f", lineData.vol, Double(volData?.value ?? 0)))
                         }else{
-                            labels.append(String(format:  " MAVOL\( data.key):%.\(volPrecision)f", Double(data.value ?? 0)))
+                            labels.append(String(format:  " MAVOL\( type):%.\(volPrecision)f", Double(volData?.value ?? 0)))
                         }
+                        
                     }
                     setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3])
                 case is KDJ:

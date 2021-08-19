@@ -23,12 +23,16 @@ open class KLineView: UIView {
             newValue.forEach{ $0.offset = sections[0].offset }
         }
         didSet {
+            let need = needMoveToXMax
             sections.forEach{ $0.delegate = self }
             queue.async {
                 self.indicators.forEach{ type(of: $0).calculate(&self.realData) }
                 DispatchQueue.main.async {
                     self.layout()
                     self.draw()
+                    if need {
+                        self.moveToXMax()
+                    }
                 }
             }
         }
@@ -83,6 +87,7 @@ open class KLineView: UIView {
     public func moveToXMax() {
         needMoveToXMax = true
         sections.forEach{
+            $0.chartView.viewPortHandler.refresh(newMatrix: .identity, chart: $0.chartView, invalidate: false)
             $0.chartView.moveViewToX($0.chartView.chartXMax)
         }
     }
@@ -107,12 +112,12 @@ open class KLineView: UIView {
     /// ⭐️ should call draw before layout
     open func draw() {
         let transform = sections.first?.chartView.viewPortHandler.touchMatrix
-        let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
+        //let scale = sections.first?.chartView.viewPortHandler.scaleX ?? 1.5
         sections.forEach{ $0.data = self.data }
 
         if let transform = transform, transform.tx != 0 {
             sections.forEach{
-                $0.chartView.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+                //$0.chartView.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
                 $0.chartView.viewPortHandler.refresh(newMatrix: transform, chart: $0.chartView, invalidate: true)
             }
         }
@@ -126,6 +131,10 @@ open class KLineView: UIView {
             moveToXMin()
         }
         needMoveToXMin = false
+    }
+
+    open func removeLimitLines() {
+        sections.forEach{ $0.removeLimitLines() }
     }
 
 //    /// tell the view needupdate when data changed without redraw

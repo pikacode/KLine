@@ -56,7 +56,6 @@ extension MA: KLIndicator {
             return nil
 
         }
-
         let sets = days.compactMap { (day) -> LineChartDataSet in
             var entries = data.compactMap{ (d) -> ChartDataEntry? in
                 if let value = d.ma?.data[day] as? Double {
