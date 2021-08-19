@@ -199,7 +199,7 @@ class ViewController: UIViewController {
             self.klineView.sections.first?.chartView.crosshair.vertical?.limitLine.drawLabelEnabled = true
         }
 
-        addDepthView()
+//        addDepthView()
     }
 
     

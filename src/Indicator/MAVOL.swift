@@ -66,7 +66,7 @@ extension MAVOL: KLIndicator {
             if index == 0 {
                 label = String(format: "VOL:%.\(KLineView.volPrecision)f", data.last?.vol ?? 0)
             }
-            label = label + String(format: " MAVOL\(day):%.\(KLineView.volPrecision)f", entries.last?.y ?? 0)
+            label = label + String(format: "MAVOL\(day):%.\(KLineView.volPrecision)f", entries.last?.y ?? 0)
             let set = LineChartDataSet(entries: entries, label: label)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
