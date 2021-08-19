@@ -70,19 +70,20 @@ open class KLCombinedChartView: CombinedChartView {
         legend.yOffset = 2
 
         xAxis.labelPosition = .bottomInside
-        xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.3)
+        xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
         xAxis.labelTextColor = KLStyle.default.label.color
         xAxis.labelFont = KLStyle.default.label.font
         xAxis.labelHeight = 20
         xAxis.axisLineColor = KLStyle.default.darkGrayColor
+        xAxis.axisLineWidth = 2
 
         leftAxis.drawLabelsEnabled = false
-        leftAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.3)
+        leftAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
         leftAxis.axisLineColor = UIColor.clear
         
         
         rightAxis.labelPosition = .insideChart
-        rightAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.3)
+        rightAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.5)
         rightAxis.labelTextColor = KLStyle.default.label.color
         rightAxis.labelFont = KLStyle.default.label.font
         rightAxis.axisLineColor = UIColor.clear
