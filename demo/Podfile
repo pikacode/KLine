@@ -8,7 +8,7 @@ use_frameworks!
 target 'demo' do
 
     pod 'KLine', :path => '../'
-    pod 'Charts', :git => 'https://github.com/pikacode/Charts.git', :branch => 'kline', :commit => '3ce3d45383edf654df3612b9fbb26b5bae3f6272'
+    pod 'Charts', :git => 'https://github.com/pikacode/Charts.git', :branch => 'kline', :commit => 'b900dd13339b841606799cbcba60ee2823c6c662'
 
  
 end
