@@ -111,7 +111,7 @@ extension MACD: KLIndicator {
         var colors = [UIColor]()
         let entries = data.compactMap{ (model) -> BarChartDataEntry in
             let macd = model.macd ?? MACD()
-            colors.append(macd.macd > 0 ? style.upBarColor : style.downBarColor)
+            colors.append(macd.macd < 0 ? style.upBarColor : style.downBarColor)
             return BarChartDataEntry(x: model.x, y: macd.macd)
         }
         let set = BarChartDataSet(entries: entries)
