@@ -19,7 +19,7 @@ open class Depth {
         let sellSum = sellArr.reduce(0) { (total, model) in return total + model.amount}
       
     
-        buyArr[0].depthNum = buySum
+        buyArr.first?.depthNum = buySum
         for index in 1 ..< buyArr.count {
 
             let item = buyArr[index]
@@ -29,7 +29,7 @@ open class Depth {
         }
         let count = sellArr.count - 1
         
-        sellArr[0].depthNum = sellArr[0].amount
+        sellArr.first?.depthNum = sellArr[0].amount
         sellArr[count].depthNum = sellSum
         for index in stride(from: count, through: 1, by: -1) {
             let item = sellArr[index]
