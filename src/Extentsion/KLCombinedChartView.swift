@@ -390,6 +390,8 @@ extension KLCombinedChartView {
                 }
             }
             setCustomLegend(labels, section,[item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
+        case is Minute:
+            section.chartView.legend.entries = []
         default: break
         }
     }
