@@ -52,6 +52,7 @@
 		3B01A8C126CA4A0A00484903 /* LimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B01A8C026CA4A0A00484903 /* LimitLine.swift */; };
 		3B78841A26BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78841926BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift */; };
 		3B78842226BD3AF900BEA7E8 /* KLXAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78842126BD3AF900BEA7E8 /* KLXAxisRenderer.swift */; };
+		3B859DAC26CF56FA0036EAFC /* KLCandleStickChartRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B859DAB26CF56FA0036EAFC /* KLCandleStickChartRenderer.swift */; };
 		3B9BBCFE26C140A8005B8CE0 /* Minute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9BBCFD26C140A8005B8CE0 /* Minute.swift */; };
 		3D57709B53538839313AA6A6DC6E322C /* ILineRadarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C4B267A4820A775520B1F23ECE97E0 /* ILineRadarChartDataSet.swift */; };
 		3EAC9B9D96C569653EF71750289EB0D0 /* CandleChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5FAA917CB8604181B74E2806CB081 /* CandleChartDataEntry.swift */; };
@@ -166,7 +167,6 @@
 		CEC814CFD549BCDDAB65F5918969182E /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7045AE44AA41F438E17FF48B7B8DCA /* IHighlighter.swift */; };
 		D097867377CFA622E7AFBD514E7B4642 /* KLCombinedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AED4690B1EC93BA23931F679D66182 /* KLCombinedChartView.swift */; };
 		D0E11432F3033BBF59C77F416514A462 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F177F1E6C72276E2501569D4833FC541 /* Charts.framework */; };
-		D13023A626CA4A5C0067BED7 /* LimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13023A526CA4A5C0067BED7 /* LimitLine.swift */; };
 		D68F93293888B6776369185028CB60B0 /* IBarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEA8AC06FB34D00653F00EB4DA31444 /* IBarChartDataSet.swift */; };
 		D6E011A7BA193945CEA69517E40CBD48 /* XShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116AB9BF75A2A772277869CDD16CFD5 /* XShapeRenderer.swift */; };
 		D7B623CFD7231E00FB60419AA17A3E82 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F617C946A8AF36F4BE67A3944DCD159 /* MoveViewJob.swift */; };
@@ -257,6 +257,7 @@
 		3B01A8C026CA4A0A00484903 /* LimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitLine.swift; path = src/Indicator/LimitLine.swift; sourceTree = "<group>"; };
 		3B78841926BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSDecimalNumber+KL.swift"; path = "src/Extentsion/NSDecimalNumber+KL.swift"; sourceTree = "<group>"; };
 		3B78842126BD3AF900BEA7E8 /* KLXAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KLXAxisRenderer.swift; path = src/Extentsion/KLXAxisRenderer.swift; sourceTree = "<group>"; };
+		3B859DAB26CF56FA0036EAFC /* KLCandleStickChartRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KLCandleStickChartRenderer.swift; path = src/Extentsion/KLCandleStickChartRenderer.swift; sourceTree = "<group>"; };
 		3B9BBCFD26C140A8005B8CE0 /* Minute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Minute.swift; path = src/Indicator/Minute.swift; sourceTree = "<group>"; };
 		3BA2DA72CB14C6E3D94D353720952D31 /* KLTransformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KLTransformer.swift; path = src/Extentsion/KLTransformer.swift; sourceTree = "<group>"; };
 		3C3E9EB40F9E043A4B7AC15DB289587E /* EMA.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EMA.swift; path = src/Indicator/EMA.swift; sourceTree = "<group>"; };
@@ -391,7 +392,6 @@
 		CE6013C31DB5F628FCFF459656034379 /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
 		CEEED036C18816CECC0CE22C86D1282A /* YAxisRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRenderer.swift; path = Source/Charts/Renderers/YAxisRenderer.swift; sourceTree = "<group>"; };
 		D064CCBEB3D8F86F6C6EB1E51C427CFA /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarHighlighter.swift; path = Source/Charts/Highlight/PieRadarHighlighter.swift; sourceTree = "<group>"; };
-		D13023A526CA4A5C0067BED7 /* LimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitLine.swift; path = src/Indicator/LimitLine.swift; sourceTree = "<group>"; };
 		D19BA561ACEB8618FE161AF94ACE5873 /* Candle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Candle.swift; path = src/Indicator/Candle.swift; sourceTree = "<group>"; };
 		D466846EAE78237BBF2B30F1C005611F /* RadarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataEntry.swift; sourceTree = "<group>"; };
 		D5870D99A8B67AFF39FEA87AED03835E /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };
@@ -497,6 +497,7 @@
 				50E361BD5A7856C527181DFA0E7566E9 /* UIView+KL.swift */,
 				0C9911EBDF6D03F9E8AE8342677450AE /* UIViewController+KL.swift */,
 				3B78841926BD2FFB00BEA7E8 /* NSDecimalNumber+KL.swift */,
+				3B859DAB26CF56FA0036EAFC /* KLCandleStickChartRenderer.swift */,
 			);
 			name = Extentsion;
 			sourceTree = "<group>";
@@ -1132,6 +1133,7 @@
 				3B78842226BD3AF900BEA7E8 /* KLXAxisRenderer.swift in Sources */,
 				15014079D9B607A75B7446AA140D8E47 /* MA.swift in Sources */,
 				9CB212A0F5EB45FBECACE2EE3623B3B4 /* MACD.swift in Sources */,
+				3B859DAC26CF56FA0036EAFC /* KLCandleStickChartRenderer.swift in Sources */,
 				8030F93B7FD5268110D233DE53AB69A4 /* MAVOL.swift in Sources */,
 				1D3427BDEBF3B2D0111FC4F7E55AFB46 /* RSI.swift in Sources */,
 				C538519ABB2A926EAB7A648603D98611 /* UIColor+KL.swift in Sources */,

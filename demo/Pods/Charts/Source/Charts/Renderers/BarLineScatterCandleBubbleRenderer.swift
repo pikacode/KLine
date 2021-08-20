@@ -15,7 +15,7 @@ import CoreGraphics
 @objc(BarLineScatterCandleBubbleChartRenderer)
 open class BarLineScatterCandleBubbleRenderer: DataRenderer
 {
-    internal var _xBounds = XBounds() // Reusable XBounds object
+    public var _xBounds = XBounds() // Reusable XBounds object
     
     public override init(animator: Animator, viewPortHandler: ViewPortHandler)
     {
@@ -39,7 +39,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
     }
     
     /// - Returns: `true` if the DataSet values should be drawn, `false` if not.
-    internal func shouldDrawValues(forDataSet set: IChartDataSet) -> Bool
+    public func shouldDrawValues(forDataSet set: IChartDataSet) -> Bool
     {
         return set.isVisible && (set.isDrawValuesEnabled || set.isDrawIconsEnabled)
     }

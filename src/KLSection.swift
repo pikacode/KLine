@@ -136,6 +136,13 @@ open class KLSection {
             
             chartView.data = combinedData
 
+            //add render
+            (chartView.renderer as? CombinedChartRenderer)?.subRenderers.forEach{
+                if $0 is CandleStickChartRenderer {
+                    object_setClass($0, KLCandleStickChartRenderer.self)
+                }
+            }
+
 //            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
 //            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
 
