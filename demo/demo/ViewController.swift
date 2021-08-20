@@ -199,7 +199,7 @@ class ViewController: UIViewController {
             self.klineView.sections.first?.chartView.crosshair.vertical?.limitLine.drawLabelEnabled = true
         }
 
-//        addDepthView()
+        addDepthView()
     }
 
     
@@ -210,17 +210,17 @@ class ViewController: UIViewController {
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
-        if let chartView = depthKLineView.sections.first?.chartView {
-            chartView.xAxis.axisMinimum = 0
-            chartView.xAxis.axisMaximum = Double(depthData.count)
-            var priceArr = [String]()
-            for price in depthData {
-                priceArr.append(String(format: "%2.f", price.price))
-            }
-            chartView.xAxis.valueFormatter  = KLDepthFormatter(priceArr)
-            chartView.xAxis.labelPosition = .bottom
-            chartView.leftAxis.axisMinimum = 0
-        }
+//        if let chartView = depthKLineView.sections.first?.chartView {
+//            chartView.xAxis.axisMinimum = 0
+////            chartView.xAxis.axisMaximum = Double(depthData.count)
+//            var priceArr = [String]()
+//            for price in depthData {
+//                priceArr.append(String(format: "%2.f", price.price))
+//            }
+//            chartView.xAxis.valueFormatter  = KLDepthFormatter(priceArr)
+//            chartView.xAxis.labelPosition = .bottom
+//            chartView.leftAxis.axisMinimum = 0
+//        }
         
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData

@@ -60,7 +60,7 @@ open class MACD {
                 macd.dif =  macd.shortEma - macd.longEma
                 macd.dea  = lastMacd.dea * (ma - 1.0) / (ma + 1.0) + macd.dif * 2.0 / (ma + 1.0)
             }
-            macd.macd = macd.dif - macd.dea
+            macd.macd = (macd.dif - macd.dea) * 2
             data[i].macd = macd
         }
     }

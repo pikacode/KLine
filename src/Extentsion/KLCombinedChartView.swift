@@ -211,14 +211,19 @@ extension KLCombinedChartView {
                 return view.combinedData?.lineData
             }
         }
-
+        
         guard let candleData = data.first,
-              let entry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan)
+              let firstEntry = candleData.dataSets.first?.entryForXValue(Double(p.x), closestToY: .nan),
+              let lastEntry = candleData.dataSets.last?.entryForXValue(Double(p.x), closestToY: .nan)
+        
         else {
             return
         }
         
-        if let index = candleData.dataSets.first?.entryIndex(entry: entry) {
+        let entry = fabs(firstEntry.x - Double(p.x)) > fabs(lastEntry.x - Double(p.x)) ? lastEntry : firstEntry
+        let dataSet = fabs(firstEntry.x - Double(p.x)) > fabs(lastEntry.x - Double(p.x)) ? candleData.dataSets.last : candleData.dataSets.first
+        
+        if let index = dataSet?.entryIndex(entry: entry) {
             KLLegendRenderer.index = index
             let pt = self.pixelForValues(x: p.x.double, y: p.y.double, axis: .left)
             klView.highlightedChanged(index, pt)
