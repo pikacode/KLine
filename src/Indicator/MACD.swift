@@ -60,13 +60,10 @@ open class MACD {
                 macd.dif =  macd.shortEma - macd.longEma
                 macd.dea  = lastMacd.dea * (ma - 1.0) / (ma + 1.0) + macd.dif * 2.0 / (ma + 1.0)
             }
-            macd.macd = 2 * (macd.dif - macd.dea)
+            macd.macd = macd.dif - macd.dea
             data[i].macd = macd
         }
     }
-    
-    
-    
 }
 
 extension MACD: KLIndicator {
@@ -85,14 +82,14 @@ extension MACD: KLIndicator {
                 let macd = model.macd ?? MACD()
                 return ChartDataEntry(x: model.x, y: type == .dif ? macd.dif : macd.dea)
             }
-            var label = ""
-            let precision = KLineView.precision
-            
-            if index == 0 {
-                label = "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"
-            }
-            label += type == .dea ? String(format: " DEA:%.\(precision)f",entries.last?.y ?? 0) : type == .dif ? String(format: " DIF:%.\(precision)f",entries.last?.y ?? 0) : String(format: " MACD:%.\(precision)f",entries.last?.y ?? 0)
-            
+//            var label = ""
+//            let precision = KLineView.precision
+//
+//            if index == 0 {
+//                label = "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"
+//            }
+//            label += type == .dea ? String(format: " DEA:%.\(precision)f",entries.last?.y ?? 0) : type == .dif ? String(format: " DIF:%.\(precision)f",entries.last?.y ?? 0) : String(format: " MACD:%.\(precision)f",entries.last?.y ?? 0)
+//
             let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
@@ -114,7 +111,7 @@ extension MACD: KLIndicator {
         var colors = [UIColor]()
         let entries = data.compactMap{ (model) -> BarChartDataEntry in
             let macd = model.macd ?? MACD()
-            colors.append(macd.macd > 0 ? style.upBarColor : style.downBarColor)
+            colors.append(macd.macd < 0 ? style.upBarColor : style.downBarColor)
             return BarChartDataEntry(x: model.x, y: macd.macd)
         }
         let set = BarChartDataSet(entries: entries)

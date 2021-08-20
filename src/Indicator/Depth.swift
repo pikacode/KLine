@@ -27,6 +27,9 @@ open class Depth {
             item.depthNum = lastItem.depthNum - lastItem.amount
             buyArr[index] = item
         }
+        if sellArr.count < 1 {
+            return
+        }
         let count = sellArr.count - 1
         
         sellArr.first?.depthNum = sellArr[0].amount
