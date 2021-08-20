@@ -46,6 +46,10 @@ class KLCandleStickChartRenderer: CandleStickChartRenderer {
             let lineHeight = valueFont.lineHeight
             var yOffset: CGFloat = lineHeight + 5.0
 
+            if _xBounds.max - _xBounds.min <= 4 {
+                return
+            }
+
             let es = dataSet.entries[(_xBounds.min+1)...(_xBounds.max-1)].compactMap{ $0 as? CandleChartDataEntry }
             guard let max = es.max { $0.high < $1.high },
                   let min = es.min { $0.low < $1.low },

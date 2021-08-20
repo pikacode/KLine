@@ -146,10 +146,7 @@ open class KLSection {
 //            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
 //            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
 
-            //经验值
-            chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
 
-            chartView.viewPortHandler.setMaximumScaleX(20)
 
             if //data.count < Int(visibleXMaxCount),
                let max = chartView.data?.dataSets.first?.xMax,
@@ -170,8 +167,18 @@ open class KLSection {
 //                chartView.setVisibleXRange(minXRange: 1, maxXRange: 1)
 //                chartView.moveViewToX(chartView.chartXMax)
 //                chartView.viewPortHandler.refresh(newMatrix: .identity, chart: chartView, invalidate: false)
-                chartView.setVisibleXRange(minXRange: 10, maxXRange: Double(visibleXMaxCount))
             }
+//            chartView.setVisibleXRange(minXRange: 10, maxXRange: Double(visibleXMaxCount))
+
+//            let scale = chartView.scaleX
+//
+//            //经验值
+//            chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
+//
+//            chartView.viewPortHandler.setMaximumScaleX(20)
+//
+//            let t = chartView.viewPortHandler.setZoom(scaleX: scale, scaleY: 1)
+//            chartView.viewPortHandler.refresh(newMatrix: t, chart: chartView, invalidate: false)
 
         }
 

@@ -88,6 +88,12 @@ open class KLineView: UIView {
         needMoveToXMax = true
         sections.forEach{
             $0.chartView.viewPortHandler.refresh(newMatrix: .identity, chart: $0.chartView, invalidate: false)
+            $0.chartView.setScaleMinima(CGFloat(data.count)/200.0, scaleY: 1)
+            $0.chartView.viewPortHandler.setMaximumScaleX(20)
+
+            let s = $0.chartView.xAxis.axisRange/52
+            let t = $0.chartView.viewPortHandler.setZoom(scaleX: CGFloat(s), scaleY: 1)
+            $0.chartView.viewPortHandler.refresh(newMatrix: t, chart: $0.chartView, invalidate: false)
             $0.chartView.moveViewToX($0.chartView.chartXMax)
         }
     }
