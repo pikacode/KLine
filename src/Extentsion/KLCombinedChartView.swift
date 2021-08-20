@@ -94,7 +94,7 @@ open class KLCombinedChartView: CombinedChartView {
         dragYEnabled = false
         doubleTapToZoomEnabled = false
         highlightPerTapEnabled = false
-
+        highlightPerDragEnabled = false
         object_setClass(xAxisRenderer.transformer, KLTransformer.self)
 
         addGestureRecognizer(longPressGesture)
@@ -154,7 +154,6 @@ extension KLCombinedChartView {
         super.draw(rect)
 
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        let d = combinedData?.lineData.dataSets[1]
         
         //rang
         if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled {

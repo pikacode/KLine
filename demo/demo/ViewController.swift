@@ -210,6 +210,7 @@ class ViewController: UIViewController {
         depthKLineView = KLineView([KLSection([Depth()], 200)])
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
+        
 //        if let chartView = depthKLineView.sections.first?.chartView {
 //            chartView.xAxis.axisMinimum = 0
 ////            chartView.xAxis.axisMaximum = Double(depthData.count)
