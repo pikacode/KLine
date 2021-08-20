@@ -154,7 +154,8 @@ extension KLCombinedChartView {
         super.draw(rect)
 
         guard let context = UIGraphicsGetCurrentContext() else { return }
-
+        let d = combinedData?.lineData.dataSets[1]
+        
         //rang
         if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled {
             leftYAxisRenderer.renderLimitLines(context: context)

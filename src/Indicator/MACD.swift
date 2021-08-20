@@ -82,14 +82,7 @@ extension MACD: KLIndicator {
                 let macd = model.macd ?? MACD()
                 return ChartDataEntry(x: model.x, y: type == .dif ? macd.dif : macd.dea)
             }
-//            var label = ""
-//            let precision = KLineView.precision
-//
-//            if index == 0 {
-//                label = "MACD(\(MACD.short_period),\(MACD.long_period),\(MACD.ma_period))"
-//            }
-//            label += type == .dea ? String(format: " DEA:%.\(precision)f",entries.last?.y ?? 0) : type == .dif ? String(format: " DIF:%.\(precision)f",entries.last?.y ?? 0) : String(format: " MACD:%.\(precision)f",entries.last?.y ?? 0)
-//
+
             let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)

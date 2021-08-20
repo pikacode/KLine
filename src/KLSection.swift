@@ -146,20 +146,38 @@ open class KLSection {
 //            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
 //            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
 
+            if let d = data as? [KLineData] {
 
+                if //data.count < Int(visibleXMaxCount),
+                    let min = d.first?.x,
+                    let max = d.last?.x,
+                    max > min, min.isFinite,
+                    min != Double.greatestFiniteMagnitude,
+                    visibleXMaxCount != 0 {
 
-            if //data.count < Int(visibleXMaxCount),
-               let max = chartView.data?.dataSets.first?.xMax,
-               let min = chartView.data?.dataSets.first?.xMin,
-               max > min, min.isFinite,
-               min != Double.greatestFiniteMagnitude,
-               visibleXMaxCount != 0 {
+                    let n = (max - min)/Double(data.count)
+                    if data.count < Int(visibleXMaxCount) {
+                        chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
+                    } else {
+                        chartView.xAxis.axisMaximum = n * (Double(data.count) + 8) + min
+                    }
+                }
 
-                let n = (max - min)/Double(data.count)
-                if data.count < Int(visibleXMaxCount) {
-                    chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
-                } else {
-                    chartView.xAxis.axisMaximum = n * (Double(data.count) + 8) + min
+            } else {
+
+                if //data.count < Int(visibleXMaxCount),
+                   let max = chartView.data?.dataSets.first?.xMax,
+                   let min = chartView.data?.dataSets.first?.xMin,
+                   max > min, min.isFinite,
+                   min != Double.greatestFiniteMagnitude,
+                   visibleXMaxCount != 0 {
+
+                    let n = (max - min)/Double(data.count)
+                    if data.count < Int(visibleXMaxCount) {
+                        chartView.xAxis.axisMaximum = n * (Double(visibleXMaxCount) + 8) + min
+                    } else {
+                        chartView.xAxis.axisMaximum = n * (Double(data.count) + 8) + min
+                    }
                 }
             }
 

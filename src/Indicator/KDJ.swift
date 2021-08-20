@@ -117,18 +117,6 @@ extension KDJ: KLIndicator {
                 return ChartDataEntry(x: model.x, y: yValue)
             }
             
-//            let yValue = entries.last?.y ?? 0
-//            var label = ""
-//            let precision = KLineView.precision
-//            switch type {
-//            case .K:
-//                label = String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ",yValue)
-//            case .D:
-//                label = String(format: " D:%.\(precision)f ",yValue)
-//            case .J:
-//                label = String(format: " J:%.\(precision)f ",yValue)
-//
-//            }
             let set = LineChartDataSet(entries: entries)
             let color = [style.lineColor1, style.lineColor2, style.lineColor3][index]
             set.setColor(color)
