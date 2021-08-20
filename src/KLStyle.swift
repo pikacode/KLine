@@ -26,6 +26,8 @@ open class KLStyle: NSObject {
     public var maxBarWidth: CGFloat
     public var minBarWidth: CGFloat
 
+    public var drawMaxMinValue: Bool
+
     public var space: CGFloat
 
     public var lineColor1: UIColor
@@ -71,9 +73,11 @@ open class KLStyle: NSObject {
             upGradient = style.upGradient
             downGradient = style.downGradient
             xOffset = style.xOffset
+            drawMaxMinValue = style.drawMaxMinValue
             label = KLLabel(style.label)
         } else {
             lineWidth1 = 1
+            drawMaxMinValue = false
             maxBarWidth = 4
             minBarWidth = 1
             space = 1

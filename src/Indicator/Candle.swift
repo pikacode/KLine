@@ -8,6 +8,25 @@
 import UIKit
 import Charts
 
+class KLCandleValueFormatter: IValueFormatter {
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+//        return "---"
+        if viewPortHandler?.isInBoundsLeft(CGFloat(entry.x)) ?? false {
+            return "   —— " + value.decimal.toString(precision: KLineView.precision)
+        } else {
+            return value.decimal.toString(precision: KLineView.precision) + " ——"
+        }
+    }
+
+    func stringForValue(value: Double, left: Bool) -> String {
+        if left {
+            return "—— " + value.decimal.toString(precision: KLineView.precision)
+        } else {
+            return value.decimal.toString(precision: KLineView.precision) + " ——"
+        }
+    }
+}
+
 open class Candle: KLIndicator {
     
     required public init() {}
@@ -23,12 +42,20 @@ open class Candle: KLIndicator {
         set.increasingFilled = true
         set.decreasingFilled = true
         set.shadowColorSameAsCandle = true
-        set.valueFont = .systemFont(ofSize: 10)
-        set.drawValuesEnabled = false
+        if style.drawMaxMinValue {
+            set.valueFont = .systemFont(ofSize: 10)
+            set.drawValuesEnabled = true
+            set.valueTextColor = UIColor.white.alpha(0.6)
+            set.valueFormatter = KLCandleValueFormatter()
+        }
         set.shadowWidth = style.lineWidth1
         return [set]
     }
 
-    public static var style: KLStyle = .default
+    public static var style: KLStyle = {
+        let d = KLStyle.default
+        d.drawMaxMinValue = true
+        return d
+    }()
 
 }
