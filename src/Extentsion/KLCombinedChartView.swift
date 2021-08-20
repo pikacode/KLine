@@ -359,9 +359,9 @@ extension KLCombinedChartView {
             for  type in KDJ.macd_type{
                 switch type {
                 case .K:
-                    labels.append(String(format: "KDJ(\(KDJ.calculate_period),\(KDJ.ma1_period),\(KDJ.ma2_period)) K:%.\(precision)f ", kdj.k))
+                    labels.append(String(format: "K:%.\(precision)f ", kdj.k))
                 case .D:
-                    labels.append(String(format: " D:%.\(precision)f ",kdj.k))
+                    labels.append(String(format: " D:%.\(precision)f ",kdj.d))
                 case .J:
                     labels.append(String(format: " J:%.\(precision)f ",kdj.j))
                 }
