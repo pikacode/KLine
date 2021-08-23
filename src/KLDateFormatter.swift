@@ -21,13 +21,13 @@ open class KLEmptyFormatter: IAxisValueFormatter {
 
 open class KLDateFormatter: IAxisValueFormatter {
 
-    let formatter: DateFormatter
+    public let formatter: DateFormatter
 
     public init(_ formatter: DateFormatter) {
         self.formatter = formatter
     }
 
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+    open func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = Date(timeIntervalSince1970: value * KLineData.timeXScale)
         return formatter.string(from: date)
     }

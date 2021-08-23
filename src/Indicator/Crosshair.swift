@@ -15,7 +15,7 @@ open class Crosshair {
 
     public static var dateFormatter: DateFormatter = {
         let f = DateFormatter()
-        f.dateFormat = " yyyy-MM-dd HH:mm "
+        f.dateFormat = " MM-dd HH:mm "
         return f
     }()
 
