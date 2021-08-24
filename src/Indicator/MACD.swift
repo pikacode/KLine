@@ -78,6 +78,7 @@ extension MACD: KLIndicator {
         guard let data = data as? [KLineData] else { return nil }
         var sets = [LineChartDataSet]()
         for (index, type) in MACD.macd_type.enumerated() {
+            if type == .macd { break }
             let entries = data.compactMap{ (model) -> ChartDataEntry? in
                 let macd = model.macd ?? MACD()
                 return ChartDataEntry(x: model.x, y: type == .dif ? macd.dif : macd.dea)
