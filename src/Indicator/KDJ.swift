@@ -54,7 +54,7 @@ open class KDJ {
                 model.k = (2 * lastModel.k + model.rsv) / Double(ma1_period)
                 model.d = (2 * lastModel.d + model.k) / Double(ma2_period)
             }
-            model.j = 3 * model.d - 2 * model.k
+            model.j = 3 * model.k - 2 * model.d
             data[i].kdj =  model
         }
     }
