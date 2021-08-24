@@ -14,22 +14,21 @@ open class Depth {
     //待优化
         var buyArr = data.filter { (model) -> Bool in return model.type ==  .buy}
         var sellArr = data.filter { (model) -> Bool in return model.type ==  .sell }
-        
-        if buyArr.count == 0 || sellArr.count == 0 {
-            return
-        }
+    
         let buySum = buyArr.reduce(0) { (total, model) in return total + model.amount}
         let sellSum = sellArr.reduce(0) { (total, model) in return total + model.amount}
       
        
-        
-        buyArr.first?.depthNum = buySum
-        for index in 1 ..< buyArr.count {
-
-            let item = buyArr[index]
-            let lastItem = buyArr[index - 1]
-            item.depthNum = lastItem.depthNum - lastItem.amount
-            buyArr[index] = item
+        if buyArr.count > 0 {
+            
+            buyArr.first?.depthNum = buySum
+            for index in 1 ..< buyArr.count {
+                
+                let item = buyArr[index]
+                let lastItem = buyArr[index - 1]
+                item.depthNum = lastItem.depthNum - lastItem.amount
+                buyArr[index] = item
+            }
         }
         if sellArr.count < 1 {
             return
