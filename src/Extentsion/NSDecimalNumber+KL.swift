@@ -59,8 +59,22 @@ extension NSDecimalNumber {
         return f
     }()
 
-    func toString(precision: Int = 0) -> String {
-        return NSDecimalNumber.formatter.string(from: self) ?? ""
+    static let kl_formatter = NumberFormatter()
+
+    func toString(precision: Int = 0, maxF: Int = 10, minI: Int = 1, roundingMode: NumberFormatter.RoundingMode = .down, numberStyle: NumberFormatter.Style = .none) -> String {
+        var str = ""
+        let number = self
+        let formatter = NSDecimalNumber.kl_formatter
+        formatter.roundingMode = roundingMode
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.minimumFractionDigits = precision
+        formatter.maximumFractionDigits = (precision >= 0) ? precision: maxF
+        formatter.minimumIntegerDigits = minI
+        formatter.numberStyle = numberStyle
+        if let s = formatter.string(from: number) {
+            str = s
+        }
+        return str
     }
 
 }

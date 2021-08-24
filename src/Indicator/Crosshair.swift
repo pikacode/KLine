@@ -41,7 +41,7 @@ open class Crosshair {
         l.label.color = UIColor.white
         l.label.font = UIFont.boldSystemFont(ofSize: 9)
         l.limitLine.labelPosition = .topRight
-        l.limitLine.xOffset = -3
+        l.limitLine.xOffset = 0
         return l
     }()
 
@@ -58,7 +58,7 @@ open class Crosshair {
         object_setClass(l.limitLine, KLCrosshairLimitLine.self)
         l.limitLine.labelPosition = .bottomLeft
         l.limitLine.yOffset = 20
-        l.limitLine.xOffset = -45
+        l.limitLine.xOffset = -32
         l.limitLine.drawLabelEnabled = false
         l.label.bgColor = 0x0188ff.toColor
         l.label.color = UIColor.white
