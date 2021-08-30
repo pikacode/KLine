@@ -276,6 +276,13 @@ open class ChartDataSet: ChartBaseDataSet
         closestToY yValue: Double,
         rounding: ChartDataSetRounding) -> Int
     {
+        
+        //kline
+        if xValue.isNaN {
+            return 0
+        }
+        //kline
+
         var low = startIndex
         var high = endIndex - 1
         var closest = high
