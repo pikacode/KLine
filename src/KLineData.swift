@@ -14,7 +14,7 @@ open class KLineData {
     public var low: Double = 0
     public var vol: Double = 0
     public var time: TimeInterval = 0
-    
+    public var icon: UIImage?
 
     /// 对时间戳的缩放  x = timeInterval / timeXScale
     public static var timeXScale: Double = 86400

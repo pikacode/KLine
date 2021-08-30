@@ -89,7 +89,7 @@ class KLCandleStickChartRenderer: CandleStickChartRenderer {
 
                         ChartUtils.drawText(
                             context: context,
-                            text: formatter.stringForValue(value: e.high, left: maxLeft),
+                            text: formatter.stringForValue(value: e.high, left: maxLeft, low: false),
                             point: CGPoint(
                                 x: pt.x,
                                 y: pt.y + yOffset),
@@ -103,7 +103,7 @@ class KLCandleStickChartRenderer: CandleStickChartRenderer {
 
                         ChartUtils.drawText(
                             context: context,
-                            text: formatter.stringForValue(value: e.low, left: minLeft),
+                            text: formatter.stringForValue(value: e.low, left: minLeft, low: true),
                             point: CGPoint(
                                 x: pt.x,
                                 y: pt.y + yOffset),

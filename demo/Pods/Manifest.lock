@@ -12,26 +12,26 @@ PODS:
     - Charts
 
 DEPENDENCIES:
-  - Charts (from `https://github.com/pikacode/Charts.git`, commit `6aba70ba95e3bff1941e43677923d057799ca22c`, branch `kline`)
+  - Charts (from `https://github.com/pikacode/Charts.git`, commit `edb06251d48a4ede15395999b8e8140de83f0ad5`, branch `kline`)
   - KLine (from `../`)
 
 EXTERNAL SOURCES:
   Charts:
     :branch: kline
-    :commit: 6aba70ba95e3bff1941e43677923d057799ca22c
+    :commit: edb06251d48a4ede15395999b8e8140de83f0ad5
     :git: https://github.com/pikacode/Charts.git
   KLine:
     :path: "../"
 
 CHECKOUT OPTIONS:
   Charts:
-    :commit: 6aba70ba95e3bff1941e43677923d057799ca22c
+    :commit: edb06251d48a4ede15395999b8e8140de83f0ad5
     :git: https://github.com/pikacode/Charts.git
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   KLine: 00ce9a85e0ef9bd489eb6ffc42acadbb14a4ee67
 
-PODFILE CHECKSUM: 06530f0a76359f5af24dff9341144d9b36f44773
+PODFILE CHECKSUM: 792e36aa2bdb4c930ce675fa5a098f0961726d2d
 
 COCOAPODS: 1.10.1

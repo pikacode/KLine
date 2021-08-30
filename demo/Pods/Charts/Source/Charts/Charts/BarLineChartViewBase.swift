@@ -608,8 +608,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 }
                 else
                 {
-                    let x = abs(recognizer.location(in: self).x - recognizer.nsuiLocationOfTouch(1, inView: self).x)
-                    let y = abs(recognizer.location(in: self).y - recognizer.nsuiLocationOfTouch(1, inView: self).y)
+
+                    //kline
+                    let n = recognizer.numberOfTouches > 1 ? 1 : 0
+                    //kline
+
+                    let x = abs(recognizer.location(in: self).x - recognizer.nsuiLocationOfTouch(n, inView: self).x)
+                    let y = abs(recognizer.location(in: self).y - recognizer.nsuiLocationOfTouch(n, inView: self).y)
                     
                     if _scaleXEnabled != _scaleYEnabled
                     {
