@@ -12,7 +12,7 @@ open class KLCandleValueFormatter: IValueFormatter {
 
     public init() {}
 
-    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+    public func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
 //        return "---"
         if viewPortHandler?.isInBoundsLeft(CGFloat(entry.x)) ?? false {
             return "   —— " + value.decimal.toString(precision: KLineView.precision)

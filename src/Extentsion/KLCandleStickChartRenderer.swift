@@ -50,7 +50,11 @@ class KLCandleStickChartRenderer: CandleStickChartRenderer {
                 return
             }
 
-            let es = dataSet.entries[_xBounds.min..._xBounds.max].compactMap{ $0 as? CandleChartDataEntry }
+            var range = (_xBounds.min + 1)..._xBounds.max
+            if _xBounds.min != dataSet.entries.count {
+                range = (_xBounds.min + 1)...(_xBounds.max-1)
+            }
+            let es = dataSet.entries[range].compactMap{ $0 as? CandleChartDataEntry }
             guard let max = es.max { $0.high < $1.high },
                   let min = es.min { $0.low < $1.low },
                   let maxIndex = es.firstIndex(of: max),
