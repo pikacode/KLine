@@ -10,19 +10,19 @@ import UIKit
 
 extension UIViewController {
 
-    static var current: UIViewController? {
-        return UIViewController.currentViewController()
+    static var kl_current: UIViewController? {
+        return UIViewController.kl_currentViewController()
     }
 
-    class func currentViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func kl_currentViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
-            return currentViewController(base: nav.visibleViewController)
+            return kl_currentViewController(base: nav.visibleViewController)
         }
         if let tab = base as? UITabBarController {
-            return currentViewController(base: tab.selectedViewController)
+            return kl_currentViewController(base: tab.selectedViewController)
         }
         if let presented = base?.presentedViewController {
-            return currentViewController(base: presented)
+            return kl_currentViewController(base: presented)
         }
         return base
     }

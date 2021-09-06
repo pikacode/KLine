@@ -102,7 +102,7 @@ open class KLCombinedChartView: CombinedChartView {
         gestureRecognizers?.forEach{
             if let pan = $0 as? UIPanGestureRecognizer {
                 pan.require(toFail: self.longPressGesture)
-                if let ges = UIViewController.current?.navigationController?.interactivePopGestureRecognizer {
+                if let ges = UIViewController.kl_current?.navigationController?.interactivePopGestureRecognizer {
                     pan.require(toFail: ges)
                 }
             }
