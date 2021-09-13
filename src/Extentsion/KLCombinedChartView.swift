@@ -182,7 +182,6 @@ extension KLCombinedChartView {
     }
 
     open func changeCrosshair(_ point: CGPoint?, force: Bool = false) {
-//        print("123", point, force)
         guard let klView = superview as? KLineView else { return }
 
         guard point != crosshair.point || force else { return }
@@ -204,7 +203,9 @@ extension KLCombinedChartView {
         guard let p = point else {
             crosshair.point = point
             klView.highlightedChanged(nil, nil)
-            crosshairSelected = false
+            for section in klView.sections {
+                section.chartView.crosshairSelected = false
+            }
             refreshCustomLegend(index: klView.data.count - 1, klineView: klView)
             return
         }
@@ -232,7 +233,9 @@ extension KLCombinedChartView {
             KLLegendRenderer.index = index
             let pt = self.pixelForValues(x: p.x.double, y: p.y.double, axis: .left)
             klView.highlightedChanged(index, pt)
-            self.crosshairSelected = true
+            for section in klView.sections {
+                section.chartView.crosshairSelected = true
+            }
             self.refreshCustomLegend(index: index, klineView: klView, true)
         }
 
