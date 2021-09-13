@@ -279,6 +279,7 @@ extension KLCombinedChartView {
         switch item {
         case is MA:
             guard let ma = lineData.ma else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
@@ -292,6 +293,7 @@ extension KLCombinedChartView {
             
         case  is EMA:
             guard let ema = lineData.ema else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
@@ -309,6 +311,7 @@ extension KLCombinedChartView {
             setCustomLegend(labels, section, [item.style.lineColor1, item.style.lineColor2, item.style.lineColor3],first: first)
         case is BOLL:
             guard let boll = lineData.boll else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
@@ -328,6 +331,7 @@ extension KLCombinedChartView {
             
         case is MACD:
             guard let macd = lineData.macd else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
 
@@ -348,6 +352,7 @@ extension KLCombinedChartView {
             
         case is MAVOL:
             guard let mavol = lineData.mavol else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
@@ -367,6 +372,7 @@ extension KLCombinedChartView {
             setCustomLegend(labels, section, [legendColor ,item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
         case is KDJ:
             guard let kdj = lineData.kdj else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
@@ -385,6 +391,7 @@ extension KLCombinedChartView {
             setCustomLegend(labels, section, [legendColor, item.style.lineColor1, item.style.lineColor2, item.style.lineColor3], first: first)
         case is RSI:
             guard let rsi = lineData.rsi else {
+                setCustomLegend([""], section, [legendColor])
                 return
             }
             var labels = [String]()
