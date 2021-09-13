@@ -143,9 +143,6 @@ open class KLSection {
                 }
             }
 
-//            chartView.setVisibleXRange(minXRange: Double(visibleXMaxCount), maxXRange: Double(visibleXMaxCount))
-//            chartView.setVisibleXRangeMaximum(Double(visibleXMaxCount))
-
             if let d = data as? [KLineData] {
 
                 if //data.count < Int(visibleXMaxCount),

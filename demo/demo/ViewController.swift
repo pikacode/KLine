@@ -211,18 +211,6 @@ class ViewController: UIViewController {
         depthKLineView.scaleXEnabled = false
         depthKLineView.frame = depthContenView.bounds
         
-//        if let chartView = depthKLineView.sections.first?.chartView {
-//            chartView.xAxis.axisMinimum = 0
-////            chartView.xAxis.axisMaximum = Double(depthData.count)
-//            var priceArr = [String]()
-//            for price in depthData {
-//                priceArr.append(String(format: "%2.f", price.price))
-//            }
-//            chartView.xAxis.valueFormatter  = KLDepthFormatter(priceArr)
-//            chartView.xAxis.labelPosition = .bottom
-//            chartView.leftAxis.axisMinimum = 0
-//        }
-        
         depthContenView.addSubview(depthKLineView)
         depthKLineView.data = depthData
     }
@@ -242,14 +230,7 @@ class ViewController: UIViewController {
             }
         }
         return lines
-//        return settingsView.settings.priceLines.filter { $0.enabled }.map { (pl) -> LimitLine in
-//            let line = LimitLine(pl.value, .horizontal)
-//            line.label.text = pl.label
-//            line.style.lineColor1 = UIColor(kl_hex: pl.color)
-//            line.label.bgColor = line.style.lineColor1
-//            line.label.color = UIColor.black
-//            return line
-//        }
+
     }
 
     override func viewDidLayoutSubviews() {

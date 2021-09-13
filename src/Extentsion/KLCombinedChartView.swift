@@ -18,7 +18,8 @@ open class KLCombinedChartView: CombinedChartView {
             }
         }
     }
-
+    var crosshairSelected = false
+    
     private static var didExchangeMethod = false
     public class func exchangeMethod(){
         if didExchangeMethod { return }
@@ -43,6 +44,8 @@ open class KLCombinedChartView: CombinedChartView {
     }
 
     open var klMarker: KLMarker?
+    
+    
 
     open func initUI() {
 
@@ -68,7 +71,7 @@ open class KLCombinedChartView: CombinedChartView {
         legend.formToTextSpace = 0
         legend.xOffset = 10
         legend.yOffset = 2
-
+        
         xAxis.labelPosition = .bottomInside
         xAxis.gridColor = KLStyle.default.darkGrayColor.alpha(0.6)
         xAxis.labelTextColor = KLStyle.default.label.color
@@ -179,7 +182,7 @@ extension KLCombinedChartView {
     }
 
     open func changeCrosshair(_ point: CGPoint?, force: Bool = false) {
-
+//        print("123", point, force)
         guard let klView = superview as? KLineView else { return }
 
         guard point != crosshair.point || force else { return }
@@ -201,6 +204,8 @@ extension KLCombinedChartView {
         guard let p = point else {
             crosshair.point = point
             klView.highlightedChanged(nil, nil)
+            crosshairSelected = false
+            refreshCustomLegend(index: klView.data.count - 1, klineView: klView)
             return
         }
 
@@ -227,7 +232,8 @@ extension KLCombinedChartView {
             KLLegendRenderer.index = index
             let pt = self.pixelForValues(x: p.x.double, y: p.y.double, axis: .left)
             klView.highlightedChanged(index, pt)
-            self.refreshCustomLegend(index: index, klineView: klView)
+            self.crosshairSelected = true
+            self.refreshCustomLegend(index: index, klineView: klView, true)
         }
 
         views.forEach{
@@ -251,7 +257,7 @@ extension KLCombinedChartView {
 
     }
     
-    func refreshCustomLegend(index: Int, klineView: KLineView) {
+    func refreshCustomLegend(index: Int, klineView: KLineView, _ selectedShow: Bool = false) {
         
         guard let lineData = klineView.data[index] as? KLineData else {
             return
@@ -259,11 +265,14 @@ extension KLCombinedChartView {
        
         for section in klineView.sections {
             for item in section.indicators {
-                customLegend(item: item, lineData: lineData, section: section)
+                customLegend(item: item, lineData: lineData, section: section, selectedShow)
             }
         }
     }
-    func customLegend(item: KLIndicator, lineData: KLineData, section: KLSection, first: Bool = false)  {
+    func customLegend(item: KLIndicator, lineData: KLineData, section: KLSection, first: Bool = false, _ selectedShow: Bool = false)  {
+        if crosshairSelected && !selectedShow {
+            return
+        }
         let precision = KLineView.precision
         let legendColor = UIColor.color(red: 255, green: 255, blue: 255, alpha: 0.6)
         

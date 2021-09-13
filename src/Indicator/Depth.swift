@@ -78,6 +78,7 @@ extension Depth: KLIndicator {
             set.circleHoleRadius = 0
             set.drawValuesEnabled = false
 
+            set.mode = .stepped
             //生成渐变色
             let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                                            colors: [colors[index].cgColor, UIColor.clear.cgColor] as CFArray, locations: [1.0, 0.0])
