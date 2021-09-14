@@ -88,7 +88,11 @@ open class KLineView: UIView {
         needMoveToXMax = true
         sections.forEach{
             $0.chartView.viewPortHandler.refresh(newMatrix: .identity, chart: $0.chartView, invalidate: false)
-            $0.chartView.setScaleMinima(CGFloat(max(data.count, visibleXMaxCount))/200.0, scaleY: 1)
+            if data.count == 1 {
+                $0.chartView.setScaleMinima(0.05, scaleY: 1)
+            } else {
+                $0.chartView.setScaleMinima(CGFloat(max(data.count, visibleXMaxCount))/200.0, scaleY: 1)
+            }
             $0.chartView.viewPortHandler.setMaximumScaleX(20)
 
             let s = $0.chartView.xAxis.axisRange/Double(visibleXMaxCount)

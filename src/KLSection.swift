@@ -148,7 +148,7 @@ open class KLSection {
                 if //data.count < Int(visibleXMaxCount),
                     let min = d.first?.x,
                     let max = d.last?.x,
-                    max > min, min.isFinite,
+                    max >= min, min.isFinite,
                     min != Double.greatestFiniteMagnitude,
                     visibleXMaxCount != 0 {
 
@@ -165,7 +165,7 @@ open class KLSection {
                 if //data.count < Int(visibleXMaxCount),
                    let max = chartView.data?.dataSets.first?.xMax,
                    let min = chartView.data?.dataSets.first?.xMin,
-                   max > min, min.isFinite,
+                   max >= min, min.isFinite,
                    min != Double.greatestFiniteMagnitude,
                    visibleXMaxCount != 0 {
 
