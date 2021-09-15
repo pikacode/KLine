@@ -13,7 +13,6 @@ open class KLCandleValueFormatter: IValueFormatter {
     public init() {}
 
     public func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
-//        return "---"
         if viewPortHandler?.isInBoundsLeft(CGFloat(entry.x)) ?? false {
             return "   —— " + value.decimal.toString(precision: KLineView.precision)
         } else {
@@ -27,18 +26,5 @@ open class KLCandleValueFormatter: IValueFormatter {
         } else {
             return value.decimal.toString(precision: KLineView.precision) + " ——"
         }
-//        if left {
-//            if low {
-//                return "↖ " + value.decimal.toString(precision: KLineView.precision)
-//            } else {
-//                return "↙ " + value.decimal.toString(precision: KLineView.precision)
-//            }
-//        } else {
-//            if low {
-//                return value.decimal.toString(precision: KLineView.precision) + " ↗"
-//            } else {
-//                return value.decimal.toString(precision: KLineView.precision) + " ↘"
-//            }
-//        }
     }
 }

@@ -262,7 +262,7 @@ extension KLCombinedChartView {
     
     func refreshCustomLegend(index: Int, klineView: KLineView, _ selectedShow: Bool = false) {
         
-        guard let lineData = klineView.data[index] as? KLineData else {
+        guard let lineData = klineView.data[index~] as? KLineData else {
             return
         }
        
