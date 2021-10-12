@@ -47,8 +47,8 @@ open class KLineView: UIView {
         set {
             tempData = newValue
             if let d = newValue as? [KLineData], newValue.count >= 2 {
-                let d2 = d[1]
-                let d1 = d[0]
+                let d2 = d[d.count-1]
+                let d1 = d[d.count-2]
                 KLineData.timeXScale = d2.time - d1.time
             }
             if isCalculating {
